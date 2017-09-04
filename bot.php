@@ -79,7 +79,7 @@ if (!is_null($events['events'])) {
 
 			// Build message to reply back
 			$messages = [
-				'type' => 'image',
+				'type' => MessageType::IMAGE,
 				'originalContentUrl' => $img_url,
                 'previewImageUrl' => $img_url
 			];
