@@ -43,51 +43,17 @@ if (!is_null($events['events'])) {
 			echo $result . "\r\n";
 		}
 		else if ($event['type'] == 'message' && $event['message']['type'] == 'sticker') {
-			$dayofweek = date('l');
-
-			switch (dayofweek) {
-				case 'Sunday':
-					$img_url = "http://สวัสดีตอนเช้า.com/wp-content/uploads/2017/04/2460-1-326x326.png";
-					break;
-				case 'Monday':
-					$img_url = "http://สวัสดีตอนเช้า.com/wp-content/uploads/2017/06/12660-326x232.png";
-					break;
-				case 'Tueday':
-					$img_url = "http://สวัสดีตอนเช้า.com/wp-content/uploads/2017/07/18760-326x214.png";
-					break;
-				case 'Wednesday':
-					$img_url = "http://สวัสดีตอนเช้า.com/wp-content/uploads/2017/05/31560-326x271.png";
-					break;
-				case 'Thursday':
-					$img_url = "http://สวัสดีตอนเช้า.com/wp-content/uploads/2017/07/13760-326x326.png";
-					break;
-				case 'Friday':
-					$img_url = "http://สวัสดีตอนเช้า.com/wp-content/uploads/2017/05/26560-326x245.png";
-					break;
-				case 'Saturday':
-					$img_url = "http://สวัสดีตอนเช้า.com/wp-content/uploads/2017/06/3660-326x311.png";
-					break;				
-				default:
-					# code...
-					break;
-			}
-
-			// Get text sent
-			// $text = 'อย่าส่งสติ๊กเกอร์มาจิ เค้าไม่มีนะตัวเอง ส่งเป็นของขวัญมาให้เค้าหน่อยได้ป๊ะล่ะ';
 			// Get replyToken
 			$replyToken = $event['replyToken'];
 
+			$var = rand(1,46);
+
 			// Build message to reply back
 			$messages = [
-				'type' => 'image',
-				'originalContentUrl' => $img_url,
-                'previewImageUrl' => $img_url
+				'type' => 'sticker',
+				'packageId' => '1',
+    			'stickerId' => $var
 			];
-			// $messages = [
-			// 	'type' => 'sticker',
-			// 	'packageId' => '1',
-   //  			'stickerId' => '1'
-			// ];
 
 			// Make a POST Request to Messaging API to reply to sender
 			$url = 'https://api.line.me/v2/bot/message/reply';
