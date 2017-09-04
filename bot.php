@@ -80,8 +80,8 @@ if (!is_null($events['events'])) {
 			// Build message to reply back
 			$messages = [
 				'type' => MessageType::IMAGE,
-				'originalContentUrl' => $img_url,
-                'previewImageUrl' => $img_url
+				'originalContentUrl' => $this->img_url,
+                'previewImageUrl' => $this->img_url
 			];
 
 			// Make a POST Request to Messaging API to reply to sender
