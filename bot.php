@@ -84,11 +84,9 @@ if (!is_null($events['events'])) {
    //              'previewImageUrl' => $img_url
 			// ];
 			$messages = [
-				"type": "location",
-			    "title": "my location",
-			    "address": "ฺBangkok, Thailand",
-			    "latitude": 35.65910807942215,
-			    "longitude": 139.70372892916203
+				'type' => 'sticker',
+				'packageId' => '1',
+    			'stickerId' => '1'
 			];
 
 			// Make a POST Request to Messaging API to reply to sender
