@@ -46,7 +46,7 @@ if (!is_null($events['events'])) {
 			// Get replyToken
 			$replyToken = $event['replyToken'];
 
-			$var = rand(1,46);
+			$var = rand(1,43);
 
 			// Build message to reply back
 			$messages = [
