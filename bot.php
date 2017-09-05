@@ -46,12 +46,12 @@ if (!is_null($events['events'])) {
 			// Get replyToken
 			$replyToken = $event['replyToken'];
 
-			$var = rand(1,43);
+			$var = rand(1,20);
 
 			// Build message to reply back
 			$messages = [
 				'type' => 'text',
-				'text' => $var
+				'text' => string($var)
 			];
 			$messages = [
 				'type' => 'sticker',
