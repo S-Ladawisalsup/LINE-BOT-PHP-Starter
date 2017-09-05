@@ -47,7 +47,6 @@ if (!is_null($events['events'])) {
 
 					// Get text sent echo without bot's name
 					$text = substr($event['message']['text'], strlen($bot_name));
-
 					if (endsWith($text, 'หรือไม่') || endsWith($text, 'ไหม') || endsWith($text, 'มั้ย') || endsWith($text, 'เท่าไร') || endsWith($text, 'เท่าไหร่') || endsWith($text, '?')) {
 						$messages = [						
 							'type' => 'text',
@@ -55,13 +54,11 @@ if (!is_null($events['events'])) {
 						];							
 					}
 					else if (strpos($text, 'image')) {
-
 						$messages = [
-							'type' => 'image',
-	    					'originalContentUrl' => 'http://mumraisin.com/wp-content/uploads/2017/08/1-za-790-1024x1024.jpg',
-	    					'previewImageUrl' => 'http://mumraisin.com/wp-content/uploads/2017/08/1-za-790-1024x1024.jpg'
-	    					];
-
+							'type'=> 'image',
+	    					'originalContentUrl'=> 'http://mumraisin.com/wp-content/uploads/2017/08/1-za-790-1024x1024.jpg',
+	    					'previewImageUrl'=> 'https://static1.squarespace.com/static/57ce3208d482e9784e542a1d/t/57e74bad15d5db790f347b9f/1474775981522/credit-report-235x235.jpg'
+    					];
 					}
 					else {
 						// Build message to reply back
