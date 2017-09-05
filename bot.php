@@ -14,31 +14,38 @@ function endsWith($haystack, $needle) {
 
 function maths($a, $b,$operator) {
     // search forward starting from end minus needle length characters
-    if($operater == '+')
+    if($operater == '+' || $operater == 'บวก')
     {
-    	return a+b;
+    	return $a + $b;
     }
-    elseif ( $operater == '-') 
+    else if ( $operater == '-' || $operater == 'ลบ') 
     {
-    	return a-b;
+    	return $a - $b;
     }
-    elseif ($operater == '*') 
+    else if ($operater == '*' || $operater == 'คูณ' || $operater == 'x' || $operater == 'X' || $operater == '×') 
     {
-    	return a*b;
+    	return $a * $b;
     }
-    elseif ($operater == '/') 
+    else if ($operater == '/' || $operater == 'หาร') 
     {
-    	if(b != 0)
+    	if($b != 0)
     	{
-    		$s = a/b;
+    		$s = $a / $b;
     		$sum = floatval($s);
     		return $sum;
     	}
     	else
     	{
-    		$s = 'ตัวหารไม่สามารถเป็น ศูนย์ ไก้จร้า'
+    		$s = 'ตัวหารไม่สามารถเป็นศูนย์ไก้';
     		return $s;
     	}
+    }else if ($operater == '%') 
+    {
+    	return $a % $b;
+    }
+    else
+    {
+    	return $s = 'ส่งอะไรมาเนี่ย';
     }
 }
 /************************************************************************************************************************************/
@@ -76,6 +83,7 @@ $mathematics = [
 	9 => 'ลบ',
 	10 => 'คูณ',
 	11 => 'หาร',
+	12 => 'X',
 ];
 
 $answer = [
