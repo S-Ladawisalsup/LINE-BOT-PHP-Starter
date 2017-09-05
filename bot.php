@@ -28,7 +28,7 @@ if (!is_null($events['events'])) {
 				if((strpos($event['message']['text'], '@Kiki') !== false) || (strpos($event['message']['text'], '@kiki') !== false)) {
 
 					// Get text sent echo without bot's name
-					$text = str_replace('@Kiki', '', $event['message']['text'])
+					$text = str_replace('@Kiki', '', $event['message']['text']);
 					$text = str_replace('@kiki', '', $text) . 'จ้า';
 
 					// Build message to reply back
