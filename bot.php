@@ -48,6 +48,49 @@ function maths($a, $b, $operator) {
     		return 'โอ๊ยปวดหัว คิดไม่ออกแล้ว';
     }
 }
+
+function translate($q, $sl, $tl) {
+
+	if ($s == $e || $s == '' || $e == '') {
+	    return $q;
+
+	}
+	else {
+	    $res = "";
+
+	    $qqq = explode(".", $q);
+
+	    if(count($qqq) < 2) {
+
+	        @unlink($_SERVER['DOCUMENT_ROOT'] . "/transes.html");
+	        copy("http://translate.googleapis.com/translate_a/single?client=gtx&ie=UTF-8&oe=UTF-8&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&dt=at&sl=" . $sl . "&tl=" . $tl . "&hl=hl&q=" . urlencode($q), $_SERVER['DOCUMENT_ROOT']."/transes.html");
+	        if (file_exists($_SERVER['DOCUMENT_ROOT'] . "/transes.html")) {
+	            $dara = file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/transes.html");
+	            $f = explode("\"", $dara);
+
+	            $res .= $f[1];
+	        }
+	    }
+	    else {
+
+
+		    for ($i = 0; $i < (count($qqq) - 1); $i++) {
+
+		        if ($qqq[$i] == ' ' || $qqq[$i] == '') { }
+		        else {
+		            copy("http://translate.googleapis.com/translate_a/single?client=gtx&ie=UTF-8&oe=UTF-8&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&dt=at&sl=" . $s . "&tl=" . $e . "&hl=hl&q=".urlencode($qqq[$i]), $_SERVER['DOCUMENT_ROOT'] . "/transes.html");
+
+		            $dara = file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/transes.html");
+		            @unlink($_SERVER['DOCUMENT_ROOT'] . "/transes.html");
+		            $f = explode("\"", $dara);
+
+		            $res .= $f[1] . ". ";
+		            }
+		        }
+	    }
+	    return $res;
+	}
+}
 /************************************************************************************************************************************/
 
 
@@ -161,7 +204,16 @@ if (!is_null($events['events'])) {
 									'text' => $solve . " จ้า"
 								];	
 							}
-
+						}
+						else if (endsWith($text, $question[0]) && strpos($text, 'แปลว่า')) {
+							$trans = str_replace('แปลว่า', '', $text);
+							$trans = str_replace('?', '', $trans);
+							$trans = str_replace(' ', '', $trans);
+							$tran = translate($trans, "en", "th");
+							$messages = [						
+								'type' => 'text',
+								'text' => $trans . " แปลว่า " . $tran . " จ้า"
+							];
 						}
 						else {
 							$messages = [						
