@@ -40,7 +40,13 @@ if (!is_null($events['events'])) {
 					// Get text sent echo without bot's name
 					$text = substr($event['message']['text'], strlen($bot_name));
 
-					if (strpos($text, 'image')) {
+					if (endsWith($text, 'หรือไม่') || endsWith($text, 'ไหม') || endsWith($text, 'มั้ย') || endsWith($text, 'เท่าไร') || endsWith($text, 'เท่าไหร่') || endsWith($text, '?')){
+						$messages = [						
+							'type' => 'text',
+							'text' => 'ไม่รู้จ้า'
+						];							
+					}
+					else if (strpos($text, 'image')) {
 
 						//Try to send image here...
 
