@@ -46,7 +46,7 @@ if (!is_null($events['events'])) {
 						// 	'originalContentUrl' => "http://www.mx7.com/i/2b6/S6wX6W.jpg",
     		// 				'previewImageUrl' => "http://www.mx7.com/i/086/RWalf1.jpg"
 						// ];		
-						$messages = new CURLFile(realpath('www.mx7.com/i/086/RWalf1.jpg'), 'image/jpg', 'RWalf1.jpg');					
+						$messages = new CURLFile('http://www.mx7.com/i/086/RWalf1.jpg', 'image/jpg', 'RWalf1.jpg');					
 					}
 					else {
 						// Build message to reply back
