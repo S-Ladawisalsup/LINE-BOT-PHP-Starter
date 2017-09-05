@@ -141,7 +141,7 @@ if (!is_null($events['events'])) {
 							if (empty($solve)) {
 								$messages = [						
 									'type' => 'text',
-									'text' => '1'//$answer[rand(0,4)] //1+1=?
+									'text' => $matches[0].'/'.$matches[1].'/'.$operator.'/'.count($matches) //$answer[rand(0,4)] //1+1=?
 								];	
 							}
 							else {
