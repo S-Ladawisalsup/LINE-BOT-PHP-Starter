@@ -49,7 +49,7 @@ if (!is_null($events['events'])) {
 						$messages = [
 							'type'=> 'image',
 	    					'originalContentUrl'=> 'http://mumraisin.com/wp-content/uploads/2017/08/1-za-790-1024x1024.jpg',
-	    					'previewImageUrl'=> 'http://mumraisin.com/wp-content/uploads/2017/08/1-za-790-1024x1024.jpg'
+	    					'previewImageUrl'=> 'https://static1.squarespace.com/static/57ce3208d482e9784e542a1d/t/57e74bad15d5db790f347b9f/1474775981522/credit-report-235x235.jpg'
     					];
 					}
 					else {
