@@ -13,45 +13,68 @@ function endsWith($haystack, $needle) {
 }
 
 function maths($a, $b, $operator) {
-    // search forward starting from end minus needle length characters
-    if($operator == '+' || $operator == 'บวก')
-    {
+    if($operator == '+' || $operator == 'บวก') {
     	return $a + $b;
     }
-    else if ( $operator == '-' || $operator == 'ลบ') 
-    {
+    else if ( $operator == '-' || $operator == 'ลบ') {
     	return $a - $b;
     }
-    else if ($operator == '*' || $operator == 'คูณ' || $operator == 'x' || $operator == 'X' || $operator == '×') 
-    {
+    else if ($operator == '*' || $operator == 'คูณ' || $operator == 'x' || $operator == 'X' || $operator == '×') {
     	return $a * $b;
     }
-    else if ($operator == '/' || $operator == 'หาร') 
-    {
-    	if($b != 0)
-    	{
-    		return $a / $b;;
+    else if ($operator == '/' || $operator == 'หาร') {
+    	if($b != 0) {
+    		return $a / $b;
     	}
-    	else
-    	{
+    	else {
     		return 'ตัวหารเป็น 0 ไม่ไก้ ไปคิดมาใหม่นะ';
     	}
     }
-    else if ($operator == '%') 
-    {
+    else if ($operator == '%') {
     	return $a % $b;
     }
-	else if ($operator == 'ยกกำลัง' || $operator == 'pow') 
-    {
+	else if ($operator == 'ยกกำลัง' || $operator == 'pow') {
     	return pow($a, $b);
     }
-	else if ($operator == 'ถอดรูท' || $operator == 'sqrt') 
-    {
+	else if ($operator == 'รูทที่สอง' || $operator == 'รากที่สอง' || $operator == 'sqrt') {
     	return sqrt($a);
     }
-    else
-    {
-    	return $s = 'โอ๊ยปวดหัว คิดไม่ออกแล้ว';
+    else {
+    	return 'โอ๊ยปวดหัว คิดไม่ออกแล้ว';
+    }
+
+    switch ($operator) {
+    	case '+':
+    	case 'บวก':
+    		return $a + $b;
+    	case '-':
+    	case 'ลบ':
+    		return $a - $b;
+    	case '*':
+    	case 'คูณ':
+    	case 'x':
+    	case 'X':
+    	case '×':
+    		return $a * $b;
+    	case '/':
+    	case 'หาร':
+    		if ($b != 0) {
+    			return $a / $b;
+    		}
+    		else {
+    			return 'ตัวหารเป็น 0 ไม่ไก้ ไปคิดมาใหม่นะ';
+    		}
+    	case '%':
+    		return $a % $b;
+    	case 'ยกกำลัง':
+    	case 'pow':
+    		return pow($a, $b);
+    	case 'รูทที่สอง':
+    	case 'รากที่สอง':
+    	case 'sqrt':
+    		return sqrt($a); 	
+    	default:
+    		return 'โอ๊ยปวดหัว คิดไม่ออกแล้ว';
     }
 }
 /************************************************************************************************************************************/
@@ -92,6 +115,9 @@ $mathematics = [
 	12 => 'X',
 	13 => 'ยกกำลัง',
 	14 => 'pow',
+	15 => 'รากที่สอง',
+	16 => 'รูทที่สอง',
+	17 => 'sqrt',
 ];
 
 $answer = [
@@ -143,9 +169,13 @@ if (!is_null($events['events'])) {
 								preg_match_all('!\d+\.*\d*!', $text, $matches);
 								$val = $matches[0];
 
-								if (count($val) == 2) {
+								if ((count($val) == 1) && ($operator == $mathematics[15] || $operator == $mathematics[16] || $operator == $mathematics[17])) {
+									$solve = maths($val[0], 0, $operator);
+								}
+								else if (count($val) == 2) {
 									$solve = maths($val[0], $val[1], $operator);
 								}
+								 
 							}
 
 							if (isset($solve) === false) {
