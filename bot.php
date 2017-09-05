@@ -132,18 +132,18 @@ if (!is_null($events['events'])) {
 							}
 
 							if ($operator != 'null') {
-								preg_match_all('!\d+!', $text, $matches);
-								$val_x = implode('', $matches[0]);
-								$val_y = implode('', $matches[1]);
-								if ((empty($val_x) === false) && (empty($val_y) === false)) {
-									$solve = maths($val_x, $val_y, $operator);
+								preg_match_all('/\d+/', $text, $matches);
+								$val = $matches[0];
+
+								if (count($val) == 2) {
+									$solve = maths($val[0], $val[1], $operator);
 								}
 							}
 
 							if (isset($solve) === false) {
 								$messages = [						
 									'type' => 'text',
-									'text' => $val_x . '/' . $val_y . '/' . $operator //$answer[rand(0,4)]
+									'text' => $val[0] . '/' . $val[1] . '/' . $operator . '/' . count($val) //$answer[rand(0,4)]
 								];	
 							}
 							else {
