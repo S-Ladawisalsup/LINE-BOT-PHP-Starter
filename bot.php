@@ -21,15 +21,20 @@ if (!is_null($events['events'])) {
 	foreach ($events['events'] as $event) {
 		// Reply only when message sent is in 'text' format
 		if ($event['type'] == 'message') {
-			if ($event['message']['type'] == 'text') {
-				// Get text sent
-				$text = $event['message']['text'] . 'จ้า';
 
-				// Build message to reply back
-				$messages = [
-					'type' => 'text',
-					'text' => $text
-				];				
+			if ($event['message']['type'] == 'text') {
+
+				if(strpos($event['message']['text'], '@Kiki')) {
+
+					// Get text sent
+					$text = str_replace('@Kiki', '', $event['message']['text']) . 'จ้า';
+
+					// Build message to reply back
+					$messages = [
+						'type' => 'text',
+						'text' => $text
+					];	
+				}			
 			}
 			else if ($event['message']['type'] == 'sticker') {
 				// Get random number of sticker
