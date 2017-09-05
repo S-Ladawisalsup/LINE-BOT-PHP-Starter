@@ -40,15 +40,9 @@ if (!is_null($events['events'])) {
 					$text = str_replace('@kiki', '', $text);
 
 					// Build message to reply back
-					$messages = [
-						{
-							'type' => 'text',
-							'text' => $text
-						},
-						{
-							'type' => 'text',
-							'text' => 'จ้า'
-						} 
+					$messages = [						
+						'type' => 'text',
+						'text' => $text . 'จ้า'
 					];	
 				}			
 			}
