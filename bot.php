@@ -61,7 +61,7 @@ if (!is_null($events['events'])) {
 					// Check text is question
 					$faq = false;
 					foreach ($question as $item) {
-						if (endsWith($text, item)) {
+						if (endsWith($text, $item)) {
 							$faq = true;
 							break;
 						}
