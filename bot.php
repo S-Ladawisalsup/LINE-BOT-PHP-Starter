@@ -14,19 +14,19 @@ function endsWith($haystack, $needle) {
 
 function maths($a, $b, $operator) {
     // search forward starting from end minus needle length characters
-    if($operater == '+' || $operater == 'บวก')
+    if($operator == '+' || $operator == 'บวก')
     {
     	return $a + $b;
     }
-    else if ( $operater == '-' || $operater == 'ลบ') 
+    else if ( $operator == '-' || $operator == 'ลบ') 
     {
     	return $a - $b;
     }
-    else if ($operater == '*' || $operater == 'คูณ' || $operater == 'x' || $operater == 'X' || $operater == '×') 
+    else if ($operator == '*' || $operator == 'คูณ' || $operator == 'x' || $operator == 'X' || $operator == '×') 
     {
     	return $a * $b;
     }
-    else if ($operater == '/' || $operater == 'หาร') 
+    else if ($operator == '/' || $operator == 'หาร') 
     {
     	if($b != 0)
     	{
@@ -36,10 +36,11 @@ function maths($a, $b, $operator) {
     	}
     	else
     	{
-    		$s = 'ตัวหารไม่สามารถเป็น 0 ไก้';
+    		$s = 'ตัวหารเป็น 0 ไม่ไก้ ไปคิดมาใหม่นะ';
     		return $s;
     	}
-    }else if ($operater == '%') 
+    }
+    else if ($operator == '%') 
     {
     	return $a % $b;
     }
@@ -143,13 +144,13 @@ if (!is_null($events['events'])) {
 							if (isset($solve) === false) {
 								$messages = [						
 									'type' => 'text',
-									'text' => $val[0] . '/' . $val[1] . '/' . $operator . '/' . count($val) //$answer[rand(0,4)]
+									'text' => $answer[rand(0,4)]
 								];	
 							}
 							else {
 								$messages = [						
 									'type' => 'text',
-									'text' => $solve . " จ้า" . $val[0] . '/' . $val[1] . '/' . $operator . '/' . count($val)
+									'text' => $solve . " จ้า"
 								];	
 							}
 
