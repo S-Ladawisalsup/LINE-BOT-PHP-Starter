@@ -25,7 +25,7 @@ if (!is_null($events['events'])) {
 			if ($event['message']['type'] == 'text') {
 
 				//Compare message calling bot
-				if((strpos($event['message']['text'], '@Kiki') !== false) || (strpos($event['message']['text'], '@kiki' !== false))) {
+				if((strpos($event['message']['text'], '@Kiki') !== false) || (strpos($event['message']['text'], '@kiki') !== false)) {
 
 					// Get text sent echo without bot's name
 					$text = str_replace('@Kiki', '', $event['message']['text'])
