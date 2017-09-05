@@ -141,7 +141,7 @@ if (!is_null($events['events'])) {
 							if (!isset($solve)) {
 								$messages = [						
 									'type' => 'text',
-									'text' => $answer[rand(0,4)]
+									'text' => '1'//$answer[rand(0,4)]
 								];	
 							}
 							else {
@@ -155,7 +155,7 @@ if (!is_null($events['events'])) {
 						else {
 							$messages = [						
 								'type' => 'text',
-								'text' => $answer[rand(0,4)]
+								'text' => '2'//$answer[rand(0,4)]
 							];							
 						}
 					}
