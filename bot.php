@@ -209,7 +209,7 @@ if (!is_null($events['events'])) {
 							$trans = str_replace('แปลว่า', '', $text);
 							$trans = str_replace('?', '', $trans);
 							$trans = str_replace(' ', '', $trans);
-							$tran = translate($trans, "en", "th");
+							$tran = translate($trans, 'en', 'th');
 							$messages = [						
 								'type' => 'text',
 								'text' => $trans . " แปลว่า " . $tran . " จ้า"
