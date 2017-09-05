@@ -30,14 +30,11 @@ function maths($a, $b, $operator) {
     {
     	if($b != 0)
     	{
-    		$s = $a / $b;
-    		$sum = floatval($s);
-    		return $s;
+    		return $a / $b;;
     	}
     	else
     	{
-    		$s = 'ตัวหารเป็น 0 ไม่ไก้ ไปคิดมาใหม่นะ';
-    		return $s;
+    		return 'ตัวหารเป็น 0 ไม่ไก้ ไปคิดมาใหม่นะ';
     	}
     }
     else if ($operator == '%') 
@@ -133,7 +130,7 @@ if (!is_null($events['events'])) {
 							}
 
 							if ($operator != 'null') {
-								preg_match_all('/\d+/', $text, $matches);
+								preg_match_all('!\d+\.*\d*!', $text, $matches);
 								$val = $matches[0];
 
 								if (count($val) == 2) {
