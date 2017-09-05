@@ -138,7 +138,7 @@ if (!is_null($events['events'])) {
 								}
 							}
 
-							if (!isset($solve)) {
+							if (empty($solve)) {
 								$messages = [						
 									'type' => 'text',
 									'text' => '1'//$answer[rand(0,4)] //1+1=?
