@@ -2,13 +2,14 @@
 
 /************************************************************************************************************************************/
 /*** PHP Function Zone. ***/
-function CallingBot($text_message, $bot_name){
-	if ((strpos($text_message, $bot_name) !== false) || (strpos($text_message, strtolower($bot_name)) !== false)) {
-		return true;
-	}
-	else {
-		return false;
-	}
+function startsWith($haystack, $needle) {
+    // search backwards starting from haystack length characters from the end
+    return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== false;
+}
+
+function endsWith($haystack, $needle) {
+    // search forward starting from end minus needle length characters
+    return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== false);
 }
 
 /************************************************************************************************************************************/
@@ -33,11 +34,13 @@ if (!is_null($events['events'])) {
 			if ($event['message']['type'] == 'text') {
 
 				//Compare message calling bot's name
-				if (CallingBot($event['message']['text'], $bot_name)) {
+				if (startsWith($event['message']['text'], $bot_name)) {
 
 					// Get text sent echo without bot's name
 					$text = str_replace($bot_name, '', $event['message']['text']);
 					$text = str_replace(strtolower($bot_name), '', $text);
+
+					//if ((strpos($text, 'หรือไม่') !== false) ||)
 
 					// Build message to reply back
 					$messages = [						
