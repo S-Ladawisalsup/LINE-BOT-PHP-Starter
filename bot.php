@@ -52,8 +52,9 @@ function maths($a, $b, $operator) {
 function Translate($word) {
 	$word = urlencode($word);
 
-	// english to hindi
-	$url = 'http://translate.google.com/translate_a/t?client=t&text='.$word.'&hl=en&sl=th&tl=en&ie=UTF-8&oe=UTF-8&multires=1&otf=1&ssel=3&tsel=3&sc=1';
+	// english to thai
+	// $url = 'http://translate.google.com/translate_a/t?client=t&text='.$word.'&hl=en&sl=th&tl=en&ie=UTF-8&oe=UTF-8&multires=1&otf=1&ssel=3&tsel=3&sc=1';
+	$url = 'https://translate.google.co.th/#en/th/' . $word;
 
 	$name_en = curl($url);
 
