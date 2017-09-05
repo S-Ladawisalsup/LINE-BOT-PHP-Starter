@@ -3,7 +3,7 @@
 /************************************************************************************************************************************/
 /*** PHP Function Zone. ***/
 function CallingBot($text_message, $bot_name){
-	if ((strpos($text_message, $bot_name) || strpos($text_message, strtolower($bot_name))) !== false) {
+	if ((strpos($text_message, $bot_name) !== false) || (strpos($text_message, strtolower($bot_name)) !== false)) {
 		return true;
 	}
 	else {
