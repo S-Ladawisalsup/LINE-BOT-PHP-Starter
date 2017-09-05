@@ -12,7 +12,7 @@ function endsWith($haystack, $needle) {
     return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== false);
 }
 
-function maths($a, $b,$operator) {
+function maths($a, $b, $operator) {
     // search forward starting from end minus needle length characters
     if($operater == '+')
     {
