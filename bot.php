@@ -53,8 +53,18 @@ $events = json_decode($content, true);
 
 $bot_name = '@kiki';
 
+$question = [
+	0 => '?',
+	1 => 'ไหม',
+	2 => 'มั้ย',
+	3 => 'หรือไม่',
+	4 => 'เท่าไร',
+	5 => 'เท่าไหร่',
+	6 => 'อะไร',
+];
+
 $answer = [
-	0 => 'ไม่รู้จ้',
+	0 => 'ไม่รู้จ้า',
 	1 => 'ไม่รู้สิจ๊ะ',
 	2 => 'ไม่รู้ว้อย',
 	3 => 'ผมขอโทษ ผมไม่รู้จริงๆครับ T_T',
@@ -70,13 +80,23 @@ if (!is_null($events['events'])) {
 
 			if ($event['message']['type'] == 'text') {
 
-				//Compare message calling bot's name
+				// Compare message calling bot's name
 				$haystack = strtolower($event['message']['text']);
 				if (startsWith($haystack, $bot_name)) {
 
 					// Get text sent echo without bot's name
 					$text = substr($event['message']['text'], strlen($bot_name));
-					if (endsWith($text, 'หรือไม่') || endsWith($text, 'ไหม') || endsWith($text, 'มั้ย') || endsWith($text, 'เท่าไร') || endsWith($text, 'เท่าไหร่') || endsWith($text, '?')) {
+
+					// Check text is question
+					$faq = false;
+					foreach ($question as $item) {
+						if (endsWith($text, $item)) {
+							$faq = true;
+							break;
+						}
+					}
+
+					if ($faq === true) {
 						$messages = [						
 							'type' => 'text',
 							'text' => $answer[rand(0,4)]
