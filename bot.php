@@ -13,35 +13,6 @@ function endsWith($haystack, $needle) {
 }
 
 function maths($a, $b, $operator) {
-    if($operator == '+' || $operator == 'บวก') {
-    	return $a + $b;
-    }
-    else if ( $operator == '-' || $operator == 'ลบ') {
-    	return $a - $b;
-    }
-    else if ($operator == '*' || $operator == 'คูณ' || $operator == 'x' || $operator == 'X' || $operator == '×') {
-    	return $a * $b;
-    }
-    else if ($operator == '/' || $operator == 'หาร') {
-    	if($b != 0) {
-    		return $a / $b;
-    	}
-    	else {
-    		return 'ตัวหารเป็น 0 ไม่ไก้ ไปคิดมาใหม่นะ';
-    	}
-    }
-    else if ($operator == '%') {
-    	return $a % $b;
-    }
-	else if ($operator == 'ยกกำลัง' || $operator == 'pow') {
-    	return pow($a, $b);
-    }
-	else if ($operator == 'รูทที่สอง' || $operator == 'รากที่สอง' || $operator == 'sqrt') {
-    	return sqrt($a);
-    }
-    else {
-    	return 'โอ๊ยปวดหัว คิดไม่ออกแล้ว';
-    }
 
     switch ($operator) {
     	case '+':
