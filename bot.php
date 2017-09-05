@@ -47,7 +47,7 @@ if (!is_null($events['events'])) {
 
 					// Get text sent echo without bot's name
 					$text = substr($event['message']['text'], strlen($bot_name));
-					if (endsWith($text, 'หรือไม่') || endsWith($text, 'ไหม') || endsWith($text, 'มั้ย') || endsWith($text, 'เท่าไร') || endsWith($text, 'เท่าไหร่') || endsWith($text, '?')) {
+					if (endsWith($text, 'หรือไม่') || endsWith($text, 'ไหม') || endsWith($text, 'มั้ย') || endsWith($text, 'เท่าไร') || endsWith($text, 'เท่าไหร่') || endsWith($text, 'อะไร') || endsWith($text, '?')) {
 						$messages = [						
 							'type' => 'text',
 							'text' => $answer[rand(0,4)]
