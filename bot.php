@@ -134,14 +134,16 @@ if (!is_null($events['events'])) {
 							if ($operator != 'null') {
 								preg_match_all('!\d+!', $text, $matches);
 								$val_x = implode('', $matches[0]);
-								$val_y = implode('', $matches[1])
-								$solve = maths($val_x, $val_y, $operator);
+								$val_y = implode('', $matches[1]);
+								if ((empty($val_x) === false) && (empty($val_y) === false)) {
+									$solve = maths($val_x, $val_y, $operator);
+								}
 							}
 
-							if (!isset($solve)) {
+							if (isset($solve) === false) {
 								$messages = [						
 									'type' => 'text',
-									'text' => $val_y.'/'.$val_y.'/'.$operator //$answer[rand(0,4)]
+									'text' => $val_x . '/' . $val_y . '/' . $operator //$answer[rand(0,4)]
 								];	
 							}
 							else {
