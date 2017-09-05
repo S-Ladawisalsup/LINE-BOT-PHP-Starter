@@ -12,6 +12,35 @@ function endsWith($haystack, $needle) {
     return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== false);
 }
 
+function maths($a, $b,$operator) {
+    // search forward starting from end minus needle length characters
+    if($operater == '+')
+    {
+    	return a+b;
+    }
+    elseif ( $operater == '-') 
+    {
+    	return a-b;
+    }
+    elseif ($operater == '*') 
+    {
+    	return a*b;
+    }
+    elseif ($operater == '/') 
+    {
+    	if(b != 0)
+    	{
+    		$s = a/b;
+    		$sum = floatval($s);
+    		return $sum;
+    	}
+    	else
+    	{
+    		$s = 'ตัวหารไม่สามารถเป็น ศูนย์ ไก้จร้า'
+    		return $s;
+    	}
+    }
+}
 /************************************************************************************************************************************/
 
 
