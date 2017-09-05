@@ -33,17 +33,27 @@ if (!is_null($events['events'])) {
 			if ($event['message']['type'] == 'text') {
 
 				//Compare message calling bot's name
-				//if ((strpos($event['message']['text'], '@Kiki') !== false) || (strpos($event['message']['text'], '@kiki') !== false)) {
 				if (CallingBot($event['message']['text'])) {
+
 					// Get text sent echo without bot's name
 					$text = str_replace('@Kiki', '', $event['message']['text']);
-					$text = str_replace('@kiki', '', $text) . 'จ้า';
+					$text = str_replace('@kiki', '', $text);
 
-					// Build message to reply back
-					$messages = [
-						'type' => 'text',
-						'text' => $text
-					];	
+					if (strpos($text, 'สวัสดี') !== false) {
+						// Try to send image
+						$messages = [
+							'type' => 'image',
+							'originalContentUrl' => "http://www.mx7.com/i/2b6/S6wX6W.jpg",
+    						'previewImageUrl' => "http://www.mx7.com/i/086/RWalf1.jpg"
+						];
+					}
+					else {
+						// Build message to reply back
+						$messages = [
+							'type' => 'text',
+							'text' => $text . 'จ้า'ก
+						];	
+					}
 				}			
 			}
 			else if ($event['message']['type'] == 'sticker') {
