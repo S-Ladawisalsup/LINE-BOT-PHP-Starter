@@ -34,11 +34,11 @@ if (!is_null($events['events'])) {
 			if ($event['message']['type'] == 'text') {
 
 				//Compare message calling bot's name
-				if (startsWith(strtolower($event['message']['text']), $bot_name)) {
+				$haystack = strtolower($event['message']['text']);
+				if (startsWith($haystack, $bot_name)) {
 
 					// Get text sent echo without bot's name
-					$text = str_replace($bot_name, '', $event['message']['text']);
-					$text = str_replace(strtolower($bot_name), '', $text);
+					$text = substr($event['message']['text'], strlen($bot_name));
 
 					//if ((strpos($text, 'หรือไม่') !== false) ||)
 
