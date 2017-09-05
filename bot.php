@@ -2,7 +2,15 @@
 
 /************************************************************************************************************************************/
 /*** PHP Function Zone. ***/
-
+function CallingBot($text_message){
+	$bot_name = '@Kiki';
+	if((strpos($text_message, $bot_name) !== false) || (strpos($text_message, strtolower($bot_name)) !== false)){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
 
 /************************************************************************************************************************************/
 
@@ -24,9 +32,9 @@ if (!is_null($events['events'])) {
 
 			if ($event['message']['type'] == 'text') {
 
-				//Compare message calling bot
-				if((strpos($event['message']['text'], '@Kiki') !== false) || (strpos($event['message']['text'], '@kiki') !== false)) {
-
+				//Compare message calling bot's name
+				//if ((strpos($event['message']['text'], '@Kiki') !== false) || (strpos($event['message']['text'], '@kiki') !== false)) {
+				if (CallingBot($event['message']['text'])) {
 					// Get text sent echo without bot's name
 					$text = str_replace('@Kiki', '', $event['message']['text']);
 					$text = str_replace('@kiki', '', $text) . 'จ้า';
