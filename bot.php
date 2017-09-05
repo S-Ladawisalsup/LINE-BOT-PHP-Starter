@@ -42,14 +42,18 @@ if (!is_null($events['events'])) {
 					if (strpos($text, 'สวัสดี') !== false) {
 						// Try to send image
 						$messages = [
+							'type' => 'text',
+							'text' => 'ดีจ้า'
+						];
+						$messages = [
 							'type' => 'image',
 							'originalContentUrl' => "http://www.mx7.com/i/2b6/S6wX6W.jpg",
     						'previewImageUrl' => "http://www.mx7.com/i/086/RWalf1.jpg"
-						];
+						];	
 						$messages = [
 							'type' => 'text',
-							'text' => 'ดีจ้า'
-						];	
+							'text' => 'ดีจ้าอีกรอบ'
+						];						
 					}
 					else {
 						// Build message to reply back
