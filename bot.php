@@ -22,7 +22,7 @@ $content = file_get_contents('php://input');
 // Parse JSON
 $events = json_decode($content, true);
 
-$bot_name = '@Kiki';
+$bot_name = '@kiki';
 
 // Validate parsed JSON data
 if (!is_null($events['events'])) {
@@ -34,7 +34,7 @@ if (!is_null($events['events'])) {
 			if ($event['message']['type'] == 'text') {
 
 				//Compare message calling bot's name
-				if (startsWith($event['message']['text'], $bot_name)) {
+				if (startsWith(strtolower($event['message']['text']), $bot_name)) {
 
 					// Get text sent echo without bot's name
 					$text = str_replace($bot_name, '', $event['message']['text']);
