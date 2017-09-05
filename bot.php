@@ -41,10 +41,11 @@ if (!is_null($events['events'])) {
 					$text = substr($event['message']['text'], strlen($bot_name));
 
 					if (strpos($text, 'image')) {
-
-						'type': 'image',
-    					'originalContentUrl': 'http://mumraisin.com/wp-content/uploads/2017/08/1-za-790-1024x1024.jpg',
-    					'previewImageUrl': 'http://mumraisin.com/wp-content/uploads/2017/08/1-za-790-1024x1024.jpg'
+						$messages = [
+						'type'=> 'image',
+    					'originalContentUrl'=> 'http://mumraisin.com/wp-content/uploads/2017/08/1-za-790-1024x1024.jpg',
+    					'previewImageUrl'=> 'http://mumraisin.com/wp-content/uploads/2017/08/1-za-790-1024x1024.jpg'
+    					];
 
 					}
 					else {
