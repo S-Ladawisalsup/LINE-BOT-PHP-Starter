@@ -133,15 +133,15 @@ if (!is_null($events['events'])) {
 
 							if ($operator != 'null') {
 								preg_match_all('!\d+!', $text, $matches);
-								if (count($matches) == 2) {
-									$solve = maths($matches[0], $matches[1], $operator);
-								}
+								$val_x = implode('', $matches[0]);
+								$val_y = implode('', $matches[1])
+								$solve = maths($val_x, $val_y, $operator);
 							}
 
-							if (empty($solve)) {
+							if (!isset($solve)) {
 								$messages = [						
 									'type' => 'text',
-									'text' => $matches[0].'/'.$matches[1].'/'.$operator.'/'.count($matches) //$answer[rand(0,4)] //1+1=?
+									'text' => $val_y.'/'.$val_y.'/'.$operator //$answer[rand(0,4)]
 								];	
 							}
 							else {
@@ -155,7 +155,7 @@ if (!is_null($events['events'])) {
 						else {
 							$messages = [						
 								'type' => 'text',
-								'text' => '2'//$answer[rand(0,4)]
+								'text' => $answer[rand(0,4)]
 							];							
 						}
 					}
