@@ -32,7 +32,7 @@ function maths($a, $b, $operator) {
     	{
     		$s = $a / $b;
     		$sum = floatval($s);
-    		return $sum;
+    		return $s;
     	}
     	else
     	{
