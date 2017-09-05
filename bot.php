@@ -40,13 +40,18 @@ if (!is_null($events['events'])) {
 					// Get text sent echo without bot's name
 					$text = substr($event['message']['text'], strlen($bot_name));
 
-					//if ((strpos($text, 'หรือไม่') !== false) ||)
+					if (strpos($text, 'image')) {
 
-					// Build message to reply back
-					$messages = [						
-						'type' => 'text',
-						'text' => $text . 'จ้า'
-					];	
+						//Try to send image here...
+
+					}
+					else {
+						// Build message to reply back
+						$messages = [						
+							'type' => 'text',
+							'text' => $text . 'จ้า'
+						];	
+					}
 				}			
 			}
 			else if ($event['message']['type'] == 'sticker') {
