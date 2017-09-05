@@ -41,6 +41,14 @@ function maths($a, $b, $operator) {
     {
     	return $a % $b;
     }
+	else if ($operator == 'ยกกำลัง' || $operator == 'pow') 
+    {
+    	return pow($a, $b);
+    }
+	else if ($operator == 'ถอดรูท' || $operator == 'sqrt') 
+    {
+    	return sqrt($a);
+    }
     else
     {
     	return $s = 'โอ๊ยปวดหัว คิดไม่ออกแล้ว';
@@ -82,6 +90,8 @@ $mathematics = [
 	10 => 'คูณ',
 	11 => 'หาร',
 	12 => 'X',
+	13 => 'ยกกำลัง',
+	14 => 'pow',
 ];
 
 $answer = [
