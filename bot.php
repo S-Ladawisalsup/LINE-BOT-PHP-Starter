@@ -2,8 +2,7 @@
 
 /************************************************************************************************************************************/
 /*** PHP Function Zone. ***/
-function CallingBot($text_message){
-	$bot_name = '@Kiki';
+function CallingBot($text_message, $bot_name){
 	if ((strpos($text_message, $bot_name) || strpos($text_message, strtolower($bot_name))) !== false) {
 		return true;
 	}
@@ -22,6 +21,7 @@ $content = file_get_contents('php://input');
 // Parse JSON
 $events = json_decode($content, true);
 
+$bot_name = '@Kiki';
 
 // Validate parsed JSON data
 if (!is_null($events['events'])) {
@@ -33,7 +33,7 @@ if (!is_null($events['events'])) {
 			if ($event['message']['type'] == 'text') {
 
 				//Compare message calling bot's name
-				if (CallingBot($event['message']['text'])) {
+				if (CallingBot($event['message']['text'], $bot_name)) {
 
 					// Get text sent echo without bot's name
 					$text = str_replace('@Kiki', '', $event['message']['text']);
