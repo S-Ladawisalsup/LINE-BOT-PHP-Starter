@@ -46,6 +46,10 @@ if (!is_null($events['events'])) {
 							'originalContentUrl' => "http://www.mx7.com/i/2b6/S6wX6W.jpg",
     						'previewImageUrl' => "http://www.mx7.com/i/086/RWalf1.jpg"
 						];
+						$messages = [
+							'type' => 'text',
+							'text' => 'ดีจ้า'
+						];	
 					}
 					else {
 						// Build message to reply back
