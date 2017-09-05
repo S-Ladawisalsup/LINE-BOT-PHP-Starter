@@ -36,8 +36,8 @@ if (!is_null($events['events'])) {
 				if (CallingBot($event['message']['text'], $bot_name)) {
 
 					// Get text sent echo without bot's name
-					$text = str_replace('@Kiki', '', $event['message']['text']);
-					$text = str_replace('@kiki', '', $text);
+					$text = str_replace($bot_name, '', $event['message']['text']);
+					$text = str_replace(strtolower($bot_name), '', $text);
 
 					// Build message to reply back
 					$messages = [						
