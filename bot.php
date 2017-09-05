@@ -120,7 +120,7 @@ if (!is_null($events['events'])) {
 					}
 
 					if ($faq === true) {
-						if (endsWith($text, $question[0]) || endsWith($text, $question[4])) {
+						if (endsWith($text, $question[0]) || endsWith($text, $question[4]) || endsWith($text, $question[5]) ) {
 							foreach ($mathematics as $math) {
 								if (strpos($text, $math)) {
 									$operator = $math;
@@ -141,7 +141,7 @@ if (!is_null($events['events'])) {
 							if (!isset($solve)) {
 								$messages = [						
 									'type' => 'text',
-									'text' => '1'//$answer[rand(0,4)]
+									'text' => '1'//$answer[rand(0,4)] //1+1=?
 								];	
 							}
 							else {
