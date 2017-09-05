@@ -24,6 +24,14 @@ $events = json_decode($content, true);
 
 $bot_name = '@kiki';
 
+$answer = [
+	0 => 'ไม่รู้จ้',
+	1 => 'ไม่รู้สิจ๊ะ',
+	2 => 'ไม่รู้ว้อย',
+	3 => 'ผมขอโทษ ผมไม่รู้จริงๆครับ T_T',
+	4 => 'I don\'t know.',
+];
+
 // Validate parsed JSON data
 if (!is_null($events['events'])) {
 	// Loop through each event
@@ -43,7 +51,7 @@ if (!is_null($events['events'])) {
 					if (endsWith($text, 'หรือไม่') || endsWith($text, 'ไหม') || endsWith($text, 'มั้ย') || endsWith($text, 'เท่าไร') || endsWith($text, 'เท่าไหร่') || endsWith($text, '?')) {
 						$messages = [						
 							'type' => 'text',
-							'text' => 'ไม่รู้จ้า'
+							'text' => $answer[rand(0,4)]
 						];							
 					}
 					else if (strpos($text, 'image')) {
