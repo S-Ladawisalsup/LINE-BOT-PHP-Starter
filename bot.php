@@ -39,22 +39,17 @@ if (!is_null($events['events'])) {
 					$text = str_replace('@Kiki', '', $event['message']['text']);
 					$text = str_replace('@kiki', '', $text);
 
-					if (strpos($text, 'สวัสดี') !== false) {
-						// Try to send image
-						// $messages = [
-						// 	'type' => 'image',
-						// 	'originalContentUrl' => "http://www.mx7.com/i/2b6/S6wX6W.jpg",
-    		// 				'previewImageUrl' => "http://www.mx7.com/i/086/RWalf1.jpg"
-						// ];		
-						$messages = new CURLFile('http://www.mx7.com/i/086/RWalf1.jpg', 'image/jpg', 'RWalf1.jpg');					
-					}
-					else {
-						// Build message to reply back
-						$messages = [
+					// Build message to reply back
+					$messages = [
+						{
 							'type' => 'text',
-							'text' => $text . 'จ้า'
-						];	
-					}
+							'text' => $text
+						},
+						{
+							'type' => 'text',
+							'text' => 'จ้า'
+						} 
+					];	
 				}			
 			}
 			else if ($event['message']['type'] == 'sticker') {
