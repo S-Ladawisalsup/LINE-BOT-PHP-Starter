@@ -205,7 +205,7 @@ if (!is_null($events['events'])) {
 								];	
 							}
 						}
-						else if ((endsWith($text, $question[0]) && (strpos($text, 'แปลว่า') !== false))) {
+						else if (strpos($text, 'แปลว่า') !== false) {
 							$trans = str_replace('แปลว่า', '', $text);
 							$trans = str_replace('?', '', $trans);
 							$trans = str_replace(' ', '', $trans);
