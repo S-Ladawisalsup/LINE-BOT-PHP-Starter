@@ -34,6 +34,21 @@ $question = [
 	6 => 'อะไร',
 ];
 
+$mathematics = [
+	0 => '+',
+	1 => '-',
+	2 => 'x',
+	3 => '*',
+	4 => '×',
+	5 => '÷',
+	6 => '/',
+	7 => '%',
+	8 => 'บวก',
+	9 => 'ลบ',
+	10 => 'คูณ',
+	11 => 'หาร',
+];
+
 $answer = [
 	0 => 'ไม่รู้จ้า',
 	1 => 'ไม่รู้สิจ๊ะ',
@@ -68,17 +83,44 @@ if (!is_null($events['events'])) {
 					}
 
 					if ($faq === true) {
-						$messages = [						
-							'type' => 'text',
-							'text' => $answer[rand(0,4)]
-						];							
-					}
-					else if (strpos($text, 'image')) {
-						$messages = [
-							'type'=> 'image',
-	    					'originalContentUrl'=> 'http://mumraisin.com/wp-content/uploads/2017/08/1-za-790-1024x1024.jpg',
-	    					'previewImageUrl'=> 'https://static1.squarespace.com/static/57ce3208d482e9784e542a1d/t/57e74bad15d5db790f347b9f/1474775981522/credit-report-235x235.jpg'
-    					];
+						if (endsWith($text, $question[0]) || endsWith($text, $question[4])) {
+							foreach ($mathematics as $math) {
+								if (strpos($text, $math)) {
+									$operator = $math;
+									break;
+								}
+								else {
+									$operator = 'null';
+								}
+							}
+
+							if ($operator != 'null') {
+								preg_match_all('!\d+!', $text, $matches);
+								if (count($matches) == 2) {
+									$solve = maths($matches[0], $matches[1], $operator);
+								}
+							}
+
+							if (!isset($solve)) {
+								$messages = [						
+									'type' => 'text',
+									'text' => $answer[rand(0,4)]
+								];	
+							}
+							else {
+								$messages = [						
+									'type' => 'text',
+									'text' => $solve . " จ้า"
+								];	
+							}
+
+						}
+						else {
+							$messages = [						
+								'type' => 'text',
+								'text' => $answer[rand(0,4)]
+							];							
+						}
 					}
 					else {
 						// Build message to reply back
