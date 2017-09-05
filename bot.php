@@ -49,47 +49,16 @@ function maths($a, $b, $operator) {
     }
 }
 
-function translate($q, $sl, $tl) {
+function Translate($word) {
+	$word = urlencode($word);
 
-	if ($s == $e || $s == '' || $e == '') {
-	    return $q;
+	// english to hindi
+	$url = 'http://translate.google.com/translate_a/t?client=t&text='.$word.'&hl=en&sl=th&tl=en&ie=UTF-8&oe=UTF-8&multires=1&otf=1&ssel=3&tsel=3&sc=1';
 
-	}
-	else {
-	    $res = "";
+	$name_en = curl($url);
 
-	    $qqq = explode(".", $q);
-
-	    if(count($qqq) < 2) {
-
-	        @unlink($_SERVER['DOCUMENT_ROOT'] . "/transes.html");
-	        copy("http://translate.googleapis.com/translate_a/single?client=gtx&ie=UTF-8&oe=UTF-8&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&dt=at&sl=" . $sl . "&tl=" . $tl . "&hl=hl&q=" . urlencode($q), $_SERVER['DOCUMENT_ROOT']."/transes.html");
-	        if (file_exists($_SERVER['DOCUMENT_ROOT'] . "/transes.html")) {
-	            $dara = file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/transes.html");
-	            $f = explode("\"", $dara);
-
-	            $res .= $f[1];
-	        }
-	    }
-	    else {
-
-
-		    for ($i = 0; $i < (count($qqq) - 1); $i++) {
-
-		        if ($qqq[$i] == ' ' || $qqq[$i] == '') { }
-		        else {
-		            copy("http://translate.googleapis.com/translate_a/single?client=gtx&ie=UTF-8&oe=UTF-8&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&dt=at&sl=" . $s . "&tl=" . $e . "&hl=hl&q=".urlencode($qqq[$i]), $_SERVER['DOCUMENT_ROOT'] . "/transes.html");
-
-		            $dara = file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/transes.html");
-		            @unlink($_SERVER['DOCUMENT_ROOT'] . "/transes.html");
-		            $f = explode("\"", $dara);
-
-		            $res .= $f[1] . ". ";
-		            }
-		        }
-	    }
-	    return $res;
-	}
+	$name_en = explode('"', $name_en);
+	return  $name_en[1];
 }
 /************************************************************************************************************************************/
 
@@ -209,7 +178,7 @@ if (!is_null($events['events'])) {
 							$trans = str_replace('แปลว่า', '', $text);
 							$trans = str_replace('?', '', $trans);
 							$trans = str_replace(' ', '', $trans);
-							$tran = translate($trans, 'en', 'th');
+							$tran = translate($trans);
 							$messages = [						
 								'type' => 'text',
 								'text' => $trans . " แปลว่า " . $tran . " จ้า"
