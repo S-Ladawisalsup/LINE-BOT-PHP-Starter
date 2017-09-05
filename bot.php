@@ -42,7 +42,9 @@ if (!is_null($events['events'])) {
 
 					if (strpos($text, 'image')) {
 
-						//Try to send image here...
+						'type': 'image',
+    					'originalContentUrl': 'http://mumraisin.com/wp-content/uploads/2017/08/1-za-790-1024x1024.jpg',
+    					'previewImageUrl': 'http://mumraisin.com/wp-content/uploads/2017/08/1-za-790-1024x1024.jpg'
 
 					}
 					else {
