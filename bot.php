@@ -172,7 +172,16 @@ if (!is_null($events['events'])) {
 
 					/* Specific word response for testing line bot reply */
 					else if (strpos($text, 'txt') !== false) {
-						$rtxt = explode("\n", file_get_contents('file.txt'));
+						$rtxt = explode("\n", file_get_contents('data\greeting.txt'));
+
+						foreach ($rtxt as $txt) {
+							$vartxt .= $txt . ' / ';
+						}
+
+						$messages = [						
+							'type' => 'text',
+							'text' => $vartxt . ' / ' . count($vartxt)
+						];	
 					}
 
 					// Check text is greeting
@@ -200,15 +209,9 @@ if (!is_null($events['events'])) {
 
 				// Build message to reply back
 				$messages = [
-					{
-						'type' => 'sticker',
-						'packageId' => '1',
-	    				'stickerId' => $var
-	    			},
-	    			{
-	    				'type' => 'text',
-						'text' => 'อันนี้เป็นสติ๊กเกอร์ลำดับที่' . $var . 'จ้า'
-	    			},
+					'type' => 'sticker',
+					'packageId' => '1',
+    				'stickerId' => $var
 				];
 			}
 
