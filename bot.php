@@ -48,19 +48,6 @@ function maths($a, $b, $operator) {
     		return 'โอ๊ยปวดหัว คิดไม่ออกแล้ว';
     }
 }
-
-function Translate($word) {
-	$word = urlencode($word);
-
-	// english to thai
-	// $url = 'http://translate.google.com/translate_a/t?client=t&text='.$word.'&hl=en&sl=th&tl=en&ie=UTF-8&oe=UTF-8&multires=1&otf=1&ssel=3&tsel=3&sc=1';
-	$url = 'https://translate.google.co.th/#en/th/' . $word;
-
-	$name_en = curl($url);
-
-	$name_en = explode('"', $name_en);
-	return  $name_en[1];
-}
 /************************************************************************************************************************************/
 
 
@@ -174,16 +161,6 @@ if (!is_null($events['events'])) {
 									'text' => $solve . " จ้า"
 								];	
 							}
-						}
-						else if (strpos($text, 'แปลว่า') !== false) {
-							$trans = str_replace('แปลว่า', '', $text);
-							$trans = str_replace('?', '', $trans);
-							$trans = str_replace(' ', '', $trans);
-							$tran = translate($trans);
-							$messages = [						
-								'type' => 'text',
-								'text' => $trans . " แปลว่า " . $tran . " จ้า"
-							];
 						}
 						else {
 							$messages = [						
