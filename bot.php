@@ -184,15 +184,15 @@ if (!is_null($events['events'])) {
 					else if (strpos($text, 'token') !== false) {
 						$token = $event['replyToken'];
 						$messages = [
-						array(						
+						{					
 							'type' => 'text',
 							'text' => $token
-							),
-						array(
+						},
+						{
 							'type' => 'sticker',
 							'packageId' => '1',
-    						'stickerId' => 1
-							)
+    						'stickerId' => '1'
+						}
 						];	
 					}
 
