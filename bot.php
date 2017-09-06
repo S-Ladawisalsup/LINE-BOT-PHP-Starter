@@ -187,11 +187,15 @@ if (!is_null($events['events'])) {
 				$var = rand(1,20);
 
 				// Build message to reply back
-				$messages = [
-					'type' => 'sticker',
-					'packageId' => '1',
-	    			'stickerId' => $var
-				];
+				$messages = array( 
+					array(	'type' => 'sticker',
+							'packageId' => '1',
+	    					'stickerId' => $var
+						),
+					array(	'type' => 'text',
+							'text' => $var
+						)
+					)
 			}
 
 			// Get replyToken
