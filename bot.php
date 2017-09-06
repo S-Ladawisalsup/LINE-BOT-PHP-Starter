@@ -193,12 +193,12 @@ if (!is_null($events['events'])) {
 				// Build message to reply back
 				$messages = array( 
 					array(	'type' => 'text',
-							'text' => 'test'
+							'text' => $var . 'จ้า'
 						),
 					array(	'type' => 'text',
-							'text' => $var.'เว้ยเห้ย'
+							'text' => $var . 'เว้ย'
 						)
-					)
+					);
 			}
 
 			// Get replyToken
