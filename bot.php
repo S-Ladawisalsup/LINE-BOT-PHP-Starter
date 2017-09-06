@@ -145,8 +145,7 @@ if (!is_null($events['events'])) {
 								}
 								else if (count($val) == 2) {
 									$solve = maths($val[0], $val[1], $operator);
-								}
-								 
+								}							 
 							}
 
 							if (isset($solve) === false) {
@@ -172,11 +171,12 @@ if (!is_null($events['events'])) {
 					/* Specific word response for testing line bot reply */
 					else if (strpos($text, 'txt') !== false) {
 						
-						$datas = file('greeting.txt'); 
+						$lines = explode("\n", file_get_contents('greeting.txt'));
+						$vas = $lines[0];
 
 						$messages = [						
 							'type' => 'text',
-							'text' => count($datas)
+							'text' => count($lines)
 						];	
 					}
 
@@ -195,6 +195,7 @@ if (!is_null($events['events'])) {
 							)
 						];	
 					}
+
 					// Check text is greeting
 					else if ((strpos($text, 'สวัสดี') !== false) || (strpos($text, 'หวัดดี') !== false) || (strpos($text, 'ดีจ้า') !== false) || (strpos($text, 'อรุณสวัสดิ์') !== false)) {
 						$day = strtolower(substr(date('l'), 0, 3));
