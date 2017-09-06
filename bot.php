@@ -173,7 +173,7 @@ if (!is_null($events['events'])) {
 					/* Specific word response for testing line bot reply */
 					else if (strpos($text, 'txt') !== false) {
 						// Open the file
-						$fp = @fopen($filename, 'r'); 
+						$fp = @fopen('data\greeting.txt', 'r'); 
 
 						// Add each line to an array
 						if ($fp) {
