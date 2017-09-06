@@ -49,28 +49,7 @@ function maths($a, $b, $operator) {
     }
 }
 
-function StringBuilder($mood) {
-	$mathematics = [
-		0 => '+',
-		1 => '-',
-		2 => 'x',
-		3 => '*',
-		4 => '×',
-		5 => '÷',
-		6 => '/',
-		7 => '%',
-		8 => 'บวก',
-		9 => 'ลบ',
-		10 => 'คูณ',
-		11 => 'หาร',
-		12 => 'X',
-		13 => 'ยกกำลัง',
-		14 => 'pow',
-		15 => 'รากที่สอง',
-		16 => 'รูทที่สอง',
-		17 => 'sqrt',
-	];
-
+function GetQuesion($text) {
 	$question = [
 		0 => '?',
 		1 => 'อะไร',
@@ -95,6 +74,37 @@ function StringBuilder($mood) {
 		20 => 'อันไหน',
 		21 => 'อันใด',
 		22 => 'เท่าใด',
+	];
+
+	foreach ($question as $item) {
+		if (endsWith($text, $item)) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+function AnswerBuilder($mood) {
+	$mathematics = [
+		0 => '+',
+		1 => '-',
+		2 => 'x',
+		3 => '*',
+		4 => '×',
+		5 => '÷',
+		6 => '/',
+		7 => '%',
+		8 => 'บวก',
+		9 => 'ลบ',
+		10 => 'คูณ',
+		11 => 'หาร',
+		12 => 'X',
+		13 => 'ยกกำลัง',
+		14 => 'pow',
+		15 => 'รากที่สอง',
+		16 => 'รูทที่สอง',
+		17 => 'sqrt',
 	];
 
 	$answer = [
@@ -168,15 +178,6 @@ $mathematics = [
 	17 => 'sqrt',
 ];
 
-$answer = [
-	0 => 'ไม่รู้จ้า',
-	1 => 'ไม่รู้สิจ๊ะ',
-	2 => 'ไม่รู้ว้อย',
-	3 => 'ผมขอโทษ ผมไม่รู้จริงๆครับ T_T',
-	4 => 'I don\'t know.',
-	5 => 'ก็ไม่รู้สินะ',
-];
-
 // Validate parsed JSON data
 if (!is_null($events['events'])) {
 	// Loop through each event
@@ -193,16 +194,7 @@ if (!is_null($events['events'])) {
 					// Get text sent echo without bot's name
 					$text = substr($event['message']['text'], strlen($bot_name));
 
-					// Check text is question
-					$faq = false;
-					foreach ($question as $item) {
-						if (endsWith($text, $item)) {
-							$faq = true;
-							break;
-						}
-					}
-
-					if ($faq === true) {
+					if (GetQuesion($text)) {
 						if (endsWith($text, $question[0]) || endsWith($text, $question[4]) || endsWith($text, $question[5]) ) {
 							foreach ($mathematics as $math) {
 								if (strpos($text, $math)) {
@@ -229,7 +221,7 @@ if (!is_null($events['events'])) {
 							if (isset($solve) === false) {
 								$messages = [						
 									'type' => 'text',
-									'text' => StringBuilder('ans') //$answer[rand(0,5)]
+									'text' => AnswerBuilder('ans')
 								];	
 							}
 							else {
@@ -242,7 +234,7 @@ if (!is_null($events['events'])) {
 						else {
 							$messages = [						
 								'type' => 'text',
-								'text' => StringBuilder('ans') //$answer[rand(0,5)]
+								'text' => AnswerBuilder('ans')
 							];							
 						}
 					}
