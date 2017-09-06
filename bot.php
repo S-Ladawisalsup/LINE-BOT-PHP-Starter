@@ -192,11 +192,6 @@ if (!is_null($events['events'])) {
 						'type' => 'sticker',
 						'packageId' => '1',
 	    				'stickerId' => $var
-	    			},
-	    			{
-	    				'type' => 'sticker',
-						'packageId' => '1',
-	    				'stickerId' => '1'
 	    			}
 				];
 			}
