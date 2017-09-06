@@ -180,7 +180,7 @@ if (!is_null($events['events'])) {
 
 						$messages = [						
 							'type' => 'text',
-							'text' => count($datas)
+							'text' => $strja . ' / ' . count($datas)
 						];	
 					}
 
@@ -192,6 +192,7 @@ if (!is_null($events['events'])) {
 							'text' => $token
 						];	
 					}
+
 					// Check text is greeting
 					else if ((strpos($text, 'สวัสดี') !== false) || (strpos($text, 'หวัดดี') !== false) || (strpos($text, 'ดีจ้า') !== false) || (strpos($text, 'อรุณสวัสดิ์') !== false)) {
 						$day = strtolower(substr(date('l'), 0, 3));
