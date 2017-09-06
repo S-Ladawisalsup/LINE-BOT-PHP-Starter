@@ -172,11 +172,13 @@ if (!is_null($events['events'])) {
 					else if (strpos($text, 'txt') !== false) {
 						
 						$lines = explode("\n", file_get_contents('greeting.txt'));
-						$vas = $lines[0];
+						foreach ($lines as $line => $datas) {
+							$vas .= $datas . ' / ';
+						}
 
 						$messages = [						
 							'type' => 'text',
-							'text' => count($lines)
+							'text' => $vas
 						];	
 					}
 
