@@ -188,7 +188,7 @@ if (!is_null($events['events'])) {
 						$token = $event['replyToken'];
 						$messages = [
 							'type' => 'text',
-							'text' => $token
+							'text' => $token,
 						];	
 					}
 
