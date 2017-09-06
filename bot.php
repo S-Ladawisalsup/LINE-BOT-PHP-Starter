@@ -193,7 +193,7 @@ if (!is_null($events['events'])) {
 	    					'stickerId' => $var
 						),
 					array(	'type' => 'text',
-							'text' => $var.' เว้ยเห้ย!'
+							'text' => $var
 						)
 					)
 			}
