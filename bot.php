@@ -172,15 +172,11 @@ if (!is_null($events['events'])) {
 
 					/* Specific word response for testing line bot reply */
 					else if (strpos($text, 'txt') !== false) {
-						$rtxt = explode("\n", file_get_contents('data\\greeting.txt'));
-
-						foreach ($rtxt as $txt) {
-							$vartxt .= $txt . ' / ';
-						}
+						$rtxt = explode("\n", file_get_contents('data\greeting.txt'));
 
 						$messages = [						
 							'type' => 'text',
-							'text' => $vartxt . ' / ' . count($vartxt)
+							'text' => $rtxt
 						];	
 					}
 
