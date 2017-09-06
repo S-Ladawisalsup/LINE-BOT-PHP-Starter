@@ -173,9 +173,13 @@ if (!is_null($events['events'])) {
 						
 						$lines = file('greeting.txt');
 
+						if (array_key_exists(0, $lines)) {
+							$checked = true;
+						}
+
 						$messages = [						
 							'type' => 'text',
-							'text' => $lines[0]
+							'text' => $checked
 						];	
 					}
 
