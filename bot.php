@@ -162,6 +162,10 @@ if (!is_null($events['events'])) {
 								];	
 							}
 						}
+						/* Specific word response for testing line bot reply */
+						else if (strpos($text, 'txt') !== false) {
+							
+						}
 						else {
 							$messages = [						
 								'type' => 'text',
