@@ -188,11 +188,9 @@ if (!is_null($events['events'])) {
 
 				// Build message to reply back
 				$messages = [
-					{
 						'type' => 'sticker',
 						'packageId' => '1',
 	    				'stickerId' => $var
-	    			}
 				];
 			}
 
