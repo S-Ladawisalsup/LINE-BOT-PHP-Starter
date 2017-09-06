@@ -175,7 +175,7 @@ if (!is_null($events['events'])) {
 
 						$messages = [						
 							'type' => 'text',
-							'text' => $lines[1]
+							'text' => $lines[0] . $lines[1]
 						];	
 					}
 
