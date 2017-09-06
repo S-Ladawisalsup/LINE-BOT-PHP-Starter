@@ -173,7 +173,7 @@ if (!is_null($events['events'])) {
 						
 						$lines = file('greeting.txt');
 
-						$lines = array_map("utf8_decode", $lines);
+						$lines = array_map("utf8_encode($lines)", $lines);
 
 						$messages = [						
 							'type' => 'text',
