@@ -162,20 +162,20 @@ if (!is_null($events['events'])) {
 								];	
 							}
 						}
-						/* Specific word response for testing line bot reply */
-						else if (strpos($text, 'สวัสดี') !== false) {
-							$messages = [
-								'type' => 'image',
-							    'originalContentUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/wed_original.jpg',
-							    'previewImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/wed_240.jpg'
-							];
-						}
 						else {
 							$messages = [						
 								'type' => 'text',
 								'text' => $answer[rand(0,4)]
 							];							
 						}
+					}
+					/* Specific word response for testing line bot reply */
+					else if (strpos($text, 'สวัสดี') !== false) {
+						$messages = [
+							'type' => 'image',
+						    'originalContentUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/wed_original.jpg',
+						    'previewImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/wed_240.jpg'
+						];
 					}
 					else {
 						// Build message to reply back
