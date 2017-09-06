@@ -171,12 +171,9 @@ if (!is_null($events['events'])) {
 					}
 					/* Specific word response for testing line bot reply */
 					else if (strpos($text, 'day') !== false) {
-						$messages = [						
-							'type' => 'text',
-							'text' => date('l')
-						];	
+
 					}
-					else if (strpos($text, 'สวัสดี') !== false) {
+					else if ((strpos($text, 'สวัสดี') !== false) || (strpos($text, 'หวัดดี') !== false) || (strpos($text, 'ดีจ้า') !== false) || (strpos($text, 'อรุณสวัสดิ์') !== false)) {
 						$day = strtolower(substr(date('l'), 0, 3));
 
 						$messages = [
