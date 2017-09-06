@@ -172,7 +172,13 @@ if (!is_null($events['events'])) {
 
 					/* Specific word response for testing line bot reply */
 					else if (strpos($text, 'txt') !== false) {
-						$rtxt = explode("\n", file_get_contents('data\greeting.txt'));
+						// Open the file
+						$fp = @fopen($filename, 'r'); 
+
+						// Add each line to an array
+						if ($fp) {
+						   $rtxt = explode("\n", fread($fp, filesize($filename)));
+						}
 
 						$messages = [						
 							'type' => 'text',
