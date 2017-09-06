@@ -177,10 +177,12 @@ if (!is_null($events['events'])) {
 						];	
 					}
 					else if (strpos($text, 'สวัสดี') !== false) {
+						$day = strtolower(substr(date('l'), 0, 3));
+
 						$messages = [
 							'type' => 'image',
-						    'originalContentUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/wed_original.jpg',
-						    'previewImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/wed_240.jpg'
+						    'originalContentUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/' . $day . '_original.jpg',
+						    'previewImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/' . $day . '_240.jpg'
 						];
 					}
 					else {
