@@ -173,16 +173,9 @@ if (!is_null($events['events'])) {
 						
 						$lines = file('greeting.txt');
 
-						if ($lines[0] == null){
-							$vas = 'nullable';
-						}
-						else {
-							$vas = string($lines[0]);
-						}
-
 						$messages = [						
 							'type' => 'text',
-							'text' => $vas
+							'text' => $lines[1]
 						];	
 					}
 
