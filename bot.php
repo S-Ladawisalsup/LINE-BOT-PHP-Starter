@@ -171,12 +171,11 @@ if (!is_null($events['events'])) {
 					/* Specific word response for testing line bot reply */
 					else if (strpos($text, 'txt') !== false) {
 						
-						$lines = explode("\n", file_get_contents('greeting.txt'));
-						$vas = $lines[0];
+						$lines = file('greeting.txt');
 
 						$messages = [						
 							'type' => 'text',
-							'text' => count($lines)
+							'text' => $lines[0]
 						];	
 					}
 
