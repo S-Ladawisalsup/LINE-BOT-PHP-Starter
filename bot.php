@@ -176,7 +176,7 @@ if (!is_null($events['events'])) {
 
 						$messages = [						
 							'type' => 'text',
-							'text' => $datas[0] . ' / ' . count($datas)
+							'text' => count($datas)
 						];	
 					}
 
