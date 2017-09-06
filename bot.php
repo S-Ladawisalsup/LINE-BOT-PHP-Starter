@@ -175,7 +175,7 @@ if (!is_null($events['events'])) {
 
 						$messages = [						
 							'type' => 'text',
-							'text' => serialize($lines[0])
+							'text' => $lines[0]
 						];	
 					}
 
