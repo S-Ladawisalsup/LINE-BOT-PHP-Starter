@@ -198,7 +198,7 @@ if (!is_null($events['events'])) {
 					array(	'type' => 'text',
 							'text' => $var . 'เว้ย'
 						)
-					)
+					);
 			}
 
 			// Get replyToken
