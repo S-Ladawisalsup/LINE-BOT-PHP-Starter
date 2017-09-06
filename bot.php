@@ -172,15 +172,16 @@ if (!is_null($events['events'])) {
 
 					/* Specific word response for testing line bot reply */
 					else if (strpos($text, 'txt') !== false) {
-						$all = file_get_contents('greeting.txt');
-						$lines = preg_split('/\n/', $all);
-						foreach ($lines as $line) {
-							$rtxt .= $line . ' / ';
+						
+						$datas = file('greeting.txt'); 
+
+						for ($i = 0; $i < count($data); $i++) { 
+							$rtxt .= $datas . ' / ';
 						}
 
 						$messages = [						
 							'type' => 'text',
-							'text' => $lines[0]
+							'text' => $rtxt
 						];	
 					}
 
