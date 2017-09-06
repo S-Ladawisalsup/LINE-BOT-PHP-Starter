@@ -177,7 +177,7 @@ if (!is_null($events['events'])) {
 							$vas = 'nullable';
 						}
 						else {
-							$vas = count($lines);
+							$vas = $lines[0];
 						}
 
 						$messages = [						
