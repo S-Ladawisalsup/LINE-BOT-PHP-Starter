@@ -191,14 +191,14 @@ if (!is_null($events['events'])) {
 				$var = rand(1,20);
 
 				// Build message to reply back
-				$messages = array( 
-					array(	'type' => 'text',
-							'text' => $var . 'จ้า'
-						),
-					array(	'type' => 'text',
-							'text' => $var . 'เว้ย'
-						)
-					);
+				$messages = [ 
+							[	'type' => 'text',
+								'text' => $var . 'จ้า'
+							],
+							[	'type' => 'text',
+								'text' => $var . 'เว้ย'
+							]
+					];
 			}
 
 			// Get replyToken
@@ -208,7 +208,7 @@ if (!is_null($events['events'])) {
 			$url = 'https://api.line.me/v2/bot/message/reply';
 			$data = [
 				'replyToken' => $replyToken,
-				'messages' => $messages,
+				'messages' => [$messages],
 			];
 			$post = json_encode($data);
 			$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
