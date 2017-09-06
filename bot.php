@@ -185,9 +185,6 @@ if (!is_null($events['events'])) {
 						$messages = [
 							'type' => 'text',
 							'text' => $token,
-							'type' => 'sticker',
-							'packageId' => '1',
-    						'stickerId' => $var
 						];	
 					}
 
