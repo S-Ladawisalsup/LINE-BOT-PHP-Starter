@@ -174,8 +174,8 @@ if (!is_null($events['events'])) {
 						
 						$datas = file('greeting.txt'); 
 
-						for ($i = 0; i < count($datas); i++){
-							$strja = $strja . $datas[i] . ' / ';
+						for ($i = 0; $i < count($datas); $i++) {
+							$strja = $strja . $datas[$i] . ' / ';
 						}
 
 						$messages = [						
