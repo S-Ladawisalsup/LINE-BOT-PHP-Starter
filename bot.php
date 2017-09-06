@@ -192,13 +192,16 @@ if (!is_null($events['events'])) {
 
 				// Build message to reply back
 				$messages = [
-							[	'type' => 'text',
-								'text' => $var . 'จ้า'
-							],
-							[	'type' => 'text',
-								'text' => $var . 'เว้ย'
-							]
-						];
+				array(
+						'type' => 'sticker',
+						'packageId' => '1',
+	    				'stickerId' => $var
+	    			),
+				array(
+						'type' => 'text',
+						'text' => $var . 'จ้า'
+					)
+				];
 			}
 
 			// Get replyToken
