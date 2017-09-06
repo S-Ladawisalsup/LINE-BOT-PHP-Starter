@@ -169,7 +169,6 @@ if (!is_null($events['events'])) {
 							];							
 						}
 					}
-
 					/* Specific word response for testing line bot reply */
 					else if (strpos($text, 'txt') !== false) {
 						
@@ -181,6 +180,14 @@ if (!is_null($events['events'])) {
 						];	
 					}
 
+					/* test token */
+					else if (strpos($text, 'token') !== false) {
+						$token = $event['replyToken'];
+						$messages = [						
+							'type' => 'text',
+							'text' => $token
+						];	
+					}
 					// Check text is greeting
 					else if ((strpos($text, 'สวัสดี') !== false) || (strpos($text, 'หวัดดี') !== false) || (strpos($text, 'ดีจ้า') !== false) || (strpos($text, 'อรุณสวัสดิ์') !== false)) {
 						$day = strtolower(substr(date('l'), 0, 3));
