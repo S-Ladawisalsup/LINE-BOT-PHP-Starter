@@ -173,7 +173,7 @@ if (!is_null($events['events'])) {
 					else if (strpos($text, 'day') !== false) {
 						$messages = [						
 							'type' => 'text',
-							'text' => date('l');
+							'text' => date('l')
 						];	
 					}
 					else if (strpos($text, 'สวัสดี') !== false) {
