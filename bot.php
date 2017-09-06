@@ -173,14 +173,16 @@ if (!is_null($events['events'])) {
 						
 						$lines = file('greeting.txt');
 
-						$checked = false;
-						if (array_key_exists(0, $lines)) {
-							$checked = true;
+						if ($lines[0] == null){
+							$vas = 'nullable';
+						}
+						else {
+							$vas = count($lines);
 						}
 
 						$messages = [						
 							'type' => 'text',
-							'text' => $checked
+							'text' => $vas
 						];	
 					}
 
