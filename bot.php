@@ -173,7 +173,7 @@ if (!is_null($events['events'])) {
 					/* Specific word response for testing line bot reply */
 					else if (strpos($text, 'txt') !== false) {
 						
-						$datas = file('greeting.txt'); 
+						$datas = file('../greeting.txt'); 
 
 						for ($i = 0; $i < count($data); $i++) { 
 							$rtxt .= $datas . ' / ';
