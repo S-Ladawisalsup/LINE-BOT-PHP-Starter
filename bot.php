@@ -191,14 +191,13 @@ if (!is_null($events['events'])) {
 				$var = rand(1,20);
 
 				// Build message to reply back
-				$messages = [ 
+				$messages = 
 							[	'type' => 'text',
 								'text' => $var . 'จ้า'
-							],
+							].
 							[	'type' => 'text',
 								'text' => $var . 'เว้ย'
-							]
-					];
+							];
 			}
 
 			// Get replyToken
