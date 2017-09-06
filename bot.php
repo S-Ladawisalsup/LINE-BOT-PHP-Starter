@@ -191,7 +191,7 @@ if (!is_null($events['events'])) {
 						array(
 							'type' => 'sticker',
 							'packageId' => '1',
-    						'stickerId' => '1'
+    						'stickerId' => 1
 							)
 						];	
 					}
