@@ -1,5 +1,5 @@
 <?php
-
+header('Content-Type: text/html; charset=UTF-8');
 /************************************************************************************************************************************/
 /*** PHP Function Zone. ***/
 function startsWith($haystack, $needle) {
