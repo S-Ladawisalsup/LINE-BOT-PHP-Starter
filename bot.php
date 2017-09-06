@@ -183,9 +183,16 @@ if (!is_null($events['events'])) {
 					/* test token */
 					else if (strpos($text, 'token') !== false) {
 						$token = $event['replyToken'];
-						$messages = [						
+						$messages = [
+						array(						
 							'type' => 'text',
 							'text' => $token
+							),
+						array(
+							'type' => 'sticker',
+							'packageId' => '1',
+    						'stickerId' => '1'
+							)
 						];	
 					}
 					// Check text is greeting
