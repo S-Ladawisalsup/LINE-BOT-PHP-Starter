@@ -198,15 +198,9 @@ if (!is_null($events['events'])) {
 
 				// Build message to reply back
 				$messages = [
-				array(
 						'type' => 'sticker',
 						'packageId' => '1',
 	    				'stickerId' => $var
-	    				),
-				array(
-						'type' => 'text',
-						'text' => $var . 'จ้า'
-					)
 				];
 			}
 
