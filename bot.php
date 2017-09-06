@@ -1,5 +1,5 @@
 <?php
-header('Content-Type: text/html; charset=UTF-8');
+
 /************************************************************************************************************************************/
 /*** PHP Function Zone. ***/
 function startsWith($haystack, $needle) {
@@ -171,7 +171,9 @@ if (!is_null($events['events'])) {
 					/* Specific word response for testing line bot reply */
 					else if (strpos($text, 'txt') !== false) {
 						
-						$lines = utf8_encode(file('greeting.txt'));
+						$lines = file('greeting.txt');
+
+						$lines = array_map("utf8_encode", $lines);
 
 						$messages = [						
 							'type' => 'text',
