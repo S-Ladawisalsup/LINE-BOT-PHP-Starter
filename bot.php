@@ -174,13 +174,13 @@ if (!is_null($events['events'])) {
 						
 						$datas = file('greeting.txt'); 
 
-						foreach ($datas as $dkey) {
-							$strja .= $dkey . ' / ';
+						for ($i = 0; i < count($datas); i++){
+							$strja = $strja . $datas[i] . ' / ';
 						}
 
 						$messages = [						
 							'type' => 'text',
-							'text' => $strja . ' / ' . count($datas)
+							'text' => $strja . count($datas)
 						];	
 					}
 
