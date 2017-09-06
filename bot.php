@@ -170,6 +170,12 @@ if (!is_null($events['events'])) {
 						}
 					}
 					/* Specific word response for testing line bot reply */
+					else if (strpos($text, 'day') !== false) {
+						$messages = [						
+							'type' => 'text',
+							'text' => date('l');
+						];	
+					}
 					else if (strpos($text, 'สวัสดี') !== false) {
 						$messages = [
 							'type' => 'image',
