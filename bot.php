@@ -175,6 +175,10 @@ if (!is_null($events['events'])) {
 						
 						$datas = file('greeting.txt'); 
 
+						foreach ($datas as $dkey) {
+							$strja .= $dkey . ' / ';
+						}
+
 						$messages = [						
 							'type' => 'text',
 							'text' => count($datas)
