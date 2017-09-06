@@ -176,7 +176,7 @@ if (!is_null($events['events'])) {
 
 						$messages = [						
 							'type' => 'text',
-							'text' => count($lines) . $vas
+							'text' => count($lines)
 						];	
 					}
 
