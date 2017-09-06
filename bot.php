@@ -188,16 +188,6 @@ if (!is_null($events['events'])) {
 
 				// Build message to reply back
 				$messages = [
-				array(	
-						'type' => 'sticker',
-						'packageId' => '1',
-	    				'stickerId' => $var
-	    				),
-				array(
-						'type' => 'text',
-						'text' => 'ก็น๊ะ'
-	    				)
-						
 				];
 			}
 
@@ -208,7 +198,14 @@ if (!is_null($events['events'])) {
 			$url = 'https://api.line.me/v2/bot/message/reply';
 			$data = [
 				'replyToken' => $replyToken,
-				'messages' => [$messages],
+				'messages' => array( 
+					array(	'type' => 'text',
+							'text' => $text . 'จ้า'
+						),
+					array(	'type' => 'text',
+							'text' => $text . 'เออมั้ง'
+						)
+					)
 			];
 			$post = json_encode($data);
 			$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
