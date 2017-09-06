@@ -172,19 +172,7 @@ if (!is_null($events['events'])) {
 
 					/* Specific word response for testing line bot reply */
 					else if (strpos($text, 'txt') !== false) {
-						// Open the file
-						$filename = 'data\greeting.txt';
-						$fp = @fopen($filename, 'r'); 
 
-						// Add each line to an array
-						if ($fp) {
-						   $rtxt = explode("\n", fread($fp, filesize($filename)));
-						}
-
-						$messages = [						
-							'type' => 'text',
-							'text' => $rtxt[0]
-						];	
 					}
 
 					// Check text is greeting
