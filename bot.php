@@ -171,13 +171,11 @@ if (!is_null($events['events'])) {
 					/* Specific word response for testing line bot reply */
 					else if (strpos($text, 'txt') !== false) {
 						
-						$lines = file('greeting.txt');
-
-						$line = utf8_encode($lines);
+						$lines = utf8_encode(file('greeting.txt'));
 
 						$messages = [						
 							'type' => 'text',
-							'text' => $line[0] . $line[1]
+							'text' => $lines[0] . $lines[1]
 						];	
 					}
 
