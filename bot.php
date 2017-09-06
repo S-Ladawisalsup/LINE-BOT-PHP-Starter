@@ -170,8 +170,8 @@ if (!is_null($events['events'])) {
 						}
 					}
 					/* Specific word response for testing line bot reply */
-					else if (strpos($text, 'day') !== false) {
-
+					else if (strpos($text, 'txt') !== false) {
+						$rtxt = explode("\n", file_get_contents('file.txt'));
 					}
 					else if ((strpos($text, 'สวัสดี') !== false) || (strpos($text, 'หวัดดี') !== false) || (strpos($text, 'ดีจ้า') !== false) || (strpos($text, 'อรุณสวัสดิ์') !== false)) {
 						$day = strtolower(substr(date('l'), 0, 3));
@@ -197,9 +197,15 @@ if (!is_null($events['events'])) {
 
 				// Build message to reply back
 				$messages = [
+					[
 						'type' => 'sticker',
 						'packageId' => '1',
 	    				'stickerId' => $var
+	    			],
+	    			[
+	    				'type' => 'text',
+						'text' => 'อันนี้เป็นสติ๊กเกอร์ลำดับที่' . $var . 'จ้า'
+	    			],
 				];
 			}
 
