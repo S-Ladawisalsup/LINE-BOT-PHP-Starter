@@ -2,6 +2,6 @@
 
 $array = file('greeting.txt');
 
-foreach(mb_list_encodings() as $chr){ 
-    echo mb_convert_encoding($array, 'UTF-8', $chr)." : ".$chr."<br>";    
-}
+file_put_contents("greeting.txt", "\xEF\xBB\xBF" . $data);
+
+echo count($data);
