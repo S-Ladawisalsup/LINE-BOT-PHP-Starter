@@ -8,4 +8,4 @@ if ($data[0] == '?') {
 	$key = 'true';
 }
 
-echo $key;
+echo $data[0].$key;
