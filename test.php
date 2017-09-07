@@ -1,7 +1,7 @@
 <?php
 
 $array = file('greeting.txt');
-$text = iconv('TIS-620','UTF-8//ignore',$array);
+$text = iconv('UTF-8','TIS-620//ignore',$array);
 
 foreach ($array as $item) {
 	$test .= $item . '/';
