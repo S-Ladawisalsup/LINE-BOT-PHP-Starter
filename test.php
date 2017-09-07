@@ -2,7 +2,7 @@
 
 $data = file('question.txt');
 
-if ($data[0] == '?') {
+if ($data[0] === '?') {
 	$key = true;
 }
 else {
