@@ -2,7 +2,7 @@
 
 $array = file('greeting.txt');
 
-$array = utf8_decode($array);
+$array = mb_convert_encoding($array, 'utf8_encode');
 
 foreach ($array as $item) {
 	$test .= $item . '/';
