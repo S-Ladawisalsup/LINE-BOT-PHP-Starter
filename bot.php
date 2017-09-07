@@ -232,7 +232,7 @@ if (!is_null($events['events'])) {
 						$qa = file('question.txt');
 						$messages = [						
 							'type' => 'text',
-							'text' => $qa[0]
+							'text' => endsWith($text, $qa[0])
 						];	
 					}
 				}			
