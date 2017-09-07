@@ -229,9 +229,10 @@ if (!is_null($events['events'])) {
 					}
 					else {
 						// Build message to reply back
+						$qa = file('question.txt');
 						$messages = [						
 							'type' => 'text',
-							'text' => GetQuesion($text)
+							'text' => $qa[0]
 						];	
 					}
 				}			
