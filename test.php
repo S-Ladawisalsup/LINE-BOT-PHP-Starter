@@ -1,12 +1,10 @@
 <?php
 
-//header('Content-Type: text/html; charset=utf-8');
-
 $array = file('greeting.txt');
-$text = iconv( 'TIS-620' , 'UTF-8' ,$array);
+$text = iconv('TIS-620','UTF-8//ignore',$array);
 
 foreach ($array as $item) {
 	$test .= $item . '/';
 }
 
-echo $text . '->' . $test . count($array);
+echo $text . '=>' . $test . count($array);
