@@ -2,4 +2,4 @@
 
  $data = file('greeting.txt');
 
- echo count($data);
+ echo $data;
