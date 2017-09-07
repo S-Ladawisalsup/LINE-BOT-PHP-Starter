@@ -2,4 +2,6 @@
 
 $data = file('question.txt');
 
-echo 'push';
+foreach ($data as $key) {
+	echo $key;
+}
