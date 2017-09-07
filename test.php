@@ -2,4 +2,4 @@
 
 $data = file('question.txt');
 
-echo 'john';
+echo 'push';
