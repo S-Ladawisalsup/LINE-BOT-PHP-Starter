@@ -77,6 +77,7 @@ function GetQuesion($text) {
 	// ];
 
 	$question = file('question.txt');
+	$question = str_replace("\n", '', $question);
 
 	foreach ($question as $item) {
 		if (endsWith($text, $item)) {
