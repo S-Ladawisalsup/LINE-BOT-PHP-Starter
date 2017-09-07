@@ -1,9 +1,9 @@
 <?php
 
-$data = file('greeting.txt');
+$data = file('question.txt');
 
 foreach ($data as $item) {
-	echo $item . ' / ';
+	echo $item . '<br>';
 }
 
 echo count($data);
