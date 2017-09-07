@@ -20,3 +20,5 @@ $ary[] = "ASCII";
 $ary[] = "JIS";
 $ary[] = "EUC-JP";
 echo mb_detect_encoding($str, $ary);
+
+?>
