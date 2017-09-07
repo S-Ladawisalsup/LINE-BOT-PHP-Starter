@@ -2,4 +2,8 @@
 
 $array = file('greeting.txt');
 
-echo count($array);
+foreach ($array as $item) {
+	$test .= $item . '/';
+}
+
+echo $test . count($array);
