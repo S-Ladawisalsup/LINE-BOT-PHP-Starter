@@ -89,44 +89,20 @@ function GetQuesion($text) {
 }
 
 function AnswerBuilder($mood) {
-	$mathematics = [
-		0 => '+',
-		1 => '-',
-		2 => 'x',
-		3 => '*',
-		4 => '×',
-		5 => '÷',
-		6 => '/',
-		7 => '%',
-		8 => 'บวก',
-		9 => 'ลบ',
-		10 => 'คูณ',
-		11 => 'หาร',
-		12 => 'X',
-		13 => 'ยกกำลัง',
-		14 => 'pow',
-		15 => 'รากที่สอง',
-		16 => 'รูทที่สอง',
-		17 => 'sqrt',
-	];
 
-	$answer = file('answer.txt');
-
-	$random[] = null;
 	switch ($mood) {
 		case 'ans':
-			$random = $answer;
-			break;
-		
+			$answer = file('answer.txt');
+			break;		
 		default:
-			# code...
+			$answer = file('reply.txt');
 			break;
 	}
 
 	$building = 'error';
-	if (count($random) > 0) {
-		$numindex = rand(0, (count($random) - 1));
-		$building = $random[$numindex];
+	if (count($answer) > 0) {
+		$numindex = rand(0, (count($answer) - 1));
+		$building = $answer[$numindex];
 	}
 
 	return $building;
@@ -255,11 +231,10 @@ if (!is_null($events['events'])) {
 						];
 					}
 					else {
-						$qa = file('question.txt');
 						// Build message to reply back
 						$messages = [						
 							'type' => 'text',
-							'text' => '('.$qa[0].')('.$qa[1].')'
+							'text' => AnswerBuilder('res')
 						];	
 					}
 				}			
