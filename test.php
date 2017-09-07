@@ -2,10 +2,10 @@
 
 $data = file('question.txt');
 
-$key = false;
+$key = 'false';
 
 if ($data[0] === '?') {
-	$key = true;
+	$key = 'true';
 }
 
 echo $key;
