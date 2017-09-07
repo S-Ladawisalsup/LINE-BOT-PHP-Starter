@@ -77,7 +77,6 @@ function GetQuesion($text) {
 	// ];
 
 	$question = file('question.txt');
-	$text = utf8_encode($text);
 
 	foreach ($question as $item) {
 		if (endsWith($text, $item)) {
@@ -255,10 +254,11 @@ if (!is_null($events['events'])) {
 						];
 					}
 					else {
+						$qa = file('question.txt');
 						// Build message to reply back
 						$messages = [						
 							'type' => 'text',
-							'text' => $text . 'จ้า'
+							'text' => '('.$qa[0].')('.$qa[1].')'
 						];	
 					}
 				}			
