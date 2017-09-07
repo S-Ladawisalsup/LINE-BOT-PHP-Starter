@@ -231,7 +231,7 @@ if (!is_null($events['events'])) {
 						// Build message to reply back
 						$messages = [						
 							'type' => 'text',
-							'text' => $text . 'จ้า'
+							'text' => GetQuesion($text)
 						];	
 					}
 				}			
