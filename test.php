@@ -1,7 +1,7 @@
 <?php
 
-$array = file('greeting.txt');
+$data = file('greeting.txt');
 
-file_put_contents("greeting.txt", "\xEF\xBB\xBF" . $data);
+$data = iconv("ISO-8859-1","UTF-8", $data);
 
 echo count($data);
