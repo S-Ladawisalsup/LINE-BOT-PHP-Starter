@@ -2,6 +2,11 @@
 
 $data = file('question.txt');
 
-foreach ($data as $key) {
-	echo $key;
+if ($data[0] == '?') {
+	$key = true;
 }
+else {
+	$key = false;
+}
+
+echo $key;
