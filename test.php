@@ -9,4 +9,4 @@ foreach ($array as $item) {
 	$test .= $item . '/';
 }
 
-echo $text . $test . count($array);
+echo $text . ':=' . $test . count($array);
