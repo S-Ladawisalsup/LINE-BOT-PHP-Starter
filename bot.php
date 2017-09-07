@@ -76,10 +76,10 @@ function GetQuesion($text) {
 	// 	22 => 'เท่าใด',
 	// ];
 
-	$file = file_get_contents('question.txt');   
-	$question = explode(PHP_EOL, $file);
+	$question = file('question.txt');
 
 	foreach ($question as $item) {
+		$item = str_replace("\n", '', $item);
 		if (endsWith($text, $item)) {
 			return true;
 		}
