@@ -1,5 +1,5 @@
 <?php
 
-//$array = file('greeting.txt');
+$array = file('greeting.txt');
 
-echo "This is test page OK.";
+echo count($array);
