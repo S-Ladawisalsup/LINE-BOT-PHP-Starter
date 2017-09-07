@@ -80,7 +80,7 @@ function GetQuesion($text) {
 	$question[] = null;
 
 	foreach ($qa as $key) {
-		array_push($question, utf8_encode($key);
+		array_push($question, utf8_decode($key);
 	}
 
 	foreach ($question as $item) {
