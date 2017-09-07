@@ -76,12 +76,8 @@ function GetQuesion($text) {
 	// 	22 => 'เท่าใด',
 	// ];
 
-	$qa = file('question.txt');
-	$question[] = null;
-
-	foreach ($qa as $key) {
-		array_push($question, utf8_encode($key));
-	}
+	$question = file('question.txt');
+	$text = utf8_encode($text);
 
 	foreach ($question as $item) {
 		if (endsWith($text, $item)) {
