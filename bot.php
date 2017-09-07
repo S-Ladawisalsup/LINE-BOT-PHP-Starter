@@ -51,7 +51,7 @@ function maths($a, $b, $operator) {
 
 function GetQuesion($text) {
 	$question = file('question.txt');
-
+	$question = utf8_decode($question);
 	foreach ($question as $item) {
 		if (endsWith($text, $item)) {
 			return true;
