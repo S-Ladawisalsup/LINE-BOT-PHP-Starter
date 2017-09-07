@@ -1,10 +1,7 @@
 <?php
 
 $array = file('greeting.txt');
-$text = iconv(mb_detect_encoding($array, mb_detect_order(), true), "UTF-8", $array);
 
-foreach ($array as $item) {
-	$test .= $item . '/';
+foreach(mb_list_encodings() as $chr){ 
+    echo mb_convert_encoding($array, 'UTF-8', $chr)." : ".$chr."<br>";    
 }
-
-echo $text . '=>' . $test . count($array);
