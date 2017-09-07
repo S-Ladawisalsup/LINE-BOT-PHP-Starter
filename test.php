@@ -1,5 +1,7 @@
 <?php
 
+header('Content-Type: text/html; charset=utf-8');
+
 $array = file('greeting.txt');
 
 foreach ($array as $item) {
