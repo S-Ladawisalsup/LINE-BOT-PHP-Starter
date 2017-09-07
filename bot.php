@@ -76,7 +76,7 @@ function GetQuesion($text) {
 	// 	22 => 'เท่าใด',
 	// ];
 
-	$question = file('question.txt', FILE_IGNORE_NEW_LINES);
+	$question = str_replace(array("\r", "\n"), '', $question);
 
 	foreach ($question as $item) {
 		if (endsWith($text, $item)) {

@@ -2,4 +2,4 @@
 
 $data = file('question.txt');
 
-echo 'pass';
+echo 'haha';
