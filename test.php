@@ -2,6 +2,10 @@
 
 $data = file('question.txt');
 
-foreach ($data as $key) {
-	echo utf8_decode($key);
+if (utf8_decode($data[0]) == '?') {
+	echo "ok";
 }
+else {
+	echo "not ok";
+}
+
