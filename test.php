@@ -5,7 +5,7 @@
 // $data = iconv("ISO-8859-1","UTF-8", $data);
 
 // echo count($data);
-
+$str = file('greeting.txt');
 /* Detect character encoding with current detect_order */
 echo mb_detect_encoding($str);
 
