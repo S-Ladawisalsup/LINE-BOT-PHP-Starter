@@ -50,8 +50,32 @@ function maths($a, $b, $operator) {
 }
 
 function GetQuesion($text) {
-	$question = file('question.txt');
-	$question = utf8_decode($question);
+	$question = [
+		0 => '?',
+		1 => 'อะไร',
+		2 => 'ที่ไหน',
+		3 => 'ที่ใด',
+		4 => 'ใคร',
+		5 => 'เมื่อไร',
+		6 => 'เมื่อไหร่',
+		7 => 'เมื่อใด',
+		8 => 'เวลาไหน',
+		9 => 'เวลาใด',
+		10 => 'อย่างไร',
+		11 => 'ยังไง',
+		12 => 'เท่าไร',
+		13 => 'เท่าไหร่',
+		14 => 'หรือไม่',
+		15 => 'ไหม',
+		16 => 'มั้ย',
+		17 => 'ทำไม',
+		18 => 'สิ่งไหน',
+		19 => 'สิ่งใด',
+		20 => 'อันไหน',
+		21 => 'อันใด',
+		22 => 'เท่าใด',
+	];
+
 	foreach ($question as $item) {
 		if (endsWith($text, $item)) {
 			return true;
@@ -229,10 +253,9 @@ if (!is_null($events['events'])) {
 					}
 					else {
 						// Build message to reply back
-						$qa = file('question.txt');
 						$messages = [						
 							'type' => 'text',
-							'text' => endsWith($text, $qa[0])
+							'text' => $text . 'จ้า'
 						];	
 					}
 				}			
