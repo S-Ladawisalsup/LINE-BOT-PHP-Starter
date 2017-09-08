@@ -241,37 +241,32 @@ if (!is_null($events['events'])) {
 		}
 	}
 }
-//else if (date('i', time()) % 5 == 0) {
 
-	$touser = 'Ua492767fd96449cd8a857b101dbdbcce';
+$touser = 'Ua492767fd96449cd8a857b101dbdbcce';
 
-	// Get replyToken
-	//$replyToken = $event['replyToken'];
+$messages = [
+	'type' => 'text',
+	'text' => AnswerBuilder('res')
+];
 
-	$messages = [
-		'type' => 'text',
-		'text' => AnswerBuilder('res')
-	];
+// Make a POST Request to Messaging API to push to sender
+$url = 'https://api.line.me/v2/bot/message/push';
+$data = [
+	'to' => $touser,
+	'messages' => [$messages],
+];
+$post = json_encode($data);
+$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
 
-	// Make a POST Request to Messaging API to reply to sender
-	$url = 'https://api.line.me/v2/bot/message/reply';
-	$data = [
-		'to' => $touser,
-	//	'replyToken' => $replyToken,
-		'messages' => [$messages],
-	];
-	$post = json_encode($data);
-	$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+$result = curl_exec($ch);
+curl_close($ch);
 
-	$ch = curl_init($url);
-	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
-	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-	$result = curl_exec($ch);
-	curl_close($ch);
+echo $result . "\r\n";	
 
-	echo $result . "\r\n";	
-//}
 echo "OK";
