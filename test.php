@@ -1,6 +1,6 @@
 <?php
 
-echo date('l').'Fini';
+echo date('UTC+7').'Fini'. "<br>";
 $t= time('GMT+7');
 echo $t . "<br>";
 echo(date("Y-m-d||H:i:sP",$t) . "<br>");
