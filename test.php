@@ -1,3 +1,3 @@
 <?php
 
-echo date('l').'F';
+echo date('l');
