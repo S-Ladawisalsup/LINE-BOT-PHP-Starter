@@ -100,9 +100,13 @@ function AnswerBuilder($mood) {
 	if (count($answer) > 0) {
 		$numindex = rand(0, (count($answer) - 1));
 		$building = $answer[$numindex];
+// oa edit
+		$costr = strlen($building);
+		$subs = substr($building,0,$costr - 1 );
+//
 	}
-
-	return $building;
+	return $subs; // oa edit
+//	return $building;
 }
 /************************************************************************************************************************************/
 
