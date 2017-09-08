@@ -246,7 +246,7 @@ if (!is_null($events['events'])) {
 	$touser = 'Ua492767fd96449cd8a857b101dbdbcce';
 
 	// Get replyToken
-	$replyToken = $event['replyToken'];
+	//$replyToken = $event['replyToken'];
 
 	$messages = [
 		'type' => 'text',
@@ -257,7 +257,7 @@ if (!is_null($events['events'])) {
 	$url = 'https://api.line.me/v2/bot/message/reply';
 	$data = [
 		'to' => $touser,
-		'replyToken' => $replyToken,
+	//	'replyToken' => $replyToken,
 		'messages' => [$messages],
 	];
 	$post = json_encode($data);
