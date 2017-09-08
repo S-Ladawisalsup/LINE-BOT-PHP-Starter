@@ -61,14 +61,14 @@ function GetQuesion($text, $flag) {
 		case 'math':
 			$ismath = file('text/question.txt');
 			$question[] = null;
-			for ($i = 0; $i < 4; $i++) {
+			for ($i = 1; $i < 4; $i++) {
 				array_push($question, $ismath[$i]);
 			}
 			break;
 		case 'issqrt':
 			$issqrt = file('text/math.txt');
 			$question[] = null;
-			for ($i = 0; $i < 4; $i++) {
+			for ($i = 1; $i < 4; $i++) {
 				array_push($question, $issqrt[$i]);
 			}
 			break;
