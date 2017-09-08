@@ -1,3 +1,3 @@
 <?php
 
-echo date('l').'Fin';
+echo date('l').'Fini';
