@@ -1,5 +1,4 @@
 <?php
 
-$question = file('question.txt');
-
-echo strlen($question[0]).'/'.strlen($question[1]);
+$question = file('https://cryptic-harbor-32168.herokuapp.com/text/txt.txt');
+echo count($question);

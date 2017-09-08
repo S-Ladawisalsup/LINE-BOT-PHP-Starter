@@ -92,10 +92,10 @@ function AnswerBuilder($mood) {
 
 	switch ($mood) {
 		case 'ans':
-			$answer = file('https://cryptic-harbor-32168.herokuapp.com/text/answer.txt');
+			$answer = file('answer.txt');
 			break;		
 		default:
-			$answer = file('https://cryptic-harbor-32168.herokuapp.com/text/reply.txt');
+			$answer = file('reply.txt');
 			break;
 	}
 
