@@ -180,7 +180,8 @@ if (!is_null($events['events'])) {
 					}
 					// Check text is greeting
 					else if (GetQuesion($text, 'greeting')) {
-						$day = strtolower(substr(date('l'), 0, 3));
+						//$day = strtolower(substr(date('l'), 0, 3));
+						$day = strtolower(date("D"));
 
 						$messages = [
 							'type' => 'image',
