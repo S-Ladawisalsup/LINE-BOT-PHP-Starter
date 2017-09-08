@@ -117,27 +117,6 @@ $events = json_decode($content, true);
 
 $bot_name = '@kiki';
 
-$mathematics = [
-	0 => '+',
-	1 => '-',
-	2 => 'x',
-	3 => '*',
-	4 => '×',
-	5 => '÷',
-	6 => '/',
-	7 => '%',
-	8 => 'บวก',
-	9 => 'ลบ',
-	10 => 'คูณ',
-	11 => 'หาร',
-	12 => 'X',
-	13 => 'ยกกำลัง',
-	14 => 'pow',
-	15 => 'รากที่สอง',
-	16 => 'รูทที่สอง',
-	17 => 'sqrt',
-];
-
 // Validate parsed JSON data
 if (!is_null($events['events'])) {
 	// Loop through each event
@@ -156,7 +135,9 @@ if (!is_null($events['events'])) {
 
 					if (GetQuesion($text, 'quiz')) {
 						if (GetQuesion($text, 'math')) {
+							$mathematics = file('text/math.txt');
 							foreach ($mathematics as $math) {
+								$math = substr($math, 0, strlen($math) - 1);
 								if (strpos($text, $math)) {
 									$operator = $math;
 									break;
@@ -170,7 +151,7 @@ if (!is_null($events['events'])) {
 								preg_match_all('!\d+\.*\d*!', $text, $matches);
 								$val = $matches[0];
 
-								if ((count($val) == 1) && ($operator == $mathematics[15] || $operator == $mathematics[16] || $operator == $mathematics[17])) {
+								if ((count($val) == 1) && GetQuesion($operator, 'issqrt')) {
 									$solve = maths($val[0], 0, $operator);
 								}
 								else if (count($val) == 2) {
