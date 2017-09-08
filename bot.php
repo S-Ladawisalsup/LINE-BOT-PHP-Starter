@@ -242,8 +242,6 @@ if (!is_null($events['events'])) {
 	}
 }
 
-$touser = 'Ua492767fd96449cd8a857b101dbdbcce';
-
 $messages = [
 	'type' => 'text',
 	'text' => AnswerBuilder('res')
@@ -252,7 +250,7 @@ $messages = [
 // Make a POST Request to Messaging API to push to sender
 $url = 'https://api.line.me/v2/bot/message/push';
 $data = [
-	'to' => $touser,
+	'to' => 'Ua492767fd96449cd8a857b101dbdbcce',
 	'messages' => [$messages],
 ];
 $post = json_encode($data);
