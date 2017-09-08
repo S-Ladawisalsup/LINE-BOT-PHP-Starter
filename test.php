@@ -2,4 +2,4 @@
 
 $question = file('question.txt');
 
-echo count($question);
+echo count($question[0]);
