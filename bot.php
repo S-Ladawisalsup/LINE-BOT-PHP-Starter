@@ -106,8 +106,7 @@ function AnswerBuilder($mood) {
 	return $building;
 }
 /************************************************************************************************************************************/
-
-
+date_default_timezone_set("Asia/Bangkok");
 $access_token = 'CFecc4UnPdpCUxVk2VuTlf7ANCYHbCpaxYltjR/z15zMJ/KzsPIVrp4tCql4xmQYr8qgJSZ6oitEZ0/PKH+FpdneucSfPgjTP03mQ5KRSKqYT93fEEvGDqOUxJ/SBoS3oTXcJaRSxlPVBWxH+8PWxAdB04t89/1O/w1cDnyilFU=';
 
 // Get POST body content
