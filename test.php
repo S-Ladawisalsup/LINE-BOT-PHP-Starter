@@ -6,4 +6,4 @@ $building = $data[14];
 echo $building;
 $costr = strlen($building);
 echo $costr;
-echo substr($building,0,$costr - 2 );
+echo substr($building,0,$costr - 1 );
