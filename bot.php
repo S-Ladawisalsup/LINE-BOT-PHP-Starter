@@ -189,6 +189,12 @@ if (!is_null($events['events'])) {
 						    'previewImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/' . $day . '_240.jpg'
 						];
 					}
+					else if (strpos($text, 'Who am I')) {
+						$messages = [						
+							'type' => 'text',
+							'text' => 'สวัสดี ID คุณคือ ' . $event['source']['userId']
+						];	
+					}
 					else {
 						// Build message to reply back
 						$messages = [						
