@@ -180,7 +180,6 @@ if (!is_null($events['events'])) {
 					}
 					// Check text is greeting
 					else if (GetQuesion($text, 'greeting')) {
-						//$day = strtolower(substr(date('l'), 0, 3));
 						$day = strtolower(date("D"));
 
 						$messages = [
@@ -242,29 +241,32 @@ if (!is_null($events['events'])) {
 	}
 }
 
-// $messages = [
-// 	'type' => 'text',
-// 	'text' => AnswerBuilder('res')
-// ];
+else {
+	$messages = [
+		'type' => 'text',
+		'text' => AnswerBuilder('res')
+	];
 
-// // Make a POST Request to Messaging API to push to sender
-// $url = 'https://api.line.me/v2/bot/message/push';
-// $data = [
-// 	'to' => 'Ua492767fd96449cd8a857b101dbdbcce',
-// 	'messages' => [$messages],
-// ];
-// $post = json_encode($data);
-// $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+	// Make a POST Request to Messaging API to push to sender
+	$url = 'https://api.line.me/v2/bot/message/push';
+	$data = [
+		'to' => 'Ua492767fd96449cd8a857b101dbdbcce',
+		'messages' => [$messages],
+	];
+	$post = json_encode($data);
+	$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
 
-// $ch = curl_init($url);
-// curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-// curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
-// curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-// curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-// $result = curl_exec($ch);
-// curl_close($ch);
+	$ch = curl_init($url);
+	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+	$result = curl_exec($ch);
+	curl_close($ch);
 
-// echo $result . "\r\n";	
+	echo $result . "\r\n";	
+}
+
 
 echo "OK";
