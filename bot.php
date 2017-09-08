@@ -76,7 +76,7 @@ function GetQuesion($text) {
 	// 	22 => 'เท่าใด',
 	// ];
 
-	$question = file('question.txt');
+	$question = file('https://cryptic-harbor-32168.herokuapp.com/text/question.txt');
 
 	foreach ($question as $item) {
 		$item = substr($item, 0, strlen($item) - 1);
@@ -92,10 +92,10 @@ function AnswerBuilder($mood) {
 
 	switch ($mood) {
 		case 'ans':
-			$answer = file('answer.txt');
+			$answer = file('https://cryptic-harbor-32168.herokuapp.com/text/answer.txt');
 			break;		
 		default:
-			$answer = file('reply.txt');
+			$answer = file('https://cryptic-harbor-32168.herokuapp.com/text/reply.txt');
 			break;
 	}
 
