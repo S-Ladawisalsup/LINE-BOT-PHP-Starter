@@ -7,3 +7,4 @@ echo $building;
 $costr = strlen($building);
 echo $costr;
 echo substr($building,0,$costr - 1 );
+echo $costr-1;
