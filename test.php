@@ -2,4 +2,4 @@
 
 $question = file('question.txt');
 
-echo count($question[0]);
+echo count($question[0]).'/'.count($question[1]);
