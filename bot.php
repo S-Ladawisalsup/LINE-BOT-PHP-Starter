@@ -241,7 +241,7 @@ if (!is_null($events['events'])) {
 		}
 	}
 }
-else if (date('i', time()) % 5 == 0) {
+//else if (date('i', time()) % 5 == 0) {
 
 	$touser = 'Ua492767fd96449cd8a857b101dbdbcce';
 
@@ -273,5 +273,5 @@ else if (date('i', time()) % 5 == 0) {
 	curl_close($ch);
 
 	echo $result . "\r\n";	
-}
+//}
 echo "OK";
