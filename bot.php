@@ -65,6 +65,13 @@ function GetQuesion($text, $flag) {
 				array_push($question, $ismath[$i]);
 			}
 			break;
+		case 'issqrt':
+			$issqrt = file('text/math.txt');
+			$question[] = null;
+			for ($i = 0; i < 3; i++) {
+				array_push($question, $issqrt[$i]);
+			}
+			break;
 		default:
 			return false;
 	}	
@@ -110,16 +117,6 @@ $events = json_decode($content, true);
 
 $bot_name = '@kiki';
 
-$question = [
-	0 => '?',
-	1 => 'ไหม',
-	2 => 'มั้ย',
-	3 => 'หรือไม่',
-	4 => 'เท่าไร',
-	5 => 'เท่าไหร่',
-	6 => 'อะไร',
-];
-
 $mathematics = [
 	0 => '+',
 	1 => '-',
@@ -158,7 +155,6 @@ if (!is_null($events['events'])) {
 					$text = substr($event['message']['text'], strlen($bot_name));
 
 					if (GetQuesion($text, 'quiz')) {
-						//if (endsWith($text, $question[0]) || endsWith($text, $question[4]) || endsWith($text, $question[5]) ) {
 						if (GetQuesion($text, 'math')) {
 							foreach ($mathematics as $math) {
 								if (strpos($text, $math)) {
@@ -174,7 +170,7 @@ if (!is_null($events['events'])) {
 								preg_match_all('!\d+\.*\d*!', $text, $matches);
 								$val = $matches[0];
 
-								if ((count($val) == 1) && ($operator == $mathematics[15] || $operator == $mathematics[16] || $operator == $mathematics[17])) {
+								if ((count($val) == 1) && GetQuesion($operator, 'issqrt')) {
 									$solve = maths($val[0], 0, $operator);
 								}
 								else if (count($val) == 2) {
