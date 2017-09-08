@@ -49,9 +49,25 @@ function maths($a, $b, $operator) {
     }
 }
 
-function GetQuesion($text) {
+function GetQuesion($text, $flag) {
 
-	$question = file('https://cryptic-harbor-32168.herokuapp.com/text/question.txt');
+	switch ($flag) {
+		case 'quiz':
+			$question = file('text/question.txt');
+			break;
+		case 'greeting':
+			$question = file('text/greeting.txt');
+			break;
+		case 'math':
+			$ismath = file('text/question.txt');
+			$question[] = null;
+			for ($i = 0; $i < 3; $i++) {
+				array_push($question, $ismath[$i]);
+			}
+			break;
+		default:
+			return false;
+	}	
 
 	foreach ($question as $item) {
 		$item = substr($item, 0, strlen($item) - 1);
@@ -67,10 +83,10 @@ function AnswerBuilder($mood) {
 
 	switch ($mood) {
 		case 'ans':
-			$answer = file('https://cryptic-harbor-32168.herokuapp.com/text/answer.txt');
+			$answer = file('text/answer.txt');
 			break;		
 		default:
-			$answer = file('https://cryptic-harbor-32168.herokuapp.com/text/reply.txt');
+			$answer = file('text/reply.txt');
 			break;
 	}
 
@@ -141,8 +157,9 @@ if (!is_null($events['events'])) {
 					// Get text sent echo without bot's name
 					$text = substr($event['message']['text'], strlen($bot_name));
 
-					if (GetQuesion($text)) {
-						if (endsWith($text, $question[0]) || endsWith($text, $question[4]) || endsWith($text, $question[5]) ) {
+					if (GetQuesion($text, 'quiz')) {
+						//if (endsWith($text, $question[0]) || endsWith($text, $question[4]) || endsWith($text, $question[5]) ) {
+						if (GetQuesion($text, 'math')) {
 							foreach ($mathematics as $math) {
 								if (strpos($text, $math)) {
 									$operator = $math;
@@ -185,18 +202,8 @@ if (!is_null($events['events'])) {
 							];							
 						}
 					}
-
-					/* test token */
-					else if (strpos($text, 'token') !== false) {
-						$token = $event['replyToken'];
-						$messages = [
-							'type' => 'text',
-							'text' => $token,
-						];	
-					}
-
 					// Check text is greeting
-					else if ((strpos($text, 'สวัสดี') !== false) || (strpos($text, 'หวัดดี') !== false) || (strpos($text, 'ดีจ้า') !== false) || (strpos($text, 'อรุณสวัสดิ์') !== false)) {
+					else if (GetQuesion($text, 'greeting')) {
 						$day = strtolower(substr(date('l'), 0, 3));
 
 						$messages = [
