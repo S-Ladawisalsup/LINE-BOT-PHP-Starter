@@ -1,4 +1,4 @@
 <?php
 
-$question = file('https://cryptic-harbor-32168.herokuapp.com/text/txt.txt');
+$question = file('/text/txt.txt');
 echo count($question);
