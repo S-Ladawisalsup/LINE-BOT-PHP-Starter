@@ -156,9 +156,7 @@ if (!is_null($events['events'])) {
 
 					if (GetQuesion($text, 'quiz')) {
 						if (GetQuesion($text, 'math')) {
-							//$mathematics = file('text/math.txt');
 							foreach ($mathematics as $math) {
-								//$math = substr($math, 0, strlen($math) - 1);
 								if (strpos($text, $math)) {
 									$operator = $math;
 									break;
@@ -172,7 +170,7 @@ if (!is_null($events['events'])) {
 								preg_match_all('!\d+\.*\d*!', $text, $matches);
 								$val = $matches[0];
 
-								if ((count($val) == 1) && GetQuesion($operator, 'issqrt')) {
+								if ((count($val) == 1) && ($operator == $mathematics[15] || $operator == $mathematics[16] || $operator == $mathematics[17])) {
 									$solve = maths($val[0], 0, $operator);
 								}
 								else if (count($val) == 2) {
