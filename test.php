@@ -6,7 +6,8 @@ $token = 'yJwRVXYNItJu2V8q54aUCpGjtMteCzNNsRTbf60pt9J'; 	//ใส่Token ที
 $str = 'Hello'; 											//ข้อความที่ต้องการส่ง สูงสุด 1000 ตัวอักษร
  
 $res = notify_message($str, $token);
-print_r($res);
+echo $res;
+
 function notify_message($message, $token){
 	$queryData = array('message' => $message);
 	$queryData = http_build_query($queryData, '', '&');
