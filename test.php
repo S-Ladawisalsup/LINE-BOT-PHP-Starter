@@ -9,3 +9,5 @@ else
 {
 	echo "666";
 }
+echo "<br>";
+echo $building;
