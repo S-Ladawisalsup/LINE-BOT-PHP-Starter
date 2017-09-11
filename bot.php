@@ -105,6 +105,17 @@ function AnswerBuilder($mood) {
 	}
 	return $building;
 }
+
+function GetSticker() {
+
+	$packageId = 0;
+	$stickerId = 0;
+
+	// write you code here ...
+	// ...
+
+	return array('packageId' => $packageId, 'stickerId' => $stickerId);
+}
 /************************************************************************************************************************************
 function notify_message($message, $token){
 	$queryData = array('message' => $message);
