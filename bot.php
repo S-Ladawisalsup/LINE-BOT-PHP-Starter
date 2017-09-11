@@ -107,13 +107,66 @@ function AnswerBuilder($mood) {
 }
 
 function GetSticker() {
-
-	$packageId = 0;
+	$packageId = rand(1,2);
 	$stickerId = 0;
-
-	// write you code here ...
-	// ...
-
+	if($packageId==1)
+	{
+		$ra1 = rand(0,2);
+		if($ra1 == 0)
+		{
+			$ra2 = rand(0,18);
+			if($ra2==18)
+			{
+				$ra2 = 21;//
+				$stickerId = $ra2;
+			}
+			else
+			{
+				$stickerId = $ra2;
+			}
+		}
+		else if($ra1 == 1)
+		{
+			$ra2 = rand(0,39);
+			$ra2 = $ra2+100;
+			$stickerId = $ra2;
+		}
+		else if($ra1 ==2)
+		{
+			$ra2 = rand(1,30);
+			$ra2 = $ra2 + 400;
+			$stickerId = $ra2;
+		}
+	}
+	else
+	{
+		$ra1 = rand(0,2);
+		if($ra1 == 0)
+		{
+			$ra2 = rand(19,47);
+			if($ra2 <= 21)//
+			{
+				$ra2 = $ra2 - 1;
+				$stickerId = $ra2;
+			}
+			else
+			{
+				$stickerId = $ra2;
+			}
+		}
+		else if($ra1 == 1)
+		{
+			$ra2 = rand(40,79);
+			$ra2 = $ra2 +100;
+			$stickerId = $ra2;
+		}
+		else if($ra1 == 2)
+		{
+			$ra2 = rand(1,27);
+			$ra2 = $ra2 + 500;
+			$stickerId = $ra2;
+		}
+	}
 	return array('packageId' => $packageId, 'stickerId' => $stickerId);
 }
 /************************************************************************************************************************************
