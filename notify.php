@@ -3,7 +3,7 @@
 $Token = 'yJwRVXYNItJu2V8q54aUCpGjtMteCzNNsRTbf60pt9J'//$_GET["Token"];
 $message = 'Test Line Notify' //$_GET["message "];
 
-echo 'This line is state before call function' . <br>;
+echo 'This line is state before call function';
 
 line_notify($Token, $message);
 
