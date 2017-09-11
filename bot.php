@@ -105,7 +105,33 @@ function AnswerBuilder($mood) {
 	}
 	return $building;
 }
-/************************************************************************************************************************************/
+/************************************************************************************************************************************
+function notify_message($message, $token){
+	$queryData = array('message' => $message);
+	$queryData = http_build_query($queryData, '', '&');
+	$headerOptions = array( 
+         				'http' => array(
+			            'method' => 'POST',
+			            'header' => 'Content-Type: application/x-www-form-urlencoded\r\n'
+			                        . 'Authorization: Bearer ' . $token . '\r\n'
+			                        . 'Content-Length: ' . strlen($queryData) . '\r\n',
+			            'content' => $queryData
+			         ),
+ );
+	 $context = stream_context_create($headerOptions);
+	 $result = file_get_contents(LINE_API, FALSE, $context);
+	 $res = json_decode($result);
+	 return $res;
+}
+/************************************************************************************************************************************
+define('LINE_API', 'https://notify-api.line.me/api/notify');
+ 
+$token = 'yJwRVXYNItJu2V8q54aUCpGjtMteCzNNsRTbf60pt9J'; 	//ใส่Token ที่copy เอาไว้
+$str = 'Hello'; 											//ข้อความที่ต้องการส่ง สูงสุด 1000 ตัวอักษร
+ 
+$res = notify_message($str, $token);
+echo $res;
+************************************************************************************************************************************/
 date_default_timezone_set("Asia/Bangkok");
 $access_token = 'CFecc4UnPdpCUxVk2VuTlf7ANCYHbCpaxYltjR/z15zMJ/KzsPIVrp4tCql4xmQYr8qgJSZ6oitEZ0/PKH+FpdneucSfPgjTP03mQ5KRSKqYT93fEEvGDqOUxJ/SBoS3oTXcJaRSxlPVBWxH+8PWxAdB04t89/1O/w1cDnyilFU=';
 
@@ -240,32 +266,5 @@ if (!is_null($events['events'])) {
 		}
 	}
 }
-
-// $messages = [
-// 	'type' => 'text',
-// 	'text' => AnswerBuilder('res')
-// ];
-
-// // Make a POST Request to Messaging API to push to sender
-// $url = 'https://api.line.me/v2/bot/message/push';
-// $data = [
-// 	'to' => 'Ua492767fd96449cd8a857b101dbdbcce',
-// 	'messages' => [$messages],
-// ];
-// $post = json_encode($data);
-// $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
-
-// $ch = curl_init($url);
-// curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-// curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
-// curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-// curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-// $result = curl_exec($ch);
-// curl_close($ch);
-
-// echo $result . "\r\n";	
-
-
 
 echo "OK";
