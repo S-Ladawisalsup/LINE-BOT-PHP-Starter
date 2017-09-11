@@ -1,5 +1,4 @@
 <?php
-
 $question = file('text/question.txt');
 $building = $question[0];
 if($building == 'blfacwbfpkpnmtnmyiynnoppjfthnbpmtlmbapfpckesaaesaayyrayjtcayjyjj')
