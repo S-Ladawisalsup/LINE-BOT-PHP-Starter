@@ -1,13 +1,13 @@
 <?php
 $numstick = 0;
 $randpack = rand(1,2);
-if($randpack=1);
+if($randpack=1)
 {
 	$ra1 = rand(0,2);
-	if($ra1 = 0);
+	if($ra1 = 0)
 	{
 		$ra2 = rand(0,18);
-		if($ra2=18);
+		if($ra2=18)
 		{
 			$ra2 = 21;//
 			$numstick = $ra2;
