@@ -297,11 +297,13 @@ if (!is_null($events['events'])) {
 				// Get random number of sticker
 				$var = rand(1,20);
 
+				$sticker = GetSticker();
+
 				// Build message to reply back
 				$messages = [
 					'type' => 'sticker',
-					'packageId' => '1',
-    				'stickerId' => $var
+					'packageId' => $sticker['packageId'], //'1',
+    				'stickerId' => $sticker['stickerId'] //$var
 				];
 			}
 
