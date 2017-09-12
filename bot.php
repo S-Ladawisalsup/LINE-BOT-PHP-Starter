@@ -108,7 +108,7 @@ function AnswerBuilder($mood) {
 
 function GetSticker() {
 	$packageId = rand(1, 2);
-	if ($packageId==1) {
+	if ($packageId == 1) {
 		$ra1 = rand(0, 2);
 		if ($ra1 == 0) {
 			$stickerId = rand(0, 18);
@@ -140,33 +140,11 @@ function GetSticker() {
 	}
 	return array('packageId' => $packageId, 'stickerId' => $stickerId);
 }
-/************************************************************************************************************************************
-function notify_message($message, $token){
-	$queryData = array('message' => $message);
-	$queryData = http_build_query($queryData, '', '&');
-	$headerOptions = array( 
-         				'http' => array(
-			            'method' => 'POST',
-			            'header' => 'Content-Type: application/x-www-form-urlencoded\r\n'
-			                        . 'Authorization: Bearer ' . $token . '\r\n'
-			                        . 'Content-Length: ' . strlen($queryData) . '\r\n',
-			            'content' => $queryData
-			         ),
- );
-	 $context = stream_context_create($headerOptions);
-	 $result = file_get_contents(LINE_API, FALSE, $context);
-	 $res = json_decode($result);
-	 return $res;
+
+function ConnectToMyDB() {
+	//Do somthing.
 }
-/************************************************************************************************************************************
-define('LINE_API', 'https://notify-api.line.me/api/notify');
- 
-$token = 'yJwRVXYNItJu2V8q54aUCpGjtMteCzNNsRTbf60pt9J'; 	//ใส่Token ที่copy เอาไว้
-$str = 'Hello'; 											//ข้อความที่ต้องการส่ง สูงสุด 1000 ตัวอักษร
- 
-$res = notify_message($str, $token);
-echo $res;
-************************************************************************************************************************************/
+/************************************************************************************************************************************/
 date_default_timezone_set("Asia/Bangkok");
 $access_token = 'CFecc4UnPdpCUxVk2VuTlf7ANCYHbCpaxYltjR/z15zMJ/KzsPIVrp4tCql4xmQYr8qgJSZ6oitEZ0/PKH+FpdneucSfPgjTP03mQ5KRSKqYT93fEEvGDqOUxJ/SBoS3oTXcJaRSxlPVBWxH+8PWxAdB04t89/1O/w1cDnyilFU=';
 
@@ -249,11 +227,9 @@ if (!is_null($events['events'])) {
 						    'previewImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/' . $day . '_240.jpg'
 						];
 					}
-					else if (strpos($text, 'Who am I')) {
-						$messages = [						
-							'type' => 'text',
-							'text' => 'สวัสดี ID คุณคือ ' . $event['source']['userId']
-						];	
+					// Case for test to connect DB Heroku-Progresql
+					else if (strpos($text, 'connectdb')) {
+						// Do something.	
 					}
 					else {
 						// Build message to reply back
