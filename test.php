@@ -1,13 +1,14 @@
 <?php
-function translate($from_lan='en', $to_lan='th', $text){
-    $json = json_decode(file_get_contents('https://ajax.googleapis.com/ajax/services/language/translate?v=1.0&q=' . urlencode($text) . '&langpair=' . $from_lan . '|' . $to_lan));
-    $translated_text = $json->responseData->translatedText;
 
-    return $translated_text;
-}
+use Google\Cloud\Translate\TranslateClient;
 
-$str = '@123e l e 34แปล pha 45n-=งะt//s';
-$str = preg_replace('/[^A-Za-z]/', '', $str);
-$str = ucfirst(strtolower($str));
-$str = translate($str);
-echo $str;
+$text = 'The text to translate.'
+$targetLanguage = 'th';
+
+$translate = new TranslateClient();
+$result = $translate->translate($text, [
+    'target' => $targetLanguage,
+]);
+// print("Source language: $result[source]\n");
+// print("Translation: $result[text]\n");
+echo $result['source'] . '=>' . $result['text'];
