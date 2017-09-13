@@ -141,13 +141,6 @@ function GetSticker() {
 	return array('packageId' => $packageId, 'stickerId' => $stickerId);
 }
 
-function translate($from_lan='en', $to_lan='th', $text){
-    $json = json_decode(file_get_contents('https://ajax.googleapis.com/ajax/services/language/translate?v=1.0&q=' . urlencode($text) . '&langpair=' . $from_lan . '|' . $to_lan));
-    $translated_text = $json->responseData->translatedText;
-
-    return $translated_text;
-}
-
 function ConnectToMyDB() {
 	//Do somthing.
 }
@@ -233,9 +226,6 @@ if (!is_null($events['events'])) {
 						    'originalContentUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/' . $day . '_original.jpg',
 						    'previewImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/' . $day . '_240.jpg'
 						];
-					}
-					else if (strpos($text, 'แปลว่า')) {
-						// Do something.	
 					}
 					// Case for test to connect DB Heroku-Progresql
 					else if (strpos($text, 'connectdb')) {
