@@ -2,7 +2,7 @@
 
 use Google\Cloud\Translate\TranslateClient;
 
-$text = 'Elephant'
+$text = 'Elephant';
 $targetLanguage = 'th';
 
 $translate = new TranslateClient();
