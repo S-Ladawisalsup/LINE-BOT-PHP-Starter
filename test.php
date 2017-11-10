@@ -12,15 +12,18 @@ Question format 7 types
 7. "how+.." question (will answer as number) has index no. 24-27
 */
 
-$init = 5;
+$init = 79;
 $source = 0;
 
 switch ($init) {
-	case '5':
-		$source = 1;
+	case $init > 80:
+		$source = A;
+		break;
+	case $init > 50:
+		$source = B;
 		break;	
 	default:
-		$source = 2;
+		$source = F;
 		break;
 }
 

@@ -155,5 +155,24 @@ function findQuestionType ($text) {
 		$counter = $counter + 1;
 	}
 
-	return 0;
+	switch ($counter) {
+		case '0':
+			return 0;
+		case $counter <= 5:
+			return 1;
+		case $counter <= 10:
+			return 2;
+		case $counter <= 12:
+			return 3;
+		case $counter <= 15:
+			return 4;
+		case $counter <= 19:
+			return 5;
+		case $counter <= 23:
+			return 6;
+		case $counter <= 27:
+			return 7;
+		default:
+			return 0;
+	}
 }
