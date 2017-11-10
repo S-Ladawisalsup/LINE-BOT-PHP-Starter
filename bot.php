@@ -28,7 +28,8 @@ if (!is_null($events['events'])) {
 
 					// Get text sent echo without bot's name
 					$text = substr($event['message']['text'], strlen($bot_name));
-
+//--------------------------------------------------------------------------------------------------------------------------------
+					// Check text is question
 					if (GetQuesion($text, 'quiz')) {
 						if (GetQuesion($text, 'math')) {
 							$mathematics = file('text/math.txt');
@@ -75,6 +76,7 @@ if (!is_null($events['events'])) {
 							];							
 						}
 					}
+//--------------------------------------------------------------------------------------------------------------------------------
 					// Check text is greeting
 					else if (GetQuesion($text, 'greeting')) {
 						$day = strtolower(date("D"));

@@ -62,14 +62,14 @@ function GetQuesion($text, $flag) {
 		case 'math':
 			$ismath = file('text/question.txt');
 			$question[] = null;
-			for ($i = 1; $i < 4; $i++) {
+			for ($i = 24; $i <= 27; $i++) {
 				array_push($question, $ismath[$i]);
 			}
 			break;
 		case 'issqrt':
 			$issqrt = file('text/math.txt');
 			$question[] = null;
-			for ($i = 1; $i < 4; $i++) {
+			for ($i = 1; $i <= 3; $i++) {
 				array_push($question, $issqrt[$i]);
 			}
 			break;
@@ -111,36 +111,49 @@ function AnswerBuilder($mood) {
 /*** Function generates answer as sticker type by random from default sticker(s) by LINE Corp. ***/
 function GetSticker() {
 	$packageId = rand(1, 2);
-	if ($packageId == 1) {
-		$ra1 = rand(0, 2);
-		if ($ra1 == 0) {
+	$randType = rand(0, 2);
+
+	if ($packageId == 1) {		
+		if ($randType == 0) {
 			$stickerId = rand(0, 18);
 			if ($stickerId == 18) {
 				$stickerId = 21;
 			}
 		}
-		else if ($ra1 == 1) {
+		else if ($randType == 1) {
 			$stickerId = rand(100, 139);
 		}
-		else if ($ra1 == 2) {
+		else {
 			$stickerId = rand(401, 430);
 		}
 	}
 	else {
-		$ra1 = rand(0, 2);
-		if ($ra1 == 0) {
+		if ($randType == 0) {
 			$stickerId = rand(19, 47);
 			if ($stickerId <= 21) {
 				$stickerId = $stickerId - 1;
 			}
 		}
-		else if ($ra1 == 1) {
+		else if ($randType == 1) {
 			$stickerId = rand(140, 179);
 		}
-		else if ($ra1 == 2) {
+		else {
 			$stickerId = rand(501, 527);
 		}
 	}
 	return array('packageId' => $packageId, 'stickerId' => $stickerId);
 }
 /**********************************************************************************************************************************/
+function findQuestionType ($text) {
+	$QArray = file('text/question.txt');
+	$counter = 0;
+	foreach ($QArray as $keyitem) {
+		$keyitem = substr($keyitem, 0, strlen($keyitem) - 1);
+		if (endsWith($text, $item)) {
+			break;
+		}	
+		$counter = $counter + 1;
+	}
+
+	return 0;
+}
