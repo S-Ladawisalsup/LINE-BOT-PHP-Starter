@@ -28,8 +28,9 @@ if (!is_null($events['events'])) {
 
 					// Get text sent echo without bot's name
 					$text = substr($event['message']['text'], strlen($bot_name));
-//--------------------------------------------------------------------------------------------------------------------------------
+/*********************************************************************************************************************************/
 					// Check text is question
+					/*** OLD VERSION! ***/
 					if (GetQuesion($text, 'quiz')) {
 						if (GetQuesion($text, 'math')) {
 							$mathematics = file('text/math.txt');
@@ -76,7 +77,36 @@ if (!is_null($events['events'])) {
 							];							
 						}
 					}
-//--------------------------------------------------------------------------------------------------------------------------------
+/*********************************************************************************************************************************/
+					/*** NEW VERSION! ***/
+					$typing = findQuestionType($text);
+					switch ($typing) {
+						case '1':
+							# code... Yes/No Question -> Yes/No Answer
+							break;	
+						case '2':
+							# code... When Question -> Timer Answer
+							break;
+						case '3':
+							# code... Where Question -> Location Answer
+							break;
+						case '4':
+							# code... Who Question -> Personal Answer
+							break;
+						case '5':
+							# code... What/How Question -> Reason Answer
+							break;
+						case '6':
+							# code... Which Question -> Object Answer
+							break;
+						case '7':
+							# code... How + ... Question -> Number Answer
+							break;					
+						default:
+							# code... Other case
+							break;
+					}
+/*********************************************************************************************************************************/
 					// Check text is greeting
 					else if (GetQuesion($text, 'greeting')) {
 						$day = strtolower(date("D"));
