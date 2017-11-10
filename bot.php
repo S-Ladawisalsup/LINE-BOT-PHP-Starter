@@ -28,101 +28,94 @@ if (!is_null($events['events'])) {
 
 					// Get text sent echo without bot's name
 					$text = substr($event['message']['text'], strlen($bot_name));
-/*********************************************************************************************************************************/
+
 					// Check text is question
-					/*** OLD VERSION! ***/
-					if (GetQuesion($text, 'quiz')) {
-						if (GetQuesion($text, 'math')) {
-							$mathematics = file('text/math.txt');
-							foreach ($mathematics as $math) {
-								$math = substr($math, 0, strlen($math) - 1);
-								if (strpos($text, $math)) {
-									$operator = $math;
-									break;
+
+					$typing = findQuestionType($text);
+					switch ($typing) {
+						case '1':
+							# code... Yes/No Question => Yes/No Answer
+							break;	
+						case '2':
+							# code... When Question => Timer Answer
+							break;
+						case '3':
+							# code... Where Question => Location Answer
+							break;
+						case '4':
+							# code... Who Question => Personal Answer
+							break;
+						case '5':
+							# code... What/How Question => Reason Answer
+							break;
+						case '6':
+							# code... Which Question => Object Answer
+							break;
+						case '7':
+							# Number Question (How + ...) => Number Answer
+							if (GetQuesion($text, 'math')) {
+								$mathematics = file('text/math.txt');
+								foreach ($mathematics as $math) {
+									$math = substr($math, 0, strlen($math) - 1);
+									if (strpos($text, $math)) {
+										$operator = $math;
+										break;
+									}
+									else {
+										$operator = 'null';
+									}
+								}
+
+								if ($operator != 'null') {
+									preg_match_all('!\d+\.*\d*!', $text, $matches);
+									$val = $matches[0];
+
+									if ((count($val) == 1) && GetQuesion($operator, 'issqrt')) {
+										$solve = maths($val[0], 0, $operator);
+									}
+									else if (count($val) == 2) {
+										$solve = maths($val[0], $val[1], $operator);
+									}							 
+								}
+
+								if (isset($solve) === false) {
+									$messages = [						
+										'type' => 'text',
+										'text' => AnswerBuilder('ans')
+									];	
 								}
 								else {
-									$operator = 'null';
+									$messages = [						
+										'type' => 'text',
+										'text' => $solve . " จ้า"
+									];	
 								}
-							}
-
-							if ($operator != 'null') {
-								preg_match_all('!\d+\.*\d*!', $text, $matches);
-								$val = $matches[0];
-
-								if ((count($val) == 1) && GetQuesion($operator, 'issqrt')) {
-									$solve = maths($val[0], 0, $operator);
-								}
-								else if (count($val) == 2) {
-									$solve = maths($val[0], $val[1], $operator);
-								}							 
-							}
-
-							if (isset($solve) === false) {
-								$messages = [						
-									'type' => 'text',
-									'text' => AnswerBuilder('ans')
-								];	
 							}
 							else {
 								$messages = [						
 									'type' => 'text',
-									'text' => $solve . " จ้า"
-								];	
+									'text' => AnswerBuilder('ans')
+								];							
 							}
-						}
-						else {
-							$messages = [						
-								'type' => 'text',
-								'text' => AnswerBuilder('ans')
-							];							
-						}
-					}
-/*********************************************************************************************************************************/
-					// /*** NEW VERSION! ***/
-					// $typing = findQuestionType($text);
-					// switch ($typing) {
-					// 	case '1':
-					// 		# code... Yes/No Question -> Yes/No Answer
-					// 		break;	
-					// 	case '2':
-					// 		# code... When Question -> Timer Answer
-					// 		break;
-					// 	case '3':
-					// 		# code... Where Question -> Location Answer
-					// 		break;
-					// 	case '4':
-					// 		# code... Who Question -> Personal Answer
-					// 		break;
-					// 	case '5':
-					// 		# code... What/How Question -> Reason Answer
-					// 		break;
-					// 	case '6':
-					// 		# code... Which Question -> Object Answer
-					// 		break;
-					// 	case '7':
-					// 		# code... How + ... Question -> Number Answer
-					// 		break;					
-					// 	default:
-					// 		# code... Other case
-					// 		break;
-					// }
-/*********************************************************************************************************************************/
-					// Check text is greeting
-					else if (GetQuesion($text, 'greeting')) {
-						$day = strtolower(date("D"));
-
-						$messages = [
-							'type' => 'image',
-						    'originalContentUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/' . $day . '_original.jpg',
-						    'previewImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/' . $day . '_240.jpg'
-						];
-					}
-					else {
-						// Build message to reply back
-						$messages = [						
-							'type' => 'text',
-							'text' => AnswerBuilder('res')
-						];	
+							break;					
+						default:
+							# Other cases not question
+							if (GetQuesion($text, 'greeting')) {
+								$day = strtolower(date("D"));
+								$messages = [
+									'type' => 'image',
+								    'originalContentUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/' . $day . '_original.jpg',
+								    'previewImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/' . $day . '_240.jpg'
+								];
+							}
+							else {
+								// Build message to reply back
+								$messages = [						
+									'type' => 'text',
+									'text' => AnswerBuilder('res')
+								];	
+							}  
+							break;
 					}
 				}			
 			}

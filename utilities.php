@@ -13,7 +13,6 @@ function endsWith($haystack, $needle) {
 /**********************************************************************************************************************************/
 /*** Function for calculate basic mathematics when string contain math's operator. ***/
 function maths($a, $b, $operator) {
-
     switch ($operator) {
     	case '+':
     	case 'บวก':
@@ -51,7 +50,6 @@ function maths($a, $b, $operator) {
 /**********************************************************************************************************************************/
 /*** Function for check text from user is question(?) ***/
 function GetQuesion($text, $flag) {
-
 	switch ($flag) {
 		case 'quiz':
 			$question = file('text/question.txt');
@@ -62,7 +60,7 @@ function GetQuesion($text, $flag) {
 		case 'math':
 			$ismath = file('text/question.txt');
 			$question[] = null;
-			for ($i = 24; $i <= 27; $i++) {
+			for ($i = 26; $i <= 29; $i++) {
 				array_push($question, $ismath[$i]);
 			}
 			break;
@@ -89,7 +87,6 @@ function GetQuesion($text, $flag) {
 /**********************************************************************************************************************************/
 /*** Function generates answer as text type, now get answer from array text file by random (cannot connect datatabase now) ***/
 function AnswerBuilder($mood) {
-
 	switch ($mood) {
 		case 'ans':
 			$answer = file('text/answer.txt');
@@ -162,9 +159,9 @@ Question has 7 formats!
 2. "when" question (will answer as timing) has index no. 6-10
 3. "where" qusetion (will answer as location) has index no. 11-12
 4. "who" question (will answer as person) has index no. 13-15
-5. "what/how" question (will answer as reason) has index no. 16-19
-6. "which" question (will answer as object) has index no. 20-23 
-7. "how+.." question (will answer as number) has index no. 24-27
+5. "what/how" question (will answer as reason) has index no. 16-21
+6. "which" question (will answer as object) has index no. 22-25 
+7. "how+.." question (will answer as number) has index no. 26-29
 *******************************************************************/
 
 	switch ($counter) {
@@ -178,11 +175,11 @@ Question has 7 formats!
 			return 3;
 		case $counter <= 15:
 			return 4;
-		case $counter <= 19:
+		case $counter <= 21:
 			return 5;
-		case $counter <= 23:
+		case $counter <= 25:
 			return 6;
-		case $counter <= 27:
+		case $counter <= 29:
 			return 7;
 		default:
 			return 0;
