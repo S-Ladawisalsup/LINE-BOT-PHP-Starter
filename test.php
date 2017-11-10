@@ -16,7 +16,7 @@ $init = 5;
 $source = 0;
 
 switch ($init) {
-	case '0' ... '9':
+	case '5':
 		$source = 1;
 		break;	
 	default:
