@@ -35,21 +35,45 @@ if (!is_null($events['events'])) {
 					switch ($typing) {
 						case '1':
 							# code... Yes/No Question => Yes/No Answer
+							$messages = [						
+								'type' => 'text',
+								'text' => AnswerBuilder('ans')
+							];
 							break;	
 						case '2':
 							# code... When Question => Timer Answer
+							$messages = [						
+								'type' => 'text',
+								'text' => AnswerBuilder('ans')
+							];
 							break;
 						case '3':
 							# code... Where Question => Location Answer
+							$messages = [						
+								'type' => 'text',
+								'text' => AnswerBuilder('ans')
+							];
 							break;
 						case '4':
 							# code... Who Question => Personal Answer
+							$messages = [						
+								'type' => 'text',
+								'text' => AnswerBuilder('ans')
+							];
 							break;
 						case '5':
 							# code... What/How Question => Reason Answer
+							$messages = [						
+								'type' => 'text',
+								'text' => AnswerBuilder('ans')
+							];
 							break;
 						case '6':
 							# code... Which Question => Object Answer
+							$messages = [						
+								'type' => 'text',
+								'text' => AnswerBuilder('ans')
+							];
 							break;
 						case '7':
 							# Number Question (How + ...) => Number Answer
