@@ -2,148 +2,145 @@
 
 /************************************************************************************************************************************/
 /*** PHP Function Zone. ***/
-function startsWith($haystack, $needle) {
-    // search backwards starting from haystack length characters from the end
-    return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== false;
-}
+// function startsWith($haystack, $needle) {
+//     // search backwards starting from haystack length characters from the end
+//     return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== false;
+// }
 
-function endsWith($haystack, $needle) {
-    // search forward starting from end minus needle length characters
-    return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== false);
-}
+// function endsWith($haystack, $needle) {
+//     // search forward starting from end minus needle length characters
+//     return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== false);
+// }
 
-function maths($a, $b, $operator) {
+// function maths($a, $b, $operator) {
 
-    switch ($operator) {
-    	case '+':
-    	case 'บวก':
-    		return $a + $b;
-    	case '-':
-    	case 'ลบ':
-    		return $a - $b;
-    	case '*':
-    	case 'คูณ':
-    	case 'x':
-    	case 'X':
-    	case '×':
-    		return $a * $b;
-    	case '/':
-    	case 'หาร':
-    		if ($b != 0) {
-    			return $a / $b;
-    		}
-    		else {
-    			return 'ตัวหารเป็น 0 ไม่ไก้ ไปคิดมาใหม่นะ';
-    		}
-    	case '%':
-    		return $a % $b;
-    	case 'ยกกำลัง':
-    	case 'pow':
-    		return pow($a, $b);
-    	case 'รูทที่สอง':
-    	case 'รากที่สอง':
-    	case 'sqrt':
-    		return sqrt($a); 	
-    	default:
-    		return 'โอ๊ยปวดหัว คิดไม่ออกแล้ว';
-    }
-}
+//     switch ($operator) {
+//     	case '+':
+//     	case 'บวก':
+//     		return $a + $b;
+//     	case '-':
+//     	case 'ลบ':
+//     		return $a - $b;
+//     	case '*':
+//     	case 'คูณ':
+//     	case 'x':
+//     	case 'X':
+//     	case '×':
+//     		return $a * $b;
+//     	case '/':
+//     	case 'หาร':
+//     		if ($b != 0) {
+//     			return $a / $b;
+//     		}
+//     		else {
+//     			return 'ตัวหารเป็น 0 ไม่ไก้ ไปคิดมาใหม่นะ';
+//     		}
+//     	case '%':
+//     		return $a % $b;
+//     	case 'ยกกำลัง':
+//     	case 'pow':
+//     		return pow($a, $b);
+//     	case 'รูทที่สอง':
+//     	case 'รากที่สอง':
+//     	case 'sqrt':
+//     		return sqrt($a); 	
+//     	default:
+//     		return 'โอ๊ยปวดหัว คิดไม่ออกแล้ว';
+//     }
+// }
 
-function GetQuesion($text, $flag) {
+// function GetQuesion($text, $flag) {
 
-	switch ($flag) {
-		case 'quiz':
-			$question = file('text/question.txt');
-			break;
-		case 'greeting':
-			$question = file('text/greeting.txt');
-			break;
-		case 'math':
-			$ismath = file('text/question.txt');
-			$question[] = null;
-			for ($i = 1; $i < 4; $i++) {
-				array_push($question, $ismath[$i]);
-			}
-			break;
-		case 'issqrt':
-			$issqrt = file('text/math.txt');
-			$question[] = null;
-			for ($i = 1; $i < 4; $i++) {
-				array_push($question, $issqrt[$i]);
-			}
-			break;
-		default:
-			return false;
-	}	
+// 	switch ($flag) {
+// 		case 'quiz':
+// 			$question = file('text/question.txt');
+// 			break;
+// 		case 'greeting':
+// 			$question = file('text/greeting.txt');
+// 			break;
+// 		case 'math':
+// 			$ismath = file('text/question.txt');
+// 			$question[] = null;
+// 			for ($i = 1; $i < 4; $i++) {
+// 				array_push($question, $ismath[$i]);
+// 			}
+// 			break;
+// 		case 'issqrt':
+// 			$issqrt = file('text/math.txt');
+// 			$question[] = null;
+// 			for ($i = 1; $i < 4; $i++) {
+// 				array_push($question, $issqrt[$i]);
+// 			}
+// 			break;
+// 		default:
+// 			return false;
+// 	}	
 
-	foreach ($question as $item) {
-		$item = substr($item, 0, strlen($item) - 1);
-		if (endsWith($text, $item)) {
-			return true;
-		}
-	}
+// 	foreach ($question as $item) {
+// 		$item = substr($item, 0, strlen($item) - 1);
+// 		if (endsWith($text, $item)) {
+// 			return true;
+// 		}
+// 	}
 
-	return false;
-}
+// 	return false;
+// }
 
-function AnswerBuilder($mood) {
+// function AnswerBuilder($mood) {
 
-	switch ($mood) {
-		case 'ans':
-			$answer = file('text/answer.txt');
-			break;		
-		default:
-			$answer = file('text/reply.txt');
-			break;
-	}
+// 	switch ($mood) {
+// 		case 'ans':
+// 			$answer = file('text/answer.txt');
+// 			break;		
+// 		default:
+// 			$answer = file('text/reply.txt');
+// 			break;
+// 	}
 
-	$building = 'error';
-	if (count($answer) > 0) {
-		$numindex = rand(1, count($answer));
-		$building = $answer[$numindex];
-		$building = substr($building, 0, strlen($building)-1);
-	}
-	return $building;
-}
+// 	$building = 'error';
+// 	if (count($answer) > 0) {
+// 		$numindex = rand(1, count($answer));
+// 		$building = $answer[$numindex];
+// 		$building = substr($building, 0, strlen($building)-1);
+// 	}
+// 	return $building;
+// }
 
-function GetSticker() {
-	$packageId = rand(1, 2);
-	if ($packageId == 1) {
-		$ra1 = rand(0, 2);
-		if ($ra1 == 0) {
-			$stickerId = rand(0, 18);
-			if ($stickerId == 18) {
-				$stickerId = 21;
-			}
-		}
-		else if ($ra1 == 1) {
-			$stickerId = rand(100, 139);
-		}
-		else if ($ra1 == 2) {
-			$stickerId = rand(401, 430);
-		}
-	}
-	else {
-		$ra1 = rand(0, 2);
-		if ($ra1 == 0) {
-			$stickerId = rand(19, 47);
-			if ($stickerId <= 21) {
-				$stickerId = $stickerId - 1;
-			}
-		}
-		else if ($ra1 == 1) {
-			$stickerId = rand(140, 179);
-		}
-		else if ($ra1 == 2) {
-			$stickerId = rand(501, 527);
-		}
-	}
-	return array('packageId' => $packageId, 'stickerId' => $stickerId);
-}
-
-function ConnectToMyDB() {
-	//Do somthing.
-}
+// function GetSticker() {
+// 	$packageId = rand(1, 2);
+// 	if ($packageId == 1) {
+// 		$ra1 = rand(0, 2);
+// 		if ($ra1 == 0) {
+// 			$stickerId = rand(0, 18);
+// 			if ($stickerId == 18) {
+// 				$stickerId = 21;
+// 			}
+// 		}
+// 		else if ($ra1 == 1) {
+// 			$stickerId = rand(100, 139);
+// 		}
+// 		else if ($ra1 == 2) {
+// 			$stickerId = rand(401, 430);
+// 		}
+// 	}
+// 	else {
+// 		$ra1 = rand(0, 2);
+// 		if ($ra1 == 0) {
+// 			$stickerId = rand(19, 47);
+// 			if ($stickerId <= 21) {
+// 				$stickerId = $stickerId - 1;
+// 			}
+// 		}
+// 		else if ($ra1 == 1) {
+// 			$stickerId = rand(140, 179);
+// 		}
+// 		else if ($ra1 == 2) {
+// 			$stickerId = rand(501, 527);
+// 		}
+// 	}
+// 	return array('packageId' => $packageId, 'stickerId' => $stickerId);
+// }
+include 'utilities.php';
 /************************************************************************************************************************************/
 date_default_timezone_set("Asia/Bangkok");
 $access_token = 'CFecc4UnPdpCUxVk2VuTlf7ANCYHbCpaxYltjR/z15zMJ/KzsPIVrp4tCql4xmQYr8qgJSZ6oitEZ0/PKH+FpdneucSfPgjTP03mQ5KRSKqYT93fEEvGDqOUxJ/SBoS3oTXcJaRSxlPVBWxH+8PWxAdB04t89/1O/w1cDnyilFU=';
@@ -227,10 +224,6 @@ if (!is_null($events['events'])) {
 						    'previewImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/' . $day . '_240.jpg'
 						];
 					}
-					// Case for test to connect DB Heroku-Progresql
-					else if (strpos($text, 'connectdb')) {
-						// Do something.	
-					}
 					else {
 						// Build message to reply back
 						$messages = [						
@@ -241,16 +234,14 @@ if (!is_null($events['events'])) {
 				}			
 			}
 			else if ($event['message']['type'] == 'sticker') {
-				// Get random number of sticker
-				$var = rand(1,20);
-
+				// Get random sticker default by LINE corp.
 				$sticker = GetSticker();
 
 				// Build message to reply back
 				$messages = [
 					'type' => 'sticker',
-					'packageId' => $sticker['packageId'], //'1',
-    				'stickerId' => $sticker['stickerId'] //$var
+					'packageId' => $sticker['packageId'],
+    				'stickerId' => $sticker['stickerId']
 				];
 			}
 
