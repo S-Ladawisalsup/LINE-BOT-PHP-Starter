@@ -17,25 +17,25 @@ switch ($Counters) {
 	case '0':
 		$ShowType = '0. none';
 		break;
-	case $counter <= 5:
+	case $Counters <= 5:
 		$ShowType = '1. yes/no question';
 		break;
-	case $counter <= 10:
+	case $Counters <= 10:
 		$ShowType = '2. when question';
 		break;
-	case $counter <= 12:
+	case $Counters <= 12:
 		$ShowType = '3. where question';
 		break;
-	case $counter <= 15:
+	case $Counters <= 15:
 		$ShowType = '4. who question';
 		break;
-	case $counter <= 21:
+	case $Counters <= 21:
 		$ShowType = '5. what/how question';
 		break;
-	case $counter <= 25:
+	case $Counters <= 25:
 		$ShowType = '6. which question';
 		break;
-	case $counter <= 29:
+	case $Counters <= 29:
 		$ShowType = '7. number question';
 		break;
 	default:

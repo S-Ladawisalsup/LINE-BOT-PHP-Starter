@@ -146,7 +146,7 @@ function findQuestionType ($text) {
 	$counter = 0;
 	foreach ($QArray as $keyitem) {
 		$keyitem = substr($keyitem, 0, strlen($keyitem) - 1);
-		if (endsWith($text, $item)) {
+		if (endsWith($text, $keyitem)) {
 			break;
 		}	
 		$counter = $counter + 1;
