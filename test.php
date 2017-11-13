@@ -1,46 +1,12 @@
 <?php
 
-$TInput = '?';
-$TArray = file('text/question.txt');
-$Counters = 0;
+$ip = "192.1.100.249";
 
-foreach ($TArray as $vtest) {
-	$vtest = substr($vtest, 0, strlen($vtest) - 1);
-	if ($TInput == $vtest) {
-		break;
-	}	
-	$Counters = $Counters + 1;
+$exe = shell_exec("ping -n 3 $ip");
+
+if (strrpos($exe,"100% loss") > 0) {
+	echo "เซิฟเวอร์ล่มแล้วจ้า";
 }
-
-$ShowType = 'zero';
-switch ($Counters) {
-	case '0':
-		$ShowType = '0. none';
-		break;
-	case $Counters <= 5:
-		$ShowType = '1. yes/no question';
-		break;
-	case $Counters <= 10:
-		$ShowType = '2. when question';
-		break;
-	case $Counters <= 12:
-		$ShowType = '3. where question';
-		break;
-	case $Counters <= 15:
-		$ShowType = '4. who question';
-		break;
-	case $Counters <= 21:
-		$ShowType = '5. what/how question';
-		break;
-	case $Counters <= 25:
-		$ShowType = '6. which question';
-		break;
-	case $Counters <= 29:
-		$ShowType = '7. number question';
-		break;
-	default:
-		$ShowType = 'default';
-		break;
+else { 
+	echo "เซิฟเวอร์ยังไม่ล่มแล้วจ้า";
 }
-
-echo 'counter : ' . $Counters . ', question\'s type : ' . $ShowType;
