@@ -4,7 +4,7 @@ $TInput = '?';
 $TArray = file('text/question.txt');
 $Counters = 0;
 
-foreach ($vtest as $TArray) {
+foreach ($TArray as $vtest) {
 	$vtest = substr($vtest, 0, strlen($vtest) - 1);
 	if ($TInput == $vtest) {
 		break;
@@ -44,4 +44,3 @@ switch ($Counters) {
 }
 
 echo 'counter : ' . $Counters . ', question\'s type : ' . $ShowType;
-echo $TArray;
