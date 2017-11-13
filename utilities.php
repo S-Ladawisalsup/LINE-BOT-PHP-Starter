@@ -166,12 +166,17 @@ Question has 7 formats!
 5. "what/how" question (will answer as reason) has index no. 16-21
 6. "which" question (will answer as object) has index no. 22-25 
 7. "how+.." question (will answer as number) has index no. 26-29
+Ohter(s) Mode!
+8. It's ping to anther devices or server mode
 *******************************************************************/
 
 	switch ($counter) {
 		case '0':
 			return 0;
 		case $counter <= 5:
+			if (strpos($text, 'ล่ม') !== false) {
+				return 8;
+			}
 			return 1;
 		case $counter <= 10:
 			return 2;
