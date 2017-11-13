@@ -142,6 +142,10 @@ function GetSticker() {
 }
 /**********************************************************************************************************************************/
 function findQuestionType ($text) {
+	if (is_ping_mode($text)) {
+		return 8;
+	}
+
 	$QArray = file('text/question.txt');
 	$counter = 0;
 	foreach ($QArray as $keyitem) {
