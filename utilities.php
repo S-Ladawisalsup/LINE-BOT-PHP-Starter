@@ -185,3 +185,14 @@ Question has 7 formats!
 			return 0;
 	}
 }
+/**********************************************************************************************************************************/
+function is_ping_mode ($text) {
+	$pingping = file('text/ping.txt');
+	foreach ($pingping as $pingword) {
+		$pingword = substr($pingword, 0, strlen($pingword) - 1);
+		if (strpos($text, $pingword) !== false) {
+			return true;
+		}
+	}
+	return false;
+}

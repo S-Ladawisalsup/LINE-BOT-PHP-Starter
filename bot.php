@@ -35,10 +35,18 @@ if (!is_null($events['events'])) {
 					switch ($typing) {
 						case '1':
 							# code... Yes/No Question => Yes/No Answer
-							$messages = [						
-								'type' => 'text',
-								'text' => AnswerBuilder('ans')
-							];
+							if (is_ping_mode($text)) {
+								$messages = [						
+									'type' => 'text',
+									'text' => 'ปิงโหมดจ้า'
+								];
+							}
+							else {
+								$messages = [						
+									'type' => 'text',
+									'text' => AnswerBuilder('ans')
+								];
+							}
 							break;	
 						case '2':
 							# code... When Question => Timer Answer
