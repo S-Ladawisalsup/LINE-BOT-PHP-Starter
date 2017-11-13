@@ -20,17 +20,17 @@ if (!is_null($events['events'])) {
 		// Reply only when message sent is in 'text' format
 		if ($event['type'] == 'message') {
 
+			# Check event user request is text
 			if ($event['message']['type'] == 'text') {
 
 				// Compare message calling bot's name
 				$haystack = strtolower($event['message']['text']);
 				if (startsWith($haystack, $bot_name)) {
 
-					// Get text sent echo without bot's name
+					// Get text echo without bot's name
 					$text = substr($event['message']['text'], strlen($bot_name));
 
 					// Check text is question
-
 					$typing = findQuestionType($text);
 					switch ($typing) {
 						case '1':
@@ -143,6 +143,8 @@ if (!is_null($events['events'])) {
 					}
 				}			
 			}
+
+			# Check event user request is sticker
 			else if ($event['message']['type'] == 'sticker') {
 				// Get random sticker default by LINE Corp.
 				$sticker = GetSticker();
