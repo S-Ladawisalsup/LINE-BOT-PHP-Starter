@@ -44,3 +44,4 @@ switch ($Counters) {
 }
 
 echo 'counter : ' . $Counters . ', question\'s type : ' . $ShowType;
+echo $TArray;
