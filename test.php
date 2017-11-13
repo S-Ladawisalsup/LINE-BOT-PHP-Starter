@@ -43,4 +43,4 @@ switch ($Counters) {
 		break;
 }
 
-echo 'counter : ' . $Counters . ',';
+echo 'counter : ' . $Counters . ', question\'s type : ';
