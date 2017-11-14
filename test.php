@@ -10,7 +10,7 @@ $dsn = 'pgsql:'
 
 $db = new PDO($dsn);
 
-$query = 'SELECT id, ip_addr, serv_name, status, temperature, lastchangedatetime FROM tbhlinebotserv ORDER BY id ASC';
+$query = 'SELECT id, ip_addr, serv_name, status, lastchangedatetime FROM tbhlinebotserv ORDER BY id ASC';
 $result = $db->query($query);
 
 echo '<table style="border: 1px solid black; border-collapse: collapse;">
@@ -20,7 +20,6 @@ echo '<table style="border: 1px solid black; border-collapse: collapse;">
 				<th style="border: 1px solid black; border-collapse: collapse;">IP Address</th>
 				<th style="border: 1px solid black; border-collapse: collapse;">Server Name</th>
 				<th style="border: 1px solid black; border-collapse: collapse;">Server Status</th>
-				<th style="border: 1px solid black; border-collapse: collapse;">Temperature</th>
 				<th style="border: 1px solid black; border-collapse: collapse;">Last Active Time</th>
 			</tr>
 		</thead>
@@ -32,7 +31,6 @@ while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
     echo '<td style="border: 1px solid black; border-collapse: collapse;">' . htmlspecialchars($row["ip_addr"]) . '</td>';
     echo '<td style="border: 1px solid black; border-collapse: collapse;">' . htmlspecialchars($row["serv_name"]) . '</td>';
     echo '<td style="border: 1px solid black; border-collapse: collapse;">' . htmlspecialchars($row["status"]) . '</td>';
-    echo '<td style="border: 1px solid black; border-collapse: collapse;">' . htmlspecialchars($row["temperature"]) . '</td>';
     echo '<td style="border: 1px solid black; border-collapse: collapse;">' . htmlspecialchars($row["lastchangedatetime"]) . '</td>';
     echo '</tr>';
 }
