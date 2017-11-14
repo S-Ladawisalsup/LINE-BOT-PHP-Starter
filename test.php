@@ -10,7 +10,7 @@ $dsn = 'pgsql:'
 
 $db = new PDO($dsn);
 
-$query = 'SELECT id, ip_addr, serv_name, status, lastchangedatetime FROM tbhlinebotserv ORDER BY id ASC';
+$query = 'SELECT id, ip_addr, serv_name, status, temperature, lastchangedatetime FROM tbhlinebotserv ORDER BY id ASC';
 $result = $db->query($query);
 
 echo '<table>
@@ -20,6 +20,7 @@ echo '<table>
 				<th> | IP Address</th>
 				<th> | Server Name</th>
 				<th> | Server Status</th>
+				<th> | Temperature</th>
 				<th> | Last Active Time</th>
 			</tr>
 		</thead>
@@ -31,6 +32,7 @@ while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
     echo "<td>" . htmlspecialchars($row["ip_addr"]) . "</td>";
     echo "<td>" . htmlspecialchars($row["serv_name"]) . "</td>";
     echo "<td>" . htmlspecialchars($row["status"]) . "</td>";
+    echo "<td>" . htmlspecialchars($row["temperature"]) . "</td>";
     echo "<td>" . htmlspecialchars($row["lastchangedatetime"]) . "</td>";
     echo "</tr>";
 }
