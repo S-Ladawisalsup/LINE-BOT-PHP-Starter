@@ -13,28 +13,28 @@ $db = new PDO($dsn);
 $query = 'SELECT id, ip_addr, serv_name, status, temperature, lastchangedatetime FROM tbhlinebotserv ORDER BY id ASC';
 $result = $db->query($query);
 
-echo '<table>
+echo '<table style="border: 1px solid black; border-collapse: collapse;">
 		<thead>
 			<tr>
-				<th>ID</th>
-				<th> | IP Address</th>
-				<th> | Server Name</th>
-				<th> | Server Status</th>
-				<th> | Temperature</th>
-				<th> | Last Active Time</th>
+				<th style="border: 1px solid black; border-collapse: collapse;">ID</th>
+				<th style="border: 1px solid black; border-collapse: collapse;">IP Address</th>
+				<th style="border: 1px solid black; border-collapse: collapse;">Server Name</th>
+				<th style="border: 1px solid black; border-collapse: collapse;">Server Status</th>
+				<th style="border: 1px solid black; border-collapse: collapse;">Temperature</th>
+				<th style="border: 1px solid black; border-collapse: collapse;">Last Active Time</th>
 			</tr>
 		</thead>
 		<tbody>';
 
 while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-    echo "<tr>";
-    echo "<td>" . $row["id"] . "</td>";
-    echo "<td>" . htmlspecialchars($row["ip_addr"]) . "</td>";
-    echo "<td>" . htmlspecialchars($row["serv_name"]) . "</td>";
-    echo "<td>" . htmlspecialchars($row["status"]) . "</td>";
-    echo "<td>" . htmlspecialchars($row["temperature"]) . "</td>";
-    echo "<td>" . htmlspecialchars($row["lastchangedatetime"]) . "</td>";
-    echo "</tr>";
+    echo '<tr>';
+    echo '<td style="border: 1px solid black; border-collapse: collapse;">' . $row["id"] . '</td>';
+    echo '<td style="border: 1px solid black; border-collapse: collapse;">' . htmlspecialchars($row["ip_addr"]) . '</td>';
+    echo '<td style="border: 1px solid black; border-collapse: collapse;">' . htmlspecialchars($row["serv_name"]) . '</td>';
+    echo '<td style="border: 1px solid black; border-collapse: collapse;">' . htmlspecialchars($row["status"]) . '</td>';
+    echo '<td style="border: 1px solid black; border-collapse: collapse;">' . htmlspecialchars($row["temperature"]) . '</td>';
+    echo '<td style="border: 1px solid black; border-collapse: collapse;">' . htmlspecialchars($row["lastchangedatetime"]) . '</td>';
+    echo '</tr>';
 }
 $result->closeCursor();
 
