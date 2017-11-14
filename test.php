@@ -27,10 +27,11 @@ echo '<table>
 
 while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
     echo "<tr>";
-    echo "<td>" . $row["employee_id"] . "</td>";
-    echo "<td>" . htmlspecialchars($row["last_name"]) . "</td>";
-    echo "<td>" . htmlspecialchars($row["first_name"]) . "</td>";
-    echo "<td>" . htmlspecialchars($row["title"]) . "</td>";
+    echo "<td>" . $row["id"] . "</td>";
+    echo "<td>" . htmlspecialchars($row["ip_addr"]) . "</td>";
+    echo "<td>" . htmlspecialchars($row["serv_name"]) . "</td>";
+    echo "<td>" . htmlspecialchars($row["status"]) . "</td>";
+    echo "<td>" . htmlspecialchars($row["lastchangedatetime"]) . "</td>";
     echo "</tr>";
 }
 $result->closeCursor();
