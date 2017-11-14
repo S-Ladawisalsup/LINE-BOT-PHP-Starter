@@ -142,19 +142,6 @@ function GetSticker() {
 }
 /**********************************************************************************************************************************/
 function findQuestionType ($text) {
-	if (is_ping_mode($text)) {
-		return 8;
-	}
-
-	$QArray = file('text/question.txt');
-	$counter = 0;
-	foreach ($QArray as $keyitem) {
-		$keyitem = substr($keyitem, 0, strlen($keyitem) - 1);
-		if (endsWith($text, $keyitem)) {
-			break;
-		}	
-		$counter = $counter + 1;
-	}
 
 /*******************************************************************
 NOTE!
@@ -169,6 +156,20 @@ Question has 7 formats!
 Ohter(s) Mode!
 8. It's ping to anther devices or server mode
 *******************************************************************/
+
+	if (is_ping_mode($text)) {
+		return 8;
+	}
+
+	$QArray = file('text/question.txt');
+	$counter = 0;
+	foreach ($QArray as $keyitem) {
+		$keyitem = substr($keyitem, 0, strlen($keyitem) - 1);
+		if (endsWith($text, $keyitem)) {
+			break;
+		}	
+		$counter = $counter + 1;
+	}
 
 	switch ($counter) {
 		case '0':

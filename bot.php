@@ -124,10 +124,10 @@ if (!is_null($events['events'])) {
 							break;	
 						case '8':
 							# ping mode
-								$messages = [						
-									'type' => 'text',
-									'text' => 'ไป ping เองสิจ๊ะ'
-								];
+							$messages = [						
+								'type' => 'text',
+								'text' => 'ไป ping เองสิจ๊ะ'
+							];
 							break;				
 						default:
 							# Other cases not question
