@@ -17,10 +17,10 @@ echo '<table>
 		<thead>
 			<tr>
 				<th>ID</th>
-				<th>IP Address</th>
-				<th>Server Name</th>
-				<th>Server Status</th>
-				<th>Last Active Time</th>
+				<th> | IP Address</th>
+				<th> | Server Name</th>
+				<th> | Server Status</th>
+				<th> | Last Active Time</th>
 			</tr>
 		</thead>
 		<tbody>';
