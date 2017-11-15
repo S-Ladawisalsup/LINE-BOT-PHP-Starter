@@ -226,7 +226,7 @@ function QuestionWordFromDB() {
 function TestWriteTempToDB() {
 
 	$ttempt = 26;
-	$tdatet = date("Y-m-d H:i:s");
+	//$tdatet = date("Y-m-d H:i:s");
 
 	$db = pg_connect("host=ec2-54-243-187-133.compute-1.amazonaws.com 
 					port=5432 
