@@ -1,11 +1,13 @@
 <?php
 
-echo "Temperature is " . $_POST["temperature"] . ' at time ' . $_POST["timestamp"];
+//echo "Temperature is " . $_POST["temperature"] . ' at time ' . $_POST["timestamp"];
 
-// // Get POST body content
-// $jsons = file_get_contents('php://input');
-// // Parse JSON
-// $datas = json_decode($jsons, true);
+// Get POST body content
+$jsons = file_get_contents('php://input');
+// Parse JSON
+$datas = json_decode($jsons, true);
+
+echo 'data is ' . $datas;
 
 // //if (!is_null($datas['events'])) {
 // foreach ($datas["data"] as $data) {
