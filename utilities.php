@@ -206,3 +206,7 @@ function is_ping_mode ($text) {
 	}
 	return false;
 }
+
+function QuestionWord() {
+	
+}
