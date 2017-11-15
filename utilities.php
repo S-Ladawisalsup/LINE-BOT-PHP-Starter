@@ -235,6 +235,7 @@ function TestWriteTempToDB() {
 					password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa");
 
 	$result = pg_query($db, "UPDATE tbhlinebottemploc 
-							SET (temperature, lastchangedatetime) = ($ttempt, $tdatet) 
+							SET temperature = $ttempt, 
+							lastchangedatetime = $tdatet 
 							WHERE location = 'ITSD Room'");
 }
