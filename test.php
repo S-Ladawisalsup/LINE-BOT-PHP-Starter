@@ -36,10 +36,12 @@
 
 // echo "</tbody></table>";
 
-$arrayqt = getqword();
-foreach ($arrayqt as $keyitem) {
-	echo $keyitem['text'] . '/' . $keyitem['type'] . '<br />';
-}
+// $arrayqt = getqword();
+// foreach ($arrayqt as $keyitem) {
+// 	echo $keyitem['text'] . '/' . $keyitem['type'] . '<br />';
+// }
+
+echo "status : 200 : ok";
 
 //--------------------------------------------------------------------------------------------------------------
 function getqword () {
@@ -59,9 +61,7 @@ function getqword () {
 	$qwords = array();
 	$index = 0;
 	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-	    //echo '<td style="border: 1px solid black; border-collapse: collapse;">' . htmlspecialchars($row["questiontext"]) . '</td>';
-	    //echo '<td style="border: 1px solid black; border-collapse: collapse;">' . htmlspecialchars($row["questiontype"]) . '</td>';
-		$qwords[$index] = array();
+	    $qwords[$index] = array();
 		$qwords[$index]['text'] = htmlspecialchars($row["questiontext"]);
 		$qwords[$index]['type'] = htmlspecialchars($row["questiontype"]);
 		$index = $index + 1;

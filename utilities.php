@@ -161,39 +161,55 @@ Ohter(s) Mode!
 		return 8;
 	}
 
-	$QArray = file('text/question.txt');
-	$counter = 0;
-	foreach ($QArray as $keyitem) {
-		$keyitem = substr($keyitem, 0, strlen($keyitem) - 1);
-		if (endsWith($text, $keyitem)) {
-			break;
-		}	
-		$counter = $counter + 1;
-	}
-
-	switch ($counter) {
-		case '0':
-			return 0;
-		case $counter <= 5:
-			if (strpos($text, 'ล่ม') !== false) {
+	//--------------------------------------------------------------------------------------------------------------------
+	$QAArray = QuestionWord();
+	foreach ($QAArray as $keyitems) {
+		if (endsWith($text, $keyitems['text'])) {
+			if ($keyitems['type'] == 1 && strpos($text, 'ล่ม') !== false) {
 				return 8;
 			}
-			return 1;
-		case $counter <= 10:
-			return 2;
-		case $counter <= 12:
-			return 3;
-		case $counter <= 15:
-			return 4;
-		case $counter <= 21:
-			return 5;
-		case $counter <= 25:
-			return 6;
-		case $counter <= 29:
-			return 7;
-		default:
-			return 0;
+			else {
+				return $keyitems['type'];
+			}
+		}
 	}
+
+	return 0;
+	//--------------------------------------------------------------------------------------------------------------------
+
+	// $QArray = file('text/question.txt');
+	// $counter = 0;
+	// foreach ($QArray as $keyitem) {
+	// 	$keyitem = substr($keyitem, 0, strlen($keyitem) - 1);
+	// 	if (endsWith($text, $keyitem)) {
+	// 		break;
+	// 	}	
+	// 	$counter = $counter + 1;
+	// }
+
+	// switch ($counter) {
+	// 	case '0':
+	// 		return 0;
+	// 	case $counter <= 5:
+	// 		if (strpos($text, 'ล่ม') !== false) {
+	// 			return 8;
+	// 		}
+	// 		return 1;
+	// 	case $counter <= 10:
+	// 		return 2;
+	// 	case $counter <= 12:
+	// 		return 3;
+	// 	case $counter <= 15:
+	// 		return 4;
+	// 	case $counter <= 21:
+	// 		return 5;
+	// 	case $counter <= 25:
+	// 		return 6;
+	// 	case $counter <= 29:
+	// 		return 7;
+	// 	default:
+	// 		return 0;
+	// }
 }
 /**********************************************************************************************************************************/
 function is_ping_mode ($text) {
@@ -206,7 +222,30 @@ function is_ping_mode ($text) {
 	}
 	return false;
 }
-
+/**********************************************************************************************************************************/
 function QuestionWord() {
-	
+	$dsn = 'pgsql:'
+		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
+		. 'dbname=dfusod038c3j35;'
+		. 'user=mmbbbssobrmqjs;'
+		. 'port=5432;'
+		. 'sslmode=require;'
+		. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
+
+	$db = new PDO($dsn);
+
+	$query = 'SELECT id, questiontext, questiontype, typename FROM tbhlinebotchkqa ORDER BY id ASC';
+	$result = $db->query($query);
+
+	$qwords = array();
+	$index = 0;
+	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+	    $qwords[$index] = array();
+		$qwords[$index]['text'] = htmlspecialchars($row["questiontext"]);
+		$qwords[$index]['type'] = htmlspecialchars($row["questiontype"]);
+		$index = $index + 1;
+	}
+	$result->closeCursor();
+
+	return $qwords;
 }
