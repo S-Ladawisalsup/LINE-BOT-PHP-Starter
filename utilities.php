@@ -239,7 +239,7 @@ function TestWriteTempToDB() {
 
 	$query = 'UPDATE tbhlinebottemploc 
 			SET temperature = "$ttempt"			 
-			WHERE location = "ITSD Room"'; //SET (temperature, lastchangedatetime) = ("$ttempt", "$tdatet")
+			WHERE location = "ITSD Room";'; //SET (temperature, lastchangedatetime) = ("$ttempt", "$tdatet")
 
 	$result = $db->query($query);
 }
