@@ -236,7 +236,7 @@ function TestWriteTempToDB() {
 
 	$query = 'UPDATE tbhlinebottemploc 
 			SET (temperature, lastchangedatetime) = (' . 25 . ', ' . date("Y-m-d H:i:s") . ') 
-			WHERE location = \'ITSD Room\''; 
+			WHERE location = "ITSD Room"'; 
 
 	$result = $db->query($query);
 }
