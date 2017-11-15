@@ -1,7 +1,7 @@
 <?php
 
-if (!is_null($datas['events'])) {
-	echo "Temperature is " . $_POST["temperature"];// . ' at time ' . $_POST["timestamp"] . '<br />';
+if (!is_null($_POST["temperature"])) {
+	echo "Temperature is " . $_POST["temperature"] . '<br />';// . ' at time ' . $_POST["timestamp"] . '<br />';
 }
 else {
 	echo "Cannot receive any temperature data";
