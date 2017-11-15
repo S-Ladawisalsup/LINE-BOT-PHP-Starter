@@ -40,33 +40,38 @@
 // foreach ($arrayqt as $keyitem) {
 // 	echo $keyitem['text'] . '/' . $keyitem['type'] . '<br />';
 // }
-date_default_timezone_set("Asia/Bangkok");
-echo "status 300 ok " . date("Y-m-d H:i:s");
 
-//--------------------------------------------------------------------------------------------------------------
-function getqword () {
-	$dsn = 'pgsql:'
-		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
-		. 'dbname=dfusod038c3j35;'
-		. 'user=mmbbbssobrmqjs;'
-		. 'port=5432;'
-		. 'sslmode=require;'
-		. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
 
-	$db = new PDO($dsn);
+$db = pg_connect("host=localhost port=5432 dbname=postgres user=postgres password=admin123");
+$result = pg_query($db, "SELECT * FROM book where book_id = '$_POST[bookid]'");
+$row = pg_fetch_assoc($result);
 
-	$query = 'SELECT id, questiontext, questiontype, typename FROM tbhlinebotchkqa ORDER BY id ASC';
-	$result = $db->query($query);
-
-	$qwords = array();
-	$index = 0;
-	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-	    $qwords[$index] = array();
-		$qwords[$index]['text'] = htmlspecialchars($row["questiontext"]);
-		$qwords[$index]['type'] = htmlspecialchars($row["questiontype"]);
-		$index = $index + 1;
-	}
-	$result->closeCursor();
-
-	return $qwords;
+if (isset($_POST['submit'])) {
+	echo "<ul><form name='update' action='enter-bookid.php' method='POST' >
+	<li>Book ID:</li>
+	<li><input type='text' name='bookid_updated' value='$row[book_id]' /></li>
+	<li>Book Name:</li>
+	<li><input type='text' name='book_name_updated' value='$row[name]' /></li>
+	<li>Price (USD):</li><li><input type='text' name='price_updated' value='$row[price]' /></li>
+	<li>Date of publication:</li>
+	<li><input type='text' name='dop_updated' value='$row[date_of_publication]' /></li>
+	<li><input type='submit' name='new' /></li>
+	</form>
+	</ul>";
 }
+
+if (isset($_POST['new'])) {
+	$result = pg_query($db, "UPDATE book SET book_id = $_POST[bookid_updated],
+	name = '$_POST[book_name_updated]',price = $_POST[price_updated],
+	date_of_publication = $_POST[dop_updated]");
+	if (!$result){
+		echo "Update failed!!";
+	}
+	else
+	{
+		echo "Update successfull;";
+	} 
+}
+
+// date_default_timezone_set("Asia/Bangkok");
+// echo "status 300 ok " . date("Y-m-d H:i:s");

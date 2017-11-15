@@ -224,22 +224,30 @@ function QuestionWordFromDB() {
 }
 /**********************************************************************************************************************************/
 function TestWriteTempToDB() {
-	$dsn = 'pgsql:'
-		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
-		. 'dbname=dfusod038c3j35;'
-		. 'user=mmbbbssobrmqjs;'
-		. 'port=5432;'
-		. 'sslmode=require;'
-		. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
+	// $dsn = 'pgsql:'
+	// 	. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
+	// 	. 'dbname=dfusod038c3j35;'
+	// 	. 'user=mmbbbssobrmqjs;'
+	// 	. 'port=5432;'
+	// 	. 'sslmode=require;'
+	// 	. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
 
-	$db = new PDO($dsn);
+	// $db = new PDO($dsn);
 
 	$ttempt = 25;
-	//$tdatet = date("Y-m-d H:i:s");
+	// //$tdatet = date("Y-m-d H:i:s");
 
-	$query = 'UPDATE tbhlinebottemploc 
-			SET temperature = "$ttempt"			 
-			WHERE location = "ITSD Room";'; //SET (temperature, lastchangedatetime) = ("$ttempt", "$tdatet")
+	// $query = 'UPDATE tbhlinebottemploc 
+	// 		SET temperature = "$ttempt"			 
+	// 		WHERE location = "ITSD Room";'; //SET (temperature, lastchangedatetime) = ("$ttempt", "$tdatet")
 
-	$result = $db->query($query);
+	// $result = $db->query($query);
+
+	$db = pg_connect("host=ec2-54-243-187-133.compute-1.amazonaws.com 
+					port=5432 
+					dbname=dfusod038c3j35 
+					user=mmbbbssobrmqjs 
+					password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa");
+
+	$result = pg_query($db, "UPDATE tbhlinebottemploc SET temperature = $ttempt WHERE location = 'ITSD Room'");
 }
