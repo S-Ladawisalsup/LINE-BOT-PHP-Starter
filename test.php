@@ -42,36 +42,36 @@
 // }
 
 
-$db = pg_connect("host=localhost port=5432 dbname=postgres user=postgres password=admin123");
-$result = pg_query($db, "SELECT * FROM book where book_id = '$_POST[bookid]'");
-$row = pg_fetch_assoc($result);
+// $db = pg_connect("host=localhost port=5432 dbname=postgres user=postgres password=admin123");
+// $result = pg_query($db, "SELECT * FROM book where book_id = '$_POST[bookid]'");
+// $row = pg_fetch_assoc($result);
 
-if (isset($_POST['submit'])) {
-	echo "<ul><form name='update' action='enter-bookid.php' method='POST' >
-	<li>Book ID:</li>
-	<li><input type='text' name='bookid_updated' value='$row[book_id]' /></li>
-	<li>Book Name:</li>
-	<li><input type='text' name='book_name_updated' value='$row[name]' /></li>
-	<li>Price (USD):</li><li><input type='text' name='price_updated' value='$row[price]' /></li>
-	<li>Date of publication:</li>
-	<li><input type='text' name='dop_updated' value='$row[date_of_publication]' /></li>
-	<li><input type='submit' name='new' /></li>
-	</form>
-	</ul>";
-}
+// if (isset($_POST['submit'])) {
+// 	echo "<ul><form name='update' action='enter-bookid.php' method='POST' >
+// 	<li>Book ID:</li>
+// 	<li><input type='text' name='bookid_updated' value='$row[book_id]' /></li>
+// 	<li>Book Name:</li>
+// 	<li><input type='text' name='book_name_updated' value='$row[name]' /></li>
+// 	<li>Price (USD):</li><li><input type='text' name='price_updated' value='$row[price]' /></li>
+// 	<li>Date of publication:</li>
+// 	<li><input type='text' name='dop_updated' value='$row[date_of_publication]' /></li>
+// 	<li><input type='submit' name='new' /></li>
+// 	</form>
+// 	</ul>";
+// }
 
-if (isset($_POST['new'])) {
-	$result = pg_query($db, "UPDATE book SET book_id = $_POST[bookid_updated],
-	name = '$_POST[book_name_updated]',price = $_POST[price_updated],
-	date_of_publication = $_POST[dop_updated]");
-	if (!$result){
-		echo "Update failed!!";
-	}
-	else
-	{
-		echo "Update successfull;";
-	} 
-}
+// if (isset($_POST['new'])) {
+// 	$result = pg_query($db, "UPDATE book SET book_id = $_POST[bookid_updated],
+// 	name = '$_POST[book_name_updated]',price = $_POST[price_updated],
+// 	date_of_publication = $_POST[dop_updated]");
+// 	if (!$result){
+// 		echo "Update failed!!";
+// 	}
+// 	else
+// 	{
+// 		echo "Update successfull;";
+// 	} 
+// }
 
-// date_default_timezone_set("Asia/Bangkok");
-// echo "status 300 ok " . date("Y-m-d H:i:s");
+date_default_timezone_set("Asia/Bangkok");
+echo "status 20 ok " . date("Y-m-d H:i:s");
