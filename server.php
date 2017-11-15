@@ -1,6 +1,6 @@
 <?php
 
-//echo "Temperature is " . $_POST["temperature"] . ' at time ' . $_POST["timestamp"];
+echo "Temperature is " . $_POST["temperature"] . ' at time ' . $_POST["timestamp"] . '<br />';
 
 // Get POST body content
 $jsons = file_get_contents('php://input');
