@@ -139,6 +139,16 @@ if (!is_null($events['events'])) {
 								    'previewImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/' . $day . '_240.jpg'
 								];
 							}
+							//-------------------------------------------------
+							//Test temperature written to database.
+							else if (strpos($text, 'testtemp') !== false) {
+								TestWriteTempToDB();
+								$messages = [						
+									'type' => 'text',
+									'text' => 'ลองบันทึกข้อมูลเรียบร้อย ลองไปดูใน database สิจ๊ะ'
+								];
+							}
+							//-------------------------------------------------
 							else {
 								// Build message to reply back
 								$messages = [						

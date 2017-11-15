@@ -1,4 +1,6 @@
 <?php
+
+date_default_timezone_set("Asia/Bangkok");
 /**********************************************************************************************************************************/
 /*** Function for check word(s) contain(s) start or end at string. ***/
 function startsWith($haystack, $needle) {
@@ -51,19 +53,27 @@ function maths($a, $b, $operator) {
 /*** Function for check text from user is question(?) ***/
 function GetQuesion($text, $flag) {
 	switch ($flag) {
-		case 'quiz':
-			$question = file('text/question.txt');
-			break;
 		case 'greeting':
 			$question = file('text/greeting.txt');
 			break;
 		case 'math':
+			//-------------------------------------------------
+			//Old Version
 			$ismath = file('text/question.txt');
 			$question[] = null;
 			for ($i = 26; $i <= 29; $i++) {
 				array_push($question, $ismath[$i]);
-			}
-			break;
+			}		
+			//-------------------------------------------------
+			//New Version
+			// $ismath = QuestionWordFromDB();
+			// foreach ($ismath as $keyitem) {
+			// 	if($keyitem['type'] == 7) {
+
+			// 	}
+			// }
+			//-------------------------------------------------		
+			break;	
 		case 'issqrt':
 			$issqrt = file('text/math.txt');
 			$question[] = null;
@@ -146,13 +156,13 @@ function findQuestionType ($text) {
 /*******************************************************************
 NOTE!
 Question has 7 formats!
-1. "yes/no" question has index no. 1-5
-2. "when" question (will answer as timing) has index no. 6-10
-3. "where" qusetion (will answer as location) has index no. 11-12
-4. "who" question (will answer as person) has index no. 13-15
-5. "what/how" question (will answer as reason) has index no. 16-21
-6. "which" question (will answer as object) has index no. 22-25 
-7. "how+.." question (will answer as number) has index no. 26-29
+1. "yes/no" question 
+2. "when" question (will answer as timing) 
+3. "where" qusetion (will answer as location)
+4. "who" question (will answer as person)
+5. "what/how" question (will answer as reason)
+6. "which" question (will answer as object) 
+7. "how+.." question (will answer as number)
 Ohter(s) Mode!
 8. It's ping to anther devices or server mode
 *******************************************************************/
@@ -161,8 +171,7 @@ Ohter(s) Mode!
 		return 8;
 	}
 
-	//--------------------------------------------------------------------------------------------------------------------
-	$QAArray = QuestionWord();
+	$QAArray = QuestionWordFromDB();
 	foreach ($QAArray as $keyitems) {
 		if (endsWith($text, $keyitems['text'])) {
 			if ($keyitems['type'] == 1 && strpos($text, 'ล่ม') !== false) {
@@ -173,43 +182,7 @@ Ohter(s) Mode!
 			}
 		}
 	}
-
 	return 0;
-	//--------------------------------------------------------------------------------------------------------------------
-
-	// $QArray = file('text/question.txt');
-	// $counter = 0;
-	// foreach ($QArray as $keyitem) {
-	// 	$keyitem = substr($keyitem, 0, strlen($keyitem) - 1);
-	// 	if (endsWith($text, $keyitem)) {
-	// 		break;
-	// 	}	
-	// 	$counter = $counter + 1;
-	// }
-
-	// switch ($counter) {
-	// 	case '0':
-	// 		return 0;
-	// 	case $counter <= 5:
-	// 		if (strpos($text, 'ล่ม') !== false) {
-	// 			return 8;
-	// 		}
-	// 		return 1;
-	// 	case $counter <= 10:
-	// 		return 2;
-	// 	case $counter <= 12:
-	// 		return 3;
-	// 	case $counter <= 15:
-	// 		return 4;
-	// 	case $counter <= 21:
-	// 		return 5;
-	// 	case $counter <= 25:
-	// 		return 6;
-	// 	case $counter <= 29:
-	// 		return 7;
-	// 	default:
-	// 		return 0;
-	// }
 }
 /**********************************************************************************************************************************/
 function is_ping_mode ($text) {
@@ -223,7 +196,7 @@ function is_ping_mode ($text) {
 	return false;
 }
 /**********************************************************************************************************************************/
-function QuestionWord() {
+function QuestionWordFromDB() {
 	$dsn = 'pgsql:'
 		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
 		. 'dbname=dfusod038c3j35;'
@@ -248,4 +221,22 @@ function QuestionWord() {
 	$result->closeCursor();
 
 	return $qwords;
+}
+/**********************************************************************************************************************************/
+function TestWriteTempToDB() {
+	$dsn = 'pgsql:'
+		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
+		. 'dbname=dfusod038c3j35;'
+		. 'user=mmbbbssobrmqjs;'
+		. 'port=5432;'
+		. 'sslmode=require;'
+		. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
+
+	$db = new PDO($dsn);
+
+	$query = 'UPDATE tbhlinebottemploc 
+			SET (temperature, lastchangedatetime) = (' . 25 . ', ' . date("Y-m-d H:i:s") . ') 
+			WHERE location = \'ITSD Room\''; 
+
+	$result = $db->query($query);
 }
