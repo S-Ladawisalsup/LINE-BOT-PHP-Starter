@@ -11,6 +11,9 @@ echo '1. data is ' . $datas["timestamp"] . '<br />';
 echo '2. data is ' . $_POST["timestamp"] . '<br />';
 echo '3. data is ' . $datas["data"] . '<br />';
 echo '4. data is ' . $_POST["data"] . '<br />';
+echo '5. json is ' . $jsons . '<br />';
+echo '6. datas is ' . $datas . '<br />';
+ 
 
 // //if (!is_null($datas['events'])) {
 // foreach ($datas["data"] as $data) {
