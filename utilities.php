@@ -226,7 +226,7 @@ function QuestionWordFromDB() {
 function TestWriteTempToDB() {
 
 	$ttempt = 25;
-	$tdatet = date("Y-m-d H:i:s");
+	//$tdatet = date("Y-m-d H:i:s");
 
 	$db = pg_connect("host=ec2-54-243-187-133.compute-1.amazonaws.com 
 					port=5432 
@@ -235,7 +235,6 @@ function TestWriteTempToDB() {
 					password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa");
 
 	$result = pg_query($db, "UPDATE tbhlinebottemploc 
-							SET temperature = $ttempt, 
-							lastchangedatetime = $tdatet 
-							WHERE location = 'ITSD Room'");
+							SET temperature = $ttempt 
+							WHERE location = 'ITSD Room'");//, lastchangedatetime = $tdatet 					
 }
