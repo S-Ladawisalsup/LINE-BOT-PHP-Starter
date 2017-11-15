@@ -4,7 +4,7 @@ if (!is_null($_POST["temperature"])) {
 	echo "Temperature is " . $_POST["temperature"] . '<br />';// . ' at time ' . $_POST["timestamp"] . '<br />';
 }
 else {
-	echo "Cannot receive any temperature data";
+	echo "Cannot receive any temperature data<br />";
 }
 
 
