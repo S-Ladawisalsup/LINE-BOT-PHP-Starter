@@ -74,4 +74,4 @@
 // }
 
 date_default_timezone_set("Asia/Bangkok");
-echo "status 2000 ok " . date("Y-m-d H:i:s");
+echo "status 1 ok " . date("Y-m-d H:i:s");
