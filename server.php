@@ -1,6 +1,6 @@
 <?php
 
-// echo "Temperature is " . $_POST["temperature"] . ' at time ' . $_POST["timestamp"] . '<br />';
+echo "Temperature is " . $_POST["temperature"] . ' at time ' . $_POST["timestamp"] . '<br />';
 
 // Get POST body content
 $jsons = file_get_contents('php://input');
@@ -19,8 +19,8 @@ if (!is_null($datas['events'])) {
 // foreach ($datas["data"] as $data) {
 	echo 'Time is : ' . $datas["timestamp"] . '<br />';
 	echo 'Name is : ' . $datas["data"]["name"] . '<br />';
-	echo 'res is : '. $datas["data"]["res"] . '<br />';
-	echo 'data is : '. $datas["data"]["data"] . '<br />';
+	echo 'res is : ' . $datas["data"]["res"] . '<br />';
+	echo 'data is : ' . $datas["data"]["data"] . '<br />';
 }
 else {
 	echo "Cannot receive any json data";
