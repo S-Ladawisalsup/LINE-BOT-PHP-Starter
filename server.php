@@ -1,17 +1,16 @@
 <?php
 
+// Get POST body content
+$jsons = file_get_contents('php://input');
+// Parse JSON
+$datas = json_decode($jsons, true);
+
 if (!is_null($_POST["temperature"])) {
 	echo "Temperature is " . $_POST["temperature"] . '<br />';// . ' at time ' . $_POST["timestamp"] . '<br />';
 }
 else {
 	echo "Cannot receive any temperature data<br />";
 }
-
-
-// Get POST body content
-$jsons = file_get_contents('php://input');
-// Parse JSON
-$datas = json_decode($jsons, true);
 
 // echo '1. data is ' . $datas["timestamp"] . '<br />';
 // echo '2. data is ' . $_POST["timestamp"] . '<br />';
