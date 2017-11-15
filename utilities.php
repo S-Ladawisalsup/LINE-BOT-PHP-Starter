@@ -234,11 +234,11 @@ function TestWriteTempToDB() {
 
 	$db = new PDO($dsn);
 
-	// $ttempt = 25;
-	// $tdatet = date("Y-m-d H:i:s");
+	$ttempt = 25;
+	$tdatet = date("Y-m-d H:i:s");
 
 	$query = 'UPDATE tbhlinebottemploc 
-			SET (temperature, lastchangedatetime) = ("' . 25 . '", "' . date("Y-m-d H:i:s") . '") 
+			SET (temperature, lastchangedatetime) = ("$ttempt", "$tdatet") 
 			WHERE location = "ITSD Room"'; 
 
 	$result = $db->query($query);
