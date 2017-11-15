@@ -10,6 +10,7 @@ $datas = json_decode($jsons, true);
 echo '1. data is ' . $datas["timestamp"] . '<br />';
 echo '2. data is ' . $_POST["timestamp"] . '<br />';
 echo '3. data is ' . $datas["data"] . '<br />';
+echo '4. data is ' . $_POST["data"] . '<br />';
 
 // //if (!is_null($datas['events'])) {
 // foreach ($datas["data"] as $data) {
