@@ -1,6 +1,12 @@
 <?php
 
-echo "Temperature is " . $_POST["temperature"] . ' at time ' . $_POST["timestamp"] . '<br />';
+if (!is_null($datas['events'])) {
+	echo "Temperature is " . $_POST["temperature"];// . ' at time ' . $_POST["timestamp"] . '<br />';
+}
+else {
+	echo "Cannot receive any temperature data";
+}
+
 
 // Get POST body content
 $jsons = file_get_contents('php://input');
