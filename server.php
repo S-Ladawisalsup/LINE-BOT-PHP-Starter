@@ -1,5 +1,7 @@
 <?php
 
+echo "Temperature is " . $_POST["temperature"];
+
 // Get POST body content
 $jsons = file_get_contents('php://input');
 // Parse JSON
