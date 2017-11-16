@@ -1,6 +1,6 @@
 <?php
 
-$result = $_POST["temperature"];
+$result = $_GET["temperature"];
 
 echo "Temperature is " . $result . '<br />';
 

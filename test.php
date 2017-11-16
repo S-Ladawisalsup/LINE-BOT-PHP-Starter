@@ -74,4 +74,7 @@
 // }
 
 date_default_timezone_set("Asia/Bangkok");
-echo "status 2000 ok " . date("Y-m-d H:i:s");
+echo "status 2000 ok " . date("Y-m-d H:i:s") . '<br />';
+
+echo ' <form method="post" action="https://cryptic-harbor-32168.herokuapp.com/server.php">
+</form>';
