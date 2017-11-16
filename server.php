@@ -1,11 +1,13 @@
 <?php
 
+$result = $_POST["temperature"];
+
+echo "Temperature is " . $result . '<br />';
+
 // Get POST body content
 $jsons = file_get_contents('php://input');
 // Parse JSON
 $datas = json_decode($jsons, true);
-
-echo "Temperature is " . $jsons . ' and ' . $datas . '<br />';
 
 if (!is_null($_POST["temperature"]) || !empty($_POST['temperature'])) {
 //if (!empty($_POST['temperature'])) {
