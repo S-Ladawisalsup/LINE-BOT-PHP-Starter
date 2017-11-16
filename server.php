@@ -1,6 +1,6 @@
 <?php
 
-echo "Temperature is " . $_POST["temperature"];
+echo "Temperature is " . $_POST["temperature"] . '<br />';
 
 // Get POST body content
 $jsons = file_get_contents('php://input');
