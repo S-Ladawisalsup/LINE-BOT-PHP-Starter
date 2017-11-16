@@ -1,7 +1,7 @@
 <?php
-echo "Temperature is " . $_POST["temperature"] . '<br />';
+
 if (!is_null($_POST["temperature"])) {
-	//header("Refresh:0");
+	header("Refresh:0");
 	echo "Temperature is " . $_POST["temperature"];
 }
 else {
