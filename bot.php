@@ -142,7 +142,8 @@ if (!is_null($events['events'])) {
 							//-------------------------------------------------
 							//Test temperature written to database.
 							else if (strpos($text, 'testtemp') !== false) {
-								TestWriteTempToDB();
+								//TestWriteTempToDB();
+								AddQText();
 								$messages = [						
 									'type' => 'text',
 									'text' => 'ลองบันทึกข้อมูลเรียบร้อย ลองไปดูใน database สิจ๊ะ'

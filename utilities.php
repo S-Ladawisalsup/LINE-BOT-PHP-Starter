@@ -239,3 +239,16 @@ function TestWriteTempToDB() {
 							SET temperature = $ttempt
 							WHERE location = 'ITSD Room'");				
 }
+/**********************************************************************************************************************************/
+function AddQText() {
+
+	$ttempt = 26;
+
+	$db = pg_connect("host=ec2-54-243-187-133.compute-1.amazonaws.com 
+					port=5432 
+					dbname=dfusod038c3j35 
+					user=mmbbbssobrmqjs 
+					password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa");
+
+	$result = pg_query($db, "INSERT INTO tbhlinebotchkqa (questiontext, questiontype) VALUES ('ไหม', '1');");				
+}
