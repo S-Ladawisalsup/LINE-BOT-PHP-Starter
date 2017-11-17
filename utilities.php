@@ -222,10 +222,6 @@ function QuestionWordFromDB() {
 	}
 	$result->closeCursor();
 
-	foreach ($qwords as $key1) {
-		echo $key1['type'] . '|' . $key1['text'] . '<br />';
-	}
-
 	return $qwords;
 }
 /**********************************************************************************************************************************/
@@ -242,4 +238,9 @@ function TestWriteTempToDB() {
 	$result = pg_query($db, "UPDATE tbhlinebottemploc 
 							SET temperature = $ttempt
 							WHERE location = 'ITSD Room'");				
+}
+
+$tiger = QuestionWordFromDB();
+foreach ($tiger as $key1) {
+	echo $key1['type'] . '|' . $key1['text'] . '<br />';
 }

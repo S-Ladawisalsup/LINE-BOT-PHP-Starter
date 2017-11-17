@@ -73,4 +73,4 @@
 // 	} 
 // }
 
-echo "status 20 ok";
+echo "status 200 ok";
