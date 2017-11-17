@@ -88,7 +88,7 @@ function GetQuesion($text, $flag) {
 			return false;
 	}
 
-	if ($qusetion != null) {
+	if ($question != null) {
 		foreach ($question as $item) {
 			$item = substr($item, 0, strlen($item) - 1);
 			if (endsWith($text, $item)) {
