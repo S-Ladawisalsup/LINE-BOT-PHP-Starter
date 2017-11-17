@@ -69,7 +69,7 @@ function GetQuesion($text, $flag) {
 			$ismath = QuestionWordFromDB();
 			foreach ($ismath as $keyitem) {
 				if($keyitem['type'] == 7) {
-					if (endsWith($text, utf8_encode($keyitem['text'])) {
+					if (endsWith($text, $keyitem['text']) {
 						return true;
 					}	
 				}
@@ -216,7 +216,7 @@ function QuestionWordFromDB() {
 	$index = 0;
 	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 	    $qwords[$index] = array();
-		$qwords[$index]['text'] = htmlspecialchars($row["questiontext"]);
+		$qwords[$index]['text'] = utf8_encode(htmlspecialchars($row["questiontext"]));
 		$qwords[$index]['type'] = htmlspecialchars($row["questiontype"]);
 		$index = $index + 1;
 	}
