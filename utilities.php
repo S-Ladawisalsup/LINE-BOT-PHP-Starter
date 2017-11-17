@@ -215,9 +215,7 @@ function QuestionWordFromDB() {
 	return $qwords;
 }
 /**********************************************************************************************************************************/
-function TestWriteTempToDB() {
-
-	$ttempt = 26;
+function InsertDataToDB() {
 
 	$db = pg_connect("host=ec2-54-243-187-133.compute-1.amazonaws.com 
 					port=5432 
@@ -225,7 +223,14 @@ function TestWriteTempToDB() {
 					user=mmbbbssobrmqjs 
 					password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa");
 
-	$result = pg_query($db, "UPDATE tbhlinebottemploc 
-							SET temperature = $ttempt
-							WHERE location = 'ITSD Room'");				
+	$result = pg_query($db, "INSERT INTO tbhlinebotchkqa (questiontext, questiontype) VALUES 
+							('ping', '8')
+							,('ปิง', '8')
+							,('เช็ค server', '8')
+							,('ตรวจสอบ server', '8')
+							,('เช็คserver', '8')
+							,('ตรวจสอบserver', '8')
+							,('เช็คเซิฟเวอร์', '8')
+							,('ตรวจสอบเซิฟเวอร์', '8')
+							;");				
 }
