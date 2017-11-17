@@ -72,5 +72,11 @@
 // 		echo "Update successfull;";
 // 	} 
 // }
+include 'utilities.php';
 
-echo "status 100 ok";
+$q4 = qwdb();
+foreach ($q4 as $key1) {
+	echo $key1['text'] . '/' . $key1['type'] . '<br />';
+}
+
+echo "status 1000 ok";
