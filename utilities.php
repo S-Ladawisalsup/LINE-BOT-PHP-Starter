@@ -144,7 +144,6 @@ function GetSticker() {
 }
 /**********************************************************************************************************************************/
 function findQuestionType ($text) {
-
 /*******************************************************************
 NOTE!
 Question has 7 formats!
@@ -158,14 +157,14 @@ Question has 7 formats!
 Ohter(s) Mode!
 8. It's ping to anther devices or server mode
 *******************************************************************/
-
-	if (is_ping_mode($text)) {
-		return 8;
-	}
-
 	$QAArray = QuestionWordFromDB();
 	foreach ($QAArray as $keyitems) {
-		if (endsWith($text, $keyitems['text'])) {
+		if ($keyitems['type'] == 8) {
+			if (strpos($text, $keyitems['text']) !== false) {
+				return $keyitems['type'];
+			}
+		}
+		else if (endsWith($text, $keyitems['text'])) {
 			if ($keyitems['type'] == 1 && strpos($text, 'ล่ม') !== false) {
 				return 8;
 			}
@@ -175,17 +174,6 @@ Ohter(s) Mode!
 		}
 	}
 	return 0;
-}
-/**********************************************************************************************************************************/
-function is_ping_mode ($text) {
-	$pingping = file('text/ping.txt');
-	foreach ($pingping as $pingword) {
-		$pingword = substr($pingword, 0, strlen($pingword) - 1);
-		if (strpos($text, $pingword) !== false) {
-			return true;
-		}
-	}
-	return false;
 }
 /**********************************************************************************************************************************/
 function QuestionWordFromDB() {
