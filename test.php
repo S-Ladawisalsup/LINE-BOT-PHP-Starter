@@ -74,10 +74,10 @@
 // }
 
 date_default_timezone_set("Asia/Bangkok");
-//echo "status 200 ok " . date("Y-m-d H:i:s") . '<br />';
-echo "Test sending form post (temperature=26)";
+echo "status 200 ok " . date("Y-m-d H:i:s") . '<br />';
+// echo "Test sending form post (temperature=26)";
 
-echo '<br /><form method="post" action="https://cryptic-harbor-32168.herokuapp.com/server.php">
-				<input type="hidden" name="temperature" value="26" />
-				<input type="submit" value="send value 26" />
-			</form>';
+// echo '<br /><form method="post" action="https://cryptic-harbor-32168.herokuapp.com/server.php">
+// 				<input type="hidden" name="temperature" value="26" />
+// 				<input type="submit" value="send value 26" />
+// 			</form>';
