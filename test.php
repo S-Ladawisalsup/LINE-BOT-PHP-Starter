@@ -74,7 +74,7 @@
 // }
 
 date_default_timezone_set("Asia/Bangkok");
-echo "status 700 ok";
+echo "status 7000 ok";
 // echo "Test sending form post (temperature=26)";
 
 // echo '<br /><form method="post" action="https://cryptic-harbor-32168.herokuapp.com/server.php">
