@@ -61,7 +61,7 @@ function GetQuesion($text, $flag) {
 			//Old Version
 			$ismath = file('text/question.txt');
 			$question[] = null;
-			for ($i = 26; $i <= 29; $i++) {
+			for ($i = 28; $i <= 31; $i++) {
 				array_push($question, $ismath[$i]);
 			}		
 			//-------------------------------------------------
@@ -226,7 +226,6 @@ function QuestionWordFromDB() {
 function TestWriteTempToDB() {
 
 	$ttempt = 26;
-	//$tdatet = date("Y-m-d H:i:s");
 
 	$db = pg_connect("host=ec2-54-243-187-133.compute-1.amazonaws.com 
 					port=5432 
@@ -236,5 +235,5 @@ function TestWriteTempToDB() {
 
 	$result = pg_query($db, "UPDATE tbhlinebottemploc 
 							SET temperature = $ttempt
-							WHERE location = 'ITSD Room'"); //, lastchangeupdate = $tdatet					
+							WHERE location = 'ITSD Room'");				
 }
