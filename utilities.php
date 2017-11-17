@@ -212,13 +212,13 @@ function InsertDataToDB() {
 					password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa");
 
 	$result = pg_query($db, "INSERT INTO tbhlinebotchkqa (questiontext, questiontype) VALUES 
-							('ping', '8')
-							,('ปิง', '8')
-							,('เช็ค server', '8')
-							,('ตรวจสอบ server', '8')
-							,('เช็คserver', '8')
-							,('ตรวจสอบserver', '8')
-							,('เช็คเซิฟเวอร์', '8')
-							,('ตรวจสอบเซิฟเวอร์', '8')
+							('Hello', '9')
+							,('hello', '9')
+							,('Good Morning', '9')
+							,('good morning', '9')
+							,('สวัสดี', '9')
+							,('อรุณสวัสดิ์', '9')
+							,('หวัดดี', '9')
+							,('ดีจ้า', '9')
 							;");				
 }

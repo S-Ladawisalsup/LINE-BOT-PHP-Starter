@@ -73,4 +73,4 @@
 // 	} 
 // }
 
-echo "status 2009 ok";
+echo "status 200ค ok";
