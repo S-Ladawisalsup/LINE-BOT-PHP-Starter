@@ -79,4 +79,4 @@ $q4 = QuestionWordFromDB();
 foreach ($q4 as $key1) {
 	echo $key1['text'] . '/' . $key1['type'] . '<br />';
 }
-echo "status 400 ok";
+echo "status 200 ok";
