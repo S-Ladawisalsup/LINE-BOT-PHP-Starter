@@ -209,7 +209,7 @@ function QuestionWordFromDB() {
 
 	$db = new PDO($dsn);
 
-	$query = 'SELECT id, questiontext, questiontype, typename FROM tbhlinebotchkqa ORDER BY id ASC';
+	$query = 'SELECT id, questiontext, questiontype FROM tbhlinebotchkqa ORDER BY id ASC';
 	$result = $db->query($query);
 
 	$qwords = array();
