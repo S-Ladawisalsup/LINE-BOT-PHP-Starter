@@ -85,12 +85,14 @@ function GetQuesion($text, $flag) {
 			break;
 		default:
 			return false;
-	}	
-
-	foreach ($question as $item) {
-		$item = substr($item, 0, strlen($item) - 1);
-		if (endsWith($text, $item)) {
-			return true;
+	}
+		
+	if ($qusetion != null) {
+		foreach ($question as $item) {
+			$item = substr($item, 0, strlen($item) - 1);
+			if (endsWith($text, $item)) {
+				return true;
+			}
 		}
 	}
 
