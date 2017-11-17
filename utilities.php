@@ -226,30 +226,31 @@ function QuestionWordFromDB() {
 }
 /**********************************************************************************************************************************/
 function qwdb() {
-	$dsn = 'pgsql:'
-		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
-		. 'dbname=dfusod038c3j35;'
-		. 'user=mmbbbssobrmqjs;'
-		. 'port=5432;'
-		. 'sslmode=require;'
-		. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
+	// $dsn = 'pgsql:'
+	// 	. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
+	// 	. 'dbname=dfusod038c3j35;'
+	// 	. 'user=mmbbbssobrmqjs;'
+	// 	. 'port=5432;'
+	// 	. 'sslmode=require;'
+	// 	. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
 
-	$db = new PDO($dsn);
+	// $db = new PDO($dsn);
 
-	$query = 'SELECT id, reftypename FROM tbhlinebotqaref ORDER BY id ASC';
-	$result = $db->query($query);
+	// $query = 'SELECT id, reftypename FROM tbhlinebotqaref ORDER BY id ASC';
+	// $result = $db->query($query);
 
-	$qwords = array();
-	$index = 0;
-	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-	    $qwords[$index] = array();
-		$qwords[$index]['text'] = utf8_encode(htmlspecialchars($row["id"]));
-		$qwords[$index]['type'] = utf8_encode(htmlspecialchars($row["reftypename"]));
-		$index = $index + 1;
-	}
-	$result->closeCursor();
+	// $qwords = array();
+	// $index = 0;
+	// while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+	//     $qwords[$index] = array();
+	// 	$qwords[$index]['text'] = utf8_encode(htmlspecialchars($row["id"]));
+	// 	$qwords[$index]['type'] = utf8_encode(htmlspecialchars($row["reftypename"]));
+	// 	$index = $index + 1;
+	// }
+	// $result->closeCursor();
 
-	return $qwords;
+	// return $qwords;
+	return 'hello';
 }
 /**********************************************************************************************************************************/
 function TestWriteTempToDB() {
