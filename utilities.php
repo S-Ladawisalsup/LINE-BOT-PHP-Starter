@@ -59,23 +59,23 @@ function GetQuesion($text, $flag) {
 		case 'math':
 			//-------------------------------------------------
 			//Old Version
-			$ismath = file('text/question.txt');
+			// $ismath = file('text/question.txt');
 			$question[] = null;
-			for ($i = 28; $i <= 31; $i++) {
-				array_push($question, $ismath[$i]);
-			}		
-			break;
+			// for ($i = 28; $i <= 31; $i++) {
+			// 	array_push($question, $ismath[$i]);
+			// }		
+			// break;
 			//-------------------------------------------------
 			//New Version
-			// $ismath = QuestionWordFromDB();
-			// foreach ($ismath as $keyitem) {
-			// 	if($keyitem['type'] == 7) {
-			// 		if (endsWith($text, $keyitem['text']) {
-			// 			return true;
-			// 		}	
-			// 	}
-			// }
-			// return false;
+			$ismath = QuestionWordFromDB();
+			foreach ($ismath as $keyitem) {
+				if($keyitem['type'] == 7) {
+					if (endsWith($text, $keyitem['text']) {
+						return true;
+					}	
+				}
+			}
+			return false;
 			//-------------------------------------------------						
 		case 'issqrt':
 			$issqrt = file('text/math.txt');
