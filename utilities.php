@@ -242,8 +242,8 @@ function qwdb() {
 	$index = 0;
 	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 	    $qwords[$index] = array();
-		$qwords[$index]['text'] = htmlspecialchars($row["id"]);
-		$qwords[$index]['type'] = htmlspecialchars($row["reftypename"]);
+		$qwords[$index]['text'] = utf8_encode(htmlspecialchars($row["id"]));
+		$qwords[$index]['type'] = utf8_encode(htmlspecialchars($row["reftypename"]));
 		$index = $index + 1;
 	}
 	$result->closeCursor();

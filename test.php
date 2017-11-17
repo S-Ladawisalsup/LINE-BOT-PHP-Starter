@@ -79,4 +79,4 @@ foreach ($q4 as $key1) {
 	echo $key1['text'] . '/' . $key1['type'] . '<br />';
 }
 
-echo "status 1000 ok";
+echo "status 2000 ok";
