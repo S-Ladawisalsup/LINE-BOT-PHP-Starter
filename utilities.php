@@ -222,6 +222,10 @@ function QuestionWordFromDB() {
 	}
 	$result->closeCursor();
 
+	foreach ($qwords as $key1) {
+		echo $key1['type'] . '|' . $key1['text'] . '<br />';
+	}
+
 	return $qwords;
 }
 /**********************************************************************************************************************************/
