@@ -224,6 +224,7 @@ function QuestionWordFromDB() {
 
 	return $qwords;
 }
+/**********************************************************************************************************************************/
 function qwdb() {
 	$dsn = 'pgsql:'
 		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
