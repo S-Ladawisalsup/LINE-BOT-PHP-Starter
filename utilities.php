@@ -64,6 +64,7 @@ function GetQuesion($text, $flag) {
 			// for ($i = 28; $i <= 31; $i++) {
 			// 	array_push($question, $ismath[$i]);
 			// }		
+			// break;
 			//-------------------------------------------------
 			//New Version
 			$ismath = QuestionWordFromDB();
@@ -74,8 +75,8 @@ function GetQuesion($text, $flag) {
 					}	
 				}
 			}
-			//-------------------------------------------------		
-			break;	
+			return false;
+			//-------------------------------------------------						
 		case 'issqrt':
 			$issqrt = file('text/math.txt');
 			$question[] = null;
@@ -86,7 +87,7 @@ function GetQuesion($text, $flag) {
 		default:
 			return false;
 	}
-		
+
 	if ($qusetion != null) {
 		foreach ($question as $item) {
 			$item = substr($item, 0, strlen($item) - 1);
