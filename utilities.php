@@ -224,6 +224,32 @@ function QuestionWordFromDB() {
 
 	return $qwords;
 }
+function qwdb() {
+	$dsn = 'pgsql:'
+		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
+		. 'dbname=dfusod038c3j35;'
+		. 'user=mmbbbssobrmqjs;'
+		. 'port=5432;'
+		. 'sslmode=require;'
+		. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
+
+	$db = new PDO($dsn);
+
+	$query = 'SELECT id, reftypename FROM tbhlinebotqaref ORDER BY id ASC';
+	$result = $db->query($query);
+
+	$qwords = array();
+	$index = 0;
+	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+	    $qwords[$index] = array();
+		$qwords[$index]['text'] = htmlspecialchars($row["id"]);
+		$qwords[$index]['type'] = htmlspecialchars($row["reftypename"]);
+		$index = $index + 1;
+	}
+	$result->closeCursor();
+
+	return $qwords;
+}
 /**********************************************************************************************************************************/
 function TestWriteTempToDB() {
 
@@ -240,7 +266,7 @@ function TestWriteTempToDB() {
 							WHERE location = 'ITSD Room'");				
 }
 
-$tiger = QuestionWordFromDB();
+$tiger = qwdb();
 foreach ($tiger as $key1) {
 	echo $key1['type'] . '|' . $key1['text'] . '<br />';
 }
