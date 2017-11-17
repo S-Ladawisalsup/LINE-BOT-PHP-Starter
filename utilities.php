@@ -60,7 +60,7 @@ function GetQuesion($text, $flag) {
 			//-------------------------------------------------
 			//Old Version
 			// $ismath = file('text/question.txt');
-			$question[] = null;
+			// $question[] = null;
 			// for ($i = 28; $i <= 31; $i++) {
 			// 	array_push($question, $ismath[$i]);
 			// }		
@@ -88,14 +88,13 @@ function GetQuesion($text, $flag) {
 			return false;
 	}
 
-	if ($question != null) {
-		foreach ($question as $item) {
-			$item = substr($item, 0, strlen($item) - 1);
-			if (endsWith($text, $item)) {
-				return true;
-			}
+	foreach ($question as $item) {
+		$item = substr($item, 0, strlen($item) - 1);
+		if (endsWith($text, $item)) {
+			return true;
 		}
 	}
+
 
 	return false;
 }
