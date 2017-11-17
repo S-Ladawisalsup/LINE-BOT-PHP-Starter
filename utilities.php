@@ -57,16 +57,6 @@ function GetQuesion($text, $flag) {
 			$question = file('text/greeting.txt');
 			break;
 		case 'math':
-			//-------------------------------------------------
-			//Old Version
-			// $ismath = file('text/question.txt');
-			// $question[] = null;
-			// for ($i = 28; $i <= 31; $i++) {
-			// 	array_push($question, $ismath[$i]);
-			// }		
-			// break;
-			//-------------------------------------------------
-			//New Version
 			$ismath = QuestionWordFromDB();
 			foreach ($ismath as $keyitem) {
 				if($keyitem['type'] == 7) {
@@ -75,8 +65,7 @@ function GetQuesion($text, $flag) {
 					}	
 				}
 			}
-			return false;
-			//-------------------------------------------------						
+			break;					
 		case 'issqrt':
 			$issqrt = file('text/math.txt');
 			$question[] = null;
