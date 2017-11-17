@@ -216,7 +216,7 @@ function QuestionWordFromDB() {
 	$index = 0;
 	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 	    $qwords[$index] = array();
-		$qwords[$index]['text'] = utf8_encode(htmlspecialchars($row["questiontext"]));
+		$qwords[$index]['text'] = htmlspecialchars($row["questiontext"]);
 		$qwords[$index]['type'] = htmlspecialchars($row["questiontype"]);
 		$index = $index + 1;
 	}
