@@ -266,8 +266,8 @@ function TestWriteTempToDB() {
 							WHERE location = 'ITSD Room'");				
 }
 
-$tiger = qwdb();
-foreach ($tiger as $key1) {
-	echo $key1['type'] . '|' . $key1['text'] . '<br />';
-}
+// $tiger = qwdb();
+// foreach ($tiger as $key1) {
+// 	echo $key1['type'] . '|' . $key1['text'] . '<br />';
+// }
 echo "OK";
