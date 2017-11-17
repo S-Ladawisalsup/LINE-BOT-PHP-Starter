@@ -60,7 +60,7 @@ function GetQuesion($text, $flag) {
 			//-------------------------------------------------
 			//Old Version
 			// $ismath = file('text/question.txt');
-			// $question[] = null;
+			$question[] = null;
 			// for ($i = 28; $i <= 31; $i++) {
 			// 	array_push($question, $ismath[$i]);
 			// }		
