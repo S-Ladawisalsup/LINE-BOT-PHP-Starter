@@ -74,7 +74,7 @@
 // }
 
 
-// include 'utilities.php';
+include 'utilities.php';
 $q4 = QuestionWordFromDB();
 // foreach ($q4 as $key1) {
 // 	echo $key1['text'] . '/' . $key1['type'] . '<br />';
