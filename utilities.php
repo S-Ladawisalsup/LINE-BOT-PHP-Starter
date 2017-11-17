@@ -69,7 +69,7 @@ function GetQuesion($text, $flag) {
 			//New Version
 			$ismath = QuestionWordFromDB();
 			foreach ($ismath as $keyitem) {
-				if($keyitem['type'] == '7') {
+				if($keyitem['type'] == 7) {
 					if (endsWith($text, $keyitem['text'])) {
 						return true;
 					}	
