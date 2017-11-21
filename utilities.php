@@ -236,7 +236,7 @@ function GetTemperature($text) {
 
 	$tempresult = 'ไม่มี' . $curr_locname . 'น๊ะจ๊ะ อยากรู้เดินไปดูเองเลยจ้า';
 	if ($curr_place != 0) {
-		$query_locnametemp = 'SELECT temperature, lastchangedatetime FROM tbhlinebottemploc WHERE id = $curr_place';
+		$query_locnametemp = "SELECT temperature, lastchangedatetime FROM tbhlinebottemploc WHERE id = $curr_place";
 		$results = $db->query($query_locnametemp);
 		$last_temp = array();
 		while ($row = $results->fetch(PDO::FETCH_ASSOC)) {  
