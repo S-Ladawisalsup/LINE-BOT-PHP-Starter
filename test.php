@@ -14,9 +14,12 @@ $db = new PDO($dsn);
 
 $query_locnametemp = "SELECT temperature, lastchangedatetime FROM tbhlinebottemploc WHERE id = '1'";
 $results = $db->query($query_locnametemp);
+$last_temp = array();
 while ($row = $results->fetch(PDO::FETCH_ASSOC)) {
- 	$last_temp = array('temp'     => htmlspecialchars($row["temperature"]),
- 					   'datetime' => htmlspecialchars($row["lastchangedatetime"]);
+ 	// $last_temp = array('temp'     => htmlspecialchars($row["temperature"]),
+ 	// 				   'datetime' => htmlspecialchars($row["lastchangedatetime"]);
+	$last_temp['temp'] = htmlspecialchars($row["temperature"]);
+	$last_temp['datetime'] = htmlspecialchars($row["lastchangedatetime"]);
 }
 $results->closeCursor();
 
