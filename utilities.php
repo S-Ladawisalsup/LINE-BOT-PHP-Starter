@@ -236,7 +236,7 @@ function GetTemperature($text) {
 
 	$tempresult = 'ไม่มี' . $curr_locname . 'น๊ะจ๊ะ อยากรู้เดินไปดูเองเลยจ้า';
 	if ($curr_place != 0) {
-		$query_locnametemp = "SELECT temperature, lastchangedatetime FROM tbhlinebottemploc WHERE id = $curr_place";
+		$query_locnametemp = "SELECT temperature, lastchangedatetime AT TIME ZONE 'UTC+7' FROM tbhlinebottemploc WHERE id = $curr_place";
 		$results = $db->query($query_locnametemp);
 		$last_temp = array();
 		while ($row = $results->fetch(PDO::FETCH_ASSOC)) {  
@@ -253,7 +253,7 @@ function GetTemperature($text) {
 		}
 		else {
 			//lastchangedatetime != datenow, tell date and time
-			$previous_date = date("d/m/Y", substr($last_temp['datetime'], 0, 10));
+			$previous_date = date("d/m/Y", strtotime(substr($last_temp['datetime'], 0, 10)));
 			$previous_time = substr($last_temp['datetime'], 11);
 			$previous_time = str_replace(':', '.', $previous_time);
 			$tempresult = 'เมื่อวันที่ ' . $previous_date . ' เวลา ' . $previous_time . 'น. อุณหภูมิที่' . $curr_locname . 'เท่ากับ' . $last_temp['temp'] . ' องศาเซลเซียส จ้า';
