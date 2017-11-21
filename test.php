@@ -65,5 +65,5 @@ echo $tempresult;
 
 function setTimeToGMT7 ($global_date) {
 	$tm = substr($global_date, 11, 2);
-	return $tm;
+	return $tm + 7;
 }
