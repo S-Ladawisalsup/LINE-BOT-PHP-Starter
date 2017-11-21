@@ -17,8 +17,8 @@ $events = json_decode($content, true);
 
 // Validate parsed JSON data
 if (!is_null($events['event'])) {
-	echo $events['temperature'];
-	foreach ($events['server'] as $event) {
+	echo $events['event']['temperature'];
+	foreach ($events['event']['server'] as $event) {
 		echo '/' . $event['name'] . ':' $event['status'];
 	}
 }
