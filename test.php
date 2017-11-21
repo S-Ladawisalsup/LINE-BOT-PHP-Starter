@@ -12,8 +12,8 @@ $db = new PDO($dsn);
 
 // $one = 1;
 
-// $query_locnametemp = 'SELECT id, temperature, lastchangedatetime FROM tbhlinebottemploc ORDER BY id ASC';
-// $results = $db->query($query_locnametemp);
+$query_locnametemp = 'SELECT id, temperature, lastchangedatetime FROM tbhlinebottemploc ORDER BY id ASC';
+$results = $db->query($query_locnametemp);
 // $last_temp = array();
 // $index = 0;
 // while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
@@ -23,7 +23,7 @@ $db = new PDO($dsn);
 // 	$last_temp[$index]['datetime'] = htmlspecialchars($row["lastchangedatetime"]);
 // 	$index = $index + 1;
 // }
-// $results->closeCursor();
+$results->closeCursor();
 
 // foreach ($last_temp as $final_temp) {
 // 	if ($final_temp['id'] == $one) {
