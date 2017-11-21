@@ -202,46 +202,46 @@ function QuestionWordFromDB() {
 }
 /**********************************************************************************************************************************/
 function GetTemperature($text) {
-	$dsn = 'pgsql:'
-		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
-		. 'dbname=dfusod038c3j35;'
-		. 'user=mmbbbssobrmqjs;'
-		. 'port=5432;'
-		. 'sslmode=require;'
-		. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
+	// $dsn = 'pgsql:'
+	// 	. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
+	// 	. 'dbname=dfusod038c3j35;'
+	// 	. 'user=mmbbbssobrmqjs;'
+	// 	. 'port=5432;'
+	// 	. 'sslmode=require;'
+	// 	. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
 
-	$db = new PDO($dsn);
+	// $db = new PDO($dsn);
 
-	$query_loccall = 'SELECT id, loc_callname, loc_id FROM tbhlinebotlocname ORDER BY id ASC';
-	$result = $db->query($query_loccall);
+	// $query_loccall = 'SELECT id, loc_callname, loc_id FROM tbhlinebotlocname ORDER BY id ASC';
+	// $result = $db->query($query_loccall);
 
-	$locations = array();
-	$index = 0;
-	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-	    $locations[$index] = array();
-		$locations[$index]['name'] = htmlspecialchars($row["loc_callname"]);
-		$locations[$index]['id'] = htmlspecialchars($row["loc_id"]);
-		$index = $index + 1;
-	}
-	$result->closeCursor();
+	// $locations = array();
+	// $index = 0;
+	// while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+	//     $locations[$index] = array();
+	// 	$locations[$index]['name'] = htmlspecialchars($row["loc_callname"]);
+	// 	$locations[$index]['id'] = htmlspecialchars($row["loc_id"]);
+	// 	$index = $index + 1;
+	// }
+	// $result->closeCursor();
 
-	$curr_place = 0;
-	foreach ($locations as $locate) {
-		if (strpos($text, $locate['name']) !== false) {
-			$curr_place = $locate['id'];
-		}
-	}
+	// $curr_place = 0;
+	// foreach ($locations as $locate) {
+	// 	if (strpos($text, $locate['name']) !== false) {
+	// 		$curr_place = $locate['id'];
+	// 	}
+	// }
 
-	if ($curr_place != 0) {
-		$query_locnametemp = 'SELECT temperature, lastchangedatetime FROM tbhlinebottemploc WHERE id = $curr_place';
-		$results = $db->query($query_locnametemp);
-		while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-		    $last_temp = array();
-			$last_temp['temp'] = htmlspecialchars($row["temperature"]);
-			$last_temp['datetime'] = htmlspecialchars($row["lastchangedatetime"]);
-		}
-		$results->closeCursor();	
-	}
+	// if ($curr_place != 0) {
+	// 	$query_locnametemp = 'SELECT temperature, lastchangedatetime FROM tbhlinebottemploc WHERE id = $curr_place';
+	// 	$results = $db->query($query_locnametemp);
+	// 	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+	// 	    $last_temp = array();
+	// 		$last_temp['temp'] = htmlspecialchars($row["temperature"]);
+	// 		$last_temp['datetime'] = htmlspecialchars($row["lastchangedatetime"]);
+	// 	}
+	// 	$results->closeCursor();	
+	// }
 
 	return false;
 }
