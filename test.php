@@ -21,6 +21,8 @@ while ($row = $results->fetch(PDO::FETCH_ASSOC)) {
 }
 $results->closeCursor();
 
+$last_temp['datetime'] = '2017-11-21';
+
 if (substr($last_temp['datetime'], 0, 10) == date("Y-m-d")) {
 	echo substr($last_temp['datetime'], 0, 10) . ' / ' . date("Y-m-d");
 }
