@@ -48,16 +48,14 @@ if ($curr_place != 0) {
 
 	if (substr($last_temp['datetime'], 0, 10) == date("Y-m-d")) {
 		//lastchangedatetime == datenow, tell only time
-		$last_temp['datetime'] = date("Y-m-d H:i", $last_temp['datetime']);
 		$previous_time = substr($last_temp['datetime'], 11);
 		$previous_time = str_replace(':', '.', $previous_time);
 		$tempresult = 'เมื่อเวลา ' . $previous_time . 'น. อุณหภูมิที่' . $curr_locname . 'เท่ากับ ' . $last_temp['temp'] . ' องศาเซลเซียส จ้า';
 	}
 	else {
 		//lastchangedatetime != datenow, tell date and time
-		$newTZ = date("Y-m-d H:i", strtotime($last_temp['datetime']));
-		$tz = $newTZ = new DateTimeZone("Asia/Bangkok");
-		$newTZ->setTimezone($tz);
+		$tz = new DateTimeZone("Asia/Bangkok");
+		$newTZ = date("Y-m-d H:i", strtotime($last_temp['datetime']))->setTimezone($tz);
 		// $previous_date = date("d/m/Y", strtotime(substr($last_temp['datetime'], 0, 10)));
 		// $previous_time = substr($last_temp['datetime'], 11);
 		// $previous_time = str_replace(':', '.', $previous_time);
