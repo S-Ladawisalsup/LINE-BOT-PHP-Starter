@@ -23,7 +23,7 @@ while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 	$locations[$index]['id'] = htmlspecialchars($row["loc_id"]);
 	$index = $index + 1;
 }
-$result->closeCursor();
+//$result->closeCursor();
 
 $curr_place = 0;
 foreach ($locations as $locate) {
@@ -37,13 +37,13 @@ foreach ($locations as $locate) {
 $tempresult = $curr_place . 'ไม่มี' . $curr_locname . 'น๊ะจ๊ะ อยากรู้เดินไปดูเองเลยจ้า';
 if ($curr_place != 0) {
 	$query_locnametemp = 'SELECT temperature, lastchangedatetime FROM tbhlinebottemploc WHERE id = $curr_place';
-	// $result = $db->query($query_locnametemp);
-	// $last_temp = array();
-	// while ($row = $result->fetch(PDO::FETCH_ASSOC)) {  
-	// 	$last_temp['temp'] = htmlspecialchars($row["temperature"]);
-	// 	$last_temp['datetime'] = substr(htmlspecialchars($row["lastchangedatetime"]), 0, 16);
-	// }
-	// $result->closeCursor();
+	$result = $db->query($query_locnametemp);
+	$last_temp = array();
+	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {  
+		$last_temp['temp'] = htmlspecialchars($row["temperature"]);
+		$last_temp['datetime'] = substr(htmlspecialchars($row["lastchangedatetime"]), 0, 16);
+	}
+	$result->closeCursor();
 
 	// if (substr($last_temp['datetime'], 0, 10) == date("Y-m-d")) {
 	// 	//lastchangedatetime == datenow, tell only time
@@ -58,6 +58,6 @@ if ($curr_place != 0) {
 	// 	$previous_time = str_replace(':', '.', $previous_time);
 	// 	$tempresult = 'เมื่อวันที่ ' . $previous_date . ' เวลา ' . $previous_time . 'น. อุณหภูมิที่' . $curr_locname . 'เท่ากับ' . $last_temp['temp'] . ' องศาเซลเซียส จ้า';
 	// }
-	$tempresult = $query_locnametemp;
+	$tempresult = $last_temp['temp'];
 }
 echo $tempresult;
