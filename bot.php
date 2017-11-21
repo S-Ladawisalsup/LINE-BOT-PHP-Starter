@@ -115,6 +115,12 @@ if (!is_null($events['events'])) {
 									];	
 								}
 							}
+							elseif (strpos($text, 'อุณหภูมิ') !== false) {							
+								$messages = [						
+									'type' => 'text',
+									'text' => AnswerBuilder('ans')//GetTemperature($text)
+								];	
+							}
 							else {
 								$messages = [						
 									'type' => 'text',
