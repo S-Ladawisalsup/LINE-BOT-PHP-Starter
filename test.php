@@ -55,12 +55,12 @@ if ($curr_place != 0) {
 	}
 	else {
 		//lastchangedatetime != datenow, tell date and time
-		$last_temp['datetime'] = date("Y-m-d H:i", strtotime($last_temp['datetime']));
+		$newTZ = datetime("Y-m-d H:i", strtotime($last_temp['datetime']));
 		// $previous_date = date("d/m/Y", strtotime(substr($last_temp['datetime'], 0, 10)));
 		// $previous_time = substr($last_temp['datetime'], 11);
 		// $previous_time = str_replace(':', '.', $previous_time);
 		// $tempresult = 'เมื่อวันที่ ' . $previous_date . ' เวลา ' . $previous_time . 'น. อุณหภูมิที่' . $curr_locname . 'เท่ากับ ' . $last_temp['temp'] . ' องศาเซลเซียส จ้า';
-		$tempresult = $last_temp['datetime'];
+		$tempresult = $newTZ;
 	}
 }
 echo $tempresult;
