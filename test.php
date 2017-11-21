@@ -21,6 +21,6 @@ $one = 1;
 // }
 // $results->closeCursor();
 
-echo $one . ' ' . $dsn . '<br />';
+echo $one . ' ' . $db . '<br />';
 
 echo $last_temp['temp'] . "C at " . $last_temp['datetime'];
