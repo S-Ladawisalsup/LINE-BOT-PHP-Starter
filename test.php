@@ -10,9 +10,9 @@ $dsn = 'pgsql:'
 
 $db = new PDO($dsn);
 
-// $one = 1;
+$one = 1;
 
-$query_locnametemp = "SELECT temperature, lastchangedatetime FROM tbhlinebottemploc WHERE id = '1'";
+$query_locnametemp = "SELECT temperature, lastchangedatetime FROM tbhlinebottemploc WHERE id = $one";
 $results = $db->query($query_locnametemp);
 $last_temp = array();
 while ($row = $results->fetch(PDO::FETCH_ASSOC)) {
