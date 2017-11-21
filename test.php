@@ -21,6 +21,9 @@ while ($row = $results->fetch(PDO::FETCH_ASSOC)) {
 }
 $results->closeCursor();
 
-$dtm_new = date('Y-m-d H:i', strtotime($last_temp['datetime']));
-
-echo $dtm_new . '<br />datetime type is : ' . gettype($dtm_new) . '<br />datetime now is ' . date("Y-m-d H:i");
+if (substr($last_temp['datetime'], 0, 10) == date("Y-m-d")) {
+	echo substr($last_temp['datetime'], 0, 10) . ' / ' . date("Y-m-d");
+}
+else {
+	echo substr($last_temp['datetime'], 0, 10) . ' | ' . date("Y-m-d");
+}
