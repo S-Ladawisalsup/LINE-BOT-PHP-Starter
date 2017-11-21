@@ -52,10 +52,20 @@ function maths($a, $b, $operator) {
 /**********************************************************************************************************************************/
 /*** Function for check text from user is question(?) ***/
 function GetQuesion($text, $flag) {
+
 	switch ($flag) {
 		case 'greeting':
+			//----------------------------------------------------------------
+			// Old Version
 			$question = file('text/greeting.txt');
 			break;
+			//----------------------------------------------------------------
+			// New Version
+			// $question = QuestionWordFromDB();
+			// foreach ($question as $key => $value) {
+			// 	# code...
+			// }
+			//----------------------------------------------------------------
 		case 'math':
 			$ismath = QuestionWordFromDB();
 			foreach ($ismath as $keyitem) {
@@ -65,7 +75,7 @@ function GetQuesion($text, $flag) {
 					}	
 				}
 			}
-			break;					
+			return false;					
 		case 'issqrt':
 			$issqrt = file('text/math.txt');
 			$question[] = null;
@@ -83,7 +93,6 @@ function GetQuesion($text, $flag) {
 			return true;
 		}
 	}
-
 	return false;
 }
 /**********************************************************************************************************************************/
@@ -156,6 +165,7 @@ Question has 7 formats!
 7. "how+.." question (will answer as number)
 Ohter(s) Mode!
 8. It's ping to anther devices or server mode
+9. Greeting word(s) type mode.
 *******************************************************************/
 	$QAArray = QuestionWordFromDB();
 	foreach ($QAArray as $keyitems) {

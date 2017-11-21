@@ -128,7 +128,11 @@ if (!is_null($events['events'])) {
 								'type' => 'text',
 								'text' => 'ไป ping เองสิจ๊ะ'
 							];
-							break;				
+							break;		
+						case '9':
+							# greeting mode
+							
+							break;		
 						default:
 							# Other cases not question
 							if (GetQuesion($text, 'greeting')) {

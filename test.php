@@ -73,4 +73,13 @@
 // 	} 
 // }
 
-echo "status 200 ok";
+$array = array();
+for($ind = 0, $ind < 11, $ind++) {
+	$array[$ind] = $ind;
+}
+
+foreach ($array as $key => $key%2==0) {
+	echo $key . '<br />';
+}
+
+echo "<br />status 200 ok";
