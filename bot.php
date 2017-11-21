@@ -37,42 +37,42 @@ if (!is_null($events['events'])) {
 							# code... Yes/No Question => Yes/No Answer
 							$messages = [						
 								'type' => 'text',
-								'text' => AnswerBuilder('ans')
+								'text' => 'case 1'
 							];
 							break;	
 						case '2':
 							# code... When Question => Timer Answer
 							$messages = [						
 								'type' => 'text',
-								'text' => AnswerBuilder('ans')
+								'text' => 'case 2'
 							];
 							break;
 						case '3':
 							# code... Where Question => Location Answer
 							$messages = [						
 								'type' => 'text',
-								'text' => AnswerBuilder('ans')
+								'text' => 'case 3'
 							];
 							break;
 						case '4':
 							# code... Who Question => Personal Answer
 							$messages = [						
 								'type' => 'text',
-								'text' => AnswerBuilder('ans')
+								'text' => 'case 4'
 							];
 							break;
 						case '5':
 							# code... What/How Question => Reason Answer
 							$messages = [						
 								'type' => 'text',
-								'text' => AnswerBuilder('ans')
+								'text' => 'case 5'
 							];
 							break;
 						case '6':
 							# code... Which Question => Object Answer
 							$messages = [						
 								'type' => 'text',
-								'text' => AnswerBuilder('ans')
+								'text' => 'case 6'
 							];
 							break;
 						case '7':
@@ -124,7 +124,7 @@ if (!is_null($events['events'])) {
 							else {
 								$messages = [						
 									'type' => 'text',
-									'text' => AnswerBuilder('ans')
+									'text' => 'case other'
 								];							
 							}
 							break;	
