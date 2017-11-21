@@ -12,7 +12,7 @@ $dsn = 'pgsql:'
 
 $db = new PDO($dsn);
 
-$query_loccall = 'SELECT id, loc_callname, loc_id FROM tbhlinebotlocname ORDER BY id ASC';
+$query_loccall = 'SELECT loc_callname, loc_id FROM tbhlinebotlocname ORDER BY id ASC';
 $result = $db->query($query_loccall);
 
 $locations = array();
