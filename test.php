@@ -54,7 +54,7 @@ if ($curr_place != 0) {
 	}
 	else {
 		//lastchangedatetime != datenow, tell date and time
-		$newTZ = date("Y-m-d H:i", strtotime($last_temp['datetime']));
+		$newTZ = date_create($last_temp['datetime'], timezone_open('Asia/Bangkok'));
 		// $previous_date = date("d/m/Y", strtotime(substr($last_temp['datetime'], 0, 10)));
 		// $previous_time = substr($last_temp['datetime'], 11);
 		// $previous_time = str_replace(':', '.', $previous_time);
