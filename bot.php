@@ -37,47 +37,53 @@ if (!is_null($events['events'])) {
 							# code... Yes/No Question => Yes/No Answer
 							$messages = [						
 								'type' => 'text',
-								'text' => 'case 1'
+								'text' => AnswerBuilder('ans')
 							];
 							break;	
 						case '2':
 							# code... When Question => Timer Answer
 							$messages = [						
 								'type' => 'text',
-								'text' => 'case 2'
+								'text' => AnswerBuilder('ans')
 							];
 							break;
 						case '3':
 							# code... Where Question => Location Answer
 							$messages = [						
 								'type' => 'text',
-								'text' => 'case 3'
+								'text' => AnswerBuilder('ans')
 							];
 							break;
 						case '4':
 							# code... Who Question => Personal Answer
 							$messages = [						
 								'type' => 'text',
-								'text' => 'case 4'
+								'text' => AnswerBuilder('ans')
 							];
 							break;
 						case '5':
 							# code... What/How Question => Reason Answer
 							$messages = [						
 								'type' => 'text',
-								'text' => 'case 5'
+								'text' => AnswerBuilder('ans')
 							];
 							break;
 						case '6':
 							# code... Which Question => Object Answer
 							$messages = [						
 								'type' => 'text',
-								'text' => 'case 6'
+								'text' => AnswerBuilder('ans')
 							];
 							break;
 						case '7':
 							# Number Question (How + ...) => Number Answer
-							if (GetQuesion($text, 'math')) {
+							if (strpos($text, 'อุณหภูมิ') !== false) {							
+								$messages = [						
+									'type' => 'text',
+									'text' => GetTemperature($text)
+								];	
+							}
+							else if (GetQuesion($text, 'math')) {
 								$mathematics = file('text/math.txt');
 								foreach ($mathematics as $math) {
 									$math = substr($math, 0, strlen($math) - 1);
@@ -105,7 +111,7 @@ if (!is_null($events['events'])) {
 								if (isset($solve) === false) {
 									$messages = [						
 										'type' => 'text',
-										'text' => 'case isset'
+										'text' => AnswerBuilder('ans')
 									];	
 								}
 								else {
@@ -114,17 +120,11 @@ if (!is_null($events['events'])) {
 										'text' => $solve . " จ้า"
 									];	
 								}
-							}
-							else if (strpos($text, 'อุณหภูมิ') !== false) {							
-								$messages = [						
-									'type' => 'text',
-									'text' => GetTemperature($text)
-								];	
-							}
+							} 
 							else {
 								$messages = [						
 									'type' => 'text',
-									'text' => 'case other'
+									'text' => AnswerBuilder('ans')
 								];							
 							}
 							break;	
