@@ -21,6 +21,6 @@ while ($row = $results->fetch(PDO::FETCH_ASSOC)) {
 }
 $results->closeCursor();
 
-$dtm_new = date_create_from_format("Y-m-d H:i");
+$dtm_new = date_create_from_format("Y-m-d H:i", $last_temp['datetime']);
 
 echo $dtm_new . '<br />datetime type is : ' . gettype($dtm_new) . '<br />datetime now is ' . date("Y-m-d H:i");
