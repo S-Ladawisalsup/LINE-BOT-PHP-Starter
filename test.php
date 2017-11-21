@@ -25,11 +25,11 @@ while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 }
 $results->closeCursor();
 
-foreach ($last_temp as $final_temp) {
-	if ($final_temp['id'] == $one) {
-		$temp_new = array('temp'     => $final_temp['temp'], 
-						  'datetime' => $final_temp['datetime']);
-	}
-}
+// foreach ($last_temp as $final_temp) {
+// 	if ($final_temp['id'] == $one) {
+// 		$temp_new = array('temp'     => $final_temp['temp'], 
+// 						  'datetime' => $final_temp['datetime']);
+// 	}
+// }
 
 echo $temp_new['temp'] . "C at " . $temp_new['datetime'];
