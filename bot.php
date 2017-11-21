@@ -131,21 +131,27 @@ if (!is_null($events['events'])) {
 							break;		
 						case '9':
 							# greeting mode
-							
+							$day = strtolower(date("D"));
+							$messages = [
+								'type' => 'image',
+							    'originalContentUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/' . $day . '_original.jpg',
+							    'previewImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/' . $day . '_240.jpg'
+							];
 							break;		
 						default:
 							# Other cases not question
-							if (GetQuesion($text, 'greeting')) {
-								$day = strtolower(date("D"));
-								$messages = [
-									'type' => 'image',
-								    'originalContentUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/' . $day . '_original.jpg',
-								    'previewImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/' . $day . '_240.jpg'
-								];
-							}
-							//-------------------------------------------------
-							//Test temperature written to database.
-							else if (strpos($text, 'testtemp') !== false) {
+							// if (GetQuesion($text, 'greeting')) {
+							// 	$day = strtolower(date("D"));
+							// 	$messages = [
+							// 		'type' => 'image',
+							// 	    'originalContentUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/' . $day . '_original.jpg',
+							// 	    'previewImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/' . $day . '_240.jpg'
+							// 	];
+							// }
+							// //-------------------------------------------------
+							// //Test temperature written to database.
+							// else 
+							if (strpos($text, 'testtemp') !== false) {
 								//InsertDataToDB();
 								$messages = [						
 									'type' => 'text',

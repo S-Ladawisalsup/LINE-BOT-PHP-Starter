@@ -54,23 +54,28 @@ function maths($a, $b, $operator) {
 function GetQuesion($text, $flag) {
 
 	switch ($flag) {
-		case 'greeting':
-			//----------------------------------------------------------------
-			// Old Version
-			$question = file('text/greeting.txt');
-			break;
-			//----------------------------------------------------------------
-			// New Version
-			// $question = QuestionWordFromDB();
-			// foreach ($question as $key => $value) {
-			// 	# code...
-			// }
-			//----------------------------------------------------------------
+		// case 'greeting':
+		// 	//----------------------------------------------------------------
+		// 	// Old Version
+		// 	$question = file('text/greeting.txt');
+		// 	break;
+		// 	//----------------------------------------------------------------
+		// 	// New Version
+		// 	$question = QuestionWordFromDB();
+		// 	foreach ($question as $key) {
+		// 		if($key['type'] == 9) {
+		// 			if (endsWith($text, $key['text'])) {
+		// 				return true;
+		// 			}	
+		// 		}
+		// 	}
+		// 	return false;	
+		// 	//----------------------------------------------------------------
 		case 'math':
 			$ismath = QuestionWordFromDB();
-			foreach ($ismath as $keyitem) {
-				if($keyitem['type'] == 7) {
-					if (endsWith($text, $keyitem['text'])) {
+			foreach ($ismath as $key) {
+				if($key['type'] == 7) {
+					if (endsWith($text, $key['text'])) {
 						return true;
 					}	
 				}
@@ -169,7 +174,7 @@ Ohter(s) Mode!
 *******************************************************************/
 	$QAArray = QuestionWordFromDB();
 	foreach ($QAArray as $keyitems) {
-		if ($keyitems['type'] == 8) {
+		if ($keyitems['type'] == 8 || $keyitems['type'] == 9) {
 			if (strpos($text, $keyitems['text']) !== false) {
 				return $keyitems['type'];
 			}

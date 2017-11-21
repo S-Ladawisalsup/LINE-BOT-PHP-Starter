@@ -73,13 +73,4 @@
 // 	} 
 // }
 
-// $array = array();
-// for($ind = 0, $ind < 11, $ind++) {
-// 	$array[$ind] = $ind;
-// }
-
-// foreach ($array as $key) {
-// 	echo $key . '<br />';
-// }
-
-echo "status 2000 ok";
+echo "status 200 ok";
