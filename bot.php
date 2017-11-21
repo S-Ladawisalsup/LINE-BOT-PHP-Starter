@@ -169,15 +169,20 @@ if (!is_null($events['events'])) {
 
 			# Check event user request is sticker
 			else if ($event['message']['type'] == 'sticker') {
-				// Get random sticker default by LINE Corp.
-				$sticker = GetSticker();
 
-				// Build message to reply back
-				$messages = [
-					'type' => 'sticker',
-					'packageId' => $sticker['packageId'],
-    				'stickerId' => $sticker['stickerId']
-				];
+				$rand_chance = rand(0, 1);
+
+				if ($rand_chance == 0) {
+					// Get random sticker default by LINE Corp.
+					$sticker = GetSticker();
+
+					// Build message to reply back
+					$messages = [
+						'type' => 'sticker',
+						'packageId' => $sticker['packageId'],
+	    				'stickerId' => $sticker['stickerId']
+					];
+				}
 			}
 
 			// Get replyToken
