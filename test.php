@@ -78,7 +78,7 @@ for($ind = 0, $ind < 11, $ind++) {
 	$array[$ind] = $ind;
 }
 
-foreach ($array as $key => $key%2==0) {
+foreach ($array as $key) {
 	echo $key . '<br />';
 }
 
