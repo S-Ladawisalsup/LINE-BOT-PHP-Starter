@@ -115,7 +115,7 @@ if (!is_null($events['events'])) {
 									];	
 								}
 							}
-							elseif (strpos($text, 'อุณหภูมิ') !== false) {							
+							else if (strpos($text, 'อุณหภูมิ') !== false) {							
 								$messages = [						
 									'type' => 'text',
 									'text' => GetTemperature($text)
