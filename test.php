@@ -60,4 +60,5 @@ if ($curr_place != 0) {
 		$tempresult = 'เมื่อวันที่ ' . $previous_date . ' เวลา ' . $previous_time . 'น. อุณหภูมิที่' . $curr_locname . 'เท่ากับ ' . $last_temp['temp'] . ' องศาเซลเซียส จ้า';
 	}
 }
+$tempresult = $last_temp['datetime'];
 echo $tempresult;
