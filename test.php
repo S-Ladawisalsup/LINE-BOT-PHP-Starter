@@ -1,6 +1,6 @@
 <?php
 
-$text = 'ห้องโปรแกรมเมอร์'
+$text = 'ห้องโปรแกรมเมอร์';
 
 // $dsn = 'pgsql:'
 // 	. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
