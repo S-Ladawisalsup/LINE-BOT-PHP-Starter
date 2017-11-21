@@ -105,7 +105,7 @@ if (!is_null($events['events'])) {
 								if (isset($solve) === false) {
 									$messages = [						
 										'type' => 'text',
-										'text' => AnswerBuilder('ans')
+										'text' => 'case isset'
 									];	
 								}
 								else {
