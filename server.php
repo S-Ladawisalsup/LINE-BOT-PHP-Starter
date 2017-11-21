@@ -2,9 +2,25 @@
 
 // Cannot debug to print show in page
 // But will echo response to root source data is sent
-if (!is_null($_POST["temperature"])) {
-	TestWriteTempToDB($_POST["temperature"]);
-	echo "Temperature is " . $_POST["temperature"];
+// if (!is_null($_POST["temperature"])) {
+// 	TestWriteTempToDB($_POST["temperature"]);
+// 	echo "Temperature is " . $_POST["temperature"];
+// }
+// else {
+// 	echo "Cannot receive any data";
+// }
+
+// Get POST body content
+$content = file_get_contents('php://input');
+// Parse JSON
+$events = json_decode($content, true);
+
+// Validate parsed JSON data
+if (!is_null($events['event'])) {
+	echo $events['temperature'];
+	foreach ($events['server'] as $event) {
+		echo '/' . $event['name'] . ':' $event['status'];
+	}
 }
 else {
 	echo "Cannot receive any data";

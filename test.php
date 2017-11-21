@@ -1,3 +1,3 @@
 <?php
 
-echo "200";
+echo "ok";
