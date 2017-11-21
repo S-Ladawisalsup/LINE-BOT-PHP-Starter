@@ -16,11 +16,9 @@ $query_locnametemp = "SELECT temperature, lastchangedatetime FROM tbhlinebottemp
 $results = $db->query($query_locnametemp);
 $last_temp = array();
 while ($row = $results->fetch(PDO::FETCH_ASSOC)) {
- 	// $last_temp = array('temp'     => htmlspecialchars($row["temperature"]),
- 	// 				   'datetime' => htmlspecialchars($row["lastchangedatetime"]);
 	$last_temp['temp'] = htmlspecialchars($row["temperature"]);
 	$last_temp['datetime'] = htmlspecialchars($row["lastchangedatetime"]);
 }
 $results->closeCursor();
 
-echo $last_temp['temp'] . "C at " . $last_temp['datetime'];
+echo $last_temp['temp'] . "C at " . $last_temp['datetime'] . ' datetime type is : ' . gettype($last_temp['datetime']);
