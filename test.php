@@ -1,5 +1,5 @@
 <?php
-
+date_default_timezone_set("Asia/Bangkok");
 $text = 'pwggezwpr007nn007xptzห้องโปรแกรมเมอร์';
 
 $dsn = 'pgsql:'
