@@ -142,7 +142,7 @@ if (!is_null($events['events'])) {
 							//--------------------------------------------------------
 							// Test case to insert data to postgresql database.
 							if (strpos($text, 'testtemp') !== false) {
-								InsertDataToDB();
+								//InsertDataToDB();
 								$messages = [						
 									'type' => 'text',
 									'text' => 'ลองบันทึกข้อมูลเรียบร้อย ลองไปดูใน database สิจ๊ะ'
