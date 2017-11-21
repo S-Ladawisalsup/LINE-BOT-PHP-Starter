@@ -210,14 +210,7 @@ function InsertDataToDB() {
 					user=mmbbbssobrmqjs 
 					password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa");
 
-	$result = pg_query($db, "INSERT INTO tbhlinebotwmode (questiontext, questiontype) VALUES 
-							('Hello', '9')
-							,('hello', '9')
-							,('Good Morning', '9')
-							,('good morning', '9')
-							,('สวัสดี', '9')
-							,('อรุณสวัสดิ์', '9')
-							,('หวัดดี', '9')
-							,('ดีจ้า', '9')
-							;");				
+	$result = pg_query($db, "INSERT INTO tbhlinebotlocname (loc_callname, loc_id) VALUES 
+							('ห้องโปรแกรมเมอร์', '1')							
+							;");//,('ห้อง itsd', '1')				
 }
