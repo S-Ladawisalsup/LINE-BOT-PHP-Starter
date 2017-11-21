@@ -14,7 +14,7 @@ $one = 1;
 
 $query_locnametemp = 'SELECT id, temperature, lastchangedatetime FROM tbhlinebottemploc ORDER BY id ASC';
 $results = $db->query($query_locnametemp);
-
+$last_temp = array();
 $index = 0
 while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
     $last_temp[$index] = array();
