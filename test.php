@@ -1,6 +1,6 @@
 <?php
 
-$text = 'ห้องโปรแกรมเมอร์';
+$text = 'pwggezwpr007nn007xptzห้องโปรแกรมเมอร์';
 
 $dsn = 'pgsql:'
 	. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
@@ -34,29 +34,29 @@ foreach ($locations as $locate) {
 	}
 }
 
-$tempresult = 'ไม่มี' . $curr_locname . 'น๊ะจ๊ะ อยากรู้เดินไปดูเองเลยจ้า';
-if ($curr_place != 0) {
-	$query_locnametemp = 'SELECT temperature, lastchangedatetime FROM tbhlinebottemploc WHERE id = $curr_place';
-	$results = $db->query($query_locnametemp);
-	$last_temp = array();
-	while ($row = $results->fetch(PDO::FETCH_ASSOC)) {  
-		$last_temp['temp'] = htmlspecialchars($row["temperature"]);
-		$last_temp['datetime'] = substr(htmlspecialchars($row["lastchangedatetime"]), 0, 16);
-	}
-	$results->closeCursor();
+$tempresult = $curr_place . 'ไม่มี' . $curr_locname . 'น๊ะจ๊ะ อยากรู้เดินไปดูเองเลยจ้า';
+// if ($curr_place != 0) {
+// 	$query_locnametemp = 'SELECT temperature, lastchangedatetime FROM tbhlinebottemploc WHERE id = $curr_place';
+// 	$results = $db->query($query_locnametemp);
+// 	$last_temp = array();
+// 	while ($row = $results->fetch(PDO::FETCH_ASSOC)) {  
+// 		$last_temp['temp'] = htmlspecialchars($row["temperature"]);
+// 		$last_temp['datetime'] = substr(htmlspecialchars($row["lastchangedatetime"]), 0, 16);
+// 	}
+// 	$results->closeCursor();
 
-	if (substr($last_temp['datetime'], 0, 10) == date("Y-m-d")) {
-		//lastchangedatetime == datenow, tell only time
-		$previous_time = substr($last_temp['datetime'], 11);
-		$previous_time = str_replace(':', '.', $previous_time);
-		$tempresult = 'เมื่อเวลา ' . $previous_time . 'น. อุณหภูมิที่' . $curr_locname . 'เท่ากับ' . $last_temp['temp'] . ' องศาเซลเซียส จ้า';
-	}
-	else {
-		//lastchangedatetime != datenow, tell date and time
-		$previous_date = date("d/m/Y", substr($last_temp['datetime'], 0, 10));
-		$previous_time = substr($last_temp['datetime'], 11);
-		$previous_time = str_replace(':', '.', $previous_time);
-		$tempresult = 'เมื่อวันที่ ' . $previous_date . ' เวลา ' . $previous_time . 'น. อุณหภูมิที่' . $curr_locname . 'เท่ากับ' . $last_temp['temp'] . ' องศาเซลเซียส จ้า';
-	}
-}
+// 	if (substr($last_temp['datetime'], 0, 10) == date("Y-m-d")) {
+// 		//lastchangedatetime == datenow, tell only time
+// 		$previous_time = substr($last_temp['datetime'], 11);
+// 		$previous_time = str_replace(':', '.', $previous_time);
+// 		$tempresult = 'เมื่อเวลา ' . $previous_time . 'น. อุณหภูมิที่' . $curr_locname . 'เท่ากับ' . $last_temp['temp'] . ' องศาเซลเซียส จ้า';
+// 	}
+// 	else {
+// 		//lastchangedatetime != datenow, tell date and time
+// 		$previous_date = date("d/m/Y", substr($last_temp['datetime'], 0, 10));
+// 		$previous_time = substr($last_temp['datetime'], 11);
+// 		$previous_time = str_replace(':', '.', $previous_time);
+// 		$tempresult = 'เมื่อวันที่ ' . $previous_date . ' เวลา ' . $previous_time . 'น. อุณหภูมิที่' . $curr_locname . 'เท่ากับ' . $last_temp['temp'] . ' องศาเซลเซียส จ้า';
+// 	}
+// }
 echo $tempresult;
