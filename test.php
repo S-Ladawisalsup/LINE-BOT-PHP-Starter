@@ -1,5 +1,5 @@
 <?php
-date_default_timezone_set("Asia/Bangkok");
+//date_default_timezone_set("Asia/Bangkok");
 $text = 'pwggezwpr007nn007xptzห้องโปรแกรมเมอร์';
 
 $dsn = 'pgsql:'
@@ -54,8 +54,7 @@ if ($curr_place != 0) {
 	}
 	else {
 		//lastchangedatetime != datenow, tell date and time
-		$tz = new DateTimeZone("Asia/Bangkok");
-		$newTZ = date("Y-m-d H:i", strtotime($last_temp['datetime']))->setTimezone($tz);
+		$newTZ = date("Y-m-d H:i", strtotime($last_temp['datetime']))->setTimezone(new DateTimeZone('Asia/Bangkok'));
 		// $previous_date = date("d/m/Y", strtotime(substr($last_temp['datetime'], 0, 10)));
 		// $previous_time = substr($last_temp['datetime'], 11);
 		// $previous_time = str_replace(':', '.', $previous_time);
