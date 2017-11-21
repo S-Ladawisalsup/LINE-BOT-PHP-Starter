@@ -139,18 +139,8 @@ if (!is_null($events['events'])) {
 							];
 							break;		
 						default:
-							# Other cases not question
-							// if (GetQuesion($text, 'greeting')) {
-							// 	$day = strtolower(date("D"));
-							// 	$messages = [
-							// 		'type' => 'image',
-							// 	    'originalContentUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/' . $day . '_original.jpg',
-							// 	    'previewImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/' . $day . '_240.jpg'
-							// 	];
-							// }
-							// //-------------------------------------------------
-							// //Test temperature written to database.
-							// else 
+							//--------------------------------------------------------
+							// Test case to insert data to postgresql database.
 							if (strpos($text, 'testtemp') !== false) {
 								//InsertDataToDB();
 								$messages = [						
@@ -158,7 +148,7 @@ if (!is_null($events['events'])) {
 									'text' => 'ลองบันทึกข้อมูลเรียบร้อย ลองไปดูใน database สิจ๊ะ'
 								];
 							}
-							//-------------------------------------------------
+							//--------------------------------------------------------
 							else {
 								// Build message to reply back
 								$messages = [						

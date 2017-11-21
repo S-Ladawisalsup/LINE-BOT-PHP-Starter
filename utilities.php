@@ -54,23 +54,6 @@ function maths($a, $b, $operator) {
 function GetQuesion($text, $flag) {
 
 	switch ($flag) {
-		// case 'greeting':
-		// 	//----------------------------------------------------------------
-		// 	// Old Version
-		// 	$question = file('text/greeting.txt');
-		// 	break;
-		// 	//----------------------------------------------------------------
-		// 	// New Version
-		// 	$question = QuestionWordFromDB();
-		// 	foreach ($question as $key) {
-		// 		if($key['type'] == 9) {
-		// 			if (endsWith($text, $key['text'])) {
-		// 				return true;
-		// 			}	
-		// 		}
-		// 	}
-		// 	return false;	
-		// 	//----------------------------------------------------------------
 		case 'math':
 			$ismath = QuestionWordFromDB();
 			foreach ($ismath as $key) {
@@ -202,7 +185,7 @@ function QuestionWordFromDB() {
 
 	$db = new PDO($dsn);
 
-	$query = 'SELECT id, questiontext, questiontype FROM tbhlinebotchkqa ORDER BY id ASC';
+	$query = 'SELECT id, questiontext, questiontype FROM tbhlinebotwmode ORDER BY id ASC';
 	$result = $db->query($query);
 
 	$qwords = array();
@@ -218,6 +201,7 @@ function QuestionWordFromDB() {
 	return $qwords;
 }
 /**********************************************************************************************************************************/
+//Function to insert data to postgresql database to easier than insert data to database by terminal
 function InsertDataToDB() {
 
 	$db = pg_connect("host=ec2-54-243-187-133.compute-1.amazonaws.com 
@@ -226,7 +210,7 @@ function InsertDataToDB() {
 					user=mmbbbssobrmqjs 
 					password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa");
 
-	$result = pg_query($db, "INSERT INTO tbhlinebotchkqa (questiontext, questiontype) VALUES 
+	$result = pg_query($db, "INSERT INTO tbhlinebotwmode (questiontext, questiontype) VALUES 
 							('Hello', '9')
 							,('hello', '9')
 							,('Good Morning', '9')
