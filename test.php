@@ -12,15 +12,26 @@ $db = new PDO($dsn);
 
 $one = 1;
 
-$query_locnametemp = 'SELECT temperature, lastchangedatetime FROM tbhlinebottemploc WHERE id = $one';
-// $results = $db->query($query_locnametemp);
-// while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-//     $last_temp = array();
-// 	$last_temp['temp'] = htmlspecialchars($row["temperature"]);
-// 	$last_temp['datetime'] = htmlspecialchars($row["lastchangedatetime"]);
-// }
-// $results->closeCursor();
+$query_locnametemp = 'SELECT id, temperature, lastchangedatetime FROM tbhlinebottemploc ORDER BY id ASC';
+$results = $db->query($query_locnametemp);
 
-echo $one . ' ' . $query_locnametemp . '<br />';
+$index = 0
+while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+    $last_temp[$index] = array();
+    $last_temp[$index]['id'] = $row["id"];
+	$last_temp[$index]['temp'] = htmlspecialchars($row["temperature"]);
+	$last_temp[$index]['datetime'] = htmlspecialchars($row["lastchangedatetime"]);
+	$index = $index + 1;
+}
+$results->closeCursor();
 
-echo $last_temp['temp'] . "C at " . $last_temp['datetime'];
+$temp_new = array();
+
+foreach ($last_temp as $final_temp) {
+	if ($final_temp['id'] == $one) {
+		$temp_new['temp'] = $final_temp['temp'];
+		$temp_new['datetime'] = $final_temp['datetime'];
+	}
+}
+
+echo $temp_new['temp'] . "C at " . $temp_new['datetime'];
