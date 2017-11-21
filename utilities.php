@@ -229,6 +229,7 @@ function GetTemperature($text) {
 	foreach ($locations as $locate) {
 		if (strpos($text, $locate['name']) !== false) {
 			$curr_place = $locate['id'];
+			break;
 		}
 	}
 

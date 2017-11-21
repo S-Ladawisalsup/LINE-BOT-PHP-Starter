@@ -17,8 +17,10 @@ $results = $db->query($query_locnametemp);
 $last_temp = array();
 while ($row = $results->fetch(PDO::FETCH_ASSOC)) {
 	$last_temp['temp'] = htmlspecialchars($row["temperature"]);
-	$last_temp['datetime'] = htmlspecialchars($row["lastchangedatetime"]);
+	$last_temp['datetime'] = substr(htmlspecialchars($row["lastchangedatetime"]), 0, 19) ;
 }
 $results->closeCursor();
 
-echo $last_temp['temp'] . "C at " . $last_temp['datetime'] . ' datetime type is : ' . gettype($last_temp['datetime']);
+
+
+echo $last_temp['temp'] . "C at " . $last_temp['datetime'] . '<br />datetime type is : ' . gettype($last_temp['datetime']) . '<br />datetime now is ' . date("Y-m-d H:i:s");
