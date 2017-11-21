@@ -61,4 +61,4 @@ if ($curr_place != 0) {
 	}
 }
 $tempresult = $last_temp['datetime'];
-echo $tempresult;
+echo $query_locnametemp . '<br />' . $tempresult;
