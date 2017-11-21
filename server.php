@@ -24,7 +24,7 @@ if (!is_null($events['event'])) {
 	echo "Hello World!";
 }
 else {
-	echo "Cannot receive any data";
+	echo "Cannot receive any data/".$content."/".$events."/".$events['event'];
 }
 
 /**********************************************************************************************************************************/
