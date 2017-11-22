@@ -15,19 +15,12 @@ $content = file_get_contents('php://input');
 // Parse JSON
 $events = json_decode($content, true);
 
-// // Validate parsed JSON data
-// if (!is_null($events)) {
-// 	// echo $events['event']['temperature'];
-// 	// foreach ($events['event']['server'] as $event) {
-// 	// 	echo '/' . $event['name'] . ':' $event['status'];
-// 	// }
-// 	echo "Hello World!";
-// }
-// else {
-// 	echo "Cannot receive any data/".$content."/".$events."/".$events['temperature']."/".$events['server'];
-// }
+echo "content : " . $content . "\r\nevents temperature : " . $events['temperature'];
+foreach ($events['server'] as $event) {
+	echo "\r\nevent server name : " . $event['name'] . "\r\nevent server status : " . $event['status'];
+}
 
-echo "content : ".$content."\r\nevents temperature : ".$events['event']['temperature']."\r\nevent server : ".$events['event']['server'];
+
 
 /**********************************************************************************************************************************/
 function TestWriteTempToDB($curr_temperature) {
