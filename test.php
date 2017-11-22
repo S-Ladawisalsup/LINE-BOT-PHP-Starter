@@ -1,5 +1,4 @@
 <?php
-
 // test_req = {
 // 				"temperature": data_obj1["data"], 
 // 			 	"server":[
@@ -13,5 +12,4 @@
 // 					     }
 // 			    	  	 ]
 // 			}
-
 echo "OK";
