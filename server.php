@@ -6,9 +6,9 @@ $content = file_get_contents('php://input');
 $events = json_decode($content, true);
 
 if (!is_null($events)) {
-	// if (!is_null($events['temperature'])) {
-	// 	UpdateTempToDB($events['temperature'], $events['location']);
-	// }
+	if (!is_null($events['temperature'])) {
+		UpdateTempToDB($events['temperature'], $events['location']);
+	}
 	// foreach ($events['server'] as $event) {
 	// 	if (!is_null($event)) {
 	// 		UpdateServToDB($event['name'], $event['status'], $events['location']);
