@@ -22,8 +22,8 @@ function UpdateTempToDB($curr_temperature, $location) {
 					dbname=dfusod038c3j35 
 					user=mmbbbssobrmqjs 
 					password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa");
-
-	$result = pg_query($db, "UPDATE tbhlinebottemploc SET temperature = '$curr_temperature' WHERE location = '$location'");	
+	$query = "UPDATE tbhlinebottemploc SET temperature = '" . $curr_temperature . "' WHERE location = '" . $location . "'";
+	$result = pg_query($db, $query);	
 
 	// if (!$result) {
 	// 	echo "An error occurred.";
@@ -42,8 +42,8 @@ function UpdateServToDB($name, $status, $location) {
 
 	$loc_id = findLocationID($location);
 	$res = ($status) ? 'ON' : 'OFF';
-
-	$result = pg_query($db, "UPDATE tbhlinebotserv SET (status, location_id) = ('$res', '$loc_id') WHERE ip_addr = '$name'");
+	$query = "UPDATE tbhlinebotserv SET (status, location_id) = ('" . $res . "', '" . $loc_id . "') WHERE ip_addr = '" . $name . "'";
+	$result = pg_query($db, $query);
 
 	if (!$result) {
 		echo "An error occurred.";
