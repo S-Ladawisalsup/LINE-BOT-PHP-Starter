@@ -72,11 +72,12 @@ if (!is_null($events['events'])) {
 										'type' => 'text',
 										'text' => $protocal['ip_addr']
 									];	
+									//now get ip for ping ... to be continue
 								}
 								else {
 									$messages = [						
 										'type' => 'text',
-										'text' => $protocal['ip_addr']//AnswerBuilder('ans')
+										'text' => 'ไม่มีข้อมูลในระบบ อยากรู้ก็ไป ping เองสิจ๊ะ'
 									];	
 								}
 							}

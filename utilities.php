@@ -227,7 +227,6 @@ function IsAskedServer($text) {
 					   '4' => '20.');
 
 	$ip_req = 1000;
-
 	for ($iden = 0; $iden <= 4; $iden++) {
 		if (strpos($text, $serv_iden[$iden]) !== false) {
 			$tmptext = str_replace($serv_iden[$iden], '', $text);
@@ -241,7 +240,7 @@ function IsAskedServer($text) {
 
 	foreach ($servers as $server) {
 		//must be careful with duplicated server name, now not checking.
-		if (strpos($text, $server['name']) !== false || $ip_req == $server['lip']) {		
+		if (strpos(strtolower($text), strtolower($server['name'])) !== false || $ip_req == $server['lip']) {		
 			$ip_addr['IsChecked'] = true;
 			$ip_addr['ip_addr'] = $server['ip'];
 			break;
