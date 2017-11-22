@@ -16,7 +16,7 @@ $content = file_get_contents('php://input');
 $events = json_decode($content, true);
 
 // Validate parsed JSON data
-if (!is_null($events['event'])) {
+if (!is_null($events)) {
 	// echo $events['event']['temperature'];
 	// foreach ($events['event']['server'] as $event) {
 	// 	echo '/' . $event['name'] . ':' $event['status'];
@@ -24,7 +24,7 @@ if (!is_null($events['event'])) {
 	echo "Hello World!";
 }
 else {
-	echo "Cannot receive any data/".$content."/".$events."/".$events['event'];
+	echo "Cannot receive any data";
 }
 
 /**********************************************************************************************************************************/
