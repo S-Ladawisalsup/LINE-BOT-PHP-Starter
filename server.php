@@ -45,9 +45,10 @@ function UpdateServToDB($name, $status, $location) {
 					password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa");
 
 	$loc_id = findLocationID($location);
+	$res = ($status) ? 'ON' : 'OFF';
 
 	$result = pg_query($db, "UPDATE tbhlinebotserv 
-							SET (status, location_id) = ($status, $loc_id)
+							SET (status, location_id) = ($res, $loc_id)
 							WHERE serv_name = $name");
 }
 /**********************************************************************************************************************************/
