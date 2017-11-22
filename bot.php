@@ -35,10 +35,28 @@ if (!is_null($events['events'])) {
 					switch ($typing) {
 						case '1':
 							# code... Yes/No Question => Yes/No Answer
-							$messages = [						
-								'type' => 'text',
-								'text' => AnswerBuilder('ans')
-							];
+							if (strpos($text, 'ล่ม') !== false || strpos($text, 'เจ๊ง') !== false || strpos($text, 'พัง') !== false) {
+								$protocal = IsAskedServer($text);
+								if ($protocal['IsChecked']) {
+									$messages = [						
+										'type' => 'text',
+										'text' => $protocal['ip_addr']
+									];	
+									//now get ip for ping ... to be continue
+								}
+								else {
+									$messages = [						
+										'type' => 'text',
+										'text' => 'ไม่มีข้อมูลในระบบ อยากรู้ก็ไป ping เองสิจ๊ะ'
+									];	
+								}
+							}
+							else {
+								$messages = [						
+									'type' => 'text',
+									'text' => AnswerBuilder('ans')
+								];							
+							}
 							break;	
 						case '2':
 							# code... When Question => Timer Answer
