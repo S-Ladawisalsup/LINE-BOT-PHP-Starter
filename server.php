@@ -6,24 +6,15 @@ $content = file_get_contents('php://input');
 $events = json_decode($content, true);
 
 if (!is_null($events)) {
-	//-------------------------------------------------------------------------------------------------------
-	//test json receive version
-	// echo "content : " . $content . "\r\nevents temperature : " . $events['temperature'];
-	// foreach ($events['server'] as $event) {
-	// 	echo "\r\nevent server name : " . $event['name'] . "\r\nevent server status : " . $event['status'];
+	// if (!is_null($events['temperature'])) {
+	// 	UpdateTempToDB($events['temperature'], $events['location']);
 	// }
-	//-------------------------------------------------------------------------------------------------------
-	// New Version
-	if (!is_null($events['temperature'])) {
-		UpdateTempToDB($events['temperature'], $events['location']);
-	}
-	foreach ($events['server'] as $event) {
-		if (!is_null($event)) {
-			UpdateServToDB($event['name'], $event['status'], $events['location']);
-		}
-	}
-	echo 'Update database successful';
-	//-------------------------------------------------------------------------------------------------------
+	// foreach ($events['server'] as $event) {
+	// 	if (!is_null($event)) {
+	// 		UpdateServToDB($event['name'], $event['status'], $events['location']);
+	// 	}
+	// }
+	echo 'temperature is ' . $events['temperature'] . ' in ' . $events['location'];
 }
 /**********************************************************************************************************************************/
 function UpdateTempToDB($curr_temperature, $location) {
