@@ -31,6 +31,9 @@ function UpdateTempToDB($curr_temperature, $location) {
 	if (!$result) {
 		echo "An error occurred.";
 	}			
+	else {
+		echo "Updated database successful, please check on your database.";
+	}
 }
 /**********************************************************************************************************************************/
 function UpdateServToDB($name, $status, $location) {
