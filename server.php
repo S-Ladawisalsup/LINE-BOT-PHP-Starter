@@ -14,7 +14,6 @@ if (!is_null($events)) {
 	// 		UpdateServToDB($event['name'], $event['status'], $events['location']);
 	// 	}
 	// }
-	echo 'temperature is ' . $events['temperature'] . ' in ' . $events['location'];
 }
 /**********************************************************************************************************************************/
 function UpdateTempToDB($curr_temperature, $location) {
@@ -23,6 +22,8 @@ function UpdateTempToDB($curr_temperature, $location) {
 					dbname=dfusod038c3j35 
 					user=mmbbbssobrmqjs 
 					password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa");
+
+	echo 'temperature is ' . $events['temperature'] . ' in ' . $events['location'];
 
 	$result = pg_query($db, "UPDATE tbhlinebottemploc 
 							SET temperature = $curr_temperature
