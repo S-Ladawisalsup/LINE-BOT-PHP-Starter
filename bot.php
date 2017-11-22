@@ -63,10 +63,29 @@ if (!is_null($events['events'])) {
 							break;
 						case '5':
 							# code... What/How Question => Reason Answer
-							$messages = [						
-								'type' => 'text',
-								'text' => AnswerBuilder('ans')
-							];
+							if (strpos($text, 'สถานะ') !== false || 
+								strpos($text, 'สเตตัส') !== false || 
+								strpos($text, 'status') !== false) {
+								$protocal = IsAskedServer($text);
+								if ($protocal['IsChecked']) {
+									$messages = [						
+										'type' => 'text',
+										'text' => $protocal['ip_addr']
+									];	
+								}
+								else {
+									$messages = [						
+										'type' => 'text',
+										'text' => $protocal['ip_addr']//AnswerBuilder('ans')
+									];	
+								}
+							}
+							else {
+								$messages = [						
+									'type' => 'text',
+									'text' => AnswerBuilder('ans')
+								];							
+							}
 							break;
 						case '6':
 							# code... Which Question => Object Answer
@@ -83,44 +102,6 @@ if (!is_null($events['events'])) {
 									'text' => GetTemperature($text)
 								];	
 							}
-							else if (GetQuesion($text, 'math')) {
-								$mathematics = file('text/math.txt');
-								foreach ($mathematics as $math) {
-									$math = substr($math, 0, strlen($math) - 1);
-									if (strpos($text, $math)) {
-										$operator = $math;
-										break;
-									}
-									else {
-										$operator = 'null';
-									}
-								}
-
-								if ($operator != 'null') {
-									preg_match_all('!\d+\.*\d*!', $text, $matches);
-									$val = $matches[0];
-
-									if ((count($val) == 1) && GetQuesion($operator, 'issqrt')) {
-										$solve = maths($val[0], 0, $operator);
-									}
-									else if (count($val) == 2) {
-										$solve = maths($val[0], $val[1], $operator);
-									}							 
-								}
-
-								if (isset($solve) === false) {
-									$messages = [						
-										'type' => 'text',
-										'text' => AnswerBuilder('ans')
-									];	
-								}
-								else {
-									$messages = [						
-										'type' => 'text',
-										'text' => $solve . " จ้า"
-									];	
-								}
-							} 
 							else {
 								$messages = [						
 									'type' => 'text',

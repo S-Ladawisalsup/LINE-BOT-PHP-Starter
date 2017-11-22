@@ -13,77 +13,6 @@ function endsWith($haystack, $needle) {
     return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== false);
 }
 /**********************************************************************************************************************************/
-/*** Function for calculate basic mathematics when string contain math's operator. ***/
-function maths($a, $b, $operator) {
-    switch ($operator) {
-    	case '+':
-    	case 'บวก':
-    		return $a + $b;
-    	case '-':
-    	case 'ลบ':
-    		return $a - $b;
-    	case '*':
-    	case 'คูณ':
-    	case 'x':
-    	case 'X':
-    	case '×':
-    		return $a * $b;
-    	case '/':
-    	case 'หาร':
-    		if ($b != 0) {
-    			return $a / $b;
-    		}
-    		else {
-    			return 'ตัวหารเป็น 0 ไม่ไก้ ไปคิดมาใหม่นะ';
-    		}
-    	case '%':
-    		return $a % $b;
-    	case 'ยกกำลัง':
-    	case 'pow':
-    		return pow($a, $b);
-    	case 'รูทที่สอง':
-    	case 'รากที่สอง':
-    	case 'sqrt':
-    		return sqrt($a); 	
-    	default:
-    		return 'โอ๊ยปวดหัว คิดไม่ออกแล้ว';
-    }
-}
-/**********************************************************************************************************************************/
-/*** Function for check text from user is question(?) ***/
-function GetQuesion($text, $flag) {
-
-	switch ($flag) {
-		case 'math':
-			$ismath = QuestionWordFromDB();
-			foreach ($ismath as $key) {
-				if($key['type'] == 7) {
-					if (endsWith($text, $key['text'])) {
-						return true;
-					}	
-				}
-			}
-			return false;					
-		case 'issqrt':
-			$issqrt = file('text/math.txt');
-			$question[] = null;
-			for ($i = 1; $i <= 3; $i++) {
-				array_push($question, $issqrt[$i]);
-			}
-			break;
-		default:
-			return false;
-	}
-
-	foreach ($question as $item) {
-		$item = substr($item, 0, strlen($item) - 1);
-		if (endsWith($text, $item)) {
-			return true;
-		}
-	}
-	return false;
-}
-/**********************************************************************************************************************************/
 /*** Function generates answer as text type, now get answer from array text file by random (cannot connect datatabase now) ***/
 function AnswerBuilder($mood) {
 	switch ($mood) {
@@ -261,6 +190,65 @@ function GetTemperature($text) {
 		}
 	}
 	return $tempresult;
+}
+/**********************************************************************************************************************************/
+function IsAskedServer($text) {
+	
+	$ip_addr = array('IsChecked' => false, 'ip_addr' => '127.0.0.1');
+
+	$dsn = 'pgsql:'
+		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
+		. 'dbname=dfusod038c3j35;'
+		. 'user=mmbbbssobrmqjs;'
+		. 'port=5432;'
+		. 'sslmode=require;'
+		. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
+
+	$db = new PDO($dsn);
+
+	$query = 'SELECT id, ip_addr, serv_name, last_ip FROM tbhlinebotserv ORDER BY id ASC';
+	$result = $db->query($query);
+
+	$servers = array();
+	$index = 0;
+	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+	    $servers[$index] = array();
+		$servers[$index]['ip'] = htmlspecialchars($row["ip_addr"]);
+		$servers[$index]['name'] = htmlspecialchars($row["serv_name"]);
+		$servers[$index]['lip'] = htmlspecialchars($row["last_ip"]);
+		$index = $index + 1;
+	}
+	$result->closeCursor();
+
+	$serv_iden = array('0' => 'เบอร์',
+					   '1' => '100.',
+					   '2' => '101.',
+					   '3' => '102.',
+					   '4' => '20.');
+
+	$ip_req = 1000;
+
+	for ($iden = 0; $iden <= 4; $iden++) {
+		if (strpos($text, $serv_iden[$iden]) !== false) {
+			$tmptext = str_replace($serv_iden[$iden], '', $text);
+			$tmptext = str_replace('192.1.', '', $tmptext);
+			preg_match_all('!\d+\.*\d*!', $tmptext, $matches);
+			$val = $matches[0];
+			$ip_req = $val[0];
+			break;
+		}
+	}
+
+	foreach ($servers as $server) {
+		//must be careful with duplicated server name, now not checking.
+		if (strpos($text, $server['name']) !== false || $ip_req == $server['lip']) {		
+			$ip_addr['IsChecked'] = true;
+			$ip_addr['ip_addr'] = $server['ip'];
+			break;
+		}
+	}
+
+	return $ip_addr;
 }
 /**********************************************************************************************************************************/
 //Function to insert data to postgresql database to easier than insert data to database by terminal
