@@ -27,7 +27,7 @@ function UpdateTempToDB($curr_temperature, $location) {
 
 	$result = pg_query($db, "UPDATE tbhlinebottemploc 
 							SET temperature = $curr_temperature
-							WHERE location = $location");				
+							WHERE location = 'ITSD Room'");				
 }
 /**********************************************************************************************************************************/
 function UpdateServToDB($name, $status, $location) {
