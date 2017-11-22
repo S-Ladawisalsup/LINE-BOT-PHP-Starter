@@ -23,9 +23,7 @@ function UpdateTempToDB($curr_temperature, $location) {
 					user=mmbbbssobrmqjs 
 					password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa");
 
-	$query = "UPDATE tbhlinebottemploc SET temperature = '" . $curr_temperature . "' WHERE location = '" . $location . "'";
-
-	$result = pg_query($db, $query);	
+	$result = pg_query($db, "UPDATE tbhlinebottemploc SET temperature = '$curr_temperature' WHERE location = '$location'");	
 
 	// if (!$result) {
 	// 	echo "An error occurred.";
@@ -45,16 +43,23 @@ function UpdateServToDB($name, $status, $location) {
 	$loc_id = findLocationID($location);
 	$res = ($status) ? 'ON' : 'OFF';
 
-	$query = "UPDATE tbhlinebotserv SET (status, location_id) = ('" . $res . "', '" . $loc_id . "')	WHERE serv_name = '" . $name . "'";
+	$query = "UPDATE tbhlinebotserv SET (status, location_id) = ('$res', '$loc_id')	WHERE serv_name = '$name'";
 
-	$result = pg_query($db, $query);
+	$result = pg_query($db, "UPDATE tbhlinebotserv SET (status, location_id) = ('$res', '$loc_id')	WHERE serv_name = '$name'");
 
-	// if (!$result) {
-	// 	echo "An error occurred.";
-	// }			
-	// else {
-	// 	echo "Updated database successful, please check on your database.";
-	// }
+	if (!$result) {
+		echo "An error occurred.";
+	}			
+	else {
+		echo "Updated database successful, please check on your database.";
+	}
+
+	$printf = "name = $name";
+	$printf .= "\r\nstatus = $status, res = $res";
+	$printf .= "\r\nlocation = $location, loc_id = $loc_id";
+	$printf .= "\r\nquery = $query";
+
+	echo $printf;
 }
 /**********************************************************************************************************************************/
 function findLocationID($loc_name) {
