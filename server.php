@@ -27,7 +27,7 @@ $events = json_decode($content, true);
 // 	echo "Cannot receive any data/".$content."/".$events."/".$events['temperature']."/".$events['server'];
 // }
 
-echo "content : ".$content."\r\nevents temperature : ".$events['temperature']."\r\nevent server : (".$events['server']['name'].", ".$events['server']['status'].")";
+echo "content : ".$content."\r\nevents temperature : ".$events['event']['temperature']."\r\nevent server : ".$events['event']['server'];
 
 /**********************************************************************************************************************************/
 function TestWriteTempToDB($curr_temperature) {
