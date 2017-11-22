@@ -23,12 +23,10 @@ function UpdateTempToDB($curr_temperature, $location) {
 					user=mmbbbssobrmqjs 
 					password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa");
 
-	$qry = "UPDATE tbhlinebottemploc SET temperature = $curr_temperature WHERE location = $location";
+	$query = "UPDATE tbhlinebottemploc SET temperature = '". $curr_temperature ."' WHERE location = '" . $location . "'";
 	echo $qry . "\r\n";
 
-	$result = pg_query($db, "UPDATE tbhlinebottemploc 
-							SET temperature = $curr_temperature
-							WHERE location = $location");	
+	$result = pg_query($db, $query);	
 
 	if (!$result) {
 		echo "An error occurred.";
