@@ -9,11 +9,11 @@ if (!is_null($events)) {
 	if (!is_null($events['temperature'])) {
 		UpdateTempToDB($events['temperature'], $events['location']);
 	}
-	// foreach ($events['server'] as $event) {
-	// 	if (!is_null($event)) {
-	// 		UpdateServToDB($event['name'], $event['status'], $events['location']);
-	// 	}
-	// }
+	foreach ($events['server'] as $event) {
+		if (!is_null($event)) {
+			UpdateServToDB($event['name'], $event['status'], $events['location']);
+		}
+	}
 }
 /**********************************************************************************************************************************/
 function UpdateTempToDB($curr_temperature, $location) {
@@ -23,17 +23,16 @@ function UpdateTempToDB($curr_temperature, $location) {
 					user=mmbbbssobrmqjs 
 					password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa");
 
-	$query = "UPDATE tbhlinebottemploc SET temperature = '". $curr_temperature ."' WHERE location = '" . $location . "'";
-	echo $qry . "\r\n";
+	$query = "UPDATE tbhlinebottemploc SET temperature = '" . $curr_temperature . "' WHERE location = '" . $location . "'";
 
 	$result = pg_query($db, $query);	
 
-	if (!$result) {
-		echo "An error occurred.";
-	}			
-	else {
-		echo "Updated database successful, please check on your database.";
-	}
+	// if (!$result) {
+	// 	echo "An error occurred.";
+	// }			
+	// else {
+	// 	echo "Updated database successful, please check on your database.";
+	// }
 }
 /**********************************************************************************************************************************/
 function UpdateServToDB($name, $status, $location) {
@@ -46,9 +45,16 @@ function UpdateServToDB($name, $status, $location) {
 	$loc_id = findLocationID($location);
 	$res = ($status) ? 'ON' : 'OFF';
 
-	$result = pg_query($db, "UPDATE tbhlinebotserv 
-							SET (status, location_id) = ($res, $loc_id)
-							WHERE serv_name = $name");
+	$query = "UPDATE tbhlinebotserv SET (status, location_id) = ('" . $res . "', '" . $loc_id . "')	WHERE serv_name = '" . $name . "'";
+
+	$result = pg_query($db, $query);
+
+	// if (!$result) {
+	// 	echo "An error occurred.";
+	// }			
+	// else {
+	// 	echo "Updated database successful, please check on your database.";
+	// }
 }
 /**********************************************************************************************************************************/
 function findLocationID($loc_name) {
