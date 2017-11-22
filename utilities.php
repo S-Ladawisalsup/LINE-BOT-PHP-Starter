@@ -231,6 +231,9 @@ function IsAskedServer($text) {
 		if (strpos($text, $serv_iden[$iden]) !== false) {
 			$tmptext = str_replace($serv_iden[$iden], '', $text);
 			$tmptext = str_replace('192.1.', '', $tmptext);
+			for ($i = 1; $i <= 4; $i++) {
+				$tmptext = str_replace($serv_iden[$i], '', $tmptext);
+			}
 			preg_match_all('!\d+\.*\d*!', $tmptext, $matches);
 			$val = $matches[0];
 			$ip_req = $val[0];
