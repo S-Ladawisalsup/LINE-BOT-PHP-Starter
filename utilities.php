@@ -345,9 +345,9 @@ function InsertDataToDB() {
 					password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa");
 
 	$result = pg_query($db, "INSERT INTO linebotlocation (title, address, latitude, longitude) VALUES 
-							('โรงพยาบาล ธนบุรี', '34/1 แขวง บ้านช่างหล่อ เขต บางกอกน้อย กรุงเทพมหานคร 10700', '13.7529', '100.4797')	
+							('โรงพยาบาล ธนบุรี', '34/1 แขวง บ้านช่างหล่อ เขต บางกอกน้อย กรุงเทพมหานคร 10700', '13.752988', '100.479749')	
 							;");//,('โรงพยาบาล ธนบุรี', '34/1 แขวง บ้านช่างหล่อ เขต บางกอกน้อย กรุงเทพมหานคร 10700', '13.7529', '100.4797')		
-	
+
 	// $curr_temperature = 24;
 	// $result = pg_query($db, "UPDATE tbhlinebottemploc 
 	// 						SET temperature = $curr_temperature
