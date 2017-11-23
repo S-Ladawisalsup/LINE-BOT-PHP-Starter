@@ -15,6 +15,8 @@ function endsWith($haystack, $needle) {
 /**********************************************************************************************************************************/
 /*** Function generates answer as text type, now get answer from array text file by random (cannot connect datatabase now) ***/
 function AnswerBuilder($mood) {
+	//----------------------------------------------------------------
+	// Old Version
 	switch ($mood) {
 		case 'ans':
 			$answer = file('text/answer.txt');
@@ -31,6 +33,31 @@ function AnswerBuilder($mood) {
 		$building = substr($building, 0, strlen($building)-1);
 	}
 	return $building;
+	//----------------------------------------------------------------
+	// New Version
+	// $dsn = 'pgsql:'
+	// 	. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
+	// 	. 'dbname=dfusod038c3j35;'
+	// 	. 'user=mmbbbssobrmqjs;'
+	// 	. 'port=5432;'
+	// 	. 'sslmode=require;'
+	// 	. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
+
+	// $db = new PDO($dsn);
+	// $word = 'text';
+	// $query = "SELECT $word FROM tbhlinebotans WHERE type = '$mood'";
+	// $result = $db->query($query);
+
+	// $reply = array();
+	// $index = 0;
+	// while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+	//     $reply[$index] = htmlspecialchars($row["text"]);
+	//     $index = $index + 1;
+	// }
+	// $result->closeCursor();
+
+	// return $reply[rand(0, count($reply))];
+	//----------------------------------------------------------------
 }
 /**********************************************************************************************************************************/
 /*** Function generates answer as sticker type by random from default sticker(s) by LINE Corp. ***/
@@ -83,6 +110,8 @@ Question has 7 formats!
 Ohter(s) Mode!
 8. It's ping to anther devices or server mode
 9. Greeting word(s) type mode.
+10. Refuse as answer in all response mode.
+11. Person mode for answer who's question.
 *******************************************************************/
 	//Trim start
 	$text = str_replace(' ', '', $text);
@@ -328,12 +357,12 @@ function InsertDataToDB() {
 					password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa");
 	$t = 'text';
 	$result = pg_query($db, "INSERT INTO tbhlinebotans ($t, type) VALUES 
-							('ฉันหน่ะสิ ฉันหน่ะสิ', '11')
-							,('ผมไงจะใครหล่ะ', '11')
-							,('ประยุทธ์', '11')	
-							,('คุณพฤกษ์ครับ', '11')
-							,('พี่ตูน', '11')
-							,('เธอหน่ะแหล่ะ', '11')						
+							('ไม่รู้จ้า', '10')
+							,('ไม่รู้สิจ๊ะ', '10')
+							,('ก็ไม่รู้สินะ', '10')	
+							,('ไม่รู้ว้อยยย', '10')
+							,('เค้าขอโทษ เค้าไม่รู้ T_T', '10')
+							,('จะถามคนอื่นทำไมหล่ะ ลองถามใจตัวเธอเองดูสิ', '10')						
 							;");			
 
 	// $curr_temperature = 24;
