@@ -229,8 +229,7 @@ function IsAskedServer($text) {
 	$ip_req = 1000000;
 	for ($iden = 0; $iden <= 4; $iden++) {
 		if (strpos($text, $serv_iden[$iden]) !== false) {
-			$tmptext = str_replace('192.', '', $text);
-			$tmptext = str_replace('1.', '', $text);
+			$tmptext = str_replace('192.1.', '', $text);
 			$tmptext = str_replace('.', '', $tmptext);
 			preg_match_all('!\d+\.*\d*!', $tmptext, $matches);
 			$val = $matches[0];
@@ -239,8 +238,8 @@ function IsAskedServer($text) {
 	}
 
 	foreach ($servers as $server) {
-		//must be careful with duplicated server name, now not checking.
-		if (strpos(strtolower($text), strtolower($server['name'])) !== false) {		
+		//must be careful with duplicated server name, now set false to all duplicated server name.
+		if (strpos(strtolower($text), strtolower($server['name'])) !== false && $server['name'] != 'PrinterServerS') {		
 			$ip_addr['IsChecked'] = true;
 			$ip_addr['ip_addr'] = $server['ip'];
 			break;
