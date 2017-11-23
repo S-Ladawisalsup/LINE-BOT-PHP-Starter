@@ -128,8 +128,8 @@ if (!is_null($events['events'])) {
 									'type' => 'location',
 									'title' => 'My Location',
 									'address' => 'Bangkok, Thailand',
-									'latitude': 35.65910807942215,
-    								'longitude': 139.70372892916203
+									'latitude' => 35.65910807942215,
+    								'longitude' => 139.70372892916203
 								];
 							}
 							//--------------------------------------------------------
