@@ -25,7 +25,7 @@ function QuestionWordFromDBTB() {
 
 	$db = new PDO($dsn);
 
-	$query = "SELECT id, questiontext, questiontype FROM tbhlinebotwmode WHERE questiontype = '1'";
+	$query = "SELECT id, questiontext, questiontype FROM tbhlinebotwmode WHERE questiontype = '1' OR questiontype = '8'";
 	$result = $db->query($query);
 
 	$qwords = array();
