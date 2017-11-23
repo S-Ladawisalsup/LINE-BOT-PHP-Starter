@@ -15,26 +15,6 @@ function endsWith($haystack, $needle) {
 /**********************************************************************************************************************************/
 /*** Function generates answer as text type, now get answer from array text file by random (cannot connect datatabase now) ***/
 function AnswerBuilder($mood) {
-	//----------------------------------------------------------------
-	// Old Version
-	// switch ($mood) {
-	// 	case 'ans':
-	// 		$answer = file('text/answer.txt');
-	// 		break;		
-	// 	default:
-	// 		$answer = file('text/reply.txt');
-	// 		break;
-	// }
-
-	// $building = 'error';
-	// if (count($answer) > 0) {
-	// 	$numindex = rand(1, count($answer));
-	// 	$building = $answer[$numindex];
-	// 	$building = substr($building, 0, strlen($building)-1);
-	// }
-	// return $building;
-	//----------------------------------------------------------------
-	// New Version
 	if ($mood > 11) {
 		$notepad = file('text/reply.txt');
 		$resultreply = 'ถ้าคุณขับรถบรรทุกคนไป 43 คน เพื่อไปเชียงใหม่ แต่ระหว่างทางคุณรับคนอีก 7 คน เพื่อไปส่งที่ภูเก็ต ถามว่าคนขับชื่ออะไรระหว่าง ควาย กับ หมา?';
@@ -67,7 +47,6 @@ function AnswerBuilder($mood) {
 	$result->closeCursor();
 
 	return $reply[rand(0, count($reply))];
-	//----------------------------------------------------------------
 }
 /**********************************************************************************************************************************/
 /*** Function generates answer as sticker type by random from default sticker(s) by LINE Corp. ***/
