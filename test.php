@@ -9,7 +9,7 @@ echo '<table style="border: 1px solid black; border-collapse: collapse;">
 		</tr></thead>
 		<tbody>';
 foreach ($ggezwp as $key) {
-	echo '<tr><td style="border: 1px solid black; border-collapse: collapse;>' . utf8_encode($key['text']) . '</td>';
+	echo '<tr><td style="border: 1px solid black; border-collapse: collapse;>' . utf8_decode($key['text']) . '</td>';
 	echo '<td style="border: 1px solid black; border-collapse: collapse;>' . $key['type'] . '</td></tr>';
 }		
 echo '</tbody></table>';
