@@ -347,7 +347,7 @@ function GetLocation() {
 	$db = new PDO($dsn);
 
 	// Maybe use where in title column to change result to array 1 direction, but now just random location.
-	$query = 'SELECT id, title, address, latitude, longitude FROM tbhlinebotwmode ORDER BY id ASC'; 
+	$query = 'SELECT id, title, address, latitude, longitude FROM linebotlocation ORDER BY id ASC'; 
 	$result = $db->query($query);
 
 	$locations = array();
