@@ -288,7 +288,7 @@ function GetPingAnswer($ip_address) {
 	$server = array();
 	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 		$server['status'] = htmlspecialchars($row["status"]);
-		$server['timer'] = htmlspecialchars($row["lastchangedatetime"]);
+		$server['timer'] = substr(htmlspecialchars($row["lastchangedatetime"]), 0, 16);
 	}
 	$result->closeCursor();
 
