@@ -84,9 +84,17 @@ Ohter(s) Mode!
 8. It's ping to anther devices or server mode
 9. Greeting word(s) type mode.
 *******************************************************************/
+	//Trim start
+	$text = str_replace(' ', '', $text);
+
 	$QAArray = QuestionWordFromDB();
 	foreach ($QAArray as $keyitems) {
-		if ($keyitems['type'] == 8 || $keyitems['type'] == 9) {
+		if ($keyitems['type'] == 4) {
+			if (startsWith($text, $keyitems['text']) || endsWith($text, $keyitems['text'])) {
+				return $keyitems['type'];
+			}
+		}
+		else if ($keyitems['type'] == 8 || $keyitems['type'] == 9) {
 			if (strpos($text, $keyitems['text']) !== false) {
 				return $keyitems['type'];
 			}
@@ -318,13 +326,18 @@ function InsertDataToDB() {
 					dbname=dfusod038c3j35 
 					user=mmbbbssobrmqjs 
 					password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa");
+	$t = 'text';
+	$result = pg_query($db, "INSERT INTO tbhlinebotans ($t, type) VALUES 
+							('ฉันหน่ะสิ ฉันหน่ะสิ', '11')
+							,('ผมไงจะใครหล่ะ', '11')
+							,('ประยุทธ์', '11')	
+							,('คุณพฤกษ์ครับ', '11')
+							,('พี่ตูน', '11')
+							,('เธอหน่ะแหล่ะ', '11')						
+							;");			
 
-	// $result = pg_query($db, "INSERT INTO tbhlinebotlocname (loc_callname, loc_id) VALUES 
-	// 						('ห้องโปรแกรมเมอร์', '1')							
-	// 						;");//,('ห้อง itsd', '1')			
-
-	$curr_temperature = 24;
-	$result = pg_query($db, "UPDATE tbhlinebottemploc 
-							SET temperature = $curr_temperature
-							WHERE location = 'ITSD Room'");		
+	// $curr_temperature = 24;
+	// $result = pg_query($db, "UPDATE tbhlinebottemploc 
+	// 						SET temperature = $curr_temperature
+	// 						WHERE location = 'ITSD Room'");		
 }
