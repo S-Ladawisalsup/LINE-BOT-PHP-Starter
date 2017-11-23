@@ -35,29 +35,10 @@ if (!is_null($events['events'])) {
 					switch ($typing) {
 						case '1':
 							# code... Yes/No Question => Yes/No Answer
-							if (strpos($text, 'ล่ม') !== false || strpos($text, 'เจ๊ง') !== false || 
-								strpos($text, 'พัง') !== false || strpos($text, 'ดับ') !== false) {
-								$protocal = IsAskedServer($text);
-								if ($protocal['IsChecked']) {
-									$messages = [						
-										'type' => 'text',
-										'text' => $protocal['ip_addr']
-									];	
-									//now get ip for ping ... to be continue
-								}
-								else {
-									$messages = [						
-										'type' => 'text',
-										'text' => 'ไม่มีข้อมูลในระบบ อยากรู้ก็ไป ping เองสิจ๊ะ'
-									];	
-								}
-							}
-							else {
-								$messages = [						
-									'type' => 'text',
-									'text' => AnswerBuilder('ans')
-								];							
-							}
+							$messages = [						
+								'type' => 'text',
+								'text' => AnswerBuilder('ans')
+							];							
 							break;	
 						case '2':
 							# code... When Question => Timer Answer
@@ -82,30 +63,10 @@ if (!is_null($events['events'])) {
 							break;
 						case '5':
 							# code... What/How Question => Reason Answer
-							if (strpos($text, 'สถานะ') !== false || 
-								strpos($text, 'สเตตัส') !== false || 
-								strpos($text, 'status') !== false) {
-								$protocal = IsAskedServer($text);
-								if ($protocal['IsChecked']) {
-									$messages = [						
-										'type' => 'text',
-										'text' => $protocal['ip_addr']
-									];	
-									//now get ip for ping ... to be continue
-								}
-								else {
-									$messages = [						
-										'type' => 'text',
-										'text' => 'ไม่มีข้อมูลในระบบ อยากรู้ก็ไป ping เองสิจ๊ะ'
-									];	
-								}
-							}
-							else {
-								$messages = [						
-									'type' => 'text',
-									'text' => AnswerBuilder('ans')
-								];							
-							}
+							$messages = [						
+								'type' => 'text',
+								'text' => AnswerBuilder('ans')
+							];							
 							break;
 						case '6':
 							# code... Which Question => Object Answer
@@ -131,11 +92,20 @@ if (!is_null($events['events'])) {
 							break;	
 						case '8':
 							# ping mode
-
-							$messages = [						
-								'type' => 'text',
-								'text' => 'ไป ping เองสิจ๊ะ'
-							];
+							$protocal = IsAskedServer($text);
+							if ($protocal['IsChecked']) {
+								$messages = [						
+									'type' => 'text',
+									'text' => $protocal['ip_addr']
+								];	
+								//now get ip for ping ... to be continue
+							}
+							else {
+								$messages = [						
+									'type' => 'text',
+									'text' => 'ไม่มีข้อมูลในระบบจ้า อยากรู้ก็ไป ping เองสิจ๊ะ'
+								];	
+							}
 							break;		
 						case '9':
 							# greeting mode

@@ -92,7 +92,10 @@ Ohter(s) Mode!
 			}
 		}
 		else if (endsWith($text, $keyitems['text'])) {
-			if ($keyitems['type'] == 1 && strpos($text, 'ล่ม') !== false) {
+			if (($keyitems['type'] == 1 && (strpos($text, 'ล่ม') !== false || strpos($text, 'เจ๊ง') !== false || 
+										    strpos($text, 'พัง') !== false || strpos($text, 'ดับ') !== false)) || 
+				($keyitems['type'] == 5 && (strpos($text, 'สถานะ') !== false || strpos($text, 'สเตตัส') !== false || 
+										   	strpos($text, 'status') !== false))) {
 				return 8;
 			}
 			else {
@@ -163,7 +166,7 @@ function GetTemperature($text) {
 		}
 	}
 
-	$tempresult = 'ไม่มี' . $curr_locname . 'น๊ะจ๊ะ อยากรู้เดินไปดูเองเลยจ้า';
+	$tempresult = 'ไม่มีที่ ' . $curr_locname . ' น๊ะจ๊ะ อยากรู้เดินไปดูเองเลยจ้า';
 	if ($curr_place != 0) {
 		$query_locnametemp = "SELECT temperature, lastchangedatetime AT TI"
 							."ME ZONE 'UTC+7' as lastchangedatetime FROM tbhlinebottemploc WHERE id = $curr_place";
@@ -265,6 +268,45 @@ function IsAskedServer($text) {
 	}
 
 	return $ip_addr;
+}
+/**********************************************************************************************************************************/
+function GetPingAnswer($ip_address) {
+	$dsn = 'pgsql:'
+		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
+		. 'dbname=dfusod038c3j35;'
+		. 'user=mmbbbssobrmqjs;'
+		. 'port=5432;'
+		. 'sslmode=require;'
+		. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
+
+	$db = new PDO($dsn);
+
+	$query = "SELECT status, lastchangedatetime FROM tbhlinebotserv WHERE ip_addr = '$ip_address'";
+	$result = $db->query($query);
+
+	$server = array();
+	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+		$server['status'] = htmlspecialchars($row["status"]);
+		$server['timer'] = htmlspecialchars($row["lastchangedatetime"]);
+	}
+	$result->closeCursor();
+
+	$normally = ($server['status'] == 'ON') ? ' ปกติดีจ้า' : ' น่าจะมีปัญหาแล้วหล่ะ กำลังติดต่อผู้เกี่ยวข้องให้แก้ไขอยู่น้า ใจเย็นๆน้า อารมณ์เสียมากๆ เดี๋ยวแก่เร็วนะ';
+	$pingresult = 'เค้าไม่ว่างอ่ะตัวเอง';
+	if (substr($server['timer'], 0, 10) == date("Y-m-d")) {
+		//lastchangedatetime == datenow, tell only time
+		$previous_time = substr($server['timer'], 11);
+		$previous_time = str_replace(':', '.', $previous_time);
+		$pingresult = 'ล่าสุดเมื่อเวลา ' . $previous_time . 'น. เซิฟเวอร์ ' . $ip_address . $normally;
+	}
+	else {
+		//lastchangedatetime != datenow, tell date and time
+		$previous_date = date("d/m/Y", strtotime(substr($server['timer'], 0, 10)));
+		$previous_time = substr($server['timer'], 11);
+		$previous_time = str_replace(':', '.', $previous_time);
+		$pingresult = 'ล่าสุดเมื่อเวลา ' . $previous_time . 'น. เซิฟเวอร์ ' . $ip_address . $normally;
+	}
+	return $pingresult;
 }
 /**********************************************************************************************************************************/
 //Function to insert data to postgresql database to easier than insert data to database by terminal
