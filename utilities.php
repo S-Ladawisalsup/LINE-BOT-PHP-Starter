@@ -281,7 +281,8 @@ function GetPingAnswer($ip_address) {
 
 	$db = new PDO($dsn);
 
-	$query = "SELECT status, lastchangedatetime FROM tbhlinebotserv WHERE ip_addr = '$ip_address'";
+	$query = "SELECT status, lastchangedatetime AT TI"
+							."ME ZONE 'UTC+7' as lastchangedatetime FROM tbhlinebotserv WHERE ip_addr = '$ip_address'";
 	$result = $db->query($query);
 
 	$server = array();
