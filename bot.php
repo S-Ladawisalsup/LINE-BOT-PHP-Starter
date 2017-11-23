@@ -96,9 +96,8 @@ if (!is_null($events['events'])) {
 							if ($protocal['IsChecked']) {
 								$messages = [						
 									'type' => 'text',
-									'text' => $protocal['ip_addr']
+									'text' => GetPingAnswer($protocal['ip_addr'])
 								];	
-								//now get ip for ping ... to be continue
 							}
 							else {
 								$messages = [						
