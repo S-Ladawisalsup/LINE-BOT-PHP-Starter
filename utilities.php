@@ -17,46 +17,56 @@ function endsWith($haystack, $needle) {
 function AnswerBuilder($mood) {
 	//----------------------------------------------------------------
 	// Old Version
-	switch ($mood) {
-		case 'ans':
-			$answer = file('text/answer.txt');
-			break;		
-		default:
-			$answer = file('text/reply.txt');
-			break;
-	}
+	// switch ($mood) {
+	// 	case 'ans':
+	// 		$answer = file('text/answer.txt');
+	// 		break;		
+	// 	default:
+	// 		$answer = file('text/reply.txt');
+	// 		break;
+	// }
 
-	$building = 'error';
-	if (count($answer) > 0) {
-		$numindex = rand(1, count($answer));
-		$building = $answer[$numindex];
-		$building = substr($building, 0, strlen($building)-1);
-	}
-	return $building;
+	// $building = 'error';
+	// if (count($answer) > 0) {
+	// 	$numindex = rand(1, count($answer));
+	// 	$building = $answer[$numindex];
+	// 	$building = substr($building, 0, strlen($building)-1);
+	// }
+	// return $building;
 	//----------------------------------------------------------------
 	// New Version
-	// $dsn = 'pgsql:'
-	// 	. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
-	// 	. 'dbname=dfusod038c3j35;'
-	// 	. 'user=mmbbbssobrmqjs;'
-	// 	. 'port=5432;'
-	// 	. 'sslmode=require;'
-	// 	. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
+	if ($mood > 11) {
+		$notepad = file('text/reply.txt');
+		$resultreply = 'ถ้าคุณขับรถบรรทุกคนไป 43 คน เพื่อไปเชียงใหม่ แต่ระหว่างทางคุณรับคนอีก 7 คน เพื่อไปส่งที่ภูเก็ต ถามว่าคนขับชื่ออะไรระหว่าง ควาย กับ หมา?';
+		if (count($notepad) > 0) {
+			$resultreply = $notepad[rand(1, count($notepad))];
+			$resultreply = substr($resultreply, 0, strlen($resultreply)-1);
+		}
+		return $resultreply;
+	}
 
-	// $db = new PDO($dsn);
-	// $word = 'text';
-	// $query = "SELECT $word FROM tbhlinebotans WHERE type = '$mood'";
-	// $result = $db->query($query);
+	$dsn = 'pgsql:'
+		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
+		. 'dbname=dfusod038c3j35;'
+		. 'user=mmbbbssobrmqjs;'
+		. 'port=5432;'
+		. 'sslmode=require;'
+		. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
 
-	// $reply = array();
-	// $index = 0;
-	// while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-	//     $reply[$index] = htmlspecialchars($row["text"]);
-	//     $index = $index + 1;
-	// }
-	// $result->closeCursor();
+	$db = new PDO($dsn);
+	$word = 'text';
+	$query = "SELECT $word FROM tbhlinebotans WHERE type = '$mood'";
+	$result = $db->query($query);
 
-	// return $reply[rand(0, count($reply))];
+	$reply = array();
+	$index = 0;
+	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+	    $reply[$index] = htmlspecialchars($row["text"]);
+	    $index = $index + 1;
+	}
+	$result->closeCursor();
+
+	return $reply[rand(0, count($reply))];
 	//----------------------------------------------------------------
 }
 /**********************************************************************************************************************************/

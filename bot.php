@@ -37,42 +37,42 @@ if (!is_null($events['events'])) {
 							# code... Yes/No Question => Yes/No Answer
 							$messages = [						
 								'type' => 'text',
-								'text' => AnswerBuilder('ans')
+								'text' => AnswerBuilder(10)
 							];							
 							break;	
 						case '2':
 							# code... When Question => Timer Answer
 							$messages = [						
 								'type' => 'text',
-								'text' => AnswerBuilder('ans')
+								'text' => AnswerBuilder(10)
 							];
 							break;
 						case '3':
 							# code... Where Question => Location Answer
 							$messages = [						
 								'type' => 'text',
-								'text' => AnswerBuilder('ans')
+								'text' => AnswerBuilder(10)
 							];
 							break;
 						case '4':
 							# code... Who Question => Personal Answer
 							$messages = [						
 								'type' => 'text',
-								'text' => AnswerBuilder('ans')
+								'text' => AnswerBuilder(11)
 							];
 							break;
 						case '5':
 							# code... What/How Question => Reason Answer
 							$messages = [						
 								'type' => 'text',
-								'text' => AnswerBuilder('ans')
+								'text' => AnswerBuilder(10)
 							];							
 							break;
 						case '6':
 							# code... Which Question => Object Answer
 							$messages = [						
 								'type' => 'text',
-								'text' => AnswerBuilder('ans')
+								'text' => AnswerBuilder(10)
 							];
 							break;
 						case '7':
@@ -86,7 +86,7 @@ if (!is_null($events['events'])) {
 							else {
 								$messages = [						
 									'type' => 'text',
-									'text' => AnswerBuilder('ans')
+									'text' => AnswerBuilder(10)
 								];							
 							}
 							break;	
@@ -130,7 +130,7 @@ if (!is_null($events['events'])) {
 								// Build message to reply back
 								$messages = [						
 									'type' => 'text',
-									'text' => AnswerBuilder('res')
+									'text' => AnswerBuilder(12)
 								];	
 							}  
 							break;
