@@ -343,15 +343,10 @@ function InsertDataToDB() {
 					dbname=dfusod038c3j35 
 					user=mmbbbssobrmqjs 
 					password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa");
-	$t = 'text';
-	$result = pg_query($db, "INSERT INTO tbhlinebotans ($t, type) VALUES 
-							('ไม่รู้จ้า', '10')
-							,('ไม่รู้สิจ๊ะ', '10')
-							,('ก็ไม่รู้สินะ', '10')	
-							,('ไม่รู้ว้อยยย', '10')
-							,('เค้าขอโทษ เค้าไม่รู้ T_T', '10')
-							,('จะถามคนอื่นทำไมหล่ะ ลองถามใจตัวเธอเองดูสิ', '10')						
-							;");			
+
+	$result = pg_query($db, "INSERT INTO linebotlocation (title, address, latitude, longitude) VALUES 
+							('โรงพยาบาล ธนบุรี', '34/1 แขวง บ้านช่างหล่อ เขต บางกอกน้อย กรุงเทพมหานคร 10700', '13.7529', '100.4797')	
+							;");//,('โรงพยาบาล ธนบุรี', '34/1 แขวง บ้านช่างหล่อ เขต บางกอกน้อย กรุงเทพมหานคร 10700', '13.7529', '100.4797')		
 
 	// $curr_temperature = 24;
 	// $result = pg_query($db, "UPDATE tbhlinebottemploc 
