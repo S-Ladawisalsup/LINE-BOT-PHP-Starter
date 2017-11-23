@@ -35,7 +35,8 @@ if (!is_null($events['events'])) {
 					switch ($typing) {
 						case '1':
 							# code... Yes/No Question => Yes/No Answer
-							if (strpos($text, 'ล่ม') !== false || strpos($text, 'เจ๊ง') !== false || strpos($text, 'พัง') !== false) {
+							if (strpos($text, 'ล่ม') !== false || strpos($text, 'เจ๊ง') !== false || 
+								strpos($text, 'พัง') !== false || strpos($text, 'ดับ') !== false) {
 								$protocal = IsAskedServer($text);
 								if ($protocal['IsChecked']) {
 									$messages = [						
@@ -130,7 +131,7 @@ if (!is_null($events['events'])) {
 							break;	
 						case '8':
 							# ping mode
-							
+
 							$messages = [						
 								'type' => 'text',
 								'text' => 'ไป ping เองสิจ๊ะ'
