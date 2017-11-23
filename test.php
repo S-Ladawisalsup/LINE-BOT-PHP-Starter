@@ -25,15 +25,18 @@ function QuestionWordFromDBTB() {
 
 	$db = new PDO($dsn);
 
-	$query = "SELECT id, questiontext, questiontype FROM tbhlinebotwmode WHERE questiontype = '4'";//" OR questiontype = '8'";
+	$t = 'text';
+
+	//$query = "SELECT id, questiontext, questiontype FROM tbhlinebotwmode WHERE questiontype = '4'";//" OR questiontype = '8'";
+	$query = "SELECT id, $t, type FROM tbhlinebotans WHERE type = '11'";
 	$result = $db->query($query);
 
 	$qwords = array();
 	$index = 0;
 	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 	    $qwords[$index] = array();
-		$qwords[$index]['text'] = htmlspecialchars($row["questiontext"]);
-		$qwords[$index]['type'] = htmlspecialchars($row["questiontype"]);
+		$qwords[$index]['text'] = htmlspecialchars($row["$t"]);//questiontext"]);
+		$qwords[$index]['type'] = htmlspecialchars($row["type"]);//questiontype"]);
 		$index = $index + 1;
 	}
 	$result->closeCursor();
