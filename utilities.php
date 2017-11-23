@@ -305,7 +305,7 @@ function GetPingAnswer($ip_address) {
 		$previous_date = date("d/m/Y", strtotime(substr($server['timer'], 0, 10)));
 		$previous_time = substr($server['timer'], 11);
 		$previous_time = str_replace(':', '.', $previous_time);
-		$pingresult = 'ล่าสุดเมื่อเวลา ' . $previous_time . 'น. เซิฟเวอร์ ' . $ip_address . $normally;
+		$pingresult = 'ล่าสุดเมื่อวันที่ ' . $previous_date . ' เวลา ' . $previous_time . 'น. เซิฟเวอร์ ' . $ip_address . $normally;
 	}
 	return $pingresult;
 }
