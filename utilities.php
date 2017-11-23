@@ -220,33 +220,47 @@ function IsAskedServer($text) {
 	}
 	$result->closeCursor();
 
-	$serv_iden = array('0' => 'เบอร์',
-					   '1' => '100.',
-					   '2' => '101.',
-					   '3' => '102.',
-					   '4' => '20.');
+	$serv_iden = array('0' => '20.',  //<-- these case and other check string after str_replace 192.1. and . until result 5-6 digit num
+					   '1' => '100.', //
+					   '2' => '101.', // 
+					   '3' => '102.', //
+					   '4' => 'เบอร์'); //<-- only this case check server['lip']
 
-	$ip_req = 1000;
+	$ip_req = 1000000;
 	for ($iden = 0; $iden <= 4; $iden++) {
 		if (strpos($text, $serv_iden[$iden]) !== false) {
-			$tmptext = str_replace($serv_iden[$iden], '', $text);
-			$tmptext = str_replace('192.1.', '', $tmptext);
-			for ($i = 1; $i <= 4; $i++) {
-				$tmptext = str_replace($serv_iden[$i], '', $tmptext);
-			}
+			$tmptext = str_replace('192.1.', '', $text);
+			$tmptext = str_replace('.', '', $tmptext);
 			preg_match_all('!\d+\.*\d*!', $tmptext, $matches);
 			$val = $matches[0];
 			$ip_req = $val[0];
-			break;
 		}
 	}
 
 	foreach ($servers as $server) {
 		//must be careful with duplicated server name, now not checking.
-		if (strpos(strtolower($text), strtolower($server['name'])) !== false || $ip_req == $server['lip']) {		
+		if (strpos(strtolower($text), strtolower($server['name'])) !== false) {		
 			$ip_addr['IsChecked'] = true;
 			$ip_addr['ip_addr'] = $server['ip'];
 			break;
+		}
+		else if ($ip_req < 1000000) {
+			if ($ip_req < 1000) {
+				if ($ip_req == $server['lip']) {
+					$ip_addr['IsChecked'] = true;
+					$ip_addr['ip_addr'] = $server['ip'];
+					break;
+				}
+			}
+			else {
+				$tempip = str_replace('192.1.', '', $server['ip']);
+				$tempip = str_replace('.', '', $tempip);
+				if ($ip_req == $tempip) {
+					$ip_addr['IsChecked'] = true;
+					$ip_addr['ip_addr'] = $server['ip'];
+					break;
+				}
+			}
 		}
 	}
 
