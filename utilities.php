@@ -335,6 +335,42 @@ function GetPingAnswer($ip_address) {
 	return $pingresult;
 }
 /**********************************************************************************************************************************/
+function GetLocation() {
+	$dsn = 'pgsql:'
+		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
+		. 'dbname=dfusod038c3j35;'
+		. 'user=mmbbbssobrmqjs;'
+		. 'port=5432;'
+		. 'sslmode=require;'
+		. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
+
+	$db = new PDO($dsn);
+
+	// Maybe use where in title column to change result to array 1 direction, but now just random location.
+	$query = 'SELECT id, title, address, latitude, longitude FROM tbhlinebotwmode ORDER BY id ASC'; 
+	$result = $db->query($query);
+
+	$locations = array();
+	$index = 0;
+	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+	    $locations[$index] = array();
+		$locations[$index]['title'] = htmlspecialchars($row["title"]);
+		$locations[$index]['address'] = htmlspecialchars($row["address"]);
+		$locations[$index]['latitude'] = htmlspecialchars($row["latitude"]);
+		$locations[$index]['longitude'] = htmlspecialchars($row["longitude"]);
+		$index = $index + 1;
+	}
+	$result->closeCursor();
+
+	$randnum = rand(0, $index-1);
+	$location = array('title'     => $locations[$randnum]['title'],
+					  'address'   => $locations[$randnum]['address'],
+					  'latitude'  => $locations[$randnum]['latitude'],
+					  'longitude' => $locations[$randnum]['longitude']);
+
+	return $location;
+}
+/**********************************************************************************************************************************/
 //Function to insert data to postgresql database to easier than insert data to database by terminal
 function InsertDataToDB() {
 

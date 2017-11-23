@@ -49,10 +49,22 @@ if (!is_null($events['events'])) {
 							break;
 						case '3':
 							# code... Where Question => Location Answer
-							$messages = [						
-								'type' => 'text',
-								'text' => AnswerBuilder(10)
-							];
+							$locate = GetLocation();
+							if ($locate != null) {
+								$messages = [						
+									'type' => 'location',
+									'title' => $locate['title'],
+									'address' => $locate['address'],
+									'latitude' => $locate['latitude'],
+									'longitude' => $locate['longitude']
+								];
+							}
+							else {
+								$messages = [						
+									'type' => 'text',
+									'text' => AnswerBuilder(10)
+								];
+							}
 							break;
 						case '4':
 							# code... Who Question => Personal Answer
@@ -124,13 +136,6 @@ if (!is_null($events['events'])) {
 									'type' => 'text',
 									'text' => 'ลองบันทึกข้อมูลเรียบร้อย ลองไปดูใน database สิจ๊ะ'
 								];
-								// $messages = [						
-								// 	'type' => 'location',
-								// 	'title' => 'My Location',
-								// 	'address' => 'Bangkok, Thailand',
-								// 	'latitude' => 35.65910807942215,
-    				// 				'longitude' => 139.70372892916203
-								// ];
 							}
 							//--------------------------------------------------------
 							else {
