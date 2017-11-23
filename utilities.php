@@ -380,13 +380,9 @@ function InsertDataToDB() {
 					user=mmbbbssobrmqjs 
 					password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa");
 
-	// $result = pg_query($db, "INSERT INTO linebotlocation (title, address, latitude, longitude) VALUES 
-	// 						('ป่า พริตตี้', 'ป่า พริตตี้ 87/8 ถนน บรมราชชนนี แขวง อรุณอมรินทร์ เขต บางกอกน้อย กรุงเทพมหานคร 10700', '13.768109', '100.484648')	
-	// 						;");//,('โรงพยาบาล ธนบุรี', '34/1 แขวง บ้านช่างหล่อ เขต บางกอกน้อย กรุงเทพมหานคร 10700', '13.7529', '100.4797')		
-
-	$result = pg_query($db, "INSERT INTO tbhlinebotwmode (questiontext, questiontype) VALUES 
-						('ไหน', '3')	
-						;");//,('โรงพยาบาล ธนบุรี', '34/1 แขวง บ้านช่างหล่อ เขต บางกอกน้อย กรุงเทพมหานคร 10700', '13.7529', '100.4797')	
+	$result = pg_query($db, "INSERT INTO linebotlocation (title, address, latitude, longitude) VALUES 
+							('วัดชิโนรสาราม วรวิหาร', 'วัดชิโนรสาราม วรวิหาร แขวง บ้านช่างหล่อ เขต บางกอกน้อย กรุงเทพมหานคร 10700', '13.746385', '100.479674')	
+							;");//,('โรงพยาบาล ธนบุรี', '34/1 แขวง บ้านช่างหล่อ เขต บางกอกน้อย กรุงเทพมหานคร 10700', '13.7529', '100.4797')		
 
 	// $result = pg_query($db, "UPDATE tbhlinebotwmode 
 	// 						SET address = 'โรงพยาบาล ธนบุรี 34/1 แขวง บ้านช่างหล่อ เขต บางกอกน้อย กรุงเทพมหานคร 10700'
