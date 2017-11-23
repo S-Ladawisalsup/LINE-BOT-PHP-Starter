@@ -267,7 +267,8 @@ function IsAskedServer($text) {
 
 	foreach ($servers as $server) {
 		//must be careful with duplicated server name, now set false to all duplicated server name.
-		if (strpos(strtolower($text), strtolower($server['name'])) !== false && $server['name'] != 'PrinterServerS') {		
+		if (strpos(strtolower($text), strtolower($server['name'])) !== false && 
+			($server['name'] != 'PrinterServerS' || $server['name'] != 'SERVER')) {		
 			$ip_addr['IsChecked'] = true;
 			$ip_addr['ip_addr'] = $server['ip'];
 			break;
