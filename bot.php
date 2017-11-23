@@ -118,11 +118,18 @@ if (!is_null($events['events'])) {
 						default:
 							//--------------------------------------------------------
 							// Test case to insert data to postgresql database.
-							if (strpos($text, 'addreply') !== false) {
+							if (strpos($text, 'testlocate') !== false) {
 								//InsertDataToDB();
+								// $messages = [						
+								// 	'type' => 'text',
+								// 	'text' => 'ลองบันทึกข้อมูลเรียบร้อย ลองไปดูใน database สิจ๊ะ'
+								// ];
 								$messages = [						
-									'type' => 'text',
-									'text' => 'ลองบันทึกข้อมูลเรียบร้อย ลองไปดูใน database สิจ๊ะ'
+									'type' => 'location',
+									'title' => 'My Location',
+									'address' => 'Bangkok, Thailand',
+									'latitude': 35.65910807942215,
+    								'longitude': 139.70372892916203
 								];
 							}
 							//--------------------------------------------------------

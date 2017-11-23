@@ -1,5 +1,20 @@
 <?php
-
+/*******************************************************************
+NOTE!
+Question has 7 formats!
+1. "yes/no" question 
+2. "when" question (will answer as timing) 
+3. "where" qusetion (will answer as location)
+4. "who" question (will answer as person)
+5. "what/how" question (will answer as reason)
+6. "which" question (will answer as object) 
+7. "how+.." question (will answer as number)
+Ohter(s) Mode!
+8. It's ping to anther devices or server mode
+9. Greeting word(s) type mode.
+10. Refuse as answer in all response mode.
+11. Person mode for answer who's question.
+*******************************************************************/
 date_default_timezone_set("Asia/Bangkok");
 /**********************************************************************************************************************************/
 /*** Function for check word(s) contain(s) start or end at string. ***/
@@ -86,22 +101,6 @@ function GetSticker() {
 }
 /**********************************************************************************************************************************/
 function findQuestionType ($text) {
-/*******************************************************************
-NOTE!
-Question has 7 formats!
-1. "yes/no" question 
-2. "when" question (will answer as timing) 
-3. "where" qusetion (will answer as location)
-4. "who" question (will answer as person)
-5. "what/how" question (will answer as reason)
-6. "which" question (will answer as object) 
-7. "how+.." question (will answer as number)
-Ohter(s) Mode!
-8. It's ping to anther devices or server mode
-9. Greeting word(s) type mode.
-10. Refuse as answer in all response mode.
-11. Person mode for answer who's question.
-*******************************************************************/
 	//Trim start
 	$text = str_replace(' ', '', $text);
 
