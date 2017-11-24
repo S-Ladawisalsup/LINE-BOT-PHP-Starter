@@ -194,7 +194,7 @@ if (!is_null($events['events'])) {
 	}
 }
 
-if ((date('m') % 8 == 0) && (date('s') % 60 == 0) && $justonce) {
+if ((date('i') % 11 == 0) && (date('s') % 60 == 0) && $justonce) {
 	$messages = [						
 		'type' => 'text',
 		'text' => 'อยากอกหัก...แต่อุปสรรคดันอยู่ที่หน้าตา เห้อออ'
