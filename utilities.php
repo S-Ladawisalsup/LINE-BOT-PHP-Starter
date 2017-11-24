@@ -394,9 +394,10 @@ function InsertDataToDB() {
 	// 						;");//		
 
 	//now id 36-39 is empty
-	$result = pg_query($db, "INSERT INTO tbhlinebotwmode (id, questiontext, questiontype) VALUES 
-						(34, 'ท่านผู้นำคิม จอง อึน ไง', '11')
-						,(35, 'ฉัตร', '11')	
+	$t = 'text';
+	$result = pg_query($db, "INSERT INTO tbhlinebotans ($t, type) VALUES 
+						('ท่านผู้นำคิม จอง อึน ไง', '11'
+						,('ฉัตร', '11')	
 						;");//
 
 	// $result = pg_query($db, "UPDATE tbhlinebotwmode 
