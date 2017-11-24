@@ -387,11 +387,11 @@ function InsertDataToDB() {
 					user=mmbbbssobrmqjs 
 					password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa");
 
-	$result = pg_query($db, "INSERT INTO linebotlocation (title, address, latitude, longitude) VALUES 
-							('The Bank Massage Club', 'The Bank Massage Club 14/1 ถนนเพชรบุรีตัดใหม่ ซอย เพชรบุรี 47 แขวง บางกะปิ เขต ห้วยขวาง กรุงเทพมหานคร 10310', '13.748486', '100.593094')	
-							,('Poseidon Entertainment Complex', 'Poseidon Entertainment Complex 88 สุขร่วมกัน แขวง ดินแดง เขต ดินแดง กรุงเทพมหานคร 10400', '13.785326', '100.573670')
-							,('Alaina', 'Alaina ซอย รัชดาภิเษก 7 ถนนรัชดาภิเษก แขวง ดินแดง เขต ดินแดง กรุงเทพมหานคร 10400', '13.772270', '100.573075')
-							;");//		
+	// $result = pg_query($db, "INSERT INTO linebotlocation (title, address, latitude, longitude) VALUES 
+	// 						('The Bank Massage Club', 'The Bank Massage Club 14/1 ถนนเพชรบุรีตัดใหม่ ซอย เพชรบุรี 47 แขวง บางกะปิ เขต ห้วยขวาง กรุงเทพมหานคร 10310', '13.748486', '100.593094')	
+	// 						,('Poseidon Entertainment Complex', 'Poseidon Entertainment Complex 88 สุขร่วมกัน แขวง ดินแดง เขต ดินแดง กรุงเทพมหานคร 10400', '13.785326', '100.573670')
+	// 						,('Alaina', 'Alaina ซอย รัชดาภิเษก 7 ถนนรัชดาภิเษก แขวง ดินแดง เขต ดินแดง กรุงเทพมหานคร 10400', '13.772270', '100.573075')
+	// 						;");//		
 
 	//now id 34-39 is empty
 	// $result = pg_query($db, "INSERT INTO tbhlinebotwmode (id, questiontext, questiontype) VALUES 
@@ -399,7 +399,7 @@ function InsertDataToDB() {
 	// 					,(33, 'ปิง', '8')	
 	// 					;");
 
-	// $result = pg_query($db, "UPDATE tbhlinebotwmode 
-	// 						SET questiontext = 'เช็คสถานะserver'
-	// 						WHERE id = '1'");//'ตรวจสอบสถานะserver'		
+	$result = pg_query($db, "UPDATE tbhlinebotwmode 
+							SET questiontext = 'server'
+							WHERE id = '32'");//'ตรวจสอบสถานะserver'		
 }

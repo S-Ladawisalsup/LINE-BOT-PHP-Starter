@@ -15,7 +15,6 @@ foreach ($ggezwp as $key) {
 echo '</tbody></table><br />';
 
 
-
 function QuestionWordFromDBTB() {
 	$dsn = 'pgsql:'
 		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
@@ -27,18 +26,16 @@ function QuestionWordFromDBTB() {
 
 	$db = new PDO($dsn);
 
-	$t = 'text';
-
-	$query = "SELECT questiontext, questiontype FROM tbhlinebotwmode WHERE questiontype = '8'";//" OR questiontype = '8'";
-	//$query = "SELECT $t, type FROM tbhlinebotans WHERE type = '10'";
+	//$query = "SELECT questiontext, questiontype FROM tbhlinebotwmode WHERE questiontype = '8'";//" OR questiontype = '8'";
+	$query = "SELECT $t, type FROM tbhlinebotans WHERE type = '11'";
 	$result = $db->query($query);
 
 	$words = array();
 	$index = 0;
 	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 	    $words[$index] = array();
-		$words[$index]['text'] = htmlspecialchars($row["questiontext"]);//
-		$words[$index]['type'] = htmlspecialchars($row["questiontype"]);//
+		$words[$index]['text'] = htmlspecialchars($row["text"]);//question
+		$words[$index]['type'] = htmlspecialchars($row["type"]);//question
 		$index = $index + 1;
 	}
 	$result->closeCursor();
