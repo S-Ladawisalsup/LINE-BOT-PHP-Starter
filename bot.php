@@ -130,12 +130,26 @@ if (!is_null($events['events'])) {
 						default:
 							//--------------------------------------------------------
 							// Test case to insert data to postgresql database.
-							if (strpos($text, 'testmultiplereply') !== false) {
-								InsertDataToDB();
-								$messages = [						
-									'type' => 'text',
-									'text' => 'ลองบันทึกข้อมูลเรียบร้อย ลองไปดูใน database สิจ๊ะ'
-								];
+							if (strpos($text, 'ที่นี้โรงพยาบาลชั้นนำ') !== false) {
+								//InsertDataToDB();
+								if ($event['source']['type'] == 'group') {
+									$messages = [						
+										'type' => 'text',
+										'text' => 'g/' . $event['source']['groupId']
+									];
+								}
+								else if ($event['source']['type'] == 'room') {
+									$messages = [						
+										'type' => 'text',
+										'text' => 'r/' . $event['source']['roomId']
+									];
+								}
+								else {
+									$messages = [						
+										'type' => 'text',
+										'text' => 'u/' . $event['source']['userId']
+									];
+								}
 							}
 							//--------------------------------------------------------
 							else {
