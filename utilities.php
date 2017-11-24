@@ -101,7 +101,7 @@ function GetSticker() {
 }
 /**********************************************************************************************************************************/
 function findQuestionType ($text) {
-	//Trim start
+	//Trim all space ' '
 	$text = str_replace(' ', '', $text);
 
 	$QAArray = QuestionWordFromDB();
@@ -381,11 +381,16 @@ function InsertDataToDB() {
 					user=mmbbbssobrmqjs 
 					password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa");
 
-	$result = pg_query($db, "INSERT INTO linebotlocation (title, address, latitude, longitude) VALUES 
-							('วัดชิโนรสาราม วรวิหาร', 'วัดชิโนรสาราม วรวิหาร แขวง บ้านช่างหล่อ เขต บางกอกน้อย กรุงเทพมหานคร 10700', '13.746385', '100.479674')	
-							;");//,('โรงพยาบาล ธนบุรี', '34/1 แขวง บ้านช่างหล่อ เขต บางกอกน้อย กรุงเทพมหานคร 10700', '13.7529', '100.4797')		
+	// $result = pg_query($db, "INSERT INTO linebotlocation (title, address, latitude, longitude) VALUES 
+	// 						('วัดชิโนรสาราม วรวิหาร', 'วัดชิโนรสาราม วรวิหาร แขวง บ้านช่างหล่อ เขต บางกอกน้อย กรุงเทพมหานคร 10700', '13.746385', '100.479674')	
+	// 						;");//,('โรงพยาบาล ธนบุรี', '34/1 แขวง บ้านช่างหล่อ เขต บางกอกน้อย กรุงเทพมหานคร 10700', '13.7529', '100.4797')		
+
+	$result = pg_query($db, "INSERT INTO tbhlinebotwmode (id, questiontext, questiontype) VALUES 
+						(32, 'ping', '8')
+						,(33, 'ปิง', '8')	
+						;");
 
 	// $result = pg_query($db, "UPDATE tbhlinebotwmode 
-	// 						SET address = 'โรงพยาบาล ธนบุรี 34/1 แขวง บ้านช่างหล่อ เขต บางกอกน้อย กรุงเทพมหานคร 10700'
-	// 						WHERE id = '1'");		
+	// 						SET questiontext = 'เช็คสถานะserver'
+	// 						WHERE id = '1'");//'ตรวจสอบสถานะserver'		
 }
