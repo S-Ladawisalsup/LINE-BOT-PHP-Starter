@@ -111,6 +111,14 @@ function findQuestionType ($text) {
 				return $keyitems['type'];
 			}
 		}
+		else if ($keyitems['type'] == 5) {
+			if (strpos($text, 'สถานะ') !== false || strpos($text, 'สเตตัส') !== false || strpos($text, 'status') !== false) {
+				return 8;
+			}
+			else if (startsWith($text, $keyitems['text']) || endsWith($text, $keyitems['text'])) {
+				return $keyitems['type'];
+			} 
+		}  
 		else if ($keyitems['type'] == 8 || $keyitems['type'] == 9) {
 			if (strpos($text, $keyitems['text']) !== false) {
 				return $keyitems['type'];
@@ -118,9 +126,7 @@ function findQuestionType ($text) {
 		}
 		else if (endsWith($text, $keyitems['text'])) {
 			if (($keyitems['type'] == 1 && (strpos($text, 'ล่ม') !== false || strpos($text, 'เจ๊ง') !== false || 
-										    strpos($text, 'พัง') !== false || strpos($text, 'ดับ') !== false)) || 
-				($keyitems['type'] == 5 && (strpos($text, 'สถานะ') !== false || strpos($text, 'สเตตัส') !== false || 
-										   	strpos($text, 'status') !== false))) {
+										    strpos($text, 'พัง') !== false || strpos($text, 'ดับ') !== false))) {
 				return 8;
 			}
 			else {
