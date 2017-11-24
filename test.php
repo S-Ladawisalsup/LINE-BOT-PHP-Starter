@@ -1,6 +1,6 @@
 <?php
 //(หนอนน้อยในพงไพร)groupId = Ca35db1d5c584c6467d717df89a0302ec
-
+date_default_timezone_set("Asia/Bangkok");
 $ggezwp = QuestionWordFromDBTB();
 
 echo '<table style="border: 1px solid black; border-collapse: collapse;">
@@ -14,7 +14,7 @@ foreach ($ggezwp as $key) {
 	echo '<td style="border: 1px solid black; border-collapse: collapse;">' . $key['type'] . '</td></tr>';
 }		
 echo '</tbody></table><br />';
-
+echo date('i') . ':' date('s');
 
 function QuestionWordFromDBTB() {
 	$dsn = 'pgsql:'
