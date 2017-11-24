@@ -395,16 +395,16 @@ function InsertDataToDB() {
 
 	//now id 34-39 is empty
 	$t = 'text';
-	$result = pg_query($db, "INSERT INTO tbhlinebotans ($t, type) VALUES 
-						('อีก 2 ปี', '12')
-						,('คืนนี้แหล่ะ อยากได้กี่ครั้งหล่ะ', '12')	
-						,('ไม่มีวันซะหรอก', '12')
-						,('ชาติหน้าตอนบ่ายๆอ่ะ', '12')
-						,('ชีวิตยังมีพรุ่งนี้เสมออออ...', '12')
-						,('หลังเซเว่นปิดอ่ะ', '12')
-						;");//
+	// $result = pg_query($db, "INSERT INTO tbhlinebotans ($t, type) VALUES 
+	// 					('อีก 2 ปี', '12')
+	// 					,('คืนนี้แหล่ะ อยากได้กี่ครั้งหล่ะ', '12')	
+	// 					,('ไม่มีวันซะหรอก', '12')
+	// 					,('ชาติหน้าตอนบ่ายๆอ่ะ', '12')
+	// 					,('ชีวิตยังมีพรุ่งนี้เสมออออ...', '12')
+	// 					,('หลังเซเว่นปิดอ่ะ', '12')
+	// 					;");//
 
-	// $result = pg_query($db, "UPDATE tbhlinebotans 
-	// 						SET $t = 'ฉัตรสายเหลือง'
-	// 						WHERE $t = 'ฉัตร'");//'ตรวจสอบสถานะserver'		
+	$result = pg_query($db, "UPDATE tbhlinebotwmode 
+							SET questiontext = 'ตอนไหน', questiontype = '2'
+							WHERE questiontext = 'ไหน'");//'ตรวจสอบสถานะserver'		
 }
