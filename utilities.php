@@ -396,7 +396,7 @@ function InsertDataToDB() {
 	//now id 36-39 is empty
 	$t = 'text';
 	$result = pg_query($db, "INSERT INTO tbhlinebotans ($t, type) VALUES 
-						('ท่านผู้นำคิม จอง อึน ไง', '11'
+						('ท่านผู้นำคิม จอง อึน ไง', '11')
 						,('ฉัตร', '11')	
 						;");//
 
