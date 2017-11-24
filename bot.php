@@ -194,12 +194,13 @@ if (!is_null($events['events'])) {
 	}
 }
 
-if ((date('i') % 17 == 0) && (date('s') % 60 == 0)) {
+if ((date('i') % 23 == 0) && (date('s') % 59 == 0)) {//
 	$messages = [						
 		'type' => 'text',
 		'text' => 'อยากอกหัก...แต่อุปสรรคดันอยู่ที่หน้าตา เห้อออ'
 	];
-	$nonnoi = 'Ca35db1d5c584c6467d717df89a0302ec';
+	//$nonnoi = 'Ua492767fd96449cd8a857b101dbdbcce';	//ball
+	$nonnoi = 'Ca35db1d5c584c6467d717df89a0302ec'; //group
 	// Make a POST Request to Messaging API to push to sender
 	$url = 'https://api.line.me/v2/bot/message/push';
 	$data = [
