@@ -26,6 +26,8 @@ function QuestionWordFromDBTB() {
 
 	$db = new PDO($dsn);
 
+	$t = 'text';
+
 	//$query = "SELECT questiontext, questiontype FROM tbhlinebotwmode WHERE questiontype = '8'";//" OR questiontype = '8'";
 	$query = "SELECT $t, type FROM tbhlinebotans WHERE type = '11'";
 	$result = $db->query($query);
