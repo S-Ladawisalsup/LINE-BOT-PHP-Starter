@@ -384,7 +384,7 @@ function InsertDataToDB() {
 	// $result = pg_query($db, "INSERT INTO linebotlocation (title, address, latitude, longitude) VALUES 
 	// 						('วัดชิโนรสาราม วรวิหาร', 'วัดชิโนรสาราม วรวิหาร แขวง บ้านช่างหล่อ เขต บางกอกน้อย กรุงเทพมหานคร 10700', '13.746385', '100.479674')	
 	// 						;");//,('โรงพยาบาล ธนบุรี', '34/1 แขวง บ้านช่างหล่อ เขต บางกอกน้อย กรุงเทพมหานคร 10700', '13.7529', '100.4797')		
-
+	//now id 34-39 is empty
 	$result = pg_query($db, "INSERT INTO tbhlinebotwmode (id, questiontext, questiontype) VALUES 
 						(32, 'ping', '8')
 						,(33, 'ปิง', '8')	
