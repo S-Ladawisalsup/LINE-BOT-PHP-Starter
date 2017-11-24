@@ -393,13 +393,13 @@ function InsertDataToDB() {
 	// 						,('Alaina', 'Alaina ซอย รัชดาภิเษก 7 ถนนรัชดาภิเษก แขวง ดินแดง เขต ดินแดง กรุงเทพมหานคร 10400', '13.772270', '100.573075')
 	// 						;");//		
 
-	//now id 34-39 is empty
-	// $result = pg_query($db, "INSERT INTO tbhlinebotwmode (id, questiontext, questiontype) VALUES 
-	// 					(32, 'ping', '8')
-	// 					,(33, 'ปิง', '8')	
-	// 					;");
+	//now id 36-39 is empty
+	$result = pg_query($db, "INSERT INTO tbhlinebotwmode (id, questiontext, questiontype) VALUES 
+						(34, 'ท่านผู้นำคิม จอง อึน ไง', '11')
+						,(35, 'ฉัตร', '11')	
+						;");//
 
-	$result = pg_query($db, "UPDATE tbhlinebotwmode 
-							SET questiontext = 'เซิฟเวอร์'
-							WHERE id = '33'");//'ตรวจสอบสถานะserver'		
+	// $result = pg_query($db, "UPDATE tbhlinebotwmode 
+	// 						SET questiontext = 'เซิฟเวอร์'
+	// 						WHERE id = '33'");//'ตรวจสอบสถานะserver'		
 }
