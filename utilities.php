@@ -30,7 +30,7 @@ function endsWith($haystack, $needle) {
 /**********************************************************************************************************************************/
 /*** Function generates answer as text type, now get answer from array text file by random (cannot connect datatabase now) ***/
 function AnswerBuilder($mood) {
-	if ($mood > 11) {
+	if ($mood > 12) {
 		$notepad = file('text/reply.txt');
 		$resultreply = 'ถ้าคุณขับรถบรรทุกคนไป 43 คน เพื่อไปเชียงใหม่ แต่ระหว่างทางคุณรับคนอีก 7 คน เพื่อไปส่งที่ภูเก็ต ถามว่าคนขับชื่ออะไรระหว่าง ควาย กับ หมา?';
 		if (count($notepad) > 0) {
@@ -395,12 +395,15 @@ function InsertDataToDB() {
 
 	//now id 36-39 is empty
 	$t = 'text';
-	// $result = pg_query($db, "INSERT INTO tbhlinebotans ($t, type) VALUES 
-	// 					('ท่านผู้นำคิม จอง อึน ไง', '11')
-	// 					,('ฉัตร', '11')	
-	// 					;");//
+	$result = pg_query($db, "INSERT INTO tbhlinebotans ($t, type) VALUES 
+						('อีก 2 ปี', '12')
+						,('คืนนี้แหล่ะ อยากได้กี่ครั้งหล่ะ', '12')	
+						,('ไม่มีวันซะหรอก', '12')
+						,('ชาติหน้าตอนบ่ายๆอ่ะ', '12')
+						,('ชีวิตยังมีพรุ่งนี้เสมออออ...', '12')
+						;");//
 
-	$result = pg_query($db, "UPDATE tbhlinebotans 
-							SET $t = 'ฉัตรสายเหลือง'
-							WHERE $t = 'ฉัตร'");//'ตรวจสอบสถานะserver'		
+	// $result = pg_query($db, "UPDATE tbhlinebotans 
+	// 						SET $t = 'ฉัตรสายเหลือง'
+	// 						WHERE $t = 'ฉัตร'");//'ตรวจสอบสถานะserver'		
 }

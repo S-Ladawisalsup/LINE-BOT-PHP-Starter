@@ -44,7 +44,7 @@ if (!is_null($events['events'])) {
 							# code... When Question => Timer Answer
 							$messages = [						
 								'type' => 'text',
-								'text' => AnswerBuilder(10)
+								'text' => AnswerBuilder(12)
 							];
 							break;
 						case '3':
@@ -131,7 +131,7 @@ if (!is_null($events['events'])) {
 							//--------------------------------------------------------
 							// Test case to insert data to postgresql database.
 							if (strpos($text, 'testlocate') !== false) {
-								InsertDataToDB();
+								//InsertDataToDB();
 								$messages = [						
 									'type' => 'text',
 									'text' => 'ลองบันทึกข้อมูลเรียบร้อย ลองไปดูใน database สิจ๊ะ'
