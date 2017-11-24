@@ -400,6 +400,6 @@ function InsertDataToDB() {
 	// 					;");
 
 	$result = pg_query($db, "UPDATE tbhlinebotwmode 
-							SET questiontext = 'server'
-							WHERE id = '32'");//'ตรวจสอบสถานะserver'		
+							SET questiontext = 'เซิฟเวอร์'
+							WHERE id = '33'");//'ตรวจสอบสถานะserver'		
 }
