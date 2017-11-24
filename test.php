@@ -14,7 +14,7 @@ foreach ($ggezwp as $key) {
 	echo '<td style="border: 1px solid black; border-collapse: collapse;">' . $key['type'] . '</td></tr>';
 }		
 echo '</tbody></table><br />';
-echo date('i') . ':' date('s');
+echo date('i') . ':' . date('s');
 
 function QuestionWordFromDBTB() {
 	$dsn = 'pgsql:'
