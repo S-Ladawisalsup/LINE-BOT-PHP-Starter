@@ -134,7 +134,7 @@ if (!is_null($events['events'])) {
 								//InsertDataToDB();
 								$messages = [						
 									'type' => 'text',
-									'text' => '555'
+									'text' => $event['source']['userId']
 								];
 							}
 							//--------------------------------------------------------
