@@ -405,6 +405,6 @@ function InsertDataToDB() {
 	// 					;");//
 
 	$result = pg_query($db, "UPDATE tbhlinebotwmode 
-							SET questiontext = 'ตอนไหน'
-							WHERE questiontext = 'ไหน'");		
+							SET questiontype = '2'
+							WHERE questiontext = 'ตอนไหน'");		
 }
