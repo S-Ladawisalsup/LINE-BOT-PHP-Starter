@@ -130,11 +130,19 @@ if (!is_null($events['events'])) {
 						default:
 							//--------------------------------------------------------
 							// Test case to insert data to postgresql database.
-							if (strpos($text, 'testlocate') !== false) {
+							if (strpos($text, 'testmultiplereply') !== false) {
 								//InsertDataToDB();
+								// $messages = [						
+								// 	'type' => 'text',
+								// 	'text' => 'ลองบันทึกข้อมูลเรียบร้อย ลองไปดูใน database สิจ๊ะ'
+								// ];
 								$messages = [						
 									'type' => 'text',
-									'text' => 'ลองบันทึกข้อมูลเรียบร้อย ลองไปดูใน database สิจ๊ะ'
+									'text' => 'วัน'
+								];
+								$messages .= [						
+									'type' => 'text',
+									'text' => 'ทู'
 								];
 							}
 							//--------------------------------------------------------
