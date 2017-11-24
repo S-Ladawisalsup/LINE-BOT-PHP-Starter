@@ -393,7 +393,7 @@ function InsertDataToDB() {
 	// 						,('Alaina', 'Alaina ซอย รัชดาภิเษก 7 ถนนรัชดาภิเษก แขวง ดินแดง เขต ดินแดง กรุงเทพมหานคร 10400', '13.772270', '100.573075')
 	// 						;");//		
 
-	//now id 34-39 is empty
+	//now tbhlinebotwmode id 35-39 is empty
 	$t = 'text';
 	$result = pg_query($db, "INSERT INTO tbhlinebotwmode (id, questiontext, questiontype) VALUES 
 						(34, 'อยู่ไหน', '3')						
