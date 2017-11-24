@@ -393,7 +393,7 @@ function InsertDataToDB() {
 	// 						,('Alaina', 'Alaina ซอย รัชดาภิเษก 7 ถนนรัชดาภิเษก แขวง ดินแดง เขต ดินแดง กรุงเทพมหานคร 10400', '13.772270', '100.573075')
 	// 						;");//		
 
-	//now id 36-39 is empty
+	//now id 34-39 is empty
 	$t = 'text';
 	$result = pg_query($db, "INSERT INTO tbhlinebotans ($t, type) VALUES 
 						('อีก 2 ปี', '12')
@@ -401,6 +401,7 @@ function InsertDataToDB() {
 						,('ไม่มีวันซะหรอก', '12')
 						,('ชาติหน้าตอนบ่ายๆอ่ะ', '12')
 						,('ชีวิตยังมีพรุ่งนี้เสมออออ...', '12')
+						,('หลังเซเว่นปิดอ่ะ', '12')
 						;");//
 
 	// $result = pg_query($db, "UPDATE tbhlinebotans 
