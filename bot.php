@@ -150,7 +150,7 @@ if (!is_null($events['events'])) {
 								// Build message to reply back
 								$messages = [						
 									'type' => 'text',
-									'text' => AnswerBuilder(12)
+									'text' => AnswerBuilder(10)
 								];	
 							}  
 							break;
