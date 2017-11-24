@@ -395,8 +395,8 @@ function InsertDataToDB() {
 
 	//now tbhlinebotwmode id 35-39 is empty
 	$t = 'text';
-	$result = pg_query($db, "INSERT INTO tbhlinebotwmode (id, questiontext, questiontype) VALUES 
-						(34, 'อยู่ไหน', '3')						
+	$result = pg_query($db, "INSERT INTO tbhlinebotans ($t, type) VALUES 
+						('ไม่จริงหน่า เป็นไปไม่ได้ ผมไม่เชื่อ บอกอีกที่สิว่าไม่จริง โอ้วไม่!ไม่!ไม่!ม่ายยยยยยยยย', '10')						
 						;");//,('คืนนี้แหล่ะ อยากได้กี่ครั้งหล่ะ', '12')
 
 	// $result = pg_query($db, "UPDATE tbhlinebotwmode 
