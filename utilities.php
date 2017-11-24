@@ -395,12 +395,12 @@ function InsertDataToDB() {
 
 	//now id 36-39 is empty
 	$t = 'text';
-	$result = pg_query($db, "INSERT INTO tbhlinebotans ($t, type) VALUES 
-						('ท่านผู้นำคิม จอง อึน ไง', '11')
-						,('ฉัตร', '11')	
-						;");//
+	// $result = pg_query($db, "INSERT INTO tbhlinebotans ($t, type) VALUES 
+	// 					('ท่านผู้นำคิม จอง อึน ไง', '11')
+	// 					,('ฉัตร', '11')	
+	// 					;");//
 
-	// $result = pg_query($db, "UPDATE tbhlinebotwmode 
-	// 						SET questiontext = 'เซิฟเวอร์'
-	// 						WHERE id = '33'");//'ตรวจสอบสถานะserver'		
+	$result = pg_query($db, "UPDATE tbhlinebotans 
+							SET $t = 'ฉัตรสายเหลือง'
+							WHERE $t = 'ฉัตร'");//'ตรวจสอบสถานะserver'		
 }
