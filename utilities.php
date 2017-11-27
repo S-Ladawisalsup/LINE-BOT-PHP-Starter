@@ -429,13 +429,9 @@ function InsertDataToDB() {
 		$hostname['hostname'] = htmlspecialchars($row["ip_addr"]);
 	}
 	$result->closeCursor();
-	$state = "w";
-	foreach ($hostname as $host) {
-		$file = fopen("text/server.txt", $state);
+	$file = fopen("text/server.txt", "w");
+	foreach ($hostname as $host) {		
 		echo fwrite($file, $host);
-		fclose($file);
-		if ($state == "w") {
-			$state = "a";
-		}
 	}
+	fclose($file);
 }
