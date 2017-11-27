@@ -382,11 +382,11 @@ function GetLocation() {
 //Function to insert data to postgresql database to easier than insert data to database by terminal
 function InsertDataToDB() {
 
-	// $db = pg_connect("host=ec2-54-243-187-133.compute-1.amazonaws.com 
-	// 				port=5432 
-	// 				dbname=dfusod038c3j35 
-	// 				user=mmbbbssobrmqjs 
-	// 				password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa");
+	$db = pg_connect("host=ec2-54-243-187-133.compute-1.amazonaws.com 
+					port=5432 
+					dbname=dfusod038c3j35 
+					user=mmbbbssobrmqjs 
+					password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa");
 
 	// $result = pg_query($db, "INSERT INTO linebotlocation (title, address, latitude, longitude) VALUES 
 	// 						('The Bank Massage Club', 'The Bank Massage Club 14/1 ถนนเพชรบุรีตัดใหม่ ซอย เพชรบุรี 47 แขวง บางกะปิ เขต ห้วยขวาง กรุงเทพมหานคร 10310', '13.748486', '100.593094')	
@@ -403,39 +403,4 @@ function InsertDataToDB() {
 	// $result = pg_query($db, "UPDATE tbhlinebotwmode 
 	// 						SET questiontype = '2'
 	// 						WHERE questiontext = 'ตอนไหน'");		
-
-	// $server = file('text/reply.txt');
-	// $result = '';
-	// if (count($server) > 0) {
-	// 	$result = $server[rand(1, count($server))];
-	// 	$result = substr($result, 0, strlen($result)-1);
-	// }
-	// return $result;
-
-	$dsn = 'pgsql:'
-		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
-		. 'dbname=dfusod038c3j35;'
-		. 'user=mmbbbssobrmqjs;'
-		. 'port=5432;'
-		. 'sslmode=require;'
-		. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
-
-	$db = new PDO($dsn);
-
-	$query = 'SELECT ip_addr FROM tbhlinebotserv ORDER BY id ASC'; 
-	$result = $db->query($query);
-	$hostname = array();
-	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-		$hostname['hostname'] = htmlspecialchars($row["ip_addr"]);
-	}
-	$result->closeCursor();
-
-	$writer = '';
-	foreach ($hostname as $host) {		
-		$writer .= ($host . PHP_EOL);
-	}
-
-	$file = fopen("text/server.txt", "w");
-	echo fwrite($file, $writer);
-	fclose($file);
 }
