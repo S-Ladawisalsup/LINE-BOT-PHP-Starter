@@ -62,8 +62,10 @@ function t_server() {
 	$query = 'SELECT ip_addr FROM tbhlinebotserv ORDER BY id ASC'; 
 	$result = $db->query($query);
 	$hostname = array();
+	$order = 0;
 	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-		$hostname['hostname'] = htmlspecialchars($row["ip_addr"]);
+		$hostname[$order] = htmlspecialchars($row["ip_addr"]);
+		$order = $order + 1;
 	}
 	$result->closeCursor();
 
