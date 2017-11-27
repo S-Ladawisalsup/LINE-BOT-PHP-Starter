@@ -438,6 +438,4 @@ function InsertDataToDB() {
 	$file = fopen("text/server.txt", "w");
 	echo fwrite($file, $writer);
 	fclose($file);
-
-	echo $writer;
 }
