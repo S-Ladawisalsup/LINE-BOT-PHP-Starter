@@ -14,6 +14,7 @@ Ohter(s) Mode!
 9. Greeting word(s) type mode.
 10. Refuse as answer in all response mode.
 11. Person mode for answer who's question.
+12. Timer mode for answer when's question.
 *******************************************************************/
 date_default_timezone_set("Asia/Bangkok");
 /**********************************************************************************************************************************/
@@ -395,8 +396,8 @@ function InsertDataToDB() {
 
 	//now tbhlinebotwmode id 35-39 is empty
 	$t = 'text';
-	$result = pg_query($db, "INSERT INTO tbhlinebotans ($t, type) VALUES 
-						('ใช่หรา นึกดีๆ ให้เวลากลับไปคิดใหม่ 12 คืน', '10')						
+	$result = pg_query($db, "INSERT INTO tbhlinebotlocname (loc_callname, loc_id) VALUES 
+						('ห้องเซิฟเวอร์', '2')						
 						;");//,('คืนนี้แหล่ะ อยากได้กี่ครั้งหล่ะ', '12')
 
 	// $result = pg_query($db, "UPDATE tbhlinebotwmode 

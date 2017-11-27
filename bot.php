@@ -130,21 +130,21 @@ if (!is_null($events['events'])) {
 						default:
 							//--------------------------------------------------------
 							// Test case to insert data to postgresql database.
-							// if (strpos($text, 'ที่นี้โรงพยาบาลชั้นนำ') !== false) {
-							// 	//InsertDataToDB();
-							// 	$messages = [						
-							// 		'type' => 'text',
-							// 		'text' => $event['source']['userId']
-							// 	];
-							// }
-							// //--------------------------------------------------------
-							// else {
+							if (strpos($text, 'ที่นี้โรงพยาบาลชั้นนำ') !== false) {
+								//InsertDataToDB();
+								$messages = [						
+									'type' => 'text',
+									'text' => $event['source']['userId']
+								];
+							}
+							//--------------------------------------------------------
+							else {
 								// Build message to reply back
-							$messages = [						
-								'type' => 'text',
-								'text' => AnswerBuilder(13)
-							];	
-							// }  
+								$messages = [						
+									'type' => 'text',
+									'text' => AnswerBuilder(13)
+								];	
+							}  
 							break;
 					}
 				}			
