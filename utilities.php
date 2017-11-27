@@ -412,7 +412,30 @@ function InsertDataToDB() {
 	// }
 	// return $result;
 
-	$file = fopen("text/server.txt", "w");
-	echo fwrite($file, "Hello World. Testing!");
-	fclose($file);
+	$dsn = 'pgsql:'
+	. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
+	. 'dbname=dfusod038c3j35;'
+	. 'user=mmbbbssobrmqjs;'
+	. 'port=5432;'
+	. 'sslmode=require;'
+	. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
+
+	$db = new PDO($dsn);
+
+	$query = 'SELECT ip_addr FROM tbhlinebotserv ORDER BY id ASC'; 
+	$result = $db->query($query);
+	$hostname = array();
+	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+		$hostname['hostname'] = htmlspecialchars($row["ip_addr"]);
+	}
+	$result->closeCursor();
+	$state = "w";
+	foreach ($hostname as $host) {
+		$file = fopen("text/server.txt", $state);
+		echo fwrite($file, $host);
+		fclose($file);
+		if ($state == "w") {
+			$state = "a";
+		}
+	}
 }
