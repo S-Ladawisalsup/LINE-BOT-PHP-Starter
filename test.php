@@ -32,7 +32,7 @@ function QuestionWordFromDBTB() {
 	$t = 'text';
 
 	//$query = "SELECT questiontext, questiontype FROM tbhlinebotwmode WHERE questiontype = '1' OR questiontype = '7'";
-	$query = "SELECT $t, type FROM tbhlinebotans WHERE type = '11'";
+	$query = "SELECT $t, type FROM tbhlinebotans WHERE type = '12'";
 	$result = $db->query($query);
 
 	$words = array();

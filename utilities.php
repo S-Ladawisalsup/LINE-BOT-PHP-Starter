@@ -439,5 +439,5 @@ function InsertDataToDB() {
 	echo fwrite($file, $writer);
 	fclose($file);
 
-	return $writer;
+	echo $writer;
 }
