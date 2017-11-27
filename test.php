@@ -69,7 +69,7 @@ function t_server() {
 
 	$writer = '';
 	foreach ($hostname as $host) {		
-		$writer .= $host . PHP_EOL;
+		$writer .= ($host . PHP_EOL);
 	}
 
 	$file = fopen("text/server.txt", "w");
