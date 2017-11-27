@@ -130,11 +130,11 @@ if (!is_null($events['events'])) {
 						default:
 							//--------------------------------------------------------
 							// Test case to insert data to postgresql database.
-							if (strpos($text, 'ที่นี้โรงพยาบาลชั้นนำ') !== false) {
-								//InsertDataToDB();
+							if (strpos($text, 'insertpingtemploc') !== false) {
+								InsertDataToDB();
 								$messages = [						
 									'type' => 'text',
-									'text' => $event['source']['userId']
+									'text' => $event['source']['type']
 								];
 							}
 							//--------------------------------------------------------
