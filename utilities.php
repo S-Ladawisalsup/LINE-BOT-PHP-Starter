@@ -422,7 +422,7 @@ function InsertDataToDB() {
 
 	$db = new PDO($dsn);
 
-	$query = 'SELECT ip_addr FROM tbhlinebotserv ORDER BY id ASC'; 
+	$query = 'SELECT ip_addr FROM tbhlinebotserv ORDER BY id DESC'; 
 	$result = $db->query($query);
 	$hostname = array();
 	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
