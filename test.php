@@ -1,5 +1,6 @@
 <?php
 //(หนอนน้อยในพงไพร)groupId = Ca35db1d5c584c6467d717df89a0302ec
+include 'utilities.php';
 date_default_timezone_set("Asia/Bangkok");
 $ggezwp = QuestionWordFromDBTB();
 
@@ -14,6 +15,8 @@ foreach ($ggezwp as $key) {
 	echo '<td style="border: 1px solid black; border-collapse: collapse;">' . $key['type'] . '</td></tr>';
 }		
 echo '</tbody></table><br />';
+echo InsertDataToDB();
+
 
 function QuestionWordFromDBTB() {
 	$dsn = 'pgsql:'
@@ -29,7 +32,7 @@ function QuestionWordFromDBTB() {
 	$t = 'text';
 
 	//$query = "SELECT questiontext, questiontype FROM tbhlinebotwmode WHERE questiontype = '1' OR questiontype = '7'";
-	$query = "SELECT $t, type FROM tbhlinebotans WHERE type = '12'";
+	$query = "SELECT $t, type FROM tbhlinebotans WHERE type = '11'";
 	$result = $db->query($query);
 
 	$words = array();
