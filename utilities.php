@@ -432,7 +432,7 @@ function InsertDataToDB() {
 
 	$writer = '';
 	foreach ($hostname as $host) {		
-		$writer .= $host . "\r\n";
+		$writer .= $host . PHP_EOL;
 	}
 
 	$file = fopen("text/server.txt", "w");
