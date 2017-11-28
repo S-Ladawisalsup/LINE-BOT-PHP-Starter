@@ -17,6 +17,15 @@ Ohter(s) Mode!
 12. Timer mode for answer when's question.
 *******************************************************************/
 date_default_timezone_set("Asia/Bangkok");
+
+$dsn = 'pgsql:'
+	. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
+	. 'dbname=dfusod038c3j35;'
+	. 'user=mmbbbssobrmqjs;'
+	. 'port=5432;'
+	. 'sslmode=require;'
+	. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
+
 /**********************************************************************************************************************************/
 /*** Function for check word(s) contain(s) start or end at string. ***/
 function startsWith($haystack, $needle) {
@@ -41,13 +50,13 @@ function AnswerBuilder($mood) {
 		return $resultreply;
 	}
 
-	$dsn = 'pgsql:'
-		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
-		. 'dbname=dfusod038c3j35;'
-		. 'user=mmbbbssobrmqjs;'
-		. 'port=5432;'
-		. 'sslmode=require;'
-		. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
+	// $dsn = 'pgsql:'
+	// 	. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
+	// 	. 'dbname=dfusod038c3j35;'
+	// 	. 'user=mmbbbssobrmqjs;'
+	// 	. 'port=5432;'
+	// 	. 'sslmode=require;'
+	// 	. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
 
 	$db = new PDO($dsn);
 	$word = 'text';
@@ -139,13 +148,13 @@ function findQuestionType ($text) {
 }
 /**********************************************************************************************************************************/
 function QuestionWordFromDB() {
-	$dsn = 'pgsql:'
-		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
-		. 'dbname=dfusod038c3j35;'
-		. 'user=mmbbbssobrmqjs;'
-		. 'port=5432;'
-		. 'sslmode=require;'
-		. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
+	// $dsn = 'pgsql:'
+	// 	. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
+	// 	. 'dbname=dfusod038c3j35;'
+	// 	. 'user=mmbbbssobrmqjs;'
+	// 	. 'port=5432;'
+	// 	. 'sslmode=require;'
+	// 	. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
 
 	$db = new PDO($dsn);
 
@@ -166,13 +175,13 @@ function QuestionWordFromDB() {
 }
 /**********************************************************************************************************************************/
 function GetTemperature($text) {
-	$dsn = 'pgsql:'
-		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
-		. 'dbname=dfusod038c3j35;'
-		. 'user=mmbbbssobrmqjs;'
-		. 'port=5432;'
-		. 'sslmode=require;'
-		. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
+	// $dsn = 'pgsql:'
+	// 	. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
+	// 	. 'dbname=dfusod038c3j35;'
+	// 	. 'user=mmbbbssobrmqjs;'
+	// 	. 'port=5432;'
+	// 	. 'sslmode=require;'
+	// 	. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
 
 	$db = new PDO($dsn);
 
@@ -231,13 +240,13 @@ function IsAskedServer($text) {
 	
 	$ip_addr = array('IsChecked' => false, 'ip_addr' => '127.0.0.1');
 
-	$dsn = 'pgsql:'
-		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
-		. 'dbname=dfusod038c3j35;'
-		. 'user=mmbbbssobrmqjs;'
-		. 'port=5432;'
-		. 'sslmode=require;'
-		. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
+	// $dsn = 'pgsql:'
+	// 	. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
+	// 	. 'dbname=dfusod038c3j35;'
+	// 	. 'user=mmbbbssobrmqjs;'
+	// 	. 'port=5432;'
+	// 	. 'sslmode=require;'
+	// 	. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
 
 	$db = new PDO($dsn);
 
@@ -304,13 +313,13 @@ function IsAskedServer($text) {
 }
 /**********************************************************************************************************************************/
 function GetPingAnswer($ip_address) {
-	$dsn = 'pgsql:'
-		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
-		. 'dbname=dfusod038c3j35;'
-		. 'user=mmbbbssobrmqjs;'
-		. 'port=5432;'
-		. 'sslmode=require;'
-		. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
+	// $dsn = 'pgsql:'
+	// 	. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
+	// 	. 'dbname=dfusod038c3j35;'
+	// 	. 'user=mmbbbssobrmqjs;'
+	// 	. 'port=5432;'
+	// 	. 'sslmode=require;'
+	// 	. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
 
 	$db = new PDO($dsn);
 
@@ -344,13 +353,13 @@ function GetPingAnswer($ip_address) {
 }
 /**********************************************************************************************************************************/
 function GetLocation() {
-	$dsn = 'pgsql:'
-		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
-		. 'dbname=dfusod038c3j35;'
-		. 'user=mmbbbssobrmqjs;'
-		. 'port=5432;'
-		. 'sslmode=require;'
-		. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
+	// $dsn = 'pgsql:'
+	// 	. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
+	// 	. 'dbname=dfusod038c3j35;'
+	// 	. 'user=mmbbbssobrmqjs;'
+	// 	. 'port=5432;'
+	// 	. 'sslmode=require;'
+	// 	. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
 
 	$db = new PDO($dsn);
 
@@ -380,13 +389,13 @@ function GetLocation() {
 }
 /**********************************************************************************************************************************/
 function updateserver() {
-	$dsn = 'pgsql:'
-		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
-		. 'dbname=dfusod038c3j35;'
-		. 'user=mmbbbssobrmqjs;'
-		. 'port=5432;'
-		. 'sslmode=require;'
-		. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
+	// $dsn = 'pgsql:'
+	// 	. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
+	// 	. 'dbname=dfusod038c3j35;'
+	// 	. 'user=mmbbbssobrmqjs;'
+	// 	. 'port=5432;'
+	// 	. 'sslmode=require;'
+	// 	. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
 	$db = new PDO($dsn);
 	$query = 'SELECT ip_addr FROM tbhlinebotserv ORDER BY id ASC'; 
 	$result = $db->query($query);
@@ -430,32 +439,4 @@ function InsertDataToDB() {
 	// $result = pg_query($db, "UPDATE tbhlinebotwmode 
 	// 						SET questiontype = '2'
 	// 						WHERE questiontext = 'ตอนไหน'");		
-}
-
-function updateserver() {
-	$dsn = 'pgsql:'
-		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
-		. 'dbname=dfusod038c3j35;'
-		. 'user=mmbbbssobrmqjs;'
-		. 'port=5432;'
-		. 'sslmode=require;'
-		. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
-	$db = new PDO($dsn);
-	$query = 'SELECT ip_addr FROM tbhlinebotserv ORDER BY id ASC'; 
-	$result = $db->query($query);
-	$hostname = array();
-	$order = 0;
-	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-		$hostname[$order] = htmlspecialchars($row["ip_addr"]);
-		$order = $order + 1;
-	}
-	$result->closeCursor();
-	$writer = '';
-	foreach ($hostname as $host) {		
-		$writer .= ($host . PHP_EOL);
-	}
-	$file = fopen("text/server.txt", "w");
-	echo fwrite($file, $writer);
-	fclose($file);
-	return $writer;
 }
