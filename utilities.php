@@ -18,6 +18,14 @@ Ohter(s) Mode!
 *******************************************************************/
 date_default_timezone_set("Asia/Bangkok");
 
+$dsn = 'pgsql:'
+	. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
+	. 'dbname=dfusod038c3j35;'
+	. 'user=mmbbbssobrmqjs;'
+	. 'port=5432;'
+	. 'sslmode=require;'
+	. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
+
 /**********************************************************************************************************************************/
 /*** Function for check word(s) contain(s) start or end at string. ***/
 function startsWith($haystack, $needle) {
@@ -42,15 +50,7 @@ function AnswerBuilder($mood) {
 		return $resultreply;
 	}
 
-	$dsn = 'pgsql:'
-		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
-		. 'dbname=dfusod038c3j35;'
-		. 'user=mmbbbssobrmqjs;'
-		. 'port=5432;'
-		. 'sslmode=require;'
-		. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
-
-	$db = new PDO($dsn);
+	$db = new PDO($GLOBALS['dsn']);
 	$word = 'text';
 	$query = "SELECT $word FROM tbhlinebotans WHERE type = '$mood'";
 	$result = $db->query($query);
@@ -140,16 +140,7 @@ function findQuestionType ($text) {
 }
 /**********************************************************************************************************************************/
 function QuestionWordFromDB() {
-	$dsn = 'pgsql:'
-		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
-		. 'dbname=dfusod038c3j35;'
-		. 'user=mmbbbssobrmqjs;'
-		. 'port=5432;'
-		. 'sslmode=require;'
-		. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
-
-	$db = new PDO($dsn);
-
+	$db = new PDO($GLOBALS['dsn']);
 	$query = 'SELECT id, questiontext, questiontype FROM tbhlinebotwmode ORDER BY id ASC';
 	$result = $db->query($query);
 
@@ -167,16 +158,7 @@ function QuestionWordFromDB() {
 }
 /**********************************************************************************************************************************/
 function GetTemperature($text) {
-	$dsn = 'pgsql:'
-		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
-		. 'dbname=dfusod038c3j35;'
-		. 'user=mmbbbssobrmqjs;'
-		. 'port=5432;'
-		. 'sslmode=require;'
-		. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
-
-	$db = new PDO($dsn);
-
+	$db = new PDO($GLOBALS['dsn']);
 	$query_loccall = 'SELECT id, loc_callname, loc_id FROM tbhlinebotlocname ORDER BY id ASC';
 	$result = $db->query($query_loccall);
 
@@ -229,19 +211,8 @@ function GetTemperature($text) {
 }
 /**********************************************************************************************************************************/
 function IsAskedServer($text) {
-	
 	$ip_addr = array('IsChecked' => false, 'ip_addr' => '127.0.0.1');
-
-	$dsn = 'pgsql:'
-		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
-		. 'dbname=dfusod038c3j35;'
-		. 'user=mmbbbssobrmqjs;'
-		. 'port=5432;'
-		. 'sslmode=require;'
-		. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
-
-	$db = new PDO($dsn);
-
+	$db = new PDO($GLOBALS['dsn']);
 	$query = 'SELECT id, ip_addr, serv_name, last_ip FROM tbhlinebotserv ORDER BY id ASC';
 	$result = $db->query($query);
 
@@ -305,16 +276,7 @@ function IsAskedServer($text) {
 }
 /**********************************************************************************************************************************/
 function GetPingAnswer($ip_address) {
-	$dsn = 'pgsql:'
-		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
-		. 'dbname=dfusod038c3j35;'
-		. 'user=mmbbbssobrmqjs;'
-		. 'port=5432;'
-		. 'sslmode=require;'
-		. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
-
-	$db = new PDO($dsn);
-
+	$db = new PDO($GLOBALS['dsn']);
 	$query = "SELECT status, lastchangedatetime AT TI"
 							."ME ZONE 'UTC+7' as lastchangedatetime FROM tbhlinebotserv WHERE ip_addr = '$ip_address'";
 	$result = $db->query($query);
@@ -345,16 +307,7 @@ function GetPingAnswer($ip_address) {
 }
 /**********************************************************************************************************************************/
 function GetLocation() {
-	$dsn = 'pgsql:'
-		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
-		. 'dbname=dfusod038c3j35;'
-		. 'user=mmbbbssobrmqjs;'
-		. 'port=5432;'
-		. 'sslmode=require;'
-		. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
-
-	$db = new PDO($dsn);
-
+	$db = new PDO($GLOBALS['dsn']);
 	// Maybe use where in title column to change result to array 1 direction, but now just random location.
 	$query = 'SELECT id, title, address, latitude, longitude FROM linebotlocation ORDER BY id ASC'; 
 	$result = $db->query($query);
@@ -381,14 +334,7 @@ function GetLocation() {
 }
 /**********************************************************************************************************************************/
 function updateserver() {
-	$dsn = 'pgsql:'
-		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
-		. 'dbname=dfusod038c3j35;'
-		. 'user=mmbbbssobrmqjs;'
-		. 'port=5432;'
-		. 'sslmode=require;'
-		. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
-	$db = new PDO($dsn);
+	$db = new PDO($GLOBALS['dsn']);
 	$query = 'SELECT ip_addr FROM tbhlinebotserv ORDER BY id ASC'; 
 	$result = $db->query($query);
 	$hostname = array();
