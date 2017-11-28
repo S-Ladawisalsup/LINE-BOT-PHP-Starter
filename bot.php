@@ -132,6 +132,7 @@ if (!is_null($events['events'])) {
 							// Test case to insert data to postgresql database.
 							if (strpos($text, 'insertpingtemploc') !== false) {
 								//InsertDataToDB();
+								updateserver();
 								$messages = [						
 									'type' => 'text',
 									'text' => $event['source']['type']
