@@ -36,22 +36,23 @@ def send_data():
         context = {"location": location, "temperature": 1000, "server": []}
 
         #========== Read Temp ==========#
-        data_obj1 = {"name": "temperature", "res": True, "data": 0.0}
         try:
                 context["temperature"] = read_temp()
-                print("temp: ", context["temperature"])
+                print("temp : ", context["temperature"])
         except:
                 pass
 
         #========== Ping Server ==========#
         #need to read all host from postgresqldb
+        text_file = open("https://cryptic-harbor-32168.herokuapp.com/text/server.txt", "r")
+        servers = text_file.readlines()
         
         status = ["stable", "warning", "danger", "error"]
         #in for loop all server hostname
-        #for hostname in cur.fetchall():
+        for hostname in servers:
                 data_obj = {"name": "127.0.0.1", "status": "error"}
-                #data_obj["name"] = hostname
-                #data_obj["status"] = status[ping_serv(hostname)] 
+                data_obj["name"] = hostname
+                data_obj["status"] = status[ping_serv(hostname)] 
                 context["server"].append(data_obj)
 
         url = 'https://cryptic-harbor-32168.herokuapp.com/server.php'
@@ -69,13 +70,13 @@ def ping_serv(hostname):
                 print("ping_res: {}".format(response))
                 if response != 0:
                         print("host: {} is down!".format(hostname))
-                        count += 1;
-                time.sleep(1)
+                        count += 1
+                time.sleep(10)
         if count == 0:
                 return 0
-        else if 0 < count < 10:
+        elif 0 < count < 10:
                 return 1
-        else if count == 10:
+        elif count == 10:
                 return 2
         else: 
                 return 3
@@ -83,6 +84,6 @@ def ping_serv(hostname):
 #schedule.every(1).minutes.do(send_data)
 
 while True:
-        schedule.run_pending()
+        #schedule.run_pending()
         send_data()
-        time.sleep(1)
+        time.sleep(20)

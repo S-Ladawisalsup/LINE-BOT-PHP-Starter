@@ -41,8 +41,7 @@ function UpdateServToDB($name, $status, $location) {
 					password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa");
 
 	$loc_id = findLocationID($location);
-	$res = ($status) ? 'ON' : 'OFF';
-	$result = pg_query($db, "UPDATE tbhlinebotserv SET status = '$res', location_id = '$loc_id' WHERE ip_addr = '$name'");
+	$result = pg_query($db, "UPDATE tbhlinebotserv SET status = '$status', location_id = '$loc_id' WHERE ip_addr = '$name'");
 
 	// if (!$result) {
 	// 	echo "\r\nAn error occurred.";
