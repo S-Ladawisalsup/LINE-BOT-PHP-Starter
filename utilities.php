@@ -18,14 +18,6 @@ Ohter(s) Mode!
 *******************************************************************/
 date_default_timezone_set("Asia/Bangkok");
 
-$dsn = 'pgsql:'
-	. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
-	. 'dbname=dfusod038c3j35;'
-	. 'user=mmbbbssobrmqjs;'
-	. 'port=5432;'
-	. 'sslmode=require;'
-	. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
-
 /**********************************************************************************************************************************/
 /*** Function for check word(s) contain(s) start or end at string. ***/
 function startsWith($haystack, $needle) {
@@ -50,13 +42,13 @@ function AnswerBuilder($mood) {
 		return $resultreply;
 	}
 
-	// $dsn = 'pgsql:'
-	// 	. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
-	// 	. 'dbname=dfusod038c3j35;'
-	// 	. 'user=mmbbbssobrmqjs;'
-	// 	. 'port=5432;'
-	// 	. 'sslmode=require;'
-	// 	. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
+	$dsn = 'pgsql:'
+		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
+		. 'dbname=dfusod038c3j35;'
+		. 'user=mmbbbssobrmqjs;'
+		. 'port=5432;'
+		. 'sslmode=require;'
+		. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
 
 	$db = new PDO($dsn);
 	$word = 'text';
@@ -148,13 +140,13 @@ function findQuestionType ($text) {
 }
 /**********************************************************************************************************************************/
 function QuestionWordFromDB() {
-	// $dsn = 'pgsql:'
-	// 	. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
-	// 	. 'dbname=dfusod038c3j35;'
-	// 	. 'user=mmbbbssobrmqjs;'
-	// 	. 'port=5432;'
-	// 	. 'sslmode=require;'
-	// 	. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
+	$dsn = 'pgsql:'
+		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
+		. 'dbname=dfusod038c3j35;'
+		. 'user=mmbbbssobrmqjs;'
+		. 'port=5432;'
+		. 'sslmode=require;'
+		. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
 
 	$db = new PDO($dsn);
 
@@ -175,13 +167,13 @@ function QuestionWordFromDB() {
 }
 /**********************************************************************************************************************************/
 function GetTemperature($text) {
-	// $dsn = 'pgsql:'
-	// 	. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
-	// 	. 'dbname=dfusod038c3j35;'
-	// 	. 'user=mmbbbssobrmqjs;'
-	// 	. 'port=5432;'
-	// 	. 'sslmode=require;'
-	// 	. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
+	$dsn = 'pgsql:'
+		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
+		. 'dbname=dfusod038c3j35;'
+		. 'user=mmbbbssobrmqjs;'
+		. 'port=5432;'
+		. 'sslmode=require;'
+		. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
 
 	$db = new PDO($dsn);
 
@@ -240,13 +232,13 @@ function IsAskedServer($text) {
 	
 	$ip_addr = array('IsChecked' => false, 'ip_addr' => '127.0.0.1');
 
-	// $dsn = 'pgsql:'
-	// 	. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
-	// 	. 'dbname=dfusod038c3j35;'
-	// 	. 'user=mmbbbssobrmqjs;'
-	// 	. 'port=5432;'
-	// 	. 'sslmode=require;'
-	// 	. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
+	$dsn = 'pgsql:'
+		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
+		. 'dbname=dfusod038c3j35;'
+		. 'user=mmbbbssobrmqjs;'
+		. 'port=5432;'
+		. 'sslmode=require;'
+		. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
 
 	$db = new PDO($dsn);
 
@@ -313,13 +305,13 @@ function IsAskedServer($text) {
 }
 /**********************************************************************************************************************************/
 function GetPingAnswer($ip_address) {
-	// $dsn = 'pgsql:'
-	// 	. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
-	// 	. 'dbname=dfusod038c3j35;'
-	// 	. 'user=mmbbbssobrmqjs;'
-	// 	. 'port=5432;'
-	// 	. 'sslmode=require;'
-	// 	. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
+	$dsn = 'pgsql:'
+		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
+		. 'dbname=dfusod038c3j35;'
+		. 'user=mmbbbssobrmqjs;'
+		. 'port=5432;'
+		. 'sslmode=require;'
+		. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
 
 	$db = new PDO($dsn);
 
@@ -353,13 +345,13 @@ function GetPingAnswer($ip_address) {
 }
 /**********************************************************************************************************************************/
 function GetLocation() {
-	// $dsn = 'pgsql:'
-	// 	. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
-	// 	. 'dbname=dfusod038c3j35;'
-	// 	. 'user=mmbbbssobrmqjs;'
-	// 	. 'port=5432;'
-	// 	. 'sslmode=require;'
-	// 	. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
+	$dsn = 'pgsql:'
+		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
+		. 'dbname=dfusod038c3j35;'
+		. 'user=mmbbbssobrmqjs;'
+		. 'port=5432;'
+		. 'sslmode=require;'
+		. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
 
 	$db = new PDO($dsn);
 
