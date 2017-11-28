@@ -404,7 +404,6 @@ function updateserver() {
 	$file = fopen("text/server.txt", "w");
 	echo fwrite($file, $writer);
 	fclose($file);
-	return $writer;
 }
 /**********************************************************************************************************************************/
 //Function to insert data to postgresql database to easier than insert data to database by terminal
