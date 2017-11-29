@@ -288,7 +288,22 @@ function GetPingAnswer($ip_address) {
 	}
 	$result->closeCursor();
 
-	$normally = ($server['status'] == 'ON') ? ' ปกติดีจ้า' : ' น่าจะมีปัญหาแล้วหล่ะ กำลังติดต่อผู้เกี่ยวข้องให้แก้ไขอยู่น้า ใจเย็นๆน้า อารมณ์เสียมากๆ เดี๋ยวแก่เร็วนะ';
+	$normally = ' จะเป็นยังไงก็ไม่รู้สิ ช่างมัน เช๊อะ!';
+	switch ($server['status']) {
+		case 'stable':
+			$normally = ' ปกติดีจ้า';
+			break;
+		case 'warning':
+			$normally = ' อาจจะทำงานช้าบ้างนิดหน่อย แต่น่าจะยังสามารถใช้งานได้น๊ะจ๊ะ';
+			break;
+		case 'danger':
+			$normally = ' น่าจะมีปัญหาแล้วหล่ะ กำลังติดต่อผู้เกี่ยวข้องให้แก้ไขอยู่น้า ใจเย็นๆน้า อารมณ์เสียมากๆ เดี๋ยวแก่เร็วนะ';
+			break;
+		default:
+			$normally = ' จะเป็นยังไงก็ไม่รู้สิ ช่างมัน เช๊อะ!';
+			break;
+	}
+
 	$pingresult = 'เค้าไม่ว่างอ่ะตัวเอง';
 	if (substr($server['timer'], 0, 10) == date("Y-m-d")) {
 		//lastchangedatetime == datenow, tell only time
