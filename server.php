@@ -23,9 +23,9 @@ if (!is_null($events)) {
 	if ($events['request']) {
 		//echo all server list back to client
 		GetServerNameList();
-		for ($i=0; $i < 3; $i++) { 
-			BotPush($i);
-		}
+		// for ($i=0; $i < 3; $i++) { 
+		// 	BotPush($i);
+		// }
 	}
 	else {
 		if (!is_null($events['temperature'])) {
