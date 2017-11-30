@@ -173,5 +173,5 @@ function BotPush ($warrior) {
 	$result = curl_exec($ch);
 	curl_close($ch);
 
-	//echo $result . "\r\n";
+	echo $result . "\r\n";
 }
