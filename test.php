@@ -1,18 +1,20 @@
 <?php
-$ggezwp = QuestionWordFromDBTB();
+// $ggezwp = QuestionWordFromDBTB();
 
-echo '<table style="border: 1px solid black; border-collapse: collapse;">
-		<thead><tr>
-			<th style="border: 1px solid black; border-collapse: collapse;">Word</th>
-			<th style="border: 1px solid black; border-collapse: collapse;">Type</th>
-		</tr></thead>
-		<tbody>';
-foreach ($ggezwp as $key) {
-	echo '<tr><td style="border: 1px solid black; border-collapse: collapse;">' . $key['text'] . '</td>';
-	echo '<td style="border: 1px solid black; border-collapse: collapse;">' . $key['type'] . '</td></tr>';
-}		
-echo '</tbody></table><br />';
+// echo '<table style="border: 1px solid black; border-collapse: collapse;">
+// 		<thead><tr>
+// 			<th style="border: 1px solid black; border-collapse: collapse;">Word</th>
+// 			<th style="border: 1px solid black; border-collapse: collapse;">Type</th>
+// 		</tr></thead>
+// 		<tbody>';
+// foreach ($ggezwp as $key) {
+// 	echo '<tr><td style="border: 1px solid black; border-collapse: collapse;">' . $key['text'] . '</td>';
+// 	echo '<td style="border: 1px solid black; border-collapse: collapse;">' . $key['type'] . '</td></tr>';
+// }		
+// echo '</tbody></table><br />';
 
+$str = "อะไรบ้าง";
+echo substr($str, 0, -4);
 
 function QuestionWordFromDBTB() {
 	$dsn = 'pgsql:'
