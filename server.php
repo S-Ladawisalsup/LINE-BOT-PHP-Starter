@@ -110,8 +110,8 @@ function GetServerNameList () {
 		$list = $list + 1;
 	}
 	$result->closeCursor();
-	
-	foreach ($server as $servers) {
+
+	foreach ($servers as $server) {
 		echo $server;
 	}
 }
