@@ -23,7 +23,9 @@ if (!is_null($events)) {
 	if ($events['request']) {
 		//echo all server list back to client
 		GetServerNameList();
-		BotPush();
+		for ($i=0; $i < 3; $i++) { 
+			BotPush($i);
+		}
 	}
 	else {
 		if (!is_null($events['temperature'])) {
@@ -140,12 +142,16 @@ function GetServerNameList () {
 	echo $responseJSON;
 }
 /**********************************************************************************************************************************/
-function BotPush () {
+function BotPush ($warrior) {
 	$access_token = 'CFecc4UnPdpCUxVk2VuTlf7ANCYHbCpaxYltjR/z15zMJ/KzsPIVrp4tCql4xmQYr8qgJSZ6oitEZ0/PKH+FpdneucSfPgjTP03mQ5KRSKqYT93fEEvGDqOUxJ/SBoS3oTXcJaRSxlPVBWxH+8PWxAdB04t89/1O/w1cDnyilFU=';
+
+	$wmode = array('0' => "ความน่ารักของพี่กวางนี่ผมไม่สามารถหาคำใดๆมาบรรยายได้เลยคับ",
+				   '1' => "แต่แปลงเป็นตัวเลขได้นะ",
+				   '2' => "เอาไป 3/10 ละกัน");
 
 	$messages = [						
 		'type' => 'text',
-		'text' => 'ไม่ชินกับห้องทำงานตอนทุ่มนึงที่ไม่มีพี่กวางเลยคับ...'
+		'text' => $wmode[$warrior]
 	];
 	//$nonnoi = 'Ua492767fd96449cd8a857b101dbdbcce';	//ball
 	$nonnoi = 'Ca35db1d5c584c6467d717df89a0302ec'; //group
@@ -167,5 +173,5 @@ function BotPush () {
 	$result = curl_exec($ch);
 	curl_close($ch);
 
-	echo $result . "\r\n";
+	//echo $result . "\r\n";
 }
