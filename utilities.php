@@ -365,11 +365,11 @@ function InsertDataToDB() {
 	// 						,('Alaina', 'Alaina ซอย รัชดาภิเษก 7 ถนนรัชดาภิเษก แขวง ดินแดง เขต ดินแดง กรุงเทพมหานคร 10400', '13.772270', '100.573075')
 	// 						;");//		
 
-	//now tbhlinebotwmode id 35-39 is empty
+	//now tbhlinebotwmode id 36-39 is empty
 	// $t = 'text';
-	// $result = pg_query($db, "INSERT INTO tbhlinebotlocname (loc_callname, loc_id) VALUES 
-	// 					('ห้องเซิฟเวอร์', '2')						
-	// 					;");//,('คืนนี้แหล่ะ อยากได้กี่ครั้งหล่ะ', '12')
+	$result = pg_query($db, "INSERT INTO tbhlinebotwmode (id, questiontext, questiontype) VALUES 
+						('35', 'หรอยัง', '1')						
+						;");//,('คืนนี้แหล่ะ อยากได้กี่ครั้งหล่ะ', '12')
 
 	// $result = pg_query($db, "UPDATE tbhlinebotwmode 
 	// 						SET questiontype = '2'
