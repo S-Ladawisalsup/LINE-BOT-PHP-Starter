@@ -111,7 +111,6 @@ function GetServerNameList () {
 	}
 	$result->closeCursor();
 
-	foreach ($servers as $server) {
-		echo $server;
-	}
+	$responseJSON = json_encode($servers);
+	echo $responseJSON;
 }
