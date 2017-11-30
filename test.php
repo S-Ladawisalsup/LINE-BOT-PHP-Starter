@@ -1,5 +1,4 @@
 <?php
-//(หนอนน้อยในพงไพร)groupId = Ca35db1d5c584c6467d717df89a0302ec
 $ggezwp = QuestionWordFromDBTB();
 
 echo '<table style="border: 1px solid black; border-collapse: collapse;">
@@ -28,7 +27,7 @@ function QuestionWordFromDBTB() {
 
 	$t = 'text';
 
-	$query = "SELECT questiontext, questiontype FROM tbhlinebotwmode WHERE questiontype = '4' OR questiontype = '8'";
+	$query = "SELECT questiontext, questiontype FROM tbhlinebotwmode WHERE questiontype = '8'";
 	//$query = "SELECT $t, type FROM tbhlinebotans WHERE type = '10'";
 	$result = $db->query($query);
 
