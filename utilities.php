@@ -252,13 +252,7 @@ function IsAskedServer($text) {
 
 	foreach ($servers as $server) {
 		//must be careful with duplicated server name, now set false to all duplicated server name.
-		if (strpos(strtolower($text), strtolower($server['name'])) !== false && 
-			($server['name'] != 'PrinterServerS' || $server['name'] != 'SERVER')) {		
-			$ip_addr['IsChecked'] = true;
-			$ip_addr['ip_addr'] = $server['ip'];
-			break;
-		}
-		else if ($ip_req < 1000000) {
+		if ($ip_req < 1000000) {
 			if ($ip_req < 1000) {
 				if ($ip_req == $server['lip']) {
 					$ip_addr['IsChecked'] = true;
@@ -275,6 +269,12 @@ function IsAskedServer($text) {
 					break;
 				}
 			}
+		}
+		else if (strpos(strtolower($text), strtolower($server['name'])) !== false && 
+			($server['name'] != 'PrinterServerS' && $server['name'] != 'SERVER')) {		
+			$ip_addr['IsChecked'] = true;
+			$ip_addr['ip_addr'] = $server['ip'];
+			break;
 		}
 	}
 
@@ -356,14 +356,7 @@ function GetLocation() {
 /**********************************************************************************************************************************/
 //Function to insert data to postgresql database to easier than insert data to database by terminal
 function InsertDataToDB() {
-
-	$db = pg_connect($GLOBALS['pgsql_conn']);
-
-	// $result = pg_query($db, "INSERT INTO linebotlocation (title, address, latitude, longitude) VALUES 
-	// 						('The Bank Massage Club', 'The Bank Massage Club 14/1 ถนนเพชรบุรีตัดใหม่ ซอย เพชรบุรี 47 แขวง บางกะปิ เขต ห้วยขวาง กรุงเทพมหานคร 10310', '13.748486', '100.593094')	
-	// 						,('Poseidon Entertainment Complex', 'Poseidon Entertainment Complex 88 สุขร่วมกัน แขวง ดินแดง เขต ดินแดง กรุงเทพมหานคร 10400', '13.785326', '100.573670')
-	// 						,('Alaina', 'Alaina ซอย รัชดาภิเษก 7 ถนนรัชดาภิเษก แขวง ดินแดง เขต ดินแดง กรุงเทพมหานคร 10400', '13.772270', '100.573075')
-	// 						;");//		
+	$db = pg_connect($GLOBALS['pgsql_conn']);		
 
 	//now tbhlinebotwmode id 37-39 is empty
 	// $t = 'text';
