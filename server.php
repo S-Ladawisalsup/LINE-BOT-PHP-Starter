@@ -53,6 +53,16 @@ function UpdateServToDB($name, $status, $location) {
 	$db = pg_connect($GLOBALS['pgsql_conn']);
 
 	$loc_id = findLocationID($location);
+
+	// $db_query = new PDO($GLOBALS['dsn']);
+	// $query = 'SELECT ip_addr, status FROM tbhlinebotserv ORDER BY id ASC';
+	// $res = $db_query->query($query);
+	// $previos_s
+	// $count = 0;
+	// while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+	// 	$
+	// }
+
 	$result = pg_query($db, "UPDATE tbhlinebotserv SET status = '$status', location_id = '$loc_id' WHERE ip_addr = '$name'");
 
 	// if (!$result) {
@@ -100,5 +110,8 @@ function GetServerNameList () {
 		$list = $list + 1;
 	}
 	$result->closeCursor();
-	echo $servers;
+	
+	foreach ($server as $servers) {
+		echo $server;
+	}
 }
