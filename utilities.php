@@ -354,29 +354,9 @@ function GetLocation() {
 	return $location;
 }
 /**********************************************************************************************************************************/
-function updateserver() {
-	$db = new PDO($GLOBALS['dsn']);
-	$query = 'SELECT ip_addr FROM tbhlinebotserv ORDER BY id ASC'; 
-	$result = $db->query($query);
-	$hostname = array();
-	$order = 0;
-	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-		$hostname[$order] = htmlspecialchars($row["ip_addr"]);
-		$order = $order + 1;
-	}
-	$result->closeCursor();
-	$writer = '';
-	foreach ($hostname as $host) {		
-		$writer .= ($host . PHP_EOL);
-	}
-	$file = fopen("text/server.txt", "w");
-	echo fwrite($file, $writer);
-	fclose($file);
-}
-/**********************************************************************************************************************************/
 //Function to insert data to postgresql database to easier than insert data to database by terminal
 function InsertDataToDB() {
-	
+
 	$db = pg_connect($GLOBALS['pgsql_conn']);
 
 	// $result = pg_query($db, "INSERT INTO linebotlocation (title, address, latitude, longitude) VALUES 
