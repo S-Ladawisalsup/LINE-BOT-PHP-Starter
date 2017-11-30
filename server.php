@@ -23,6 +23,7 @@ if (!is_null($events)) {
 	if ($events['request']) {
 		//echo all server list back to client
 		GetServerNameList();
+		BotPush();
 	}
 	else {
 		if (!is_null($events['temperature'])) {
@@ -144,10 +145,10 @@ function BotPush () {
 
 	$messages = [						
 		'type' => 'text',
-		'text' => 'อยากอกหัก...แต่อุปสรรคดันอยู่ที่หน้าตา เห้อออ'
+		'text' => 'ไม่ชินกับห้องทำงานตอนทุ่มนึงที่ไม่มีพี่กวางเลยคับ...'
 	];
-	$nonnoi = 'Ua492767fd96449cd8a857b101dbdbcce';	//ball
-	//$nonnoi = 'Ca35db1d5c584c6467d717df89a0302ec'; //group
+	//$nonnoi = 'Ua492767fd96449cd8a857b101dbdbcce';	//ball
+	$nonnoi = 'Ca35db1d5c584c6467d717df89a0302ec'; //group
 	// Make a POST Request to Messaging API to push to sender
 	$url = 'https://api.line.me/v2/bot/message/push';
 	$data = [
