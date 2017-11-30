@@ -365,10 +365,10 @@ function InsertDataToDB() {
 	// 						,('Alaina', 'Alaina ซอย รัชดาภิเษก 7 ถนนรัชดาภิเษก แขวง ดินแดง เขต ดินแดง กรุงเทพมหานคร 10400', '13.772270', '100.573075')
 	// 						;");//		
 
-	//now tbhlinebotwmode id 36-39 is empty
+	//now tbhlinebotwmode id 37-39 is empty
 	// $t = 'text';
 	$result = pg_query($db, "INSERT INTO tbhlinebotwmode (id, questiontext, questiontype) VALUES 
-						('35', 'หรอยัง', '1')						
+						('36', 'ไปไหน', '3')						
 						;");//,('คืนนี้แหล่ะ อยากได้กี่ครั้งหล่ะ', '12')
 
 	// $result = pg_query($db, "UPDATE tbhlinebotwmode 
