@@ -54,16 +54,40 @@ function UpdateServToDB($name, $status, $location) {
 
 	$loc_id = findLocationID($location);
 
-	// $db_query = new PDO($GLOBALS['dsn']);
-	// $query = 'SELECT ip_addr, status FROM tbhlinebotserv ORDER BY id ASC';
-	// $res = $db_query->query($query);
-	// $previos_s
-	// $count = 0;
-	// while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
-	// 	$
-	// }
+	$db_query = new PDO($GLOBALS['dsn']);
+	$query = 'SELECT ip_addr, status, lastchangedatetime FROM tbhlinebotserv ORDER BY id ASC';
+	$res = $db_query->query($query);
+	$previos_status = array();
+	$count = 0;
+	while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+		$previos_status[$count] = array();
+		$previos_status[$count]['ip'] = htmlspecialchars($row["ip_addr"]);
+		$previos_status[$count]['stats'] = htmlspecialchars($row["status"]);
+		$previos_status[$count]['timer'] = htmlspecialchars($row["lastchangedatetime"]);
+		$count = $count + 1;
+	}
+	$res->closeCursor();
+	$backup = false;
+	$laststate = 'error';
+	$lasttime = date("Y:m:d H:i:s");
+	foreach ($previos_status as $pre_state) {
+		if ($name == $pre_state['ip']) {
+			if ($status != $pre_state['stats']) {
+				$laststate = $pre_state['stats'];
+				$lasttime = $pre_state['timer'];
+				$backup = true;
+				break;
+			}
+		}
+	}
 
-	$result = pg_query($db, "UPDATE tbhlinebotserv SET status = '$status', location_id = '$loc_id' WHERE ip_addr = '$name'");
+	if ($backup) {
+		$result = pg_query($db, "UPDATE tbhlinebotserv SET status = '$status', location_id = '$loc_id', 
+								lastchangestatus = '$laststate', datetimestatuschanged = '$lasttime' WHERE ip_addr = '$name'");
+	}
+	else {
+		$result = pg_query($db, "UPDATE tbhlinebotserv SET status = '$status', location_id = '$loc_id' WHERE ip_addr = '$name'");
+	}
 
 	// if (!$result) {
 	// 	echo "\r\nAn error occurred.";
