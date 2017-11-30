@@ -14,7 +14,7 @@
 // echo '</tbody></table><br />';
 
 $str = "อะไรบ้าง";
-echo substr($str, 0, -4);
+echo substr($str, 0, -4) . 'type' . mb_check_encoding($str, 'UTF-8');
 
 function QuestionWordFromDBTB() {
 	$dsn = 'pgsql:'
