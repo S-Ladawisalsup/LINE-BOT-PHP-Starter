@@ -26,6 +26,12 @@ $dsn = 'pgsql:'
 	. 'sslmode=require;'
 	. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
 
+$pgsql_conn = "host=ec2-54-243-187-133.compute-1.amazonaws.com 
+					port=5432 
+					dbname=dfusod038c3j35 
+					user=mmbbbssobrmqjs 
+					password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa";
+
 /**********************************************************************************************************************************/
 /*** Function for check word(s) contain(s) start or end at string. ***/
 function startsWith($haystack, $needle) {
@@ -370,12 +376,8 @@ function updateserver() {
 /**********************************************************************************************************************************/
 //Function to insert data to postgresql database to easier than insert data to database by terminal
 function InsertDataToDB() {
-
-	$db = pg_connect("host=ec2-54-243-187-133.compute-1.amazonaws.com 
-					port=5432 
-					dbname=dfusod038c3j35 
-					user=mmbbbssobrmqjs 
-					password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa");
+	
+	$db = pg_connect($GLOBALS['pgsql_conn']);
 
 	// $result = pg_query($db, "INSERT INTO linebotlocation (title, address, latitude, longitude) VALUES 
 	// 						('The Bank Massage Club', 'The Bank Massage Club 14/1 ถนนเพชรบุรีตัดใหม่ ซอย เพชรบุรี 47 แขวง บางกะปิ เขต ห้วยขวาง กรุงเทพมหานคร 10310', '13.748486', '100.593094')	
