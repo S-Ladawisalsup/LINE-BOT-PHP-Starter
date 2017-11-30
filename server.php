@@ -76,8 +76,8 @@ function UpdateServToDB($name, $status, $location) {
 				$laststate = $pre_state['stats'];
 				$lasttime = $pre_state['timer'];
 				$backup = true;
-				break;
 			}
+			break;
 		}
 	}
 
