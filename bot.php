@@ -26,7 +26,7 @@ if (!is_null($events['events'])) {
 
 				// Compare message calling bot's name
 				$haystack = strtolower($event['message']['text']);
-				if (startsWith($haystack, $bot_name)) {
+				if (startsWith($haystack, $bot_name) || $event['source']['type'] == 'user') {
 
 					// Get text echo without bot's name
 					$text = substr($event['message']['text'], strlen($bot_name));

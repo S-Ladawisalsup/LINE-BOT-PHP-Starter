@@ -360,7 +360,7 @@ function GetLocation() {
 }
 /**********************************************************************************************************************************/
 function SubEndText($text) {
-	if (endsWith($text, 'บ้าง')) {
+	if (endsWith($text, 'บ้าง') || endsWith($text, 'อยู่')) {
 		$text = substr($text, 0, -12);
 	}
 	else if (endsWith($text, 'ดี')) {
