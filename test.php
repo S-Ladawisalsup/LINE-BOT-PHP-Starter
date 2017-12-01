@@ -13,9 +13,6 @@ foreach ($ggezwp as $key) {
 }		
 echo '</tbody></table><br />';
 
-$str = 'ทำอะไรอยู่';
-echo substr($str, 0, -12);
-
 function QuestionWordFromDBTB() {
 	$dsn = 'pgsql:'
 		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
