@@ -12,7 +12,7 @@
 // 	echo '<td style="border: 1px solid black; border-collapse: collapse;">' . $key['type'] . '</td></tr>';
 // }		
 // echo '</tbody></table><br />';
-//mb_internal_encoding('UTF-8');
+mb_internal_encoding('UTF-8');
 //$str = "อะไรบ้าง";
 $str2 = "ไปที่ไหนดี";
 $str3 = "HelloWorld";
