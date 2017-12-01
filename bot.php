@@ -4,6 +4,8 @@
 include 'utilities.php';
 /************************************************************************************************************************************/
 date_default_timezone_set("Asia/Bangkok");
+mb_internal_encoding('UTF-8');
+
 $access_token = 'CFecc4UnPdpCUxVk2VuTlf7ANCYHbCpaxYltjR/z15zMJ/KzsPIVrp4tCql4xmQYr8qgJSZ6oitEZ0/PKH+FpdneucSfPgjTP03mQ5KRSKqYT93fEEvGDqOUxJ/SBoS3oTXcJaRSxlPVBWxH+8PWxAdB04t89/1O/w1cDnyilFU=';
 
 // Get POST body content
@@ -29,9 +31,9 @@ if (!is_null($events['events'])) {
 
 					// Get text echo without bot's name
 					$text = substr($event['message']['text'], strlen($bot_name));
-					// if (endsWith($text, 'บ้าง')) {
-					// 	$text = mb_substr($text, 0, -4);
-					// }
+					if (endsWith($text, 'บ้าง')) {
+						$text = mb_substr($text, 0, -4);
+					}
 
 					// Check text is question
 					$typing = findQuestionType($text);
