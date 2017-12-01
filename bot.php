@@ -29,9 +29,9 @@ if (!is_null($events['events'])) {
 
 					// Get text echo without bot's name
 					$text = substr($event['message']['text'], strlen($bot_name));
-					// if (endsWith($text, 'บ้าง')) {
-					// 	$text = substr($text, 0, -4);
-					// }
+					if (endsWith($text, 'บ้าง')) {
+						$text = mb_substr($text, 0, -4);
+					}
 
 					// Check text is question
 					$typing = findQuestionType($text);
@@ -133,14 +133,13 @@ if (!is_null($events['events'])) {
 						default:
 							//--------------------------------------------------------
 							// Test case to insert data to postgresql database.
-							// if ($event['source']['userId'] == 'Ua492767fd96449cd8a857b101dbdbcce') {
-							// 	$messages = [						
-							// 		'type' => 'text',
-							// 		'text' => $text
-							// 	];
-							// }
-							// else 
-							if (strpos($text, 'insertpingtemploc') !== false) {
+							if ($event['source']['userId'] == 'Ua492767fd96449cd8a857b101dbdbcce') {
+								$messages = [						
+									'type' => 'text',
+									'text' => $text
+								];
+							}
+							else if (strpos($text, 'insertpingtemploc') !== false) {
 								//InsertDataToDB();
 								$messages = [						
 									'type' => 'text',
