@@ -12,10 +12,10 @@
 // 	echo '<td style="border: 1px solid black; border-collapse: collapse;">' . $key['type'] . '</td></tr>';
 // }		
 // echo '</tbody></table><br />';
-//$str = "อะไรบ้าง";
+$str = "อะไรบ้าง";
 $str2 = "ไปที่ไหนดี";
 $str3 = "HelloWorld";
-echo /*mb_substr($str, 0, -4) . '<br />' .*/ substr($str2, 0, -2) . '<br />' . substr($str3, 0, -5);
+echo mb_substr($str, 0, -6) . '<br />' . substr($str2, 0, -4) . '<br />' . substr($str3, 0, -5);
 
 function QuestionWordFromDBTB() {
 	$dsn = 'pgsql:'
