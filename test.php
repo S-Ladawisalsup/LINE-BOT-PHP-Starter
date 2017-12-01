@@ -1,21 +1,22 @@
 <?php
-// $ggezwp = QuestionWordFromDBTB();
+$ggezwp = QuestionWordFromDBTB();
 
-// echo '<table style="border: 1px solid black; border-collapse: collapse;">
-// 		<thead><tr>
-// 			<th style="border: 1px solid black; border-collapse: collapse;">Word</th>
-// 			<th style="border: 1px solid black; border-collapse: collapse;">Type</th>
-// 		</tr></thead>
-// 		<tbody>';
-// foreach ($ggezwp as $key) {
-// 	echo '<tr><td style="border: 1px solid black; border-collapse: collapse;">' . $key['text'] . '</td>';
-// 	echo '<td style="border: 1px solid black; border-collapse: collapse;">' . $key['type'] . '</td></tr>';
-// }		
-// echo '</tbody></table><br />';
+echo '<table style="border: 1px solid black; border-collapse: collapse;">
+		<thead><tr>
+			<th style="border: 1px solid black; border-collapse: collapse;">Word</th>
+			<th style="border: 1px solid black; border-collapse: collapse;">Type</th>
+		</tr></thead>
+		<tbody>';
+foreach ($ggezwp as $key) {
+	echo '<tr><td style="border: 1px solid black; border-collapse: collapse;">' . $key['text'] . '</td>';
+	echo '<td style="border: 1px solid black; border-collapse: collapse;">' . $key['type'] . '</td></tr>';
+}		
+echo '</tbody></table><br />';
 
 $str = "อะไรบ้าง";
 $str2 = "ไปที่ไหนดี";
-echo substr(utf8_encode(utf8_decode($str)), 0, -4) . '<br />' . substr(utf8_encode(utf8_decode($str2)), 0, -2);
+$str3 = "HelloWorld";
+echo substr($str, 0, -4) . '<br />' . substr($str2, 0, -2) . '<br />' . substr($str3, 0, -5);
 
 function QuestionWordFromDBTB() {
 	$dsn = 'pgsql:'
