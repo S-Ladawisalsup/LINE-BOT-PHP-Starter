@@ -14,9 +14,9 @@
 // echo '</tbody></table><br />';
 //mb_internal_encoding('UTF-8');
 //$str = "อะไรบ้าง";
-//$str2 = "ไปที่ไหนดี";
+$str2 = "ไปที่ไหนดี";
 $str3 = "HelloWorld";
-echo /*mb_substr($str, 0, -4) . '<br />' . mb_substr($str2, 0, -2) . '<br />' .*/ substr($str3, 0, -5);
+echo /*mb_substr($str, 0, -4) . '<br />' .*/ mb_substr($str2, 0, -2) . '<br />' . substr($str3, 0, -5);
 
 function QuestionWordFromDBTB() {
 	$dsn = 'pgsql:'
