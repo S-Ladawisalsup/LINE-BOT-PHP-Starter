@@ -1,21 +1,17 @@
 <?php
-// $ggezwp = QuestionWordFromDBTB();
+$ggezwp = QuestionWordFromDBTB();
 
-// echo '<table style="border: 1px solid black; border-collapse: collapse;">
-// 		<thead><tr>
-// 			<th style="border: 1px solid black; border-collapse: collapse;">Word</th>
-// 			<th style="border: 1px solid black; border-collapse: collapse;">Type</th>
-// 		</tr></thead>
-// 		<tbody>';
-// foreach ($ggezwp as $key) {
-// 	echo '<tr><td style="border: 1px solid black; border-collapse: collapse;">' . $key['text'] . '</td>';
-// 	echo '<td style="border: 1px solid black; border-collapse: collapse;">' . $key['type'] . '</td></tr>';
-// }		
-// echo '</tbody></table><br />';
-$str = "อะไรบ้าง";
-$str2 = "ไปที่ไหนดี";
-$str3 = "HelloWorld";
-echo substr($str, 0, -12) . '<br />' . substr($str2, 0, -6) . '<br />' . substr($str3, 0, -5);
+echo '<table style="border: 1px solid black; border-collapse: collapse;">
+		<thead><tr>
+			<th style="border: 1px solid black; border-collapse: collapse;">Word</th>
+			<th style="border: 1px solid black; border-collapse: collapse;">Type</th>
+		</tr></thead>
+		<tbody>';
+foreach ($ggezwp as $key) {
+	echo '<tr><td style="border: 1px solid black; border-collapse: collapse;">' . $key['text'] . '</td>';
+	echo '<td style="border: 1px solid black; border-collapse: collapse;">' . $key['type'] . '</td></tr>';
+}		
+echo '</tbody></table><br />';
 
 function QuestionWordFromDBTB() {
 	$dsn = 'pgsql:'
@@ -49,7 +45,7 @@ function QuestionWordFromDBTB() {
 
 /*
 * What do I do today
-* 1. substring endwiths in php language with word 'บ้าง' and 'ดี'.
+* 1. substring endwiths in php language with word 'บ้าง' and 'ดี'. [completed]
 * 2. change bot reply and push if id_type (user, group, room) is user's type
 *    when call bot do not call bot's name.
 * 3. Insert data member to postggesql database (tbhlinebotmem)

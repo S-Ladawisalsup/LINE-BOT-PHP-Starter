@@ -359,6 +359,16 @@ function GetLocation() {
 	return $location;
 }
 /**********************************************************************************************************************************/
+function SubEndText($text) {
+	if (endsWith($text, 'บ้าง')) {
+		$text = substr($text, 0, -12);
+	}
+	else if (endsWith($text, 'ดี')) {
+		$text = substr($text, 0, -6);
+	}
+	return $text;
+}
+/**********************************************************************************************************************************/
 //Function to insert data to postgresql database to easier than insert data to database by terminal
 function InsertDataToDB() {
 	$db = pg_connect($GLOBALS['pgsql_conn']);		

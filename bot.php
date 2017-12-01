@@ -30,12 +30,7 @@ if (!is_null($events['events'])) {
 
 					// Get text echo without bot's name
 					$text = substr($event['message']['text'], strlen($bot_name));
-					if (endsWith($text, 'บ้าง')) {
-						$text = substr($text, 0, -12);
-					}
-					else if (endsWith($text, 'ดี')) {
-						$text = substr($text, 0, -6);
-					}
+					$text = SubEndText($text);
 
 					// Check text is question
 					$typing = findQuestionType($text);
