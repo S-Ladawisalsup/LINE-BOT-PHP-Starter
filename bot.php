@@ -29,7 +29,9 @@ if (!is_null($events['events'])) {
 				if (startsWith($haystack, $bot_name) || $event['source']['type'] == 'user') {
 
 					// Get text echo without bot's name
-					$text = substr($event['message']['text'], strlen($bot_name));
+					if ($event['source']['type'] != 'user') {
+						$text = substr($event['message']['text'], strlen($bot_name));
+					}
 					$text = SubEndText($text);
 
 					// Check text is question
