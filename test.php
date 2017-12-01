@@ -15,7 +15,7 @@
 $str = "อะไรบ้าง";
 $str2 = "ไปที่ไหนดี";
 $str3 = "HelloWorld";
-echo mb_substr($str, 0, -6) . '<br />' . substr($str2, 0, -4) . '<br />' . substr($str3, 0, -5);
+echo substr($str, 0, -6) . '<br />' . substr($str2, 0, -4) . '<br />' . substr($str3, 0, -5);
 
 function QuestionWordFromDBTB() {
 	$dsn = 'pgsql:'
