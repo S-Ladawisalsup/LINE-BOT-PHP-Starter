@@ -15,7 +15,7 @@
 
 $str = "อะไรบ้าง";
 $str2 = "ไปที่ไหนดี";
-echo substr(utf8_decode($str), 0, -4) . '<br />' . substr(utf8_decode($str2), 0, -2);
+echo substr(utf8_encode(utf8_decode($str)), 0, -4) . '<br />' . substr(utf8_encode(utf8_decode($str2)), 0, -2);
 
 function QuestionWordFromDBTB() {
 	$dsn = 'pgsql:'
