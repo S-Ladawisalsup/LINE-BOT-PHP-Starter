@@ -132,13 +132,7 @@ if (!is_null($events['events'])) {
 						default:
 							//--------------------------------------------------------
 							// Test case to insert data to postgresql database.
-							if ($event['source']['userId'] == 'Ua492767fd96449cd8a857b101dbdbcce') {
-								$messages = [						
-									'type' => 'text',
-									'text' => $text
-								];
-							}
-							else if (strpos($text, 'insertpingtemploc') !== false) {
+							if (strpos($text, 'insertpingtemploc') !== false) {
 								//InsertDataToDB();
 								$messages = [						
 									'type' => 'text',
