@@ -35,7 +35,7 @@ if (!is_null($events['events'])) {
 							'text' => RegisterMode($text, $event['source'][$event['source']['type'] . 'Id'], $event['source']['type'])
 						];
 						break;
-					case 'trial': // allow
+					case 'allow':
 						// Compare message calling bot's name
 						$haystack = strtolower($event['message']['text']);
 						if (startsWith($haystack, $bot_name) || $event['source']['type'] == 'user') {
@@ -250,6 +250,19 @@ if (!is_null($events['events'])) {
 										'type' => 'text',
 										'text' => AnswerBuilder(10)
 									];		
+								}
+								else if ((strpos($text, 'เปิดโหมดลงทะเบียนเข้าใช้งาน') !== false) && $event['source']['type'] == 'user') {
+									if (CheckRegis($event['source'][$event['source']['type'] . 'Id']) == "allow") {	
+										$tx = "คุณสามารถใช้งาน Line Chat Bot ได้อย่างเต็มรูปแบบแล้วจ้า";
+									}
+									else {
+										SetRegisterSeq($event['source'][$event['source']['type'] . 'Id']);
+										$tx = "กรุณาระบุชื่อที่ให้ใช้เรียก (ชื่อเล่นก็ได้นะ)";
+									}
+									$messages = [						
+										'type' => 'text',
+										'text' => $tx
+									]; 
 								}
 								else {
 									$messages = [						
