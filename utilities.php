@@ -772,7 +772,7 @@ function ConfirmRowUserMember($text) {
 	return "ระบบดำเนินการตามคำอนุมัติเรียบร้อย";
 }
 /**********************************************************************************************************************************/
-function BotPushAllowAccess($usrId) {
+function BotPushAllowAccess($memberId) {
 	$access_token = 'CFecc4UnPdpCUxVk2VuTlf7ANCYHbCpaxYltjR/z15zMJ/KzsPIVrp4tCql4xmQYr8qgJSZ6oitEZ0/PKH+FpdneucSfPgjTP03mQ5KRSKqYT93fEEvGDqOUxJ/SBoS3oTXcJaRSxlPVBWxH+8PWxAdB04t89/1O/w1cDnyilFU=';
 
 	$messages = [						
@@ -780,7 +780,6 @@ function BotPushAllowAccess($usrId) {
 		'text' => "คำขอใช้งาน Line Chat Bot ของคุณได้รับการอนุญาตเรียบร้อย ยินดีต้อนรับสู่การใช้งาน Line Chat Bot อย่างเต็มรูปแบบนะคร้าบบบบบ"
 	];
 
-	$memberId = $usrId;
 	// Make a POST Request to Messaging API to push to sender
 	$url = 'https://api.line.me/v2/bot/message/push';
 	$data = [
