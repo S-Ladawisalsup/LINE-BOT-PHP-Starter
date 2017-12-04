@@ -29,9 +29,13 @@ if (!is_null($events['events'])) {
 				$bot_mod = IsAvailable($event['source'][$event['source']['type'] . 'Id']);
 				switch ($bot_mod) {
 					case 'regis':
-						//Call register function()
+						$text = $event['message']['text'];
+						$messages = [						
+							'type' => 'text',
+							'text' => RegisterMode($text, $event['source'][$event['source']['type'] . 'Id'], $event['source']['type'])
+						];
 						break;
-					case 'trial': // allow
+					case 'allow': // allow
 						// Compare message calling bot's name
 						$haystack = strtolower($event['message']['text']);
 						if (startsWith($haystack, $bot_name) || $event['source']['type'] == 'user') {
@@ -155,11 +159,18 @@ if (!is_null($events['events'])) {
 										];
 									}
 									//--------------------------------------------------------
-									else if ((strpos($text, 'เปิดโหมดลงทะเบียนเข้าใช้งาน') !== false) && $event['source']['type'] == 'user') {		
+									else if ((strpos($text, 'เปิดโหมดลงทะเบียนเข้าใช้งาน') !== false) && $event['source']['type'] == 'user') {
+										if (CheckRegis($event['source'][$event['source']['type'] . 'Id']) == "allow") {	
+											$tx = "คุณสามารถใช้งาน Line Chat Bot ได้อย่างเต็มรูปแบบแล้วจ้า";
+										}
+										else {
+											SetRegisterSeq($event['source'][$event['source']['type'] . 'Id']);
+											$tx = "กรุณาระบุชื่อที่ให้ใช้เรียก (ชื่อเล่นก็ได้นะ)";
+										}
 										$messages = [						
 											'type' => 'text',
-											'text' => 'กรุณารอสักครู่...'
-										]; //must check first now member allow yet and toggle state regis to 1 (tbhlinebotmodchng seq = 1)
+											'text' => $tx
+										]; 
 									}
 									else {
 										// Build message to reply back
@@ -173,14 +184,17 @@ if (!is_null($events['events'])) {
 						}
 						break;
 					case 'await':
+						$text = $event['message']['text'];
 						if (((strpos($text, 'ไม่') !== false) || (strpos(strtolower($text), 'no') !== false) || 
 							 (strpos($text, 'ยกเลิก') !== false) || (strpos(strtolower($text), 'cancel') !== false) || 
 							 (strpos($text, 'ปฏิเสธ') !== false) || (strpos(strtolower($text), 'refuse') !== false))) {
-							ReturnAllowToAdmin();//must check have any member wait regis
 							$messages = [						
 								'type' => 'text',
 								'text' => DeleteIdRow($text)
 							];
+							if (ListWaitRegister() == "ไม่มีรายชื่อขอเข้าใช้งานเต็มระบบตกค้าง") {
+								ReturnAllowToAdmin();
+							}
 						}
 						else if ((strpos($text, 'ใช่') !== false) || (strpos(strtolower($text), 'yes') !== false) || 
 							 	 (strpos($text, 'ตกลง') !== false) || (strpos(strtolower($text), 'accept') !== false) || 
@@ -190,11 +204,13 @@ if (!is_null($events['events'])) {
 							 	 (strpos($text, 'แน่นอน') !== false) || (strpos(strtolower($text), 'absolute') !== false) || 
 							 	 (strpos($text, 'คอนเฟิร์ม') !== false) || (strpos($text, 'อนุมัติ') !== false) || 
 							 	 (strpos($text, 'โอเค') !== false) || (strpos(strtolower($text), 'ok') !== false)) {
-							ReturnAllowToAdmin();
 							$messages = [						
 								'type' => 'text',
-								'text' => 'ระบบดำเนินการตามคำอนุมัติเรียบร้อย'
+								'text' => ConfirmRowUserMember($text)
 							];	
+							if (ListWaitRegister() == "ไม่มีรายชื่อขอเข้าใช้งานเต็มระบบตกค้าง") {
+								ReturnAllowToAdmin();
+							}
 						}
 						else if ((strpos($text, 'มีใครรออยู่บ้าง') !== false) || (strpos($text, 'ยังเหลือใครบ้าง') !== false) || 
 							     (strpos($text, 'มีใครเหลืออยู่บ้าง') !== false)) {
