@@ -147,9 +147,10 @@ if (!is_null($events['events'])) {
 									// Test case to insert data to postgresql database.
 									if (strpos($text, 'testmsgbyball') !== false) {
 										//InsertDataToDB();
+										$tx = "1\n2\n3\n4\n";
 										$messages = [						
 											'type' => 'text',
-											'text' => "1\n2\n3\n4"
+											'text' => $tx
 										];
 									}
 									//--------------------------------------------------------
