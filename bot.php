@@ -26,7 +26,6 @@ if (!is_null($events['events'])) {
 	
 			# Check event user request is text
 			if ($event['message']['type'] == 'text') {
-
 				$bot_mod = IsAvailable($event['source'][$event['source']['type'] . 'Id']);
 				switch ($bot_mod) {
 					case 'regis':
@@ -40,6 +39,9 @@ if (!is_null($events['events'])) {
 							// Get text echo without bot's name
 							if ($event['source']['type'] != 'user') {
 								$text = substr($event['message']['text'], strlen($bot_name));
+							}
+							else {
+								$text = $event['message']['text'];
 							}
 							$text = SubEndText($text);
 
@@ -180,6 +182,9 @@ if (!is_null($events['events'])) {
 								if ($event['source']['type'] != 'user') {
 									$text = substr($event['message']['text'], strlen($bot_name));
 								}
+								else {
+									$text = $event['message']['text'];
+								}
 								$text = SubEndText($text);
 
 								// Check text is question
@@ -193,7 +198,7 @@ if (!is_null($events['events'])) {
 								else {
 									$messages = [						
 										'type' => 'text',
-										'text' => 'bot_mode = ' . $bot_mod . ' /text = ' . $text //AnswerBuilder(13)
+										'text' => AnswerBuilder(13)
 									];	 	
 								}
 							}			
