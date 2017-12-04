@@ -714,7 +714,7 @@ function CheckRegis($userId) {
 
 	$bot_mod = "trial";
 	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-	    $bot_mod = htmlspecialchars($row["user_id"]);
+	    $bot_mod = htmlspecialchars($row["bot_mode"]);
 	}
 	$result->closeCursor();
 	return $bot_mod;
