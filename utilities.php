@@ -699,12 +699,11 @@ function ListWaitRegister() {
 		return "ไม่มีรายชื่อขอเข้าใช้งานเต็มระบบตกค้าง";
 	}
 
-	$query2 = "SELECT name, linename FROM tbhlinebotmodchng WHERE ";
+	$query2 = "SELECT name, linename FROM tbhlinebotmem WHERE ";
 	foreach ($regis as $item) {
 		$query2 .= "user_id = '$item' OR ";
 	}
 	$query2 = substr($query2, 0, -4);
-	$query2 .= ";"; 
 	$result2 = $db->query($query2);
 
 	$sum = array();
