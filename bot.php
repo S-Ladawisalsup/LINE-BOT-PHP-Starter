@@ -2,6 +2,7 @@
 /************************************************************************************************************************************/
 /*** include file(s) ***/
 include 'utilities.php';
+include 'registre.php';
 /************************************************************************************************************************************/
 date_default_timezone_set("Asia/Bangkok");
 
@@ -18,148 +19,195 @@ $bot_name = '@kiki';
 if (!is_null($events['events'])) {
 	// Loop through each event
 	foreach ($events['events'] as $event) {
+
+		InsertIdToDB($event['source'][$event['source']['type'] . 'Id']);
 		// Reply only when message sent is in 'text' format
 		if ($event['type'] == 'message') {
-
+	
 			# Check event user request is text
 			if ($event['message']['type'] == 'text') {
 
-				// Compare message calling bot's name
-				$haystack = strtolower($event['message']['text']);
-				if (startsWith($haystack, $bot_name) || $event['source']['type'] == 'user') {
+				$bot_mod = IsAvailable($event['source'][$event['source']['type'] . 'Id']);
+				switch ($bot_mod) {
+					case 'regis':
+						//Call register function()
+						break;
+					case 'trial': // allow
+						// Compare message calling bot's name
+						$haystack = strtolower($event['message']['text']);
+						if (startsWith($haystack, $bot_name) || $event['source']['type'] == 'user') {
 
-					// Get text echo without bot's name
-					if ($event['source']['type'] != 'user') {
-						$text = substr($event['message']['text'], strlen($bot_name));
-					}
-					$text = SubEndText($text);
+							// Get text echo without bot's name
+							if ($event['source']['type'] != 'user') {
+								$text = substr($event['message']['text'], strlen($bot_name));
+							}
+							$text = SubEndText($text);
 
-					// Check text is question
-					$typing = findQuestionType($text);
-					switch ($typing) {
-						case '1':
-							# code... Yes/No Question => Yes/No Answer
-							$messages = [						
-								'type' => 'text',
-								'text' => AnswerBuilder(10)
-							];							
-							break;	
-						case '2':
-							# code... When Question => Timer Answer
-							$messages = [						
-								'type' => 'text',
-								'text' => AnswerBuilder(12)
-							];
-							break;
-						case '3':
-							# code... Where Question => Location Answer
-							$locate = GetLocation();
-							if ($locate != null) {
-								$messages = [						
-									'type' => 'location',
-									'title' => $locate['title'],
-									'address' => $locate['address'],
-									'latitude' => $locate['latitude'],
-									'longitude' => $locate['longitude']
-								];
+							// Check text is question
+							$typing = findQuestionType($text);
+							switch ($typing) {
+								case '1':
+									# code... Yes/No Question => Yes/No Answer
+									$messages = [						
+										'type' => 'text',
+										'text' => AnswerBuilder(10)
+									];							
+									break;	
+								case '2':
+									# code... When Question => Timer Answer
+									$messages = [						
+										'type' => 'text',
+										'text' => AnswerBuilder(12)
+									];
+									break;
+								case '3':
+									# code... Where Question => Location Answer
+									$locate = GetLocation();
+									if ($locate != null) {
+										$messages = [						
+											'type' => 'location',
+											'title' => $locate['title'],
+											'address' => $locate['address'],
+											'latitude' => $locate['latitude'],
+											'longitude' => $locate['longitude']
+										];
+									}
+									else {
+										$messages = [						
+											'type' => 'text',
+											'text' => AnswerBuilder(10)
+										];
+									}
+									break;
+								case '4':
+									# code... Who Question => Personal Answer
+									$messages = [						
+										'type' => 'text',
+										'text' => AnswerBuilder(11)
+									];
+									break;
+								case '5':
+									# code... What/How Question => Reason Answer
+									$messages = [						
+										'type' => 'text',
+										'text' => AnswerBuilder(10)
+									];							
+									break;
+								case '6':
+									# code... Which Question => Object Answer
+									$messages = [						
+										'type' => 'text',
+										'text' => AnswerBuilder(10)
+									];
+									break;
+								case '7':
+									# Number Question (How + ...) => Number Answer
+									if (strpos($text, 'อุณหภูมิ') !== false) {							
+										$messages = [						
+											'type' => 'text',
+											'text' => GetTemperature($text)
+										];	
+									}
+									else {
+										$messages = [						
+											'type' => 'text',
+											'text' => AnswerBuilder(10)
+										];							
+									}
+									break;	
+								case '8':
+									# ping mode
+									$protocal = IsAskedServer($text);
+									if ($protocal['IsChecked']) {
+										$messages = [						
+											'type' => 'text',
+											'text' => GetPingAnswer($protocal['ip_addr'])
+										];	
+									}
+									else {
+										$messages = [						
+											'type' => 'text',
+											'text' => 'ไม่มีข้อมูลในระบบจ้า อยากรู้ก็ไป ping เองสิจ๊ะ'
+										];	
+									}
+									break;		
+								case '9':
+									# greeting mode
+									$day = strtolower(date("D"));
+									$messages = [
+										'type' => 'image',
+									    'originalContentUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/' . $day . '_original.jpg',
+									    'previewImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/' . $day . '_240.jpg'
+									];
+									break;		
+								default:
+									//--------------------------------------------------------
+									// Test case to insert data to postgresql database.
+									if (strpos($text, 'insertpingtemploc') !== false) {
+										//InsertDataToDB();
+										$messages = [						
+											'type' => 'text',
+											'text' => $event['source']['type']
+										];
+									}
+									//--------------------------------------------------------
+									else if ((strpos($text, 'เปิดโหมดลงทะเบียนเข้าใช้งาน') !== false) && $event['source']['type'] == 'user') {
+										$messages = [						
+											'type' => 'text',
+											'text' => 'กรุณารอสักครู่...'
+										]; // and toggle state regis to 1
+									}
+									else {
+										// Build message to reply back
+										$messages = [						
+											'type' => 'text',
+											'text' => AnswerBuilder(13)
+										];	
+									}  
+									break;
 							}
-							else {
-								$messages = [						
-									'type' => 'text',
-									'text' => AnswerBuilder(10)
-								];
-							}
-							break;
-						case '4':
-							# code... Who Question => Personal Answer
-							$messages = [						
-								'type' => 'text',
-								'text' => AnswerBuilder(11)
-							];
-							break;
-						case '5':
-							# code... What/How Question => Reason Answer
-							$messages = [						
-								'type' => 'text',
-								'text' => AnswerBuilder(10)
-							];							
-							break;
-						case '6':
-							# code... Which Question => Object Answer
-							$messages = [						
-								'type' => 'text',
-								'text' => AnswerBuilder(10)
-							];
-							break;
-						case '7':
-							# Number Question (How + ...) => Number Answer
-							if (strpos($text, 'อุณหภูมิ') !== false) {							
-								$messages = [						
-									'type' => 'text',
-									'text' => GetTemperature($text)
-								];	
-							}
-							else {
-								$messages = [						
-									'type' => 'text',
-									'text' => AnswerBuilder(10)
-								];							
-							}
-							break;	
-						case '8':
-							# ping mode
-							$protocal = IsAskedServer($text);
-							if ($protocal['IsChecked']) {
-								$messages = [						
-									'type' => 'text',
-									'text' => GetPingAnswer($protocal['ip_addr'])
-								];	
-							}
-							else {
-								$messages = [						
-									'type' => 'text',
-									'text' => 'ไม่มีข้อมูลในระบบจ้า อยากรู้ก็ไป ping เองสิจ๊ะ'
-								];	
-							}
-							break;		
-						case '9':
-							# greeting mode
-							$day = strtolower(date("D"));
-							$messages = [
-								'type' => 'image',
-							    'originalContentUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/' . $day . '_original.jpg',
-							    'previewImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/' . $day . '_240.jpg'
-							];
-							break;		
-						default:
-							//--------------------------------------------------------
-							// Test case to insert data to postgresql database.
-							if (strpos($text, 'insertpingtemploc') !== false) {
-								//InsertDataToDB();
-								$messages = [						
-									'type' => 'text',
-									'text' => $event['source']['type']
-								];
-							}
-							//--------------------------------------------------------
-							else {
-								// Build message to reply back
-								$messages = [						
-									'type' => 'text',
-									'text' => AnswerBuilder(13)
-								];	
-							}  
-							break;
-					}
-				}			
+						}
+						break;		
+					default:
+						# Check event user request is text
+						if ($event['message']['type'] == 'text') {
+
+							// Compare message calling bot's name
+							$haystack = strtolower($event['message']['text']);
+							if (startsWith($haystack, $bot_name) || $event['source']['type'] == 'user') {
+
+								// Get text echo without bot's name
+								if ($event['source']['type'] != 'user') {
+									$text = substr($event['message']['text'], strlen($bot_name));
+								}
+								$text = SubEndText($text);
+
+								// Check text is question
+								$typing = findQuestionType($text);
+								if ($typing < 8) {
+									$messages = [						
+										'type' => 'text',
+										'text' => AnswerBuilder(10)
+									];		
+								}
+								else {
+									$messages = [						
+										'type' => 'text',
+										'text' => AnswerBuilder(13)
+									];	 	
+								}
+							}			
+						}
+						break;	
+				}
 			}
 
 			# Check event user request is sticker
 			else if ($event['message']['type'] == 'sticker') {
 
-				$rand_chance = rand(0, 1);
+				$rand_chance = rand(0, 10000);
 
-				if ($rand_chance == 0) {
+				if ($rand_chance % 2 == 0) {
 					// Get random sticker default by LINE Corp.
 					$sticker = GetSticker();
 

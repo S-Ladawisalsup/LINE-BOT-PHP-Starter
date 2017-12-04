@@ -369,6 +369,115 @@ function SubEndText($text) {
 	return $text;
 }
 /**********************************************************************************************************************************/
+function IsAvailable($userId) {
+	$db = new PDO($GLOBALS['dsn']);
+	$query = "SELECT bot_mode FROM tbhlinebotmodchng WHERE user_id = '$userId'"; 
+	$result = $db->query($query);
+
+	$botmod = 'trial';
+	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+	    $botmod = htmlspecialchars($row["bot_mode"]);
+	}
+	$result->closeCursor();
+
+	return $botmod;
+}
+/**********************************************************************************************************************************/
+function InsertIdToDB($userId) {
+	$db = new PDO($GLOBALS['dsn']);
+	$query = "SELECT user_id FROM tbhlinebotmodchng WHERE user_id = '$userId'"; 
+	$result = $db->query($query);
+
+	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+	    $activate = htmlspecialchars($row["user_id"]);
+	}
+	$result->closeCursor();
+
+	if (is_null($activate)) {
+		$db2 = pg_connect($GLOBALS['pgsql_conn']);		
+		$results = pg_query($db2, "INSERT INTO tbhlinebotmodchng (user_id) VALUES ('$userId');");	
+	}
+}
+/**********************************************************************************************************************************/
+function RegisterMode($text, $userId, $userType) {
+	$db = new PDO($GLOBALS['dsn']);
+	$query = "SELECT seq FROM tbhlinebotmodchng WHERE user_id = '$userId'"; 
+	$result = $db->query($query);
+
+	$stage = 0;
+	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+	    $stage = htmlspecialchars($row["seq"]);
+	}
+	$result->closeCursor();
+
+	$db2 = pg_connect($GLOBALS['pgsql_conn']);	
+
+	switch ($stage) {
+		case '1':
+			# user tell name
+			# for infinite loop find empty id to insert in table tbhlinebotmem
+			$countable = 1;
+			while(true) {
+				$query = "SELECT id FROM tbhlinebotmem WHERE id = '$countable'"; 
+				$result = $db->query($query);
+
+				$curr_val = 0;
+				while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+				    $curr_val = htmlspecialchars($row["id"]);
+				}
+				$result->closeCursor();
+
+				if ($curr_val == 0 || is_null($curr_val)) {
+					break;
+				}
+				$countable = $countable + 1;
+			}
+			$results = pg_query($db2, "INSERT INTO tbhlinebotmem (id, user_id, name, position, id_type) 
+									   VALUES ('$countable', '$userId', '$text', 'member', '$userType');");
+			$toggle = 2;
+			$str = "กรุณาระบุชื่อไลน์ของคุณด้วยด้วยจ้า (เช่นของผมคือ @kiki อย่าลืมใส่เครื่องหมาย @ นะ)";
+			break;
+		case '2':
+			# user tell line name
+			if (startsWith($text, '@')) {
+				$results = pg_query($db2, "UPDATE tbhlinebotmem SET linename = '$text' WHERE user_id = '$userId';");
+				$toggle = 3;
+				$str = "กรุณาระบุเพศด้วยจ้า";
+			}
+			else {
+				$results = pg_query($db2, "DELETE FROM tbhlinebotmem WHERE user_id = '$userId';");
+				$results = pg_query($db2, "UPDATE tbhlinebotmodchng SET bot_mode = 'trial' WHERE user_id = '$userId';");
+				$toggle = 0;
+				$str = "ก็บอกให้ใส่เครื่องหมาย @ ด้วยไง ปัดโธ่!";
+			}
+			break;		
+		case '3':
+			# user tell gender
+			$results = pg_query($db2, "UPDATE tbhlinebotmem SET gender = '$text' WHERE user_id = '$userId';");
+			$toggle = 4;
+			$str = "กรุณาระบุวันเดือนปีเกิด (ในรูปแบบ dd/mm/yyyy เช่น 01/01/1900) ด้วยจ้า";
+			break;
+		case '4':
+			# user tell date of birth
+			$results = pg_query($db2, "UPDATE tbhlinebotmem SET date_of_birth = '$text' WHERE user_id = '$userId';");
+			$toggle = 5;
+			$str = "ยืนยันการลงทะเบียนหรือไม่";
+			break;
+		case '5':
+			# acception by user
+			$toggle = 0;
+			$str = "ขอผมคิดดูก่อนนะว่าจะรับดีมั้ยน้า แล้วเดี๋ยวจะมาบอกทีหลังนะ";
+			break;
+		default:
+			return "ขออภัยขณะนี้ระบบลงทะเบียนมีปัญหา ไว้มาลงทะเบียนใหม่ทีหลังน๊ะจ๊ะคนดีดนเก่งของพี่จุ๊บๆ";
+	}
+	
+	$result_again = pg_query($db2, "UPDATE tbhlinebotmodchng SET seq = '$toggle' WHERE user_id = '$userId';");
+
+	return $str;
+
+}
+/**********************************************************************************************************************************/
 //Function to insert data to postgresql database to easier than insert data to database by terminal
 function InsertDataToDB() {
 	$db = pg_connect($GLOBALS['pgsql_conn']);		
