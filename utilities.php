@@ -674,7 +674,7 @@ function DeleteIdRow($text) {
 			$db2 = pg_connect($GLOBALS['pgsql_conn']);
 			$result2 = pg_query($db2, "DELETE FROM tbhlinebotmem WHERE user_id = '$rm';");
 			$result_again = pg_query($db2, "UPDATE tbhlinebotmodchng SET bot_mode = 'trial', seq = '0' WHERE user_id = '$rm';");
-			BotPushAllowAccess($usrid, false);
+			BotPushAllowAccess($rm, false);
 			return "ระบบดำเนินการตามคำอนุมัติเรียบร้อย";
 		}
 	}
