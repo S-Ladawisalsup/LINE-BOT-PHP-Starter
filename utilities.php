@@ -682,7 +682,7 @@ function DeleteIdRow($text) {
 	return "ไม่สามารถจัดการข้อมูลได้ หรืออาจจะไม่มีรายชื่อนี้ กรุณาตรวจสอบ หรือ จัดการกับฐานข้อมูลโดยตรง";
 }
 /**********************************************************************************************************************************/
-function ListWaitRegister() {
+function ListWaitRegister() { //<-- current bugged this function.
 	$db = new PDO($GLOBALS['dsn']);
 
 	$query = "SELECT user_id FROM tbhlinebotmodchng WHERE bot_mode = 'regis'"; 

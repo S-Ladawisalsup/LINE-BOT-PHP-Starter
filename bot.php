@@ -35,7 +35,7 @@ if (!is_null($events['events'])) {
 							'text' => RegisterMode($text, $event['source'][$event['source']['type'] . 'Id'], $event['source']['type'])
 						];
 						break;
-					case 'allow':
+					case 'trial'://allow
 						// Compare message calling bot's name
 						$haystack = strtolower($event['message']['text']);
 						if (startsWith($haystack, $bot_name) || $event['source']['type'] == 'user') {
