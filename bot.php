@@ -143,11 +143,11 @@ if (!is_null($events['events'])) {
 								default:
 									//--------------------------------------------------------
 									// Test case to insert data to postgresql database.
-									if (strpos($text, 'insertpingtemploc') !== false) {
+									if (strpos($text, 'testmsgbyball') !== false) {
 										//InsertDataToDB();
 										$messages = [						
 											'type' => 'text',
-											'text' => $event['source']['type']
+											'text' => 'bot_mode = ' . $bot_mod . ' /text = ' . $text
 										];
 									}
 									//--------------------------------------------------------
