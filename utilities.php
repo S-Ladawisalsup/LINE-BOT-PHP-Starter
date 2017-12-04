@@ -760,7 +760,7 @@ function InsertDataToDB($userId, $userType) {
 						('$userId', 'บอล', '@Ball Sarayuth', 'M', '1990-10-28 00:00:00', 'admin', '$userType')						
 						;");//,('คืนนี้แหล่ะ อยากได้กี่ครั้งหล่ะ', '12')
 
-	// $result = pg_query($db, "UPDATE tbhlinebotwmode 
-	// 						SET questiontype = '2'
-	// 						WHERE questiontext = 'ตอนไหน'");		
+	$result = pg_query($db, "UPDATE tbhlinebotmodchng
+							SET bot_mode = 'allow'
+							WHERE id = '1'");		
 }
