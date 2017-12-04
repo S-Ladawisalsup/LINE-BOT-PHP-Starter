@@ -26,7 +26,7 @@ function QuestionWordFromDBTB() {
 
 	$t = 'text';
 
-	$query = "SELECT questiontext, questiontype FROM tbhlinebotwmode WHERE questiontype = '7'";
+	$query = "SELECT questiontext, questiontype FROM tbhlinebotwmode WHERE questiontype = '6'";
 	//$query = "SELECT $t, type FROM tbhlinebotans WHERE type = '10'";
 	$result = $db->query($query);
 
@@ -42,13 +42,3 @@ function QuestionWordFromDBTB() {
 
 	return $words;
 }
-
-/*
-* What do I do today
-* 1. substring endwiths in php language with word 'บ้าง' and 'ดี'. [completed]
-* 2. change bot reply and push if id_type (user, group, room) is user's type
-*    when call bot do not call bot's name. [completed]
-* 3. Insert data member to postggesql database (tbhlinebotmem)
-*    and try to using that data.
-* 4. Create register member system to bot.
-*/
