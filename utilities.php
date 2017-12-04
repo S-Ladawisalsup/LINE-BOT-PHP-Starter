@@ -437,6 +437,8 @@ function RegisterMode($text, $userId, $userType) {
 			$text = str_replace("ท่าน", "", $text);
 			$text = str_replace("พี่", "", $text);
 			$text = str_replace("น้อง", "", $text);
+			$text = str_replace("กลุ่ม", "", $text);
+			$text = str_replace("ห้อง", "", $text);
 			//$text = str_replace("นามสกุล", "", $text);
 			$roomgroup = "@" . $text;
 			$results = pg_query($db2, "INSERT INTO tbhlinebotmem (id, user_id, name, linename, position, id_type) 
