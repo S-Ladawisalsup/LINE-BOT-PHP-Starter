@@ -155,13 +155,13 @@ if (!is_null($events['events'])) {
 										$messages = [						
 											'type' => 'text',
 											'text' => 'กรุณารอสักครู่...'
-										]; // and toggle state regis to 1
+										]; // and toggle state regis to 1 (tbhlinebotmodchng seq = 1)
 									}
 									else {
 										// Build message to reply back
 										$messages = [						
 											'type' => 'text',
-											'text' => AnswerBuilder(13)
+											'text' => 'bot_mode = ' . $bot_mod . ' /text = ' . $text //AnswerBuilder(13)
 										];	
 									}  
 									break;
@@ -193,7 +193,7 @@ if (!is_null($events['events'])) {
 								else {
 									$messages = [						
 										'type' => 'text',
-										'text' => AnswerBuilder(13)
+										'text' => 'bot_mode = ' . $bot_mod . ' /text = ' . $text //AnswerBuilder(13)
 									];	 	
 								}
 							}			
