@@ -257,10 +257,10 @@ if (!is_null($events['events'])) {
 
 								// Check text is question
 								$typing = findQuestionType($text);
-								if ($typing < 8) {
+								if ($typing > 0 && $typing < 8) {
 									$messages = [						
 										'type' => 'text',
-										'text' => '1'.$text//AnswerBuilder(10)
+										'text' => AnswerBuilder(10)
 									];		
 								}
 								else if ((strpos($text, 'เปิดโหมดลงทะเบียนเข้าใช้งาน') !== false)) {// && $event['source']['type'] == 'user') {
@@ -291,7 +291,7 @@ if (!is_null($events['events'])) {
 								else {
 									$messages = [						
 										'type' => 'text',
-										'text' => '2'.$text//AnswerBuilder(13)
+										'text' => AnswerBuilder(13)
 									];	 	
 								}
 							}			
