@@ -148,7 +148,7 @@ if (!is_null($events['events'])) {
 									if (strpos($text, 'testmsgbyball') !== false) {
 										//InsertDataToDB();
 										$tx = "1\n2\n3\n4\n";
-										$tx = substr($tx, 0, -2);
+										$tx = substr($tx, 0, -1);
 										$messages = [						
 											'type' => 'text',
 											'text' => $tx
