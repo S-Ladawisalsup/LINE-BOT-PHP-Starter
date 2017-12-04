@@ -260,7 +260,7 @@ if (!is_null($events['events'])) {
 								if ($typing < 8) {
 									$messages = [						
 										'type' => 'text',
-										'text' => AnswerBuilder(10)
+										'text' => '1'.$text//AnswerBuilder(10)
 									];		
 								}
 								else if ((strpos($text, 'เปิดโหมดลงทะเบียนเข้าใช้งาน') !== false)) {// && $event['source']['type'] == 'user') {
@@ -291,7 +291,7 @@ if (!is_null($events['events'])) {
 								else {
 									$messages = [						
 										'type' => 'text',
-										'text' => AnswerBuilder(13)
+										'text' => '2'.$text//AnswerBuilder(13)
 									];	 	
 								}
 							}			
