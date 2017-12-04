@@ -411,27 +411,29 @@ function RegisterMode($text, $userId, $userType) {
 	$result->closeCursor();
 
 	$db2 = pg_connect($GLOBALS['pgsql_conn']);	
-
+	$error = false;
 	switch ($stage) {
 		case '1':
 			# user tell name
 			# for infinite loop find empty id to insert in table tbhlinebotmem
 			$countable = 1;
 			while(true) {
-				$query = "SELECT id FROM tbhlinebotmem WHERE id = '$countable'"; 
-				$result = $db->query($query);
+				$query2 = "SELECT id FROM tbhlinebotmem WHERE id = '$countable'"; 
+				$result2 = $db->query($query2);
 
 				$curr_val = 0;
-				while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+				while ($row = $result2->fetch(PDO::FETCH_ASSOC)) {
 				    $curr_val = htmlspecialchars($row["id"]);
 				}
-				$result->closeCursor();
+				$result2->closeCursor();
 
 				if ($curr_val == 0 || is_null($curr_val)) {
 					break;
 				}
 				$countable = $countable + 1;
 			}
+			$text = str_replace("ชื่อ", "", $text);
+			//$text = str_replace("นามสกุล", "", $text);
 			$results = pg_query($db2, "INSERT INTO tbhlinebotmem (id, user_id, name, position, id_type) 
 									   VALUES ('$countable', '$userId', '$text', 'member', '$userType');");
 			$toggle = 2;
@@ -442,40 +444,255 @@ function RegisterMode($text, $userId, $userType) {
 			if (startsWith($text, '@')) {
 				$results = pg_query($db2, "UPDATE tbhlinebotmem SET linename = '$text' WHERE user_id = '$userId';");
 				$toggle = 3;
-				$str = "กรุณาระบุเพศด้วยจ้า";
+				$str = "กรุณาระบุเพศด้วยจ้า (ชาย / หญิง)";
 			}
 			else {
-				$results = pg_query($db2, "DELETE FROM tbhlinebotmem WHERE user_id = '$userId';");
-				$results = pg_query($db2, "UPDATE tbhlinebotmodchng SET bot_mode = 'trial' WHERE user_id = '$userId';");
-				$toggle = 0;
+				$error = true;
 				$str = "ก็บอกให้ใส่เครื่องหมาย @ ด้วยไง ปัดโธ่!";
 			}
 			break;		
 		case '3':
 			# user tell gender
-			$results = pg_query($db2, "UPDATE tbhlinebotmem SET gender = '$text' WHERE user_id = '$userId';");
-			$toggle = 4;
-			$str = "กรุณาระบุวันเดือนปีเกิด (ในรูปแบบ dd/mm/yyyy เช่น 01/01/1900) ด้วยจ้า";
+			if (strpos($text, 'หญิง') || strpos(strtolower($text), 'female') || strpos($text, 'ญ') || strpos(strtolower($text), 'f')) {
+				$results = pg_query($db2, "UPDATE tbhlinebotmem SET gender = 'F' WHERE user_id = '$userId';");
+				$toggle = 4;
+				$str = "กรุณาระบุวันเดือนปีเกิด (ในรูปแบบ dd/mm/yyyy เช่น 01/01/1900) ด้วยจ้า";
+			}
+			else if (strpos($text, 'ชาย') || strpos(strtolower($text), 'male') || strpos($text, 'ช') || strpos(strtolower($text), 'm')) {
+				$results = pg_query($db2, "UPDATE tbhlinebotmem SET gender = 'M' WHERE user_id = '$userId';");
+				$toggle = 4;
+				$str = "กรุณาระบุวันเดือนปีเกิด (ในรูปแบบ(ค.ศ.) dd/mm/yyyy เช่น 01/01/1900) ด้วยจ้า";
+			} 
+			else {
+				$error = true;
+				$str = "ก็ให้ใส่แค่ ชาย หรือ หญิง ไง แล้วนี่กรอกอะไรมา!";
+			}
 			break;
 		case '4':
 			# user tell date of birth
-			$results = pg_query($db2, "UPDATE tbhlinebotmem SET date_of_birth = '$text' WHERE user_id = '$userId';");
-			$toggle = 5;
-			$str = "ยืนยันการลงทะเบียนหรือไม่";
+			preg_match_all("!\d+!", $text, $matches);
+			if (count($matches) == 3) {
+				$bd = $matches[0][2] . '-' . $matches[0][1] . '-' . $matches[0][0] . ' 00:00:00';
+				if (($bd < date("Y-m-d H:i:s")) && ($bd > date("Y-m-d H:i:s", strtotime("-150 Years")))) {
+					$results = pg_query($db2, "UPDATE tbhlinebotmem SET date_of_birth = '$bd' WHERE user_id = '$userId';");
+					$toggle = 5;
+					$str = "ยืนยันการลงทะเบียนหรือไม่";
+				}
+				else {
+					$error = true;
+					$str = "อายุคูณไม่ได้อยู่ในช่วง 150 ปีที่ผ่านมา คุณเป็นใครกันแน่เนี่ยยยย!";	
+				}
+			}
+			else {
+				$error = true;
+				$str = "ก็บอกให้กรอกวันที่ในรูปแบบ(ค.ศ.) dd/mm/yyyy เช่น 01/01/1900 ไง ไปเริ่มกรอกใหม่ตั้งแต่ต้นเลยไป๊!";
+			}
 			break;
 		case '5':
 			# acception by user
-			$toggle = 0;
-			$str = "ขอผมคิดดูก่อนนะว่าจะรับดีมั้ยน้า แล้วเดี๋ยวจะมาบอกทีหลังนะ";
+			if (strpos($text, 'ไม่')) {
+				$error = true;
+				$str = "ว่างหรอ?";
+			}
+			else if (strpos($text, 'ใช่') || strpos(strtolower($text), 'yes') || strpos(strtolower($text), 'yeah') || strpos(strtolower($text), 'y') || 
+				strpos(strtolower($text), 'absolute') || strpos(strtolower($text), 'whynot') || strpos(strtolower($text), 'sure')) {
+				//bool IsAcceptingMember();
+				$toggle = 0;
+				$str = "ขอคิดดูก่อนนะว่าจะรับดีมั้ยน้า แล้วเดี๋ยวจะมาบอกทีหลังนะ";
+			}
+			else {
+				$error = true;
+				$str = "ว่างหรอ?";
+			}
 			break;
 		default:
-			return "ขออภัยขณะนี้ระบบลงทะเบียนมีปัญหา ไว้มาลงทะเบียนใหม่ทีหลังน๊ะจ๊ะคนดีดนเก่งของพี่จุ๊บๆ";
+			$error = true;
+			$str = "ขออภัยขณะนี้ระบบลงทะเบียนมีปัญหา ไว้มาลงทะเบียนใหม่ทีหลังน๊ะจ๊ะคนดีดนเก่งของพี่จุ๊บๆ";
 	}
-	
+
+	if ($error) {
+		$results = pg_query($db2, "DELETE FROM tbhlinebotmem WHERE user_id = '$userId';");
+		$results = pg_query($db2, "UPDATE tbhlinebotmodchng SET bot_mode = 'trial' WHERE user_id = '$userId';");
+		$toggle = 0;
+	}
 	$result_again = pg_query($db2, "UPDATE tbhlinebotmodchng SET seq = '$toggle' WHERE user_id = '$userId';");
 
 	return $str;
 
+}
+/**********************************************************************************************************************************/
+function IsAcceptingMember ($userId) {
+	$db = new PDO($GLOBALS['dsn']);
+	$query = "SELECT name, linename, gender, date_of_birth, id_type FROM tbhlinebotmem WHERE user_id = '$userId'"; 
+	$result = $db->query($query);
+
+	$new_member = array();
+	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+	    $new_member['name'] = htmlspecialchars($row["name"]);
+	    $new_member['linename'] = htmlspecialchars($row["linename"]);
+	    $new_member['gender'] = htmlspecialchars($row["gender"]);
+	    $new_member['bd'] = htmlspecialchars($row["date_of_birth"]);
+	    $new_member['type'] = htmlspecialchars($row["id_type"]);
+	}
+	$result->closeCursor();
+
+	MemberConfirmation($new_member);
+
+	$query2 = "SELECT user_id FROM tbhlinebotmem WHERE position = 'admin'"; 
+	$result2 = $db->query($query2);
+
+	$admin = array();
+	$index = 0;
+	while ($row = $result2->fetch(PDO::FETCH_ASSOC)) {
+	    $admin[$index] = htmlspecialchars($row["user_id"]);
+	    $index = $index + 1;
+	}
+	$result2->closeCursor();
+
+	$db2 = pg_connect($GLOBALS['pgsql_conn']);
+	$awaitadmin = "UPDATE tbhlinebotmodchng SET bot_mode = 'await' WHERE ";
+	foreach ($admin as $adm) {
+		$awaitadmin .= "user_id = '$adm' or ";
+	}
+	$awaitadmin = substr($awaitadmin, 0, -3);
+	$awaitadmin .= ";";
+	$result3 = pg_query($db2, $awaitadmin);
+}
+/**********************************************************************************************************************************/
+function MemberConfirmation ($arrayData) {
+	$access_token = 'CFecc4UnPdpCUxVk2VuTlf7ANCYHbCpaxYltjR/z15zMJ/KzsPIVrp4tCql4xmQYr8qgJSZ6oitEZ0/PKH+FpdneucSfPgjTP03mQ5KRSKqYT93fEEvGDqOUxJ/SBoS3oTXcJaRSxlPVBWxH+8PWxAdB04t89/1O/w1cDnyilFU=';
+
+	$confirm = "มีผู้ต้องการใช้งาน Line Chat Bot อย่างเต็มระบบ\nชื่อ : " . $arrayData['name'] . "\nชื่อไลน์ : " . $arrayData['linename'] . "\nเพศ : " .
+			   $arrayData['gender'] . "\nวันเกิด : " . $arrayData['bd'] . "\nประเภท : " . $arrayData['type'] . 
+			   "\nต้องการให้คนนี้สามารถใช้งานได้เต็มรูปแบบหรือไม่?";
+
+	$messages = [						
+		'type' => 'text',
+		'text' => $confirm
+	];
+
+	//have to query admin from table to accept register member request
+	$admin = 'Ua492767fd96449cd8a857b101dbdbcce';	//ball
+	// Make a POST Request to Messaging API to push to sender
+	$url = 'https://api.line.me/v2/bot/message/push';
+	$data = [
+		'to' => $admin,
+		'messages' => [$messages],
+	];
+	$post = json_encode($data);
+	$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+
+	$ch = curl_init($url);
+	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+	$result = curl_exec($ch);
+	curl_close($ch);
+
+	echo $result . "\r\n";
+}
+/**********************************************************************************************************************************/
+function ReturnAllowToAdmin () {
+	$db = new PDO($GLOBALS['dsn']);
+
+	$query = "SELECT user_id FROM tbhlinebotmem WHERE position = 'admin'"; 
+	$result = $db->query($query);
+
+	$admin = array();
+	$index = 0;
+	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+	    $admin[$index] = htmlspecialchars($row["user_id"]);
+	    $index = $index + 1;
+	}
+	$result->closeCursor();
+
+	$db2 = pg_connect($GLOBALS['pgsql_conn']);
+	$awaitadmin = "UPDATE tbhlinebotmodchng SET bot_mode = 'allow' WHERE ";
+	foreach ($admin as $adm) {
+		$awaitadmin .= "user_id = '$adm' OR ";
+	}
+	$awaitadmin = substr($awaitadmin, 0, -4);
+	$awaitadmin .= ";";
+	$result2 = pg_query($db2, $awaitadmin);
+}
+/**********************************************************************************************************************************/
+function DeleteIdRow ($text) {
+	$db = new PDO($GLOBALS['dsn']);
+	$query = "SELECT user_id, name, linename FROM tbhlinebotmem ORDER BY id ASC"; 
+	$result = $db->query($query);
+
+	$del_user = array();
+	$index = 0;
+	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+		$del_user[$index] = array();
+	    $del_user[$index]['id'] = htmlspecialchars($row["user_id"]);
+	    $del_user[$index]['name'] = htmlspecialchars($row["name"]);
+	    $del_user[$index]['linename'] = htmlspecialchars($row["linename"]);
+	    $index = $index + 1;
+	}
+	$result->closeCursor();
+
+	$text = str_replace(" ", "", $text);
+	$text = strtolower($text);
+
+	foreach ($del_user as $del) {
+		if ((strpos($text, strtolower($del['linename'])) !== false) && (strpos($text, str_replace(" ", "", (strtolower($del['name'])))) !== false)) {
+			$rm = $del['id'];
+			$db2 = pg_connect($GLOBALS['pgsql_conn']);
+			$result2 = pg_query($db2, "DELETE FROM tbhlinebotmem WHERE user_id = '$rm';");
+			$result_again = pg_query($db2, "UPDATE tbhlinebotmodchng SET bot_mode = 'trial' WHERE user_id = '$rm';");
+			return "ระบบดำเนินการตามคำอนุมัติเรียบร้อย";
+		}
+	}
+
+	return "ไม่สามารถจัดการข้อมูลได้ หรืออาจจะไม่มีรายชื่อนี้ กรุณาตรวจสอบ หรือ จัดการกับฐานข้อมูลโดยตรง";
+}
+/**********************************************************************************************************************************/
+function ListWaitRegister () {
+	$db = new PDO($GLOBALS['dsn']);
+
+	$query = "SELECT user_id FROM tbhlinebotmodchng WHERE bot_mode = 'regis'"; 
+	$result = $db->query($query);
+
+	$regis = array();
+	$index = 0;
+	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+	    $regis[$index] = htmlspecialchars($row["user_id"]);
+	    $index = $index + 1;
+	}
+	$result->closeCursor();
+
+	if (is_null($regis)) {
+		return "ไม่มีรายชื่อขอเข้าใช้งานเต็มระบบตกค้าง";
+	}
+
+	$query2 = "SELECT name, linename FROM tbhlinebotmodchng WHERE ";
+	foreach ($regis as $item) {
+		$query2 .= "user_id = '$item' OR ";
+	}
+	$query2 = substr($query2, 0, -4);
+	$query2 .= ";"; 
+	$result2 = $db->query($query2);
+
+	$sum = array();
+	$seq = 0;
+	while ($row = $result2->fetch(PDO::FETCH_ASSOC)) {
+		$sum[$seq] = array();
+	    $sum[$seq]['linename'] = htmlspecialchars($row["linename"]);
+	    $sum[$seq]['name'] = htmlspecialchars($row["name"]);
+	    $seq = $seq + 1;
+	}
+	$result2->closeCursor();
+
+	$ret = "ไม่มีรายชื่อขอเข้าใช้งานเต็มระบบตกค้าง";
+	if (!is_null($sum)) {
+		$ret = "เหลือผู้ที่รออนุมัติการใช้งานแชทบอทเต็มรูปแบบดังต่อไปนี้\n";
+		foreach ($sum as $key) {
+			$ret .= $key['linename'] . " " . $key['name'] . "\n";
+		}
+	}
 }
 /**********************************************************************************************************************************/
 //Function to insert data to postgresql database to easier than insert data to database by terminal

@@ -149,25 +149,60 @@ if (!is_null($events['events'])) {
 										//InsertDataToDB();
 										$messages = [						
 											'type' => 'text',
-											'text' => 'bot_mode = ' . $bot_mod . ' /text = ' . $text
+											'text' => "1\n2\n3\n4"
 										];
 									}
 									//--------------------------------------------------------
-									else if ((strpos($text, 'เปิดโหมดลงทะเบียนเข้าใช้งาน') !== false) && $event['source']['type'] == 'user') {
+									else if ((strpos($text, 'เปิดโหมดลงทะเบียนเข้าใช้งาน') !== false) && $event['source']['type'] == 'user') {		
 										$messages = [						
 											'type' => 'text',
 											'text' => 'กรุณารอสักครู่...'
-										]; // and toggle state regis to 1 (tbhlinebotmodchng seq = 1)
+										]; //must check first now member allow yet and toggle state regis to 1 (tbhlinebotmodchng seq = 1)
 									}
 									else {
 										// Build message to reply back
 										$messages = [						
 											'type' => 'text',
-											'text' => 'bot_mode = ' . $bot_mod . ' /text = ' . $text //AnswerBuilder(13)
+											'text' => AnswerBuilder(13)
 										];	
 									}  
 									break;
 							}
+						}
+						break;
+					case 'await':
+						if (((strpos($text, 'ไม่') !== false) || (strpos(strtolower($text), 'no') !== false) || 
+							 (strpos($text, 'ยกเลิก') !== false) || (strpos(strtolower($text), 'cancel') !== false) || 
+							 (strpos($text, 'ปฏิเสธ') !== false) || (strpos(strtolower($text), 'refuse') !== false))) {
+							ReturnAllowToAdmin();//must check have any member wait regis
+							$messages = [						
+								'type' => 'text',
+								'text' => DeleteIdRow($text)
+							];
+						}
+						else if ((strpos($text, 'ใช่') !== false) || (strpos(strtolower($text), 'yes') !== false) || 
+							 	 (strpos($text, 'ตกลง') !== false) || (strpos(strtolower($text), 'accept') !== false) || 
+							 	 (strpos($text, 'ยอมรับ') !== false) || (strpos(strtolower($text), 'confirm') !== false) || 
+							 	 (strpos($text, 'ยืนยัน') !== false) || (strpos(strtolower($text), 'yeah') !== false) || 
+							 	 (strpos($text, 'ชัวร์') !== false) || (strpos(strtolower($text), 'sure') !== false) || 
+							 	 (strpos($text, 'แน่นอน') !== false) || (strpos(strtolower($text), 'absolute') !== false) || 
+							 	 (strpos($text, 'คอนเฟิร์ม') !== false) || (strpos($text, 'อนุมัติ') !== false) || 
+							 	 (strpos($text, 'โอเค') !== false) || (strpos(strtolower($text), 'ok') !== false)) {
+							ReturnAllowToAdmin();
+							$messages = [						
+								'type' => 'text',
+								'text' => 'ระบบดำเนินการตามคำอนุมัติเรียบร้อย'
+							];	
+						}
+						else if ((strpos($text, 'มีใครรออยู่บ้าง') !== false) || (strpos($text, 'ยังเหลือใครบ้าง') !== false) || 
+							     (strpos($text, 'มีใครเหลืออยู่บ้าง') !== false)) {
+							//show list of member wait regis
+						}
+						else {
+							$messages = [						
+								'type' => 'text',
+								'text' => 'ทำเป็นเล่นอยู่นั่น ตอบมาอนุมัติมั้ย'
+							];	
 						}
 						break;		
 					default:
