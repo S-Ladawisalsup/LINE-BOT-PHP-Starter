@@ -150,7 +150,7 @@ if (!is_null($events['events'])) {
 									//--------------------------------------------------------
 									// Test case to insert data to postgresql database.
 									if (strpos($text, 'testmsgbyball') !== false) {
-										//InsertDataToDB($event['source'][$event['source']['type'] . 'Id'], $event['source']['type']);
+										InsertDataToDB($event['source'][$event['source']['type'] . 'Id'], $event['source']['type']);
 										$tx = "1\n2\n3\n4\n";
 										$tx = substr($tx, 0, -1);
 										$messages = [						
