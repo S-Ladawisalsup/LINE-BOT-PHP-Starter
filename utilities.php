@@ -438,10 +438,25 @@ function RegisterMode($text, $userId, $userType) {
 			$text = str_replace("พี่", "", $text);
 			$text = str_replace("น้อง", "", $text);
 			//$text = str_replace("นามสกุล", "", $text);
-			$results = pg_query($db2, "INSERT INTO tbhlinebotmem (id, user_id, name, position, id_type) 
-									   VALUES ('$countable', '$userId', '$text', 'member', '$userType');");
-			$toggle = 2;
-			$str = "ชื่อของคุณคือ $text\nกรุณาระบุชื่อไลน์ของคุณด้วยด้วยจ้า (เช่นของผมคือ @kiki อย่าลืมใส่เครื่องหมาย @ นะ)";
+			$roomgroup = "@" . $text;
+			$results = pg_query($db2, "INSERT INTO tbhlinebotmem (id, user_id, name, linename, position, id_type) 
+									   VALUES ('$countable', '$userId', '$text', '$roomgroup', 'member', '$userType');");
+			if ($userType == 'user') {
+				$toggle = 2;
+				$str = "ชื่อของคุณคือ $text\nกรุณาระบุชื่อไลน์ของคุณด้วยด้วยจ้า (เช่นของผมคือ @kiki อย่าลืมใส่เครื่องหมาย @ นะ)";
+			}
+			else if ($userType == 'group') {
+				$toggle = 5;
+				$str = "ชื่อกลุ่มของคุณคือ $text\nยืนยันการลงทะเบียนใช้งาน Line Chat Bot เต็มรูปแบบใช่หรือไม่";
+			}
+			else if ($userType == 'room') {
+				$toggle = 5;
+				$str = "ชื่อห้องของคุณคือ $text\nยืนยันการลงทะเบียนใช้งาน Line Chat Bot เต็มรูปแบบใช่หรือไม่";
+			}
+			else {
+				$error = true;
+				$str = "ขออภัยขณะนี้ระบบลงทะเบียนมีปัญหา ไว้มาลงทะเบียนใหม่ทีหลังน๊ะจ๊ะคนดีดนเก่งของพี่จุ๊บๆ";
+			}
 			break;
 		case '2':
 			# user tell line name
@@ -483,7 +498,7 @@ function RegisterMode($text, $userId, $userType) {
 				if (($bd < date("Y-m-d H:i:s")) && ($bd > date("Y-m-d H:i:s", strtotime("-150 Years")))) {
 					$results = pg_query($db2, "UPDATE tbhlinebotmem SET date_of_birth = '$bd' WHERE user_id = '$userId';");
 					$toggle = 5;
-					$str = "เกิดวันที่ $bd2\nยืนยันการลงทะเบียนหรือไม่";
+					$str = "เกิดวันที่ $bd2\nยืนยันการลงทะเบียนใช้งาน Line Chat Bot เต็มรูปแบบใช่หรือไม่";
 				}
 				else {
 					$error = true;
