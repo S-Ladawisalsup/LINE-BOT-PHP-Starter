@@ -35,7 +35,7 @@ if (!is_null($events['events'])) {
 							'text' => RegisterMode($text, $event['source'][$event['source']['type'] . 'Id'], $event['source']['type'])
 						];
 						break;
-					case 'allow': // allow
+					case 'trial': // allow
 						// Compare message calling bot's name
 						$haystack = strtolower($event['message']['text']);
 						if (startsWith($haystack, $bot_name) || $event['source']['type'] == 'user') {
@@ -150,7 +150,7 @@ if (!is_null($events['events'])) {
 									//--------------------------------------------------------
 									// Test case to insert data to postgresql database.
 									if (strpos($text, 'testmsgbyball') !== false) {
-										//InsertDataToDB();
+										InsertDataToDB($event['source'][$event['source']['type'] . 'Id'], $event['source']['type']);
 										$tx = "1\n2\n3\n4\n";
 										$tx = substr($tx, 0, -1);
 										$messages = [						

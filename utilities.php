@@ -646,11 +646,8 @@ function DeleteIdRow($text) {
 	}
 	$result->closeCursor();
 
-	$text = str_replace(" ", "", $text);
-	$text = strtolower($text);
-
 	foreach ($del_user as $del) {
-		if ((strpos($text, strtolower($del['linename'])) !== false) && (strpos($text, str_replace(" ", "", (strtolower($del['name'])))) !== false)) {
+		if ((strpos($text, $del['linename']) !== false) && (strpos($text, $del['name']) !== false)) {
 			$rm = $del['id'];
 			$db2 = pg_connect($GLOBALS['pgsql_conn']);
 			$result2 = pg_query($db2, "DELETE FROM tbhlinebotmem WHERE user_id = '$rm';");
@@ -743,11 +740,8 @@ function ConfirmRowUserMember($text) {
 	    $order = $order + 1;
 	}
 	$result->closeCursor();
-	$text = str_replace(" ", "", $text);
-	$text = strtolower($text);
 	foreach ($awaitmem as $awaitusr) {
-		if ((strpos($text, str_replace(" ", "", strtolower($awaitusr['linename']))) !== false) || 
-			(strpos($text, str_replace(" ", "", strtolower($awaitusr['name']))) !== false)) {
+		if ((strpos($text, $awaitusr['linename']) !== false) || (strpos($text, $awaitusr['name']) !== false)) {
 			$usrid = $awaitusr["id"];
 			$db2 = pg_connect($GLOBALS['pgsql_conn']);
 			$result2 = pg_query($db2, "UPDATE tbhlinebotmodchng SET bot_mode = 'allow', seq = '0' WHERE user_id = '$usrid';");
@@ -757,13 +751,13 @@ function ConfirmRowUserMember($text) {
 }
 /**********************************************************************************************************************************/
 //Function to insert data to postgresql database to easier than insert data to database by terminal
-function InsertDataToDB() {
+function InsertDataToDB($userId, $userType) {
 	$db = pg_connect($GLOBALS['pgsql_conn']);		
 
 	//now tbhlinebotwmode id 37-39 is empty
 	// $t = 'text';
-	$result = pg_query($db, "INSERT INTO tbhlinebotwmode (id, questiontext, questiontype) VALUES 
-						('36', 'ไปไหน', '3')						
+	$result = pg_query($db, "INSERT INTO tbhlinebotmem (user_id, name, linename, gender, date_of_birth, position, id_type) VALUES 
+						('$userId', 'บอล', '@Ball Sarayuth', 'M', '1990-10-28 00:00:00', 'admin', '$userType')						
 						;");//,('คืนนี้แหล่ะ อยากได้กี่ครั้งหล่ะ', '12')
 
 	// $result = pg_query($db, "UPDATE tbhlinebotwmode 
