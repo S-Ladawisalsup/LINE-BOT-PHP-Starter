@@ -692,6 +692,7 @@ function ListWaitRegister () {
 		foreach ($sum as $key) {
 			$ret .= $key['linename'] . " " . $key['name'] . "\n";
 		}
+		$ret = substr($ret, 0, -1);
 	}
 	return $ret;
 }
