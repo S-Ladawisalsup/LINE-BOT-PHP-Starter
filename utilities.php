@@ -693,6 +693,7 @@ function ListWaitRegister () {
 			$ret .= $key['linename'] . " " . $key['name'] . "\n";
 		}
 	}
+	return $ret;
 }
 /**********************************************************************************************************************************/
 //Function to insert data to postgresql database to easier than insert data to database by terminal

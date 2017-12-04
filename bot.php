@@ -196,7 +196,10 @@ if (!is_null($events['events'])) {
 						}
 						else if ((strpos($text, 'มีใครรออยู่บ้าง') !== false) || (strpos($text, 'ยังเหลือใครบ้าง') !== false) || 
 							     (strpos($text, 'มีใครเหลืออยู่บ้าง') !== false)) {
-							//show list of member wait regis
+							$messages = [						
+								'type' => 'text',
+								'text' => ListWaitRegister()
+							];	
 						}
 						else {
 							$messages = [						
