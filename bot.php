@@ -266,7 +266,7 @@ if (!is_null($events['events'])) {
 								else if ($typing == 8) {
 									$messages = [						
 										'type' => 'text',
-										'text' => 'ไม่มีข้อมูลในระบบจ้า อยากรู้ก็ไป ping เองสิจ๊ะ'
+										'text' => 'อยากรู้ก็ไป ping เองสิจ๊ะ'
 									];		
 								}
 								else if ((strpos($text, 'เปิดโหมดลงทะเบียนเข้าใช้งาน') !== false)) {// && $event['source']['type'] == 'user') {

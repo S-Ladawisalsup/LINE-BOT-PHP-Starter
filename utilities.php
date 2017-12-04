@@ -400,6 +400,7 @@ function InsertIdToDB($userId) {
 }
 /**********************************************************************************************************************************/
 function RegisterMode($text, $userId, $userType) {
+	$botname = "@kiki";
 	$db = new PDO($GLOBALS['dsn']);
 	$query = "SELECT seq FROM tbhlinebotmodchng WHERE user_id = '$userId'"; 
 	$result = $db->query($query);
@@ -439,6 +440,10 @@ function RegisterMode($text, $userId, $userType) {
 			$text = str_replace("น้อง", "", $text);
 			$text = str_replace("กลุ่ม", "", $text);
 			$text = str_replace("ห้อง", "", $text);
+			$text = str_replace($botname, "", $text);
+			if ($userType != 'user') {
+				$text = str_replace(" ", "", $text);
+			}
 			//$text = str_replace("นามสกุล", "", $text);
 			$roomgroup = "@" . $text;
 			$results = pg_query($db2, "INSERT INTO tbhlinebotmem (id, user_id, name, linename, position, id_type) 
