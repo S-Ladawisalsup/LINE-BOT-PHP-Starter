@@ -674,6 +674,7 @@ function DeleteIdRow($text) {
 			$db2 = pg_connect($GLOBALS['pgsql_conn']);
 			$result2 = pg_query($db2, "DELETE FROM tbhlinebotmem WHERE user_id = '$rm';");
 			$result_again = pg_query($db2, "UPDATE tbhlinebotmodchng SET bot_mode = 'trial', seq = '0' WHERE user_id = '$rm';");
+			BotPushAllowAccess($usrid, false);
 			return "ระบบดำเนินการตามคำอนุมัติเรียบร้อย";
 		}
 	}
@@ -768,16 +769,23 @@ function ConfirmRowUserMember($text) {
 			$result2 = pg_query($db2, "UPDATE tbhlinebotmodchng SET bot_mode = 'allow', seq = '0' WHERE user_id = '$usrid';");
 		}
 	}
-	BotPushAllowAccess($usrid);
+	BotPushAllowAccess($usrid, true);
 	return "ระบบดำเนินการตามคำอนุมัติเรียบร้อย";
 }
 /**********************************************************************************************************************************/
-function BotPushAllowAccess($memberId) {
+function BotPushAllowAccess($memberId, $allow) {
 	$access_token = 'CFecc4UnPdpCUxVk2VuTlf7ANCYHbCpaxYltjR/z15zMJ/KzsPIVrp4tCql4xmQYr8qgJSZ6oitEZ0/PKH+FpdneucSfPgjTP03mQ5KRSKqYT93fEEvGDqOUxJ/SBoS3oTXcJaRSxlPVBWxH+8PWxAdB04t89/1O/w1cDnyilFU=';
+
+	if ($allow) {
+		$tx = "คำขอใช้งาน Line Chat Bot ของคุณได้รับการอนุญาตแล้ว ยินดีต้อนรับสู่การใช้งาน Line Chat Bot อย่างเต็มรูปแบบนะคร้าบบบบบ";
+	}
+	else {
+		$tx = "คำขอใช้งาน Line Chat Bot ของคุณถูกปฏิเสธ ไม่ต้องเศร้าไปนะ อย่าไปแอบร้องไห้ในห้องน้ำหล่ะ ไว้คราวหน้าละกันเนาะ";
+	}
 
 	$messages = [						
 		'type' => 'text',
-		'text' => "คำขอใช้งาน Line Chat Bot ของคุณได้รับการอนุญาตเรียบร้อย ยินดีต้อนรับสู่การใช้งาน Line Chat Bot อย่างเต็มรูปแบบนะคร้าบบบบบ"
+		'text' => $tx
 	];
 
 	// Make a POST Request to Messaging API to push to sender
