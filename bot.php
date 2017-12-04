@@ -257,7 +257,7 @@ if (!is_null($events['events'])) {
 
 								// Check text is question
 								$typing = findQuestionType($text);
-								if ($typing > 0 && $typing < 8) {
+								if ($typing > 0 && $typing < 9) {
 									$messages = [						
 										'type' => 'text',
 										'text' => AnswerBuilder(10)
