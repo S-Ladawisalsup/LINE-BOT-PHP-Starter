@@ -263,7 +263,7 @@ if (!is_null($events['events'])) {
 										'text' => AnswerBuilder(10)
 									];		
 								}
-								else if ($typing = 8) {
+								else if ($typing == 8) {
 									$messages = [						
 										'type' => 'text',
 										'text' => 'ไม่มีข้อมูลในระบบจ้า อยากรู้ก็ไป ping เองสิจ๊ะ'
