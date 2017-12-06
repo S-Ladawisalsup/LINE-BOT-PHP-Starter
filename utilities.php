@@ -516,7 +516,7 @@ function RegisterMode($text, $userId, $userType) {
 			else {
 				$error = true;
 				//$str = "ก็บอกให้กรอกวันที่ในรูปแบบ(ค.ศ.) dd/mm/yyyy เช่น 01/01/1900 ไง ไปเริ่มกรอกใหม่ตั้งแต่ต้นเลยไป๊!";
-				$str = "num is " . count($matches) . "\nmatches is " . $matches[0];
+				$str = "count : " . count($matches[0]) . "\n" . $matches[0][0] . '/' . $matches[0][1] . '/' . $matches[0][2];
 			}
 			break;
 		case '5':
