@@ -626,31 +626,31 @@ function MemberConfirmation($arrayData) {
 		'text' => $confirm
 	];
 
-	$db = new PDO($GLOBALS['dsn']);
-	$query = "SELECT user_id FROM tbhlinebotmem WHERE position = 'admin'"; 
-	$result = $db->query($query);
+	// $db = new PDO($GLOBALS['dsn']);
+	// $query = "SELECT user_id FROM tbhlinebotmem WHERE position = 'admin'"; 
+	// $result = $db->query($query);
 
-	$admin = array();
-	$order = 0;
-	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-	    $admin[$order] = htmlspecialchars($row["user_id"]);
-	    $order = $order + 1;
-	}
-	$result->closeCursor();
+	// $admin = array();
+	// $order = 0;
+	// while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+	//     $admin[$order] = htmlspecialchars($row["user_id"]);
+	//     $order = $order + 1;
+	// }
+	// $result->closeCursor();
 
-	$admins = '["';
-	foreach ($admins as $adm) {
-	  $admins .= $adm . '", "';
-	}
-	$admins = substr($admins, 0, -3);
-	$admins .= ']';
+	// $admins = '["';
+	// foreach ($admins as $adm) {
+	//   $admins .= $adm . '", "';
+	// }
+	// $admins = substr($admins, 0, -3);
+	// $admins .= ']';
 
 	//have to query admin from table to accept register member request
-	//$admin = 'Ua492767fd96449cd8a857b101dbdbcce';	//ball
+	$admin = 'Ua492767fd96449cd8a857b101dbdbcce';	//ball
 	// Make a POST Request to Messaging API to push to sender
 	$url = 'https://api.line.me/v2/bot/message/push';
 	$data = [
-		'to' => $admins,
+		'to' => $admin,
 		'messages' => [$messages],
 	];
 	$post = json_encode($data);
