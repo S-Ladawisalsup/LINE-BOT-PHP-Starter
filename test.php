@@ -45,8 +45,6 @@ function QuestionWordFromDBTB() {
 
 /*
 function have to add and test to line chat bot
-1. Test multiple admin accepting register. 
-2. Multiple push message. (maybe use for after query admin position then send message)
 3. Alert admin when server status danger. (maybe use for after query admin position then send message)
 4. Defind server ip in database in UI Line Chat Bot. (optional)
 5. Start Greeting in group in everyday.
