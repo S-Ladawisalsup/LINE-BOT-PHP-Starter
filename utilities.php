@@ -699,11 +699,11 @@ function ListWaitRegister() { //<-- current bugged this function.
 	}
 	$result->closeCursor();
 
-	if (is_null($regis)) {
+	if (empty($regis)) {
 		return "ไม่มีรายชื่อขอเข้าใช้งานเต็มรูปแบบตกค้าง";
 	}
 	else {
-		return "regis 0 is " .$regis[0];
+		return "regis 0 is " . $regis[0];
 	}
 
 	$query2 = "SELECT name, linename FROM tbhlinebotmem WHERE ";
