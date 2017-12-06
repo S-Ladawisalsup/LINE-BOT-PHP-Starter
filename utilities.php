@@ -515,7 +515,8 @@ function RegisterMode($text, $userId, $userType) {
 			}
 			else {
 				$error = true;
-				$str = "ก็บอกให้กรอกวันที่ในรูปแบบ(ค.ศ.) dd/mm/yyyy เช่น 01/01/1900 ไง ไปเริ่มกรอกใหม่ตั้งแต่ต้นเลยไป๊!";
+				//$str = "ก็บอกให้กรอกวันที่ในรูปแบบ(ค.ศ.) dd/mm/yyyy เช่น 01/01/1900 ไง ไปเริ่มกรอกใหม่ตั้งแต่ต้นเลยไป๊!";
+				$str = count($matches);
 			}
 			break;
 		case '5':
