@@ -157,29 +157,10 @@ if (!is_null($events['events'])) {
 										];
 									}
 									//--------------------------------------------------------
-									else if ((strpos($text, 'เปิดโหมดลงทะเบียนเข้าใช้งาน') !== false)) {// && $event['source']['type'] == 'user') {
-										// if (CheckRegis($event['source'][$event['source']['type'] . 'Id']) == "allow") {	
-										// 	$tx = "คุณสามารถใช้งาน Line Chat Bot ได้อย่างเต็มรูปแบบแล้วจ้า";
-										// }
-										// else {
-										// 	SetRegisterSeq($event['source'][$event['source']['type'] . 'Id']);
-										// 	if ($event['source']['type'] == 'user') {
-										// 		$tx = "กรุณาระบุชื่อที่ให้ใช้เรียก (ชื่อเล่นก็ได้นะ)";
-										// 	}
-										// 	else if ($event['source']['type'] == 'group') {
-										// 		$tx = "กรุณาระบุชื่อกลุ่ม";
-										// 	}
-										// 	else if ($event['source']['type'] == 'room') {
-										// 		$tx = "กรุณาระบุชื่อห้อง";
-										// 	}
-										// 	else {
-										// 		$tx = "ขออภัยขณะนี้ระบบลงทะเบียนมีปัญหา ไว้มาลงทะเบียนใหม่ทีหลังน๊ะจ๊ะคนดีดนเก่งของพี่จุ๊บๆ 
-										// 			   หรือลองไปติดต่อ ITSD ดูน๊ะจ๊ะ";
-										// 	}
-										// }
+									else if ((strpos($text, 'เปิดโหมดลงทะเบียนเข้าใช้งาน') !== false)) {
 										$messages = [						
 											'type' => 'text',
-											'text' => "คุณสามารถใช้งาน Line Chat Bot ได้อย่างเต็มรูปแบบแล้วจ้า"//$tx
+											'text' => "คุณสามารถใช้งาน Line Chat Bot ได้อย่างเต็มรูปแบบแล้วจ้า"
 										]; 
 									}
 									else {
@@ -267,25 +248,20 @@ if (!is_null($events['events'])) {
 										'text' => 'อยากรู้ก็ไป ping เองสิจ๊ะ'
 									];		
 								}
-								else if ((strpos($text, 'เปิดโหมดลงทะเบียนเข้าใช้งาน') !== false)) {// && $event['source']['type'] == 'user') {
-									if (CheckRegis($event['source'][$event['source']['type'] . 'Id']) == "allow") {	
-										$tx = "คุณสามารถใช้งาน Line Chat Bot ได้อย่างเต็มรูปแบบแล้วจ้า";
+								else if ((strpos($text, 'เปิดโหมดลงทะเบียนเข้าใช้งาน') !== false)) {
+									SetRegisterSeq($event['source'][$event['source']['type'] . 'Id']);
+									if ($event['source']['type'] == 'user') {
+										$tx = "กรุณาระบุชื่อที่ให้ใช้เรียก (ชื่อเล่นก็ได้นะ)";
+									}
+									else if ($event['source']['type'] == 'group') {
+										$tx = "กรุณาระบุชื่อกลุ่ม";
+									}
+									else if ($event['source']['type'] == 'room') {
+										$tx = "กรุณาระบุชื่อห้อง";
 									}
 									else {
-										SetRegisterSeq($event['source'][$event['source']['type'] . 'Id']);
-										if ($event['source']['type'] == 'user') {
-											$tx = "กรุณาระบุชื่อที่ให้ใช้เรียก (ชื่อเล่นก็ได้นะ)";
-										}
-										else if ($event['source']['type'] == 'group') {
-											$tx = "กรุณาระบุชื่อกลุ่ม";
-										}
-										else if ($event['source']['type'] == 'room') {
-											$tx = "กรุณาระบุชื่อห้อง";
-										}
-										else {
-											$tx = "ขออภัยขณะนี้ระบบลงทะเบียนมีปัญหา ไว้มาลงทะเบียนใหม่ทีหลังน๊ะจ๊ะคนดีดนเก่งของพี่จุ๊บๆ 
-												   หรือลองไปติดต่อ ITSD ดูน๊ะจ๊ะ";
-										}
+										$tx = "ขออภัยขณะนี้ระบบลงทะเบียนมีปัญหา ไว้มาลงทะเบียนใหม่ทีหลังน๊ะจ๊ะคนดีดนเก่งของพี่จุ๊บๆ 
+											   หรือลองไปติดต่อ ITSD ดูน๊ะจ๊ะ";
 									}
 									$messages = [						
 										'type' => 'text',
