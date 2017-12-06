@@ -698,7 +698,7 @@ function ListWaitRegister() { //<-- current bugged this function.
 	    $index = $index + 1;
 	}
 	$result->closeCursor();
-
+	return $regis;
 	if (is_null($regis)) {
 		return "ไม่มีรายชื่อขอเข้าใช้งานเต็มรูปแบบตกค้าง";
 	}

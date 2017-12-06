@@ -200,7 +200,7 @@ if (!is_null($events['events'])) {
 							 (strpos($text, 'ปฏิเสธ') !== false) || (strpos(strtolower($text), 'refuse') !== false))) {
 							$messages = [						
 								'type' => 'text',
-								'text' => DeleteIdRow($text) . '/' . ListWaitRegister()
+								'text' => DeleteIdRow($text)
 							];
 							if (ListWaitRegister() == "ไม่มีรายชื่อขอเข้าใช้งานเต็มรูปแบบตกค้าง") {
 								ReturnAllowToAdmin();
