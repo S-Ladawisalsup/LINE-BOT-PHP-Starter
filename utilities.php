@@ -611,68 +611,42 @@ function IsAcceptingMember($userId) {
 	$result3 = pg_query($db2, $awaitadmin);
 }
 /**********************************************************************************************************************************/
-function MemberConfirmation(){//$arrayData) {
-	// $access_token = 'CFecc4UnPdpCUxVk2VuTlf7ANCYHbCpaxYltjR/z15zMJ/KzsPIVrp4tCql4xmQYr8qgJSZ6oitEZ0/PKH+FpdneucSfPgjTP03mQ5KRSKqYT93fEEvGDqOUxJ/SBoS3oTXcJaRSxlPVBWxH+8PWxAdB04t89/1O/w1cDnyilFU=';
+function MemberConfirmation($arrayData) {
+	$access_token = 'CFecc4UnPdpCUxVk2VuTlf7ANCYHbCpaxYltjR/z15zMJ/KzsPIVrp4tCql4xmQYr8qgJSZ6oitEZ0/PKH+FpdneucSfPgjTP03mQ5KRSKqYT93fEEvGDqOUxJ/SBoS3oTXcJaRSxlPVBWxH+8PWxAdB04t89/1O/w1cDnyilFU=';
 
-	// $confirm = "มีผู้ต้องการใช้งาน Line Chat Bot อย่างเต็มระบบ\nชื่อ : " . $arrayData['name']; 
-	// $confirm .= "\nชื่อไลน์ : " . $arrayData['linename'];
-	// if (!empty($arrayData['gender']) && !empty($arrayData['bd'])) {
-	// 	$confirm .= "\nเพศ : " . $arrayData['gender'] . "\nวันเกิด : " . $arrayData['bd'];
-	// }
-	// $confirm .= "\nประเภท : " . $arrayData['type'] . "\nต้องการให้คนนี้สามารถใช้งานได้เต็มรูปแบบหรือไม่?";
-
-	// $messages = [						
-	// 	'type' => 'text',
-	// 	'text' => $confirm
-	// ];
-
-	$db = new PDO($GLOBALS['dsn']);
-	$query = "SELECT user_id FROM tbhlinebotmem WHERE position = 'admin'"; 
-	$result = $db->query($query);
-
-	$admin = array();
-	$order = 0;
-	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-	    $admin[$order] = htmlspecialchars($row["user_id"]);
-	    $order = $order + 1;
+	$confirm = "มีผู้ต้องการใช้งาน Line Chat Bot อย่างเต็มระบบ\nชื่อ : " . $arrayData['name']; 
+	$confirm .= "\nชื่อไลน์ : " . $arrayData['linename'];
+	if (!empty($arrayData['gender']) && !empty($arrayData['bd'])) {
+		$confirm .= "\nเพศ : " . $arrayData['gender'] . "\nวันเกิด : " . $arrayData['bd'];
 	}
-	$result->closeCursor();
+	$confirm .= "\nประเภท : " . $arrayData['type'] . "\nต้องการให้คนนี้สามารถใช้งานได้เต็มรูปแบบหรือไม่?";
 
-	$str = '[';
-	foreach ($admin as $adm) {
-		$str .= $adm . ', ';
-	}
-	$str = substr($str, 0, -2);
-	$str .= ']';
-	return $str;
-	// $admins = '["';
-	// foreach ($admins as $adm) {
-	//   $admins .= $adm . '", "';
-	// }
-	// $admins = substr($admins, 0, -3);
-	// $admins .= ']';
+	$messages = [						
+		'type' => 'text',
+		'text' => $confirm
+	];
 
-	// //have to query admin from table to accept register member request
-	// $admin = 'Ua492767fd96449cd8a857b101dbdbcce';	//ball
-	// // Make a POST Request to Messaging API to push to sender
-	// $url = 'https://api.line.me/v2/bot/message/push';
-	// $data = [
-	// 	'to' => $admin,
-	// 	'messages' => [$messages],
-	// ];
-	// $post = json_encode($data);
-	// $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+	//have to query admin from table to accept register member request
+	$admin = 'Ua492767fd96449cd8a857b101dbdbcce';	//ball
+	// Make a POST Request to Messaging API to push to sender
+	$url = 'https://api.line.me/v2/bot/message/push';
+	$data = [
+		'to' => $admin,
+		'messages' => [$messages],
+	];
+	$post = json_encode($data);
+	$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
 
-	// $ch = curl_init($url);
-	// curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-	// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	// curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
-	// curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-	// curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-	// $result = curl_exec($ch);
-	// curl_close($ch);
+	$ch = curl_init($url);
+	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+	$result = curl_exec($ch);
+	curl_close($ch);
 
-	// echo $result . "\r\n";
+	echo $result . "\r\n";
 }
 /**********************************************************************************************************************************/
 function ReturnAllowToAdmin() {
@@ -869,4 +843,25 @@ function InsertDataToDB($userId, $userType) {
 	// $result = pg_query($db, "UPDATE tbhlinebotmodchng
 	// 						SET bot_mode = 'allow'
 	// 						WHERE id = '1'");		
+}
+function test_f() {
+	$db = new PDO($GLOBALS['dsn']);
+	$query = "SELECT user_id FROM tbhlinebotmem WHERE position = 'admin'"; 
+	$result = $db->query($query);
+
+	$admin = array();
+	$order = 0;
+	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+	    $admin[$order] = htmlspecialchars($row["user_id"]);
+	    $order = $order + 1;
+	}
+	$result->closeCursor();
+
+	$str = '[';
+	foreach ($admin as $adm) {
+		$str .= $adm . ', ';
+	}
+	$str = substr($str, 0, -2);
+	$str .= ']';
+	return $str;
 }
