@@ -121,7 +121,7 @@ function findLocationID($loc_name) {
 	return 0;
 }
 /**********************************************************************************************************************************/
-function GetServerNameList () {
+function GetServerNameList() {
 	$db = new PDO($GLOBALS['dsn']);
 
 	$query = 'SELECT ip_addr FROM tbhlinebotserv ORDER BY id ASC';
@@ -139,7 +139,7 @@ function GetServerNameList () {
 	echo $responseJSON;
 }
 /**********************************************************************************************************************************/
-function BotPush () {
+function BotPush() {
 	$access_token = 'CFecc4UnPdpCUxVk2VuTlf7ANCYHbCpaxYltjR/z15zMJ/KzsPIVrp4tCql4xmQYr8qgJSZ6oitEZ0/PKH+FpdneucSfPgjTP03mQ5KRSKqYT93fEEvGDqOUxJ/SBoS3oTXcJaRSxlPVBWxH+8PWxAdB04t89/1O/w1cDnyilFU=';
 
 	$messages = [						
