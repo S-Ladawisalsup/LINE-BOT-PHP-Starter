@@ -26,7 +26,7 @@ function QuestionWordFromDBTB() {
 
 	$t = 'text';
 
-	$query = "SELECT questiontext, questiontype FROM tbhlinebotwmode WHERE questiontype = '4'";
+	$query = "SELECT questiontext, questiontype FROM tbhlinebotwmode WHERE questiontype = '7'";
 	//$query = "SELECT $t, type FROM tbhlinebotans WHERE type = '10'";
 	$result = $db->query($query);
 
@@ -42,3 +42,15 @@ function QuestionWordFromDBTB() {
 
 	return $words;
 }
+
+/*
+function have to add and test to line chat bot
+1. Test multiple admin accepting register.
+2. Multiple push message.
+3. Alert admin when server status danger.
+4. Defind server ip in database in UI Line Chat Bot. (optional)
+5. Start Greeting in group in everyday.
+6. Start HBD on user that have date of birth in that day.
+7. Identify user in group. 
+8. Start random push message to random user(s).
+*/
