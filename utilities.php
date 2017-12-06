@@ -453,7 +453,7 @@ function RegisterMode($text, $userId, $userType) {
 									   VALUES ('$countable', '$userId', '$text', '$roomgroup', 'member', '$userType');");
 			if ($userType == 'user') {
 				$toggle = 2;
-				$str = "ชื่อของคุณคือ $text\nกรุณาระบุชื่อไลน์ของคุณด้วยด้วยจ้า (เช่นของผมคือ @kiki อย่าลืมใส่เครื่องหมาย @ นะ)";
+				$str = "คุณ $text\nกรุณาระบุชื่อไลน์ของคุณด้วยด้วยจ้า (เช่นของผมคือ @kiki อย่าลืมใส่เครื่องหมาย @ นะ)";
 			}
 			else if ($userType == 'group') {
 				$toggle = 5;
@@ -471,13 +471,22 @@ function RegisterMode($text, $userId, $userType) {
 		case '2':
 			# user tell line name
 			if (startsWith($text, '@')) {
+				$query3 = "SELECT name FROM tbhlinebotmem WHERE user_id = '$userId'"; 
+				$result3 = $db->query($query3);
+
+				$name = "";
+				while ($row = $result3->fetch(PDO::FETCH_ASSOC)) {
+				    $name = htmlspecialchars($row["name"]);
+				}
+				$result3->closeCursor();
+
 				$results = pg_query($db2, "UPDATE tbhlinebotmem SET linename = '$text' WHERE user_id = '$userId';");
 				$toggle = 3;
-				$str = "ชื่อไลน์ของคุณคือ $text\nกรุณาระบุเพศด้วยจ้า (ชาย / หญิง)";
+				$str = "ชื่อไลน์ของคุณ" . $name . "คือ $text\nกรุณาระบุเพศด้วยจ้า (ชาย / หญิง)";
 			}
 			else {
 				$error = true;
-				$str = "ก็บอกให้ใส่เครื่องหมาย @ ด้วยไง ปัดโธ่!";
+				$str = "ก็บอกให้ใส่เครื่องหมาย @ ด้วยไง ปัดโธ่ ไปเริ่มกรอกใหม่ตั้งแต่ต้นเลยไป๊!";
 			}
 			break;		
 		case '3':
@@ -494,19 +503,19 @@ function RegisterMode($text, $userId, $userType) {
 			} 
 			else {
 				$error = true;
-				$str = "ก็ให้ใส่แค่ ชาย หรือ หญิง ไง แล้วนี่กรอกอะไรมา!";
+				$str = "ก็ให้ใส่แค่ ชาย หรือ หญิง ไง แล้วนี่กรอกอะไรมา ไปเริ่มกรอกใหม่เลยละกัน!";
 			}
 			break;
 		case '4':
 			# user tell date of birth
 			preg_match_all("!\d+!", $text, $matches);
-			if (count($matches) == 3) {
+			if (count($matches[0]) == 3) {
 				$bd = $matches[0][2] . '-' . $matches[0][1] . '-' . $matches[0][0] . ' 00:00:00';
 				$bd2 = $matches[0][0] . '/' . $matches[0][1] . '/' . $matches[0][2];
 				if (($bd < date("Y-m-d H:i:s")) && ($bd > date("Y-m-d H:i:s", strtotime("-150 Years")))) {
 					$results = pg_query($db2, "UPDATE tbhlinebotmem SET date_of_birth = '$bd' WHERE user_id = '$userId';");
 					$toggle = 5;
-					$str = "เกิดวันที่ $bd2\nยืนยันการลงทะเบียนใช้งาน Line Chat Bot เต็มรูปแบบใช่หรือไม่";
+					$str = "คุณเกิดวันที่ $bd2\nยืนยันการลงทะเบียนใช้งาน Line Chat Bot เต็มรูปแบบใช่หรือไม่";
 				}
 				else {
 					$error = true;
@@ -515,8 +524,7 @@ function RegisterMode($text, $userId, $userType) {
 			}
 			else {
 				$error = true;
-				//$str = "ก็บอกให้กรอกวันที่ในรูปแบบ(ค.ศ.) dd/mm/yyyy เช่น 01/01/1900 ไง ไปเริ่มกรอกใหม่ตั้งแต่ต้นเลยไป๊!";
-				$str = "count : " . count($matches[0]) . "\n" . $matches[0][0] . '/' . $matches[0][1] . '/' . $matches[0][2];
+				$str = "ก็บอกให้กรอกวันที่ในรูปแบบ(ค.ศ.) dd/mm/yyyy เช่น 01/01/1900 ไง ไปเริ่มกรอกใหม่ตั้งแต่ต้นเลยไป๊!";
 			}
 			break;
 		case '5':
