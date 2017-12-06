@@ -834,7 +834,7 @@ function InsertDataToDB() {
 	//now tbhlinebotwmode id 37-39 is empty
 	// $t = 'text';
 	$result = pg_query($db, "INSERT INTO tbhlinebotlocname (loc_callname, loc_id) VALUES 
-						('ห้องserver', '2')
+						('ห้องserver', '2'),
 						('ห้องprogrammer', '1')						
 						;");//,('คืนนี้แหล่ะ อยากได้กี่ครั้งหล่ะ', '12')
 
