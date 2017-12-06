@@ -84,6 +84,7 @@ function UpdateServToDB($name, $status, $location) {
 	if ($backup) {
 		$result = pg_query($db, "UPDATE tbhlinebotserv SET status = '$status', location_id = '$loc_id', 
 								lastchangestatus = '$laststate', datetimestatuschanged = '$lasttime' WHERE ip_addr = '$name'");
+		//send push msg to admin if server danger here.
 	}
 	else {
 		$result = pg_query($db, "UPDATE tbhlinebotserv SET status = '$status', location_id = '$loc_id' WHERE ip_addr = '$name'");
@@ -139,15 +140,16 @@ function GetServerNameList() {
 	echo $responseJSON;
 }
 /**********************************************************************************************************************************/
-function BotPush() {
+function BotPush($msg) {
 	$access_token = 'CFecc4UnPdpCUxVk2VuTlf7ANCYHbCpaxYltjR/z15zMJ/KzsPIVrp4tCql4xmQYr8qgJSZ6oitEZ0/PKH+FpdneucSfPgjTP03mQ5KRSKqYT93fEEvGDqOUxJ/SBoS3oTXcJaRSxlPVBWxH+8PWxAdB04t89/1O/w1cDnyilFU=';
 
 	$messages = [						
 		'type' => 'text',
-		'text' => 'ทำไมมันเงียบจังน้า ทำไมมันถึงเงียบกว่าชาวบ้านเค้า'
+		'text' => $msg
 	];
-	//$nonnoi = 'Ua492767fd96449cd8a857b101dbdbcce';	//ball
-	$nonnoi = 'Ca35db1d5c584c6467d717df89a0302ec'; //group
+
+	//will search only admin after that
+	$nonnoi = 'Ua492767fd96449cd8a857b101dbdbcce';
 	// Make a POST Request to Messaging API to push to sender
 	$url = 'https://api.line.me/v2/bot/message/push';
 	$data = [

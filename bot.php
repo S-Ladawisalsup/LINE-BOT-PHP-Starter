@@ -153,7 +153,7 @@ if (!is_null($events['events'])) {
 										//InsertDataToDB($event['source'][$event['source']['type'] . 'Id'], $event['source']['type']);
 										$messages = [						
 											'type' => 'text',
-											'text' => '0x10008A'
+											'text' => '(0x10008A)'
 										];
 									}
 									//--------------------------------------------------------
@@ -236,11 +236,25 @@ if (!is_null($events['events'])) {
 
 								// Check text is question
 								$typing = findQuestionType($text);
-								if ($typing > 0 && $typing < 8) {
+								if ($typing > 0 && $typing < 7) {
 									$messages = [						
 										'type' => 'text',
 										'text' => AnswerBuilder(10)
 									];		
+								}
+								else if ($typing == 7) {
+									if (strpos($text, 'อุณหภูมิ') !== false) {							
+										$messages = [						
+											'type' => 'text',
+											'text' => 'อยากรู้ก็เดินไปวัดเองสิจ๊ะ'
+										];	
+									}
+									else {
+										$messages = [						
+											'type' => 'text',
+											'text' => AnswerBuilder(10)
+										];							
+									}		
 								}
 								else if ($typing == 8) {
 									$messages = [						

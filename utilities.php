@@ -128,7 +128,10 @@ function findQuestionType ($text) {
 			} 
 		}  
 		else if ($keyitems['type'] == 8 || $keyitems['type'] == 9) {
-			if (strpos($text, $keyitems['text']) !== false) {
+			if ($keyitems['type'] == 8 && strpos($text, 'อุณหภูมิ') !== false) {	
+				return 7;
+			}
+			else if (strpos($text, $keyitems['text']) !== false) {
 				foreach ($QAArray as $item) {
 					if (endsWith($text, $item['text']) && $item['type'] <= 7) {
 						return $item['type'];
