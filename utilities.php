@@ -393,7 +393,7 @@ function InsertIdToDB($userId) {
 	}
 	$result->closeCursor();
 
-	if (is_null($activate)) {
+	if (empty($activate)) {
 		$db2 = pg_connect($GLOBALS['pgsql_conn']);		
 		$results = pg_query($db2, "INSERT INTO tbhlinebotmodchng (user_id) VALUES ('$userId');");	
 	}
@@ -428,7 +428,7 @@ function RegisterMode($text, $userId, $userType) {
 				}
 				$result2->closeCursor();
 
-				if ($curr_val == 0 || is_null($curr_val)) {
+				if ($curr_val == 0 || empty($curr_val)) {
 					break;
 				}
 				$countable = $countable + 1;
@@ -598,7 +598,7 @@ function MemberConfirmation($arrayData) {
 
 	$confirm = "มีผู้ต้องการใช้งาน Line Chat Bot อย่างเต็มระบบ\nชื่อ : " . $arrayData['name']; 
 	$confirm .= "\nชื่อไลน์ : " . $arrayData['linename'];
-	if (!is_null($arrayData['gender']) && !is_null($arrayData['bd'])) {
+	if (empty($arrayData['gender']) && empty($arrayData['bd'])) {
 		$confirm .= "\nเพศ : " . $arrayData['gender'] . "\nวันเกิด : " . $arrayData['bd'];
 	}
 	$confirm .= "\nประเภท : " . $arrayData['type'] . "\nต้องการให้คนนี้สามารถใช้งานได้เต็มรูปแบบหรือไม่?";
@@ -702,9 +702,6 @@ function ListWaitRegister() { //<-- current bugged this function.
 	if (empty($regis)) {
 		return "ไม่มีรายชื่อขอเข้าใช้งานเต็มรูปแบบตกค้าง";
 	}
-	else {
-		return "regis 0 is " . $regis[0];
-	}
 
 	$query2 = "SELECT name, linename FROM tbhlinebotmem WHERE ";
 	foreach ($regis as $item) {
@@ -724,7 +721,7 @@ function ListWaitRegister() { //<-- current bugged this function.
 	$result2->closeCursor();
 
 	$ret = "ไม่มีรายชื่อขอเข้าใช้งานเต็มรูปแบบตกค้าง";
-	if (!is_null($sum)) {
+	if (!empty($sum)) {
 		$ret = "เหลือผู้ที่รออนุมัติการใช้งานแชทบอทเต็มรูปแบบดังต่อไปนี้\n";
 		foreach ($sum as $key) {
 			$ret .= $key['linename'] . " " . $key['name'] . "\n";
