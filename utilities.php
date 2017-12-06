@@ -596,9 +596,12 @@ function IsAcceptingMember($userId) {
 function MemberConfirmation($arrayData) {
 	$access_token = 'CFecc4UnPdpCUxVk2VuTlf7ANCYHbCpaxYltjR/z15zMJ/KzsPIVrp4tCql4xmQYr8qgJSZ6oitEZ0/PKH+FpdneucSfPgjTP03mQ5KRSKqYT93fEEvGDqOUxJ/SBoS3oTXcJaRSxlPVBWxH+8PWxAdB04t89/1O/w1cDnyilFU=';
 
-	$confirm = "มีผู้ต้องการใช้งาน Line Chat Bot อย่างเต็มระบบ\nชื่อ : " . $arrayData['name'] . "\nชื่อไลน์ : " . $arrayData['linename'] . "\nเพศ : " .
-			   $arrayData['gender'] . "\nวันเกิด : " . $arrayData['bd'] . "\nประเภท : " . $arrayData['type'] . 
-			   "\nต้องการให้คนนี้สามารถใช้งานได้เต็มรูปแบบหรือไม่?";
+	$confirm = "มีผู้ต้องการใช้งาน Line Chat Bot อย่างเต็มระบบ\nชื่อ : " . $arrayData['name']; 
+	$confirm .= "\nชื่อไลน์ : " . $arrayData['linename'];
+	if (!is_null($arrayData['gender']) && !is_null($arrayData['bd'])) {
+		$confirm .= "\nเพศ : " . $arrayData['gender'] . "\nวันเกิด : " . $arrayData['bd'];
+	}
+	$confirm .= "\nประเภท : " . $arrayData['type'] . "\nต้องการให้คนนี้สามารถใช้งานได้เต็มรูปแบบหรือไม่?";
 
 	$messages = [						
 		'type' => 'text',
