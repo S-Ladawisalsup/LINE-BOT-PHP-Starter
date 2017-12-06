@@ -482,14 +482,12 @@ function RegisterMode($text, $userId, $userType) {
 			break;		
 		case '3':
 			# user tell gender
-			if ((strpos($text, 'หญิง') !== false) || (strpos(strtolower($text), 'female') !== false) || 
-				(strpos($text, 'ญ') !== false) || (strpos(strtolower($text), 'f') !== false)) {
+			if ((strpos($text, 'หญิง') !== false) || (strpos(strtolower($text), 'female') !== false)) {
 				$results = pg_query($db2, "UPDATE tbhlinebotmem SET gender = 'F' WHERE user_id = '$userId';");
 				$toggle = 4;
 				$str = "คุณผู้หญิง กรุณาระบุวันเดือนปีเกิด (ในรูปแบบ dd/mm/yyyy เช่น 01/01/1900) ด้วยจ้า";
 			}
-			else if ((strpos($text, 'ชาย') !== false) || (strpos(strtolower($text), 'male') !== false) || 
-				 	 (strpos($text, 'ช') !== false) || (strpos(strtolower($text), 'm') !== false)) {
+			else if ((strpos($text, 'ชาย') !== false) || (strpos(strtolower($text), 'male') !== false)) {
 				$results = pg_query($db2, "UPDATE tbhlinebotmem SET gender = 'M' WHERE user_id = '$userId';");
 				$toggle = 4;
 				$str = "คุณผู้ชาย กรุณาระบุวันเดือนปีเกิด (ในรูปแบบ(ค.ศ.) dd/mm/yyyy เช่น 01/01/1900) ด้วยจ้า";
