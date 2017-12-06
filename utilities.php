@@ -828,13 +828,14 @@ function BotPushAllowAccess($memberId, $allow) {
 }
 /**********************************************************************************************************************************/
 //Function to insert data to postgresql database to easier than insert data to database by terminal
-function InsertDataToDB($userId, $userType) {
+function InsertDataToDB() {
 	$db = pg_connect($GLOBALS['pgsql_conn']);		
 
 	//now tbhlinebotwmode id 37-39 is empty
 	// $t = 'text';
-	$result = pg_query($db, "INSERT INTO tbhlinebotmem (user_id, name, linename, gender, date_of_birth, position, id_type) VALUES 
-						('$userId', 'บอล', '@Ball Sarayuth', 'M', '1990-10-28 00:00:00', 'admin', '$userType')						
+	$result = pg_query($db, "INSERT INTO tbhlinebotlocname (loc_callname, loc_id) VALUES 
+						('ห้องserver', '2')
+						('ห้องprogrammer', '1')						
 						;");//,('คืนนี้แหล่ะ อยากได้กี่ครั้งหล่ะ', '12')
 
 	// $result = pg_query($db, "UPDATE tbhlinebotmodchng
