@@ -598,7 +598,7 @@ function MemberConfirmation($arrayData) {
 
 	$confirm = "มีผู้ต้องการใช้งาน Line Chat Bot อย่างเต็มระบบ\nชื่อ : " . $arrayData['name']; 
 	$confirm .= "\nชื่อไลน์ : " . $arrayData['linename'];
-	if (empty($arrayData['gender']) && empty($arrayData['bd'])) {
+	if (!empty($arrayData['gender']) && !empty($arrayData['bd'])) {
 		$confirm .= "\nเพศ : " . $arrayData['gender'] . "\nวันเกิด : " . $arrayData['bd'];
 	}
 	$confirm .= "\nประเภท : " . $arrayData['type'] . "\nต้องการให้คนนี้สามารถใช้งานได้เต็มรูปแบบหรือไม่?";
