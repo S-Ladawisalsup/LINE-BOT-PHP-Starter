@@ -41,12 +41,12 @@ function UpdateTempToDB($curr_temperature, $location) {
 
 	$result = pg_query($db, "UPDATE tbhlinebottemploc SET temperature = '$curr_temperature' WHERE location = '$location'");	
 
-	// if (!$result) {
-	// 	echo "An error occurred.";
-	// }			
-	// else {
-	// 	echo "Updated database successful, please check on your database.";
-	// }
+	if (!$result) {
+		echo "An error occurred.";
+	}			
+	else {
+		echo "Updated database successful, please check on your database.";
+	}
 }
 /**********************************************************************************************************************************/
 function UpdateServToDB($name, $status, $location) {
@@ -124,12 +124,12 @@ function UpdateServToDB($name, $status, $location) {
 		// }
 	}
 
-	// if (!$result) {
-	// 	echo "\r\nAn error occurred.";
-	// }			
-	// else {
-	// 	echo "\r\nUpdated database successful, please check on your database.";
-	// }
+	if (!$result) {
+		echo "\r\nAn error occurred.";
+	}			
+	else {
+		echo "\r\nUpdated database successful, please check on your database.";
+	}
 }
 /**********************************************************************************************************************************/
 function findLocationID($loc_name) {
