@@ -453,7 +453,7 @@ function RegisterMode($text, $userId, $userType) {
 									   VALUES ('$countable', '$userId', '$text', '$roomgroup', 'member', '$userType');");
 			if ($userType == 'user') {
 				$toggle = 2;
-				$str = "คุณ $text\nกรุณาระบุชื่อไลน์ของคุณด้วยด้วยจ้า (เช่นของผมคือ @kiki อย่าลืมใส่เครื่องหมาย @ นะ)";
+				$str = "คุณ $text กรุณาระบุชื่อไลน์ของคุณด้วยด้วยจ้า (เช่นของผมคือ @kiki อย่าลืมใส่เครื่องหมาย @ นะ)";
 			}
 			else if ($userType == 'group') {
 				$toggle = 5;
