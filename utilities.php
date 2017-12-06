@@ -697,7 +697,7 @@ function ListWaitRegister() { //<-- current bugged this function.
 	$result->closeCursor();
 
 	if (is_null($regis)) {
-		return "ไม่มีรายชื่อขอเข้าใช้งานเต็มระบบตกค้าง";
+		return "ไม่มีรายชื่อขอเข้าใช้งานเต็มรูปแบบตกค้าง";
 	}
 
 	$query2 = "SELECT name, linename FROM tbhlinebotmem WHERE ";
@@ -717,7 +717,7 @@ function ListWaitRegister() { //<-- current bugged this function.
 	}
 	$result2->closeCursor();
 
-	$ret = "ไม่มีรายชื่อขอเข้าใช้งานเต็มระบบตกค้าง";
+	$ret = "ไม่มีรายชื่อขอเข้าใช้งานเต็มรูปแบบตกค้าง";
 	if (!is_null($sum)) {
 		$ret = "เหลือผู้ที่รออนุมัติการใช้งานแชทบอทเต็มรูปแบบดังต่อไปนี้\n";
 		foreach ($sum as $key) {
