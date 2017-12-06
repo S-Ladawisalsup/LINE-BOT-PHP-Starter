@@ -153,7 +153,7 @@ if (!is_null($events['events'])) {
 										//InsertDataToDB($event['source'][$event['source']['type'] . 'Id'], $event['source']['type']);
 										$messages = [						
 											'type' => 'text',
-											'text' => '(0x10008A)'
+											'text' => Memberconfirmation();
 										];
 									}
 									//--------------------------------------------------------
