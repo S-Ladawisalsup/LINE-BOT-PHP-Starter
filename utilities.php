@@ -453,7 +453,7 @@ function RegisterMode($text, $userId, $userType) {
 									   VALUES ('$countable', '$userId', '$text', '$roomgroup', 'member', '$userType');");
 			if ($userType == 'user') {
 				$toggle = 2;
-				$str = "คุณ $text กรุณาระบุชื่อไลน์ของคุณด้วยด้วยจ้า (เช่นของผมคือ @kiki อย่าลืมใส่เครื่องหมาย @ นะ)";
+				$str = "คุณ$text กรุณาระบุชื่อไลน์ของคุณด้วยด้วยจ้า (เช่นของผมคือ @kiki อย่าลืมใส่เครื่องหมาย @ นะ)";
 			}
 			else if ($userType == 'group') {
 				$toggle = 5;
@@ -482,7 +482,7 @@ function RegisterMode($text, $userId, $userType) {
 
 				$results = pg_query($db2, "UPDATE tbhlinebotmem SET linename = '$text' WHERE user_id = '$userId';");
 				$toggle = 3;
-				$str = "ชื่อไลน์ของคุณ" . $name . "คือ $text\nกรุณาระบุเพศด้วยจ้า (ชาย / หญิง)";
+				$str = "ชื่อไลน์ของคุณ$nameคือ $text\nกรุณาระบุเพศด้วยจ้า (ชาย / หญิง)";
 			}
 			else {
 				$error = true;
