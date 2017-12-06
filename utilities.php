@@ -142,7 +142,7 @@ function findQuestionType ($text) {
 		}
 		else if (endsWith($text, $keyitems['text'])) {
 			if (($keyitems['type'] == 1 && (strpos($text, 'ล่ม') !== false || strpos($text, 'เจ๊ง') !== false || 
-										    strpos($text, 'พัง') !== false || strpos($text, 'ดับ') !== false))) {
+										    strpos($text, 'พัง') !== false || strpos($text, 'ดับ') !== false || strpos($text, 'ปกติ') !== false))) {
 				return 8;
 			}
 			else {
@@ -840,7 +840,7 @@ function InsertDataToDB($userId, $userType) {
 						('$userId', 'บอล', '@Ball Sarayuth', 'M', '1990-10-28 00:00:00', 'admin', '$userType')						
 						;");//,('คืนนี้แหล่ะ อยากได้กี่ครั้งหล่ะ', '12')
 
-	$result = pg_query($db, "UPDATE tbhlinebotmodchng
-							SET bot_mode = 'allow'
-							WHERE id = '1'");		
+	// $result = pg_query($db, "UPDATE tbhlinebotmodchng
+	// 						SET bot_mode = 'allow'
+	// 						WHERE id = '1'");		
 }
