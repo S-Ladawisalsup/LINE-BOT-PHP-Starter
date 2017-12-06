@@ -514,8 +514,23 @@ function RegisterMode($text, $userId, $userType) {
 				$bd2 = $matches[0][0] . '/' . $matches[0][1] . '/' . $matches[0][2];
 				if (($bd < date("Y-m-d H:i:s")) && ($bd > date("Y-m-d H:i:s", strtotime("-150 Years")))) {
 					$results = pg_query($db2, "UPDATE tbhlinebotmem SET date_of_birth = '$bd' WHERE user_id = '$userId';");
-					$toggle = 5;
-					$str = "คุณเกิดวันที่ $bd2\nยืนยันการลงทะเบียนใช้งาน Line Chat Bot เต็มรูปแบบใช่หรือไม่";
+
+					$query4 = "SELECT date_of_birth FROM tbhlinebotmem WHERE user_id = '$userId'"; 
+					$result4 = $db->query($query4);
+
+					while ($row = $result4->fetch(PDO::FETCH_ASSOC)) {
+					    $bhd = htmlspecialchars($row["date_of_birth"]);
+					}
+					$result4->closeCursor();
+
+					if (empty($hbd)) {
+						$error = true;
+						$str = "ฮั่นแน่! กรอกวันที่มั่วๆมาหน่ะสิคิดว่า...ไม่รู้หรอ ไปกรอกเริ่มใหม่ตั้งแต่ต้นน๊ะจ๊ะ";
+					}
+					else {
+						$toggle = 5;
+						$str = "คุณเกิดวันที่ $bd2\nยืนยันการลงทะเบียนใช้งาน Line Chat Bot เต็มรูปแบบใช่หรือไม่";
+					}
 				}
 				else {
 					$error = true;
