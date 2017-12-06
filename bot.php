@@ -29,11 +29,18 @@ if (!is_null($events['events'])) {
 				$bot_mod = IsAvailable($event['source'][$event['source']['type'] . 'Id']);
 				switch ($bot_mod) {
 					case 'regis':
-						$text = $event['message']['text'];
-						$messages = [						
-							'type' => 'text',
-							'text' => RegisterMode($text, $event['source'][$event['source']['type'] . 'Id'], $event['source']['type'])
-						];
+						if (startsWith($haystack, $bot_name) || $event['source']['type'] == 'user') {
+							if ($event['source']['type'] != 'user') {
+								$text = substr($event['message']['text'], strlen($bot_name));
+							}
+							else {
+								$text = $event['message']['text'];
+							}
+							$messages = [						
+								'type' => 'text',
+								'text' => RegisterMode($text, $event['source'][$event['source']['type'] . 'Id'], $event['source']['type'])
+							];
+						}
 						break;
 					case 'allow':
 						// Compare message calling bot's name
@@ -153,7 +160,7 @@ if (!is_null($events['events'])) {
 										//InsertDataToDB($event['source'][$event['source']['type'] . 'Id'], $event['source']['type']);
 										$messages = [						
 											'type' => 'text',
-											'text' => test_f()
+											'text' => 'xxx'
 										];
 									}
 									//--------------------------------------------------------
@@ -203,8 +210,7 @@ if (!is_null($events['events'])) {
 								ReturnAllowToAdmin();
 							}
 						}
-						else if ((strpos($text, 'มีใครรออยู่บ้าง') !== false) || (strpos($text, 'ยังเหลือใครบ้าง') !== false) || 
-							     (strpos($text, 'มีใครเหลืออยู่บ้าง') !== false)) {
+						else if (findQuestionType($text) == 4 && strpos($text, 'เหลือ') !== false) {
 							$messages = [						
 								'type' => 'text',
 								'text' => ListWaitRegister()

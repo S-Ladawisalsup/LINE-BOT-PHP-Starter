@@ -841,24 +841,3 @@ function InsertDataToDB($userId, $userType) {
 	// 						SET bot_mode = 'allow'
 	// 						WHERE id = '1'");		
 }
-function test_f() {
-	$db = new PDO($GLOBALS['dsn']);
-	$query = "SELECT user_id FROM tbhlinebotmem WHERE position = 'admin'"; 
-	$result = $db->query($query);
-
-	$admin = array();
-	$order = 0;
-	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-	    $admin[$order] = htmlspecialchars($row["user_id"]);
-	    $order = $order + 1;
-	}
-	$result->closeCursor();
-
-	$str = '[';
-	foreach ($admin as $adm) {
-		$str .= $adm . ', ';
-	}
-	$str = substr($str, 0, -2);
-	$str .= ']';
-	return $str;
-}
