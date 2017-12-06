@@ -588,18 +588,31 @@ function IsAcceptingMember($userId) {
 	}
 	$result->closeCursor();
 
-	MemberConfirmation($new_member);
-
 	$query2 = "SELECT user_id FROM tbhlinebotmem WHERE position = 'admin'"; 
 	$result2 = $db->query($query2);
 
 	$admin = array();
-	$index = 0;
+	$order = 0;
 	while ($row = $result2->fetch(PDO::FETCH_ASSOC)) {
+	    $new_member[$order] = htmlspecialchars($row["user_id"]);
+	    $order = $order + 1;
+	}
+	$result2->closeCursor();
+
+	foreach ($admin as $adm) {
+		MemberConfirmation($new_member, $adm);
+	}
+	
+	$query3 = "SELECT user_id FROM tbhlinebotmem WHERE position = 'admin'"; 
+	$result3 = $db->query($query3);
+
+	$admin = array();
+	$index = 0;
+	while ($row = $result3->fetch(PDO::FETCH_ASSOC)) {
 	    $admin[$index] = htmlspecialchars($row["user_id"]);
 	    $index = $index + 1;
 	}
-	$result2->closeCursor();
+	$result3->closeCursor();
 
 	$db2 = pg_connect($GLOBALS['pgsql_conn']);
 	$awaitadmin = "UPDATE tbhlinebotmodchng SET bot_mode = 'await' WHERE ";
@@ -608,10 +621,10 @@ function IsAcceptingMember($userId) {
 	}
 	$awaitadmin = substr($awaitadmin, 0, -3);
 	$awaitadmin .= ";";
-	$result3 = pg_query($db2, $awaitadmin);
+	$result4 = pg_query($db2, $awaitadmin);
 }
 /**********************************************************************************************************************************/
-function MemberConfirmation($arrayData) {
+function MemberConfirmation($arrayData, $admin) {
 	$access_token = 'CFecc4UnPdpCUxVk2VuTlf7ANCYHbCpaxYltjR/z15zMJ/KzsPIVrp4tCql4xmQYr8qgJSZ6oitEZ0/PKH+FpdneucSfPgjTP03mQ5KRSKqYT93fEEvGDqOUxJ/SBoS3oTXcJaRSxlPVBWxH+8PWxAdB04t89/1O/w1cDnyilFU=';
 
 	$confirm = "มีผู้ต้องการใช้งาน Line Chat Bot อย่างเต็มระบบ\nชื่อ : " . $arrayData['name']; 
@@ -627,7 +640,7 @@ function MemberConfirmation($arrayData) {
 	];
 
 	//have to query admin from table to accept register member request
-	$admin = 'Ua492767fd96449cd8a857b101dbdbcce';	//ball
+	//$admin = 'Ua492767fd96449cd8a857b101dbdbcce';	//ball
 	// Make a POST Request to Messaging API to push to sender
 	$url = 'https://api.line.me/v2/bot/message/push';
 	$data = [
@@ -843,25 +856,4 @@ function InsertDataToDB($userId, $userType) {
 	// $result = pg_query($db, "UPDATE tbhlinebotmodchng
 	// 						SET bot_mode = 'allow'
 	// 						WHERE id = '1'");		
-}
-function test_f() {
-	$db = new PDO($GLOBALS['dsn']);
-	$query = "SELECT user_id FROM tbhlinebotmem WHERE position = 'admin'"; 
-	$result = $db->query($query);
-
-	$admin = array();
-	$order = 0;
-	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-	    $admin[$order] = htmlspecialchars($row["user_id"]);
-	    $order = $order + 1;
-	}
-	$result->closeCursor();
-
-	$str = '[';
-	foreach ($admin as $adm) {
-		$str .= $adm . ', ';
-	}
-	$str = substr($str, 0, -2);
-	$str .= ']';
-	return $str;
 }
