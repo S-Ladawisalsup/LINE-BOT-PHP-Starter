@@ -204,7 +204,7 @@ if (!is_null($events['events'])) {
 								'type' => 'text',
 								'text' => DeleteIdRow($text)
 							];
-							if (ListWaitRegister() == "ไม่มีรายชื่อขอเข้าใช้งานเต็มระบบตกค้าง") {
+							if (ListWaitRegister() == "ไม่มีรายชื่อขอเข้าใช้งานเต็มรูปแบบตกค้าง") {
 								ReturnAllowToAdmin();
 							}
 						}
