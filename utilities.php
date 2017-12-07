@@ -112,10 +112,10 @@ function GetSticker() {
 function findQuestionType ($text) {
 	//Trim all space ' '
 	if (strpos($text, 'สวัสดี') !== false) {
-		$text = str_replace('สวัสดี', 'สวัสดีl', $text);
+		$text = str_replace('สวัสดี', 'สวัสดีก', $text);
 	}
 	else if (strpos($text, 'หวัดดี') !== false) {
-		$text = str_replace('สวัสดี', 'หวัดดีl', $text);
+		$text = str_replace('สวัสดี', 'หวัดดีก', $text);
 	}
 	$temp = str_replace(' ', '', $text);
 
