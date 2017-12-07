@@ -151,7 +151,7 @@ function findQuestionType ($text) {
 /**********************************************************************************************************************************/
 function QuestionWordFromDB() {
 	$db = new PDO($GLOBALS['dsn']);
-	$query = 'SELECT id, questiontext, questiontype FROM tbhlinebotwmode ORDER BY id ASC';
+	$query = "SELECT id, questiontext, questiontype FROM tbhlinebotwmode ORDER BY id ASC";
 	$result = $db->query($query);
 
 	$qwords = array();
@@ -165,6 +165,26 @@ function QuestionWordFromDB() {
 	$result->closeCursor();
 
 	return $qwords;
+}
+//---------------------------------------------------------------------------------------------------------------------------------
+function testnine() {
+	$db = new PDO($GLOBALS['dsn']);
+	$query = "SELECT questiontext FROM tbhlinebotwmode WHERE questiontype = '9'";
+	$result = $db->query($query);
+
+	$qwords = array();
+	$index = 0;
+	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+		$qwords[$index] = htmlspecialchars($row["questiontext"]);
+		$index = $index + 1;
+	}
+	$result->closeCursor();
+
+	foreach ($qwords as $key) {
+		$val .= $key . "\n";
+	}
+
+	return $val;
 }
 /**********************************************************************************************************************************/
 function GetTemperature($text) {

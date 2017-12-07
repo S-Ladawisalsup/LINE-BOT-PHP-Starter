@@ -184,7 +184,7 @@ if (!is_null($events['events'])) {
 										//InsertDataToDB();
 										$messages = [						
 											'type' => 'text',
-											'text' => 'Completed'
+											'text' => testnine()
 										];
 									}
 									//--------------------------------------------------------
