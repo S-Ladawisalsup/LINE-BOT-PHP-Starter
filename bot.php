@@ -166,7 +166,6 @@ if (!is_null($events['events'])) {
 									}
 									//--------------------------------------------------------
 									else if ((strpos($text, 'เปิดโหมดลงทะเบียนเข้าใช้งาน') !== false)) {
-										InsertDataToDB();
 										$messages = [						
 											'type' => 'text',
 											'text' => "คุณสามารถใช้งาน Line Chat Bot ได้อย่างเต็มรูปแบบแล้วจ้า"
