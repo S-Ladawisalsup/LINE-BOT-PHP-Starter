@@ -119,7 +119,7 @@ if (!is_null($events['events'])) {
 									if (strpos($text, 'อุณหภูมิ') !== false) {							
 										$messages = [						
 											'type' => 'text',
-											'text' => GetTemperature($text)
+											'text' => GetTemperature($text) . IdentifyUser($event['source']['userId'])
 										];	
 									}
 									else {
