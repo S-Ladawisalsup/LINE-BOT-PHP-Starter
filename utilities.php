@@ -133,11 +133,6 @@ function findQuestionType ($text) {
 				return 7;
 			}
 			else if (strpos($text, $keyitems['text']) !== false) {
-				foreach ($QAArray as $item) {
-					if (endsWith($text, $item['text']) && $item['type'] <= 7) {
-						return $item['type'];
-					}
-				}
 				return $keyitems['type'];
 			}
 		}
