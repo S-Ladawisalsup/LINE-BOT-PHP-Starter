@@ -826,17 +826,31 @@ function BotPushAllowAccess($memberId, $allow) {
 function IdentifyUser($userId) {
 	$db = new PDO($GLOBALS['dsn']);
 
-	$query = "SELECT name FROM tbhlinebotmem WHERE user_id = '$userId'"; 
+	$query = "SELECT name, gender FROM tbhlinebotmem WHERE user_id = '$userId'"; 
 	$result = $db->query($query);
 
 	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-	    $name_req = htmlspecialchars($row["name"]);
+		$name_req = array();
+	    $name_req['name'] = htmlspecialchars($row["name"]);
+	    $name_req['gender'] = htmlspecialchars($row["gender"]);
 	}
 	$result->closeCursor();
 	if (isset($name_req)) {
-		$prefix = array('0' => 'ไอ้', '1' => 'คุณ', '2' => 'พี่');
-		$rand = rand(0, 2);
-		return $prefix[$rand] . $name_req;
+		$prefix = array('0' => 'ไอ้', '1' => 'คุณ', '2' => 'พี่', '3' => 'ท่าน', '4' => 'น้อง', '5' => 'ไอ้...', '6' => '');
+		$suffix = array('0' => '', '1' => 'คนดี', '2' => 'คนเก่ง', '3' => 'สุด');
+		$randend = rand(0, 3);
+		if ($randend == 3) {
+			if ($name_req['gender'] == 'M') {
+				$suffix[$randend] = $suffix[$randend] . 'หล่อ';
+			}
+			else if ($name_req['gender'] == 'F') {
+				$suffix[$randend] = $suffix[$randend] . 'สวย';
+			}
+			else {
+				$suffix[$randend] = '';
+			}
+		}
+		return $prefix[rand(0, 6)] . $name_req['name'] . $suffix[$randend];
 	}
 	else {
 		return "";
