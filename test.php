@@ -46,7 +46,5 @@ function QuestionWordFromDBTB() {
 /*
 function have to add and test to line chat bot
 4. Defind server ip in database in UI Line Chat Bot. (optional)
-5. Start Greeting in group in everyday. (Maybe complete later)
-6. Start HBD on user that have date of birth in that day.
 8. Start random push message to random user(s).
 */
