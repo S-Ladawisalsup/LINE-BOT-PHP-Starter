@@ -27,10 +27,11 @@ if (!is_null($_POST['val']) || !is_null($events)) {
 	$result->closeCursor();
 
 	$greeting = array('0' => 'สวัสดีตอนเช้าคับทุกคนนนนนน อากาศตอนเช้าสบายดีมั้ย ขอเสียงโหน่ยยยยยยย',
-					  '1' => 'เช้าแล้วน้าาา ทุกคนตอนนี้เป็นไงกันบ้าง ขอเสียงโหน่ยยยยยยย');
+					  '1' => 'เช้าแล้วน้าาา ทุกคนตอนนี้เป็นไงกันบ้าง ขอเสียงโหน่ยยยยยยย',
+					  '2' => 'ทำไมมันเงียบจังน้า ทำไมมันถึงเงียบกว่าชาวบ้านเค้า');
 	
 	foreach ($groups as $group) {
-		BotPush($group, $greeting[rand(0, 10000) % 2]);
+		BotPush($group, $greeting[rand(0, 2)]);
 		//Maybe add random function if have to many groups registered. 
 	}
 
