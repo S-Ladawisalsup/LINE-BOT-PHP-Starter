@@ -113,7 +113,7 @@ function findQuestionType ($text) {
 	//Trim all space ' '
 	//<--- Debug text encode with word 'หวัดดี' or 'สวัสดี'
 	$temp = str_replace(' ', '', $text);
-	if (strpos($text, 'สวัสดี') !== false || strpos($text, 'หวัดดี') !== false) {
+	if (strpos($text, 'สวัสด') !== false || strpos($text, 'หวัดด') !== false) {
 		return 9;
 	}
 
