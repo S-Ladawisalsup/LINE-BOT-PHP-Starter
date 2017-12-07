@@ -68,7 +68,7 @@ function AnswerBuilder($mood) {
 	    $index = $index + 1;
 	}
 	$result->closeCursor();
-	$reply = array_filter($reply);
+	//$reply = array_filter($reply);
 
 	return $reply[rand(0, count($reply))];
 }
