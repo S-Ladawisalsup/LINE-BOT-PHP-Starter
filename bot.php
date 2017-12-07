@@ -157,11 +157,11 @@ if (!is_null($events['events'])) {
 								default:
 									//--------------------------------------------------------
 									// Test case to insert data to postgresql database.
-									if (strpos($text, 'Who am I?') !== false && !is_null($event['source']['userId'])) {
+									if (strpos($text, 'Who am I?') !== false && isset($event['source']['userId'])) {
 										//InsertDataToDB();
 										$messages = [						
 											'type' => 'text',
-											'text' => AnswerWhoQA($event['source']['userId']))
+											'text' => AnswerWhoQA($event['source']['userId'])
 										];
 									}
 									//--------------------------------------------------------

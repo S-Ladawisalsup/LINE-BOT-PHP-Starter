@@ -833,12 +833,11 @@ function AnswerWhoQA($userId) {
 	$query = "SELECT name FROM tbhlinebotmem WHERE user_id = '$userId'"; 
 	$result = $db->query($query);
 
-	$name_req = '';
 	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 	    $name_req = htmlspecialchars($row["user_id"]);
 	}
 	$result->closeCursor();
-	if (is_null($name_req)) {
+	if (!isset($name_req)) {
 		return "ไม่รู้ว่าตัวเองเป็นใครเนี่ย ไปพบแพทย์หน่อยไหม";
 	}
 	else {
