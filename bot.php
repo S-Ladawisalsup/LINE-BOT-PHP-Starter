@@ -61,10 +61,19 @@ if (!is_null($events['events'])) {
 							switch ($typing) {
 								case '1':
 									# code... Yes/No Question => Yes/No Answer
-									$messages = [						
-										'type' => 'text',
-										'text' => AnswerBuilder(10) . IdentifyUser($event['source']['userId']) 
-									];							
+									if (rand(0, 9) == 1) {
+										$messages = [
+											'type' => 'sticker',
+											'packageId' => '2',
+						    				'stickerId' => '39'
+										];
+									}
+									else {
+										$messages = [						
+											'type' => 'text',
+											'text' => AnswerBuilder(10) . IdentifyUser($event['source']['userId']) 
+										];	
+									}						
 									break;	
 								case '2':
 									# code... When Question => Timer Answer
@@ -181,9 +190,10 @@ if (!is_null($events['events'])) {
 									// Test case to insert data to postgresql database.
 									if (strpos($text, 'testmsgbyball') !== false) {
 										//InsertDataToDB();
-										$messages = [						
-											'type' => 'text',
-											'text' => 'completed'
+										$messages = [
+											'type' => 'sticker',
+											'packageId' => '2',
+						    				'stickerId' => '39'
 										];
 									}
 									//--------------------------------------------------------
