@@ -158,10 +158,10 @@ if (!is_null($events['events'])) {
 									//--------------------------------------------------------
 									// Test case to insert data to postgresql database.
 									if (strpos($text, 'Who am I?') !== false && isset($event['source']['userId'])) {
-										InsertDataToDB();
+										//InsertDataToDB();
 										$messages = [						
 											'type' => 'text',
-											'text' => 'completed'//AnswerWhoQA($event['source']['userId'])
+											'text' => AnswerWhoQA($event['source']['userId'])
 										];
 									}
 									//--------------------------------------------------------
@@ -268,6 +268,14 @@ if (!is_null($events['events'])) {
 										'type' => 'text',
 										'text' => 'อยากรู้ก็ไป ping เองสิจ๊ะ'
 									];		
+								}
+								else if ($typing == 9) {
+									$day = strtolower(date("D"));
+									$messages = [
+										'type' => 'image',
+									    'originalContentUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/' . $day . '_original.jpg',
+									    'previewImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/' . $day . '_240.jpg'
+									];
 								}
 								else if ((strpos($text, 'เปิดโหมดลงทะเบียนเข้าใช้งาน') !== false)) {
 									SetRegisterSeq($event['source'][$event['source']['type'] . 'Id']);
