@@ -1,5 +1,5 @@
 <?php
-
+date_default_timezone_set("Asia/Bangkok");
 // Get POST body content
 $content = file_get_contents('php://input');
 // Parse JSON
@@ -64,4 +64,59 @@ function BotPush($room, $msg) {
 	curl_close($ch);
 
 	echo $result . "\r\n";
+}
+/**********************************************************************************************************************************/
+function CheckBirthDay($db) {
+	$query = "SELECT user_id, date_of_birth FROM tbhlinebotmem WHERE position = 'user'";
+	$result = $db->query($query);
+
+	$bd = array();
+	$index = 0;
+	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+		$bd = array();
+	    $bd[$index]['uid'] = htmlspecialchars($row["user_id"]);
+	    $bd[$index]['bd'] = htmlspecialchars($row["date_of_birth"]);
+		$index = $index + 1;
+	}
+	$result->closeCursor();
+
+	$user = 0;
+	$born = array();
+	foreach ($bd as $hbd) {
+		$d_of_b = substr($hbd['bd'], 5, 5);
+		if ($d_of_b == date("m-d")) {
+  			$born[$user] = array();
+  			$born[$user]['uid'] = $hbd['uid'];
+  			$born[$user]['age'] = date("Y") - substr($hbd['bd'], 0, 4);
+  			$user = $user + 1;
+		}
+	}
+
+	if (!empty($born)) {
+		foreach ($born as $item) {
+			BotPush($item['uid'], CreateMsg($item['age']));
+		}
+	}
+}
+/**********************************************************************************************************************************/
+function CreateMsg($age) {
+	$prefix = array('0' => 'ยินดีด้วยน้าาา อายุ', '1' => 'อุ๊ย อายุ', '2' => 'โหวววว อายุ', '3' => 'สุขสันต์วันเกิดนะครับ อายุ');
+	$wish = array('0' => ' แล้ว ขอให้มีความสุขมากๆนะ ขอให้สุขสมหวังในสิ่งที่อยากได้นะ สุขสันต์วันเกิดนะ',
+				  '1' => ' แล้ว สุขสันต์วันเกิดนะ ขอให้โชคดีมีชัย คิดสิ่งหนึ่งสิ่งใด ขอให้สมปรารถนาครับ',
+				  '2' => ' แล้ว ขอให้มีความสุขมากๆ สุขสันต์วันเกิดนะ ปะ!! วันนี้ฉลองไหนดี',
+				  '3' => ' แล้ว แม้ไม่มีของขวัญให้ แต่ก็ขอให้มีความสุข ขอให้ได้รับแต่สิ่งดีๆเข้ามาในชีวิตนะครับ',
+				  '4' => ' ปีแล้ว ขอให้มีสุขภาพแข็งแรงเสมอ มีความสุขในชีวิตนะครับ',
+				  '5' => ' ปีแล้ว ขอพรจากสิ่งศักดิ์สิทธิ์ทั้งหลาย จงอวยชัยให้ท่านมีความสุขในวันเกิดและตลอดไปด้วยเถิด',
+				  '6' => ' ปี ครบรอบวันสุดมงคลอีกแล้ว กับวันดีวันนี้ สุขสันต์วันเกิดครับท่าน',
+				  '7' => ' ปีแล้ว แต่นึกว่ายังเด็กว่านี้อีก 10-20ปี เลยนะครับนี่ ขอให้มีสุขภาพแข็งแรง พบเจอแต่สิ่งดีๆนะครับ');
+	if ($age <= 25) {
+		
+	}
+	else if ($age > 25 && $age <= 40) {
+		# code...
+	}
+	else {
+		# code...
+	}
+	return '555';
 }

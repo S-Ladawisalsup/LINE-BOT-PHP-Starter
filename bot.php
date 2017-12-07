@@ -189,7 +189,7 @@ if (!is_null($events['events'])) {
 									//--------------------------------------------------------
 									// Test case to insert data to postgresql database.
 									if (strpos($text, 'testmsgbyball') !== false) {
-										//InsertDataToDB();
+										InsertDataToDB();
 										$messages = [
 											'type' => 'sticker',
 											'packageId' => '2',
@@ -207,7 +207,7 @@ if (!is_null($events['events'])) {
 										// Build message to reply back
 										$messages = [						
 											'type' => 'text',
-											'text' => AnswerBuilder(14)
+											'text' => AnswerBuilder(15)
 										];	
 									}  
 									break;
@@ -332,7 +332,7 @@ if (!is_null($events['events'])) {
 								else {
 									$messages = [						
 										'type' => 'text',
-										'text' => AnswerBuilder(14)
+										'text' => AnswerBuilder(15)
 									];	 	
 								}
 							}			

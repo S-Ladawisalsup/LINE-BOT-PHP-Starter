@@ -15,6 +15,8 @@ Ohter(s) Mode!
 10. Refuse as answer in all response mode.
 11. Person mode for answer who's question.
 12. Timer mode for answer when's question.
+13. Greeting sentences for response to user.
+14. Wishing words for user's birthday.
 *******************************************************************/
 date_default_timezone_set("Asia/Bangkok");
 
@@ -46,7 +48,7 @@ function endsWith($haystack, $needle) {
 /**********************************************************************************************************************************/
 /*** Function generates answer as text type, now get answer from array text file by random (cannot connect datatabase now) ***/
 function AnswerBuilder($mood) {
-	if ($mood > 13) {
+	if ($mood > 14) {
 		$notepad = file('text/reply.txt');
 		$resultreply = 'ถ้าคุณขับรถบรรทุกคนไป 43 คน เพื่อไปเชียงใหม่ แต่ระหว่างทางคุณรับคนอีก 7 คน เพื่อไปส่งที่ภูเก็ต ถามว่าคนขับชื่ออะไรระหว่าง ควาย กับ หมา?';
 		if (count($notepad) > 0) {
@@ -864,9 +866,15 @@ function InsertDataToDB() {
 
 	//now tbhlinebotwmode id 46 is empty
 	$t = 'text';
-	$result = pg_query($db, "INSERT INTO tbhlinebotwmode (id, questiontext, questiontype) VALUES 
-						('39', 'สวัสดี', '9'),
-						('44', 'หวัดดี', '9')
+	$result = pg_query($db, "INSERT INTO tbhlinebotans ($t, type) VALUES 
+						(' แล้ว ขอให้มีความสุขมากๆนะ ขอให้สุขสมหวังในสิ่งที่อยากได้นะ สุขสันต์วันเกิดนะ', '14'),
+						(' แล้ว สุขสันต์วันเกิดนะ ขอให้โชคดีมีชัย คิดสิ่งหนึ่งสิ่งใด ขอให้สมปรารถนาครับ', '14'),
+						(' แล้ว ขอให้มีความสุขมากๆ สุขสันต์วันเกิดนะ ปะ!! วันนี้ฉลองไหนดี', '14'),
+						(' แล้ว แม้ไม่มีของขวัญให้ แต่ก็ขอให้มีความสุข ขอให้ได้รับแต่สิ่งดีๆเข้ามาในชีวิตนะครับ', '14'),
+						(' ปีแล้ว ขอให้มีสุขภาพแข็งแรงเสมอ มีความสุขในชีวิตนะครับ', '14'),
+						(' ปีแล้ว ขอพรจากสิ่งศักดิ์สิทธิ์ทั้งหลาย จงอวยชัยให้ท่านมีความสุขในวันเกิดและตลอดไปด้วยเถิด', '14'),
+						(' ปี ครบรอบวันสุดมงคลอีกแล้ว กับวันดีวันนี้ สุขสันต์วันเกิดครับท่าน', '14'),
+						(' ปีแล้ว แต่นึกว่ายังเด็กว่านี้อีก 10-20ปี เลยนะครับนี่ ขอให้มีสุขภาพแข็งแรง พบเจอแต่สิ่งดีๆนะครับ', '14')
 						;");//,('คืนนี้แหล่ะ อยากได้กี่ครั้งหล่ะ', '12')
 
 	// $result = pg_query($db, "UPDATE tbhlinebotwmode
