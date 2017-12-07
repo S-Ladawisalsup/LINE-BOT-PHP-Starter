@@ -111,6 +111,12 @@ function GetSticker() {
 /**********************************************************************************************************************************/
 function findQuestionType ($text) {
 	//Trim all space ' '
+	if (strpos($text, 'สวัสดี') !== false) {
+		$text = str_replace('สวัสดี', 'สวัสดีl', $text);
+	}
+	else if (strpos($text, 'หวัดดี') !== false) {
+		$text = str_replace('สวัสดี', 'หวัดดีl', $text);
+	}
 	$temp = str_replace(' ', '', $text);
 
 	$QAArray = QuestionWordFromDB();
@@ -132,7 +138,7 @@ function findQuestionType ($text) {
 			if ($keyitems['type'] == 8 && strpos($text, 'อุณหภูมิ') !== false) {	
 				return 7;
 			}
-			else if (strpos(utf8_encode($text), utf8_encode($keyitems['text'])) !== false) {
+			else if (strpos($text, $keyitems['text']) !== false) {
 				return $keyitems['type'];
 			}
 		}
