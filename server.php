@@ -53,7 +53,7 @@ function UpdateTempToDB($curr_temperature, $location) {
 		    $index = $index + 1;
 		}
 		$result2->closeCursor();
-		$message = "ขณะนี้ที่ " . $location . " อุณหภูมิเท่กับ " . $curr_temperature . "C เพื่อความถูกต้องกรุณาตรวจสอบด้วยตัวของท่านเอง";
+		$message = "ขณะนี้ที่ " . $location . " อุณหภูมิเท่กับ " . $curr_temperature . " องศาเซลเซียส เพื่อความถูกต้องกรุณาตรวจสอบด้วยตัวของท่านเอง";
 		foreach ($admin as $adm) {
 			BotPush($message, $adm);
 		}

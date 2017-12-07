@@ -189,7 +189,7 @@ if (!is_null($events['events'])) {
 									//--------------------------------------------------------
 									// Test case to insert data to postgresql database.
 									if (strpos($text, 'testmsgbyball') !== false) {
-										InsertDataToDB();
+										//InsertDataToDB();
 										$messages = [
 											'type' => 'sticker',
 											'packageId' => '2',

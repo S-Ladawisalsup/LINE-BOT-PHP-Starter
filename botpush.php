@@ -34,7 +34,7 @@ if (!is_null($_POST['val']) || !is_null($events)) {
 		//Maybe add random function if have to many groups registered. 
 	}
 
-	//will add hdb user here....
+	CheckBirthDay($db);
 }
 /**********************************************************************************************************************************/
 function BotPush($room, $msg) {
@@ -94,29 +94,34 @@ function CheckBirthDay($db) {
 
 	if (!empty($born)) {
 		foreach ($born as $item) {
-			BotPush($item['uid'], CreateMsg($item['age']));
+			BotPush($item['uid'], CreateMsg($item['age'], $db));
 		}
 	}
 }
 /**********************************************************************************************************************************/
-function CreateMsg($age) {
-	$prefix = array('0' => 'ยินดีด้วยน้าาา อายุ', '1' => 'อุ๊ย อายุ', '2' => 'โหวววว อายุ', '3' => 'สุขสันต์วันเกิดนะครับ อายุ');
-	$wish = array('0' => ' แล้ว ขอให้มีความสุขมากๆนะ ขอให้สุขสมหวังในสิ่งที่อยากได้นะ สุขสันต์วันเกิดนะ',
-				  '1' => ' แล้ว สุขสันต์วันเกิดนะ ขอให้โชคดีมีชัย คิดสิ่งหนึ่งสิ่งใด ขอให้สมปรารถนาครับ',
-				  '2' => ' แล้ว ขอให้มีความสุขมากๆ สุขสันต์วันเกิดนะ ปะ!! วันนี้ฉลองไหนดี',
-				  '3' => ' แล้ว แม้ไม่มีของขวัญให้ แต่ก็ขอให้มีความสุข ขอให้ได้รับแต่สิ่งดีๆเข้ามาในชีวิตนะครับ',
-				  '4' => ' ปีแล้ว ขอให้มีสุขภาพแข็งแรงเสมอ มีความสุขในชีวิตนะครับ',
-				  '5' => ' ปีแล้ว ขอพรจากสิ่งศักดิ์สิทธิ์ทั้งหลาย จงอวยชัยให้ท่านมีความสุขในวันเกิดและตลอดไปด้วยเถิด',
-				  '6' => ' ปี ครบรอบวันสุดมงคลอีกแล้ว กับวันดีวันนี้ สุขสันต์วันเกิดครับท่าน',
-				  '7' => ' ปีแล้ว แต่นึกว่ายังเด็กว่านี้อีก 10-20ปี เลยนะครับนี่ ขอให้มีสุขภาพแข็งแรง พบเจอแต่สิ่งดีๆนะครับ');
+function CreateMsg($age, $db) {
+	$prefix = array('0' => 'ยินดีด้วยน้าาา อายุ ', '1' => 'อุ๊ย อายุ ', '2' => 'โหวววว อายุ ', '3' => 'สุขสันต์วันเกิดนะครับ อายุ');
+
+	$word = 'text';
+	$query = "SELECT $word FROM tbhlinebotans WHERE type = '14'";
+	$result = $db->query($query);
+
+	$wishes = array();
+	$index = 0;
+	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+		$wishes = array();
+	    $wishes[$index] = htmlspecialchars($row["text"]);
+		$index = $index + 1;
+	}
+	$result->closeCursor();
+
 	if ($age <= 25) {
-		
+		return $prefix[0] . $age . $wishes[rand(0, 3)];				// rand(0, (count($wishes) / 2) - 1)
 	}
 	else if ($age > 25 && $age <= 40) {
-		# code...
+		return $prefix[rand(1, 2)] . $age . $wishes[rand(0, 3)];	
 	}
 	else {
-		# code...
+		return $prefix[3] . $age . $wishes[rand(4, 7)];				// rand(count($wishes) / 2, count($wishes) - 1)
 	}
-	return '555';
 }
