@@ -111,11 +111,7 @@ function GetSticker() {
 /**********************************************************************************************************************************/
 function findQuestionType ($text) {
 	//Trim all space ' '
-	//<--- Debug text encode with word 'หวัดดี' or 'สวัสดี'
 	$temp = str_replace(' ', '', $text);
-	if (strpos($text, 'สวัสด') !== false || strpos($text, 'หวัดด') !== false) {
-		return 9;
-	}
 
 	$QAArray = QuestionWordFromDB();
 	foreach ($QAArray as $keyitems) {
@@ -366,7 +362,7 @@ function SubEndText($text) {
 	if (endsWith($text, 'บ้าง') || endsWith($text, 'อยู่')) {
 		$text = substr($text, 0, -12);
 	}
-	else if (endsWith($text, 'ดี')) {
+	else if (endsWith($text, 'ดี') && (!endsWith($text, 'สวัสดี') || !endsWith($text, 'หวัดดี'))) {
 		$text = substr($text, 0, -6);
 	}
 	return $text;
@@ -851,10 +847,11 @@ function IdentifyUser($userId) {
 function InsertDataToDB() {
 	$db = pg_connect($GLOBALS['pgsql_conn']);		
 
-	//now tbhlinebotwmode id 39, 44, 46 is empty
+	//now tbhlinebotwmode id 46 is empty
 	$t = 'text';
 	$result = pg_query($db, "INSERT INTO tbhlinebotwmode (id, questiontext, questiontype) VALUES 
-						('38', 'ดีจร้า', '9')
+						('39', 'สวัสดี', '9'),
+						('44', 'หวัดดี', '9')
 						;");//,('คืนนี้แหล่ะ อยากได้กี่ครั้งหล่ะ', '12')
 
 	// $result = pg_query($db, "UPDATE tbhlinebotwmode
