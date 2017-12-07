@@ -668,7 +668,7 @@ function ReturnAllowToAdmin() {
 /**********************************************************************************************************************************/
 function DeleteIdRow($text) {
 	$db = new PDO($GLOBALS['dsn']);
-	$query = "SELECT user_id, name, linename FROM tbhlinebotmem ORDER BY id ASC"; 
+	$query = "SELECT user_id, name, linename FROM tbhlinebotmem WHERE status = 'trial'"; 
 	$result = $db->query($query);
 
 	$del_user = array();
@@ -692,8 +692,7 @@ function DeleteIdRow($text) {
 			return "ระบบดำเนินการตามคำอนุมัติเรียบร้อย";
 		}
 	}
-
-	return "ไม่สามารถจัดการข้อมูลได้ หรืออาจจะไม่มีรายชื่อนี้ กรุณาตรวจสอบ หรือ จัดการกับฐานข้อมูลโดยตรง";
+	return "ไม่สามารถจัดการข้อมูลได้ อาจจะไม่มีรายชื่อนี้ หรืออาจจะไม่สามารถยกเลิกผู้ใช้รายนี้ได้ กรุณาตรวจสอบ หรือ จัดการกับฐานข้อมูลโดยตรง";
 }
 /**********************************************************************************************************************************/
 function ListWaitRegister() { //<-- current bugged this function.
@@ -781,10 +780,12 @@ function ConfirmRowUserMember($text) {
 			$usrid = $awaitusr["id"];
 			$db2 = pg_connect($GLOBALS['pgsql_conn']);
 			$result2 = pg_query($db2, "UPDATE tbhlinebotmodchng SET bot_mode = 'allow', seq = '0' WHERE user_id = '$usrid';");
+			$result3 = pg_query($db2, "UPDATE tbhlinebotmem SET status = 'allow' WHERE user_id = '$usrid';");
+			BotPushAllowAccess($usrid, true);
+			return "ระบบดำเนินการตามคำอนุมัติเรียบร้อย";
 		}
 	}
-	BotPushAllowAccess($usrid, true);
-	return "ระบบดำเนินการตามคำอนุมัติเรียบร้อย";
+	return "ไม่สามารถจัดการข้อมูลได้ กรุณาตรวจสอบ หรือ จัดการกับฐานข้อมูลโดยตรง";
 }
 /**********************************************************************************************************************************/
 function BotPushAllowAccess($memberId, $allow) {

@@ -33,6 +33,8 @@ if (!is_null($_POST['val']) || !is_null($events)) {
 		BotPush($group, $greeting[rand(0, 10000) % 2]);
 		//Maybe add random function if have to many groups registered. 
 	}
+
+	//will add hdb user here....
 }
 /**********************************************************************************************************************************/
 function BotPush($room, $msg) {
