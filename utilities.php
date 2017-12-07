@@ -111,12 +111,7 @@ function GetSticker() {
 /**********************************************************************************************************************************/
 function findQuestionType ($text) {
 	//Trim all space ' '
-	if (strpos($text, 'สวัสดี') !== false) {
-		$text = str_replace('สวัสดี', 'สวัสดี ', $text);
-	}
-	else if (strpos($text, 'หวัดดี') !== false) {
-		$text = str_replace('สวัสดี', 'หวัดดี ', $text);
-	}
+	//<--- Debug text encode with word 'หวัดดี' or 'สวัสดี'
 	$temp = str_replace(' ', '', $text);
 
 	$QAArray = QuestionWordFromDB();
@@ -141,6 +136,9 @@ function findQuestionType ($text) {
 			else if (strpos($text, $keyitems['text']) !== false) {
 				return $keyitems['type'];
 			}
+		}
+		else if (strpos($text, 'สวัสดี') !== false || strpos($text, 'หวัดดี') !== false) {
+			return 9;
 		}
 		else if (endsWith($temp, $keyitems['text'])) {
 			if (($keyitems['type'] == 1 && (strpos($text, 'ล่ม') !== false || strpos($text, 'เจ๊ง') !== false || strpos($text, 'เดี้ยง') !== false ||
@@ -853,21 +851,13 @@ function IdentifyUser($userId) {
 function InsertDataToDB() {
 	$db = pg_connect($GLOBALS['pgsql_conn']);		
 
-	//now tbhlinebotwmode id 38-39 is empty
+	//now tbhlinebotwmode id 39, 44, 46 is empty
 	$t = 'text';
-	// $result = pg_query($db, "INSERT INTO tbhlinebotans ($t, type) VALUES 
-	// 					('ตอนเช้าเป็นยังไงบ้างครับ', '13'),
-	// 					('อย่าลืมทานข้าวเช้านะครับ', '13'),
-	// 					('สู้ๆนะครับวันนี้', '13'),
-	// 					('ตั้งใจทำงานเข้านะครับ', '13'),
-	// 					('เป็นยังไงบ้างครับที่นั่นอากาศดีมั้ย', '13'),
-	// 					('สบายดีนะครับ', '13'),
-	// 					('มื้อเช้าอร่อยมั้ยครับ', '13'),
-	// 					('ขอให้โชคดีทั้งวันเลยนะครับวันนี้', '13'),
-	// 					('อย่าเครียดมากนะครับ เดี๋ยวหน้าเหี่ยวเอานะ', '13')
-	// 					;");//,('คืนนี้แหล่ะ อยากได้กี่ครั้งหล่ะ', '12')
+	$result = pg_query($db, "INSERT INTO tbhlinebotwmode (id, questiontext, questiontype) VALUES 
+						('38', 'ดีจร้า', '9')
+						;");//,('คืนนี้แหล่ะ อยากได้กี่ครั้งหล่ะ', '12')
 
-	$result = pg_query($db, "UPDATE tbhlinebotwmode
-							SET questiontext = 'หวัดดี'
-							WHERE id = '46'");		
+	// $result = pg_query($db, "UPDATE tbhlinebotwmode
+	// 						SET questiontext = 'หวัดดี'
+	// 						WHERE id = '46'");		
 }
