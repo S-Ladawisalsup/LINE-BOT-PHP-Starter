@@ -41,7 +41,7 @@ function UpdateTempToDB($curr_temperature, $location) {
 
 	$result = pg_query($db, "UPDATE tbhlinebottemploc SET temperature = '$curr_temperature' WHERE location = '$location'");	
 
-	if ($curr_temperature > 25) {
+	if ($curr_temperature > 27) {
 		$db_query = new PDO($GLOBALS['dsn']);
 		$query2 = "SELECT user_id FROM tbhlinebotmem WHERE position = 'admin'"; 
 		$result2 = $db_query->query($query2);
