@@ -166,26 +166,6 @@ function QuestionWordFromDB() {
 
 	return $qwords;
 }
-//---------------------------------------------------------------------------------------------------------------------------------
-function testnine() {
-	$db = new PDO($GLOBALS['dsn']);
-	$query = "SELECT questiontext FROM tbhlinebotwmode WHERE questiontype = '9'";
-	$result = $db->query($query);
-
-	$qwords = array();
-	$index = 0;
-	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-		$qwords[$index] = htmlspecialchars($row["questiontext"]);
-		$index = $index + 1;
-	}
-	$result->closeCursor();
-
-	foreach ($qwords as $key) {
-		$val .= $key . "\n";
-	}
-
-	return $val;
-}
 /**********************************************************************************************************************************/
 function GetTemperature($text) {
 	$db = new PDO($GLOBALS['dsn']);
@@ -869,19 +849,19 @@ function InsertDataToDB() {
 
 	//now tbhlinebotwmode id 38-39 is empty
 	$t = 'text';
-	$result = pg_query($db, "INSERT INTO tbhlinebotans ($t, type) VALUES 
-						('ตอนเช้าเป็นยังไงบ้างครับ', '13'),
-						('อย่าลืมทานข้าวเช้านะครับ', '13'),
-						('สู้ๆนะครับวันนี้', '13'),
-						('ตั้งใจทำงานเข้านะครับ', '13'),
-						('เป็นยังไงบ้างครับที่นั่นอากาศดีมั้ย', '13'),
-						('สบายดีนะครับ', '13'),
-						('มื้อเช้าอร่อยมั้ยครับ', '13'),
-						('ขอให้โชคดีทั้งวันเลยนะครับวันนี้', '13'),
-						('อย่าเครียดมากนะครับ เดี๋ยวหน้าเหี่ยวเอานะ', '13')
-						;");//,('คืนนี้แหล่ะ อยากได้กี่ครั้งหล่ะ', '12')
+	// $result = pg_query($db, "INSERT INTO tbhlinebotans ($t, type) VALUES 
+	// 					('ตอนเช้าเป็นยังไงบ้างครับ', '13'),
+	// 					('อย่าลืมทานข้าวเช้านะครับ', '13'),
+	// 					('สู้ๆนะครับวันนี้', '13'),
+	// 					('ตั้งใจทำงานเข้านะครับ', '13'),
+	// 					('เป็นยังไงบ้างครับที่นั่นอากาศดีมั้ย', '13'),
+	// 					('สบายดีนะครับ', '13'),
+	// 					('มื้อเช้าอร่อยมั้ยครับ', '13'),
+	// 					('ขอให้โชคดีทั้งวันเลยนะครับวันนี้', '13'),
+	// 					('อย่าเครียดมากนะครับ เดี๋ยวหน้าเหี่ยวเอานะ', '13')
+	// 					;");//,('คืนนี้แหล่ะ อยากได้กี่ครั้งหล่ะ', '12')
 
-	// $result = pg_query($db, "UPDATE tbhlinebotmodchng
-	// 						SET bot_mode = 'allow'
-	// 						WHERE id = '1'");		
+	$result = pg_query($db, "UPDATE tbhlinebotans
+							SET $t = 'หวัดดี'
+							WHERE id = '46'");		
 }
