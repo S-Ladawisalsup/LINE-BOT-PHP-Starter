@@ -143,7 +143,7 @@ if (!is_null($events['events'])) {
 									if ($protocal['IsChecked']) {
 										$messages = [						
 											'type' => 'text',
-											'text' => GetPingAnswer($protocal['ip_addr']) . "ครับ " . IdentifyUser($event['source']['userId'])
+											'text' => GetPingAnswer($protocal['ip_addr']) . IdentifyUser($event['source']['userId'])
 										];	
 									}
 									else {
@@ -201,6 +201,16 @@ if (!is_null($events['events'])) {
 										$messages = [						
 											'type' => 'text',
 											'text' => IdentifyUser($event['source']['userId']) . "สามารถใช้งาน Line Chat Bot ได้อย่างเต็มรูปแบบแล้วจ้า"
+										]; 
+									}
+									else if ((strpos($text, 'ขอบคุณ') !== false) || (strpos($text, 'ขอบใจ') !== false) || 
+											 (strpos(strtolower($text), 'thank') !== false) || (strpos(strtolower($text), 'thx') !== false) || 
+											 (strpos(strtolower($text), 'bye') !== false) || (strpos($text, 'ลาก่อน') !== false)) {
+										$sticker = GetSticker();
+										$messages = [
+											'type' => 'sticker',
+											'packageId' => $sticker['packageId'],
+						    				'stickerId' => $sticker['stickerId']
 										]; 
 									}
 									else {
@@ -327,6 +337,16 @@ if (!is_null($events['events'])) {
 									$messages = [						
 										'type' => 'text',
 										'text' => $tx
+									]; 
+								}
+								else if ((strpos($text, 'ขอบคุณ') !== false) || (strpos($text, 'ขอบใจ') !== false) || 
+										 (strpos(strtolower($text), 'thank') !== false) || (strpos(strtolower($text), 'thx') !== false) || 
+										 (strpos(strtolower($text), 'bye') !== false) || (strpos($text, 'ลาก่อน') !== false)) {
+									$sticker = GetSticker();
+									$messages = [
+										'type' => 'sticker',
+										'packageId' => $sticker['packageId'],
+					    				'stickerId' => $sticker['stickerId']
 									]; 
 								}
 								else {
