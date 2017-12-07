@@ -41,12 +41,12 @@ function UpdateTempToDB($curr_temperature, $location) {
 
 	$result = pg_query($db, "UPDATE tbhlinebottemploc SET temperature = '$curr_temperature' WHERE location = '$location'");	
 
-	if (!$result) {
-		echo "An error occurred.";
-	}			
-	else {
-		echo "Updated database successful, please check on your database.";
-	}
+	// if (!$result) {
+	// 	echo "An error occurred.";
+	// }			
+	// else {
+	// 	echo "Updated database successful, please check on your database.";
+	// }
 }
 /**********************************************************************************************************************************/
 function UpdateServToDB($name, $status, $location) {
@@ -85,51 +85,51 @@ function UpdateServToDB($name, $status, $location) {
 		$result = pg_query($db, "UPDATE tbhlinebotserv SET status = '$status', location_id = '$loc_id', 
 								lastchangestatus = '$laststate', datetimestatuschanged = '$lasttime' WHERE ip_addr = '$name'");
 
-		// if ($status == 'danger') {
-		// 	$query2 = "SELECT user_id FROM tbhlinebotmem WHERE position = 'admin'"; 
-		// 	$result2 = $db_query->query($query2);
+		if ($status == 'danger') {
+			$query2 = "SELECT user_id FROM tbhlinebotmem WHERE position = 'admin'"; 
+			$result2 = $db_query->query($query2);
 
-		// 	$admin = array();
-		// 	$index = 0;
-		// 	while ($row = $result2->fetch(PDO::FETCH_ASSOC)) {
-		// 	    $admin[$index] = htmlspecialchars($row["user_id"]);
-		// 	    $index = $index + 1;
-		// 	}
-		// 	$result2->closeCursor();
-		// 	$message = "ขณะนี้ server " . $name . " อาจจะไม่สามารถใช้งานได้ เพื่อความถูกต้องกรุณาตรวจสอบด้วยตัวของท่านเอง";
-		// 	foreach ($admin as $adm) {
-		// 		BotPush($message, $adm);
-		// 	}
-		// }
+			$admin = array();
+			$index = 0;
+			while ($row = $result2->fetch(PDO::FETCH_ASSOC)) {
+			    $admin[$index] = htmlspecialchars($row["user_id"]);
+			    $index = $index + 1;
+			}
+			$result2->closeCursor();
+			$message = "ขณะนี้ server " . $name . " อาจจะไม่สามารถใช้งานได้ เพื่อความถูกต้องกรุณาตรวจสอบด้วยตัวของท่านเอง";
+			foreach ($admin as $adm) {
+				BotPush($message, $adm);
+			}
+		}
 	}
 	else {
 		$result = pg_query($db, "UPDATE tbhlinebotserv SET status = '$status', location_id = '$loc_id' WHERE ip_addr = '$name'");
 
 		//for test
-		// if ($status == 'danger') {
-		// 	$query2 = "SELECT user_id FROM tbhlinebotmem WHERE position = 'admin'"; 
-		// 	$result2 = $db_query->query($query2);
+		if ($status == 'danger') {
+			$query2 = "SELECT user_id FROM tbhlinebotmem WHERE position = 'admin'"; 
+			$result2 = $db_query->query($query2);
 
-		// 	$admin = array();
-		// 	$index = 0;
-		// 	while ($row = $result2->fetch(PDO::FETCH_ASSOC)) {
-		// 	    $admin[$index] = htmlspecialchars($row["user_id"]);
-		// 	    $index = $index + 1;
-		// 	}
-		// 	$result2->closeCursor();
-		// 	$message = "ขณะนี้ server " . $name . " อาจจะไม่สามารถใช้งานได้ เพื่อความถูกต้องกรุณาตรวจสอบด้วยตัวของท่านเอง";
-		// 	foreach ($admin as $adm) {
-		// 		BotPush($message, $adm);
-		// 	}
-		// }
+			$admin = array();
+			$index = 0;
+			while ($row = $result2->fetch(PDO::FETCH_ASSOC)) {
+			    $admin[$index] = htmlspecialchars($row["user_id"]);
+			    $index = $index + 1;
+			}
+			$result2->closeCursor();
+			$message = "ขณะนี้ server " . $name . " อาจจะไม่สามารถใช้งานได้ เพื่อความถูกต้องกรุณาตรวจสอบด้วยตัวของท่านเอง";
+			foreach ($admin as $adm) {
+				BotPush($message, $adm);
+			}
+		}
 	}
 
-	if (!$result) {
-		echo "\r\nAn error occurred.";
-	}			
-	else {
-		echo "\r\nUpdated database successful, please check on your database.";
-	}
+	// if (!$result) {
+	// 	echo "\r\nAn error occurred.";
+	// }			
+	// else {
+	// 	echo "\r\nUpdated database successful, please check on your database.";
+	// }
 }
 /**********************************************************************************************************************************/
 function findLocationID($loc_name) {
