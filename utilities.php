@@ -362,7 +362,7 @@ function SubEndText($text) {
 	if (endsWith($text, 'บ้าง') || endsWith($text, 'อยู่')) {
 		$text = substr($text, 0, -12);
 	}
-	else if (endsWith($text, 'ดี') && (!endsWith($text, 'สวัสดี') || !endsWith($text, 'หวัดดี'))) {
+	else if (endsWith($text, 'ดี') && (!endsWith($text, 'สวัสดี') && !endsWith($text, 'หวัดดี'))) {
 		$text = substr($text, 0, -6);
 	}
 	return $text;
