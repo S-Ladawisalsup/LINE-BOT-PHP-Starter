@@ -861,7 +861,7 @@ function InsertDataToDB() {
 	// 					('อย่าเครียดมากนะครับ เดี๋ยวหน้าเหี่ยวเอานะ', '13')
 	// 					;");//,('คืนนี้แหล่ะ อยากได้กี่ครั้งหล่ะ', '12')
 
-	$result = pg_query($db, "UPDATE tbhlinebot
+	$result = pg_query($db, "UPDATE tbhlinebotwmode
 							SET questiontext = 'หวัดดี'
 							WHERE id = '46'");		
 }
