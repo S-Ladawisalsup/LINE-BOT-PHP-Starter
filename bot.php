@@ -266,6 +266,9 @@ if (!is_null($events['events'])) {
 							];	
 						}
 						break;		
+					case 'relation':
+						# code... <-------------------------------------------------------------------------------------- To Be Continue
+						break;
 					default:
 						# Check event user request is text
 						if ($event['message']['type'] == 'text') {

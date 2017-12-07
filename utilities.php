@@ -17,7 +17,7 @@ Ohter(s) Mode!
 12. Timer mode for answer when's question.
 13. Greeting sentences for response to user.
 14. Wishing words for user's birthday.
-15. Starting question for bot asking. //<-- Will Adding
+15. Starting question for bot asking. //<----------------------------------------------------------------------------- Will Adding
 *******************************************************************/
 date_default_timezone_set("Asia/Bangkok");
 

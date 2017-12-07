@@ -47,4 +47,5 @@ function QuestionWordFromDBTB() {
 function have to add and test to line chat bot
 4. Defind server ip in database in UI Line Chat Bot. (optional)
 8. Start random push message to random user(s).
+8.1 add another toggle on 9am, 1pm, 3pm, 10pm to bot start push message first with random user(s). 
 */
