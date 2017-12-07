@@ -151,10 +151,31 @@ if (!is_null($events['events'])) {
 									if (rand(0, 10000) % 2 == 0) {
 										$sayhi = substr($sayhi, 12);
 									}
-									$messages = [						
-										'type' => 'text',
-										'text' => $sayhi . IdentifyUser($event['source']['userId']) . " " . AnswerBuilder(13)
-									];
+									if (isset($event['source']['userId'])) {
+										$person = IdentifyUser($event['source']['userId']);	
+										if (!empty($person)) {
+											$messages = [						
+												'type' => 'text',
+												'text' => $sayhi . IdentifyUser($event['source']['userId']) . " " . AnswerBuilder(13)
+											];
+										}
+										else {
+											$day = strtolower(date("D"));
+											$messages = [
+												'type' => 'image',
+											    'originalContentUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/' . $day . '_original.jpg',
+											    'previewImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/' . $day . '_240.jpg'
+											];	
+										}
+									}
+									else {
+										$day = strtolower(date("D"));
+										$messages = [
+											'type' => 'image',
+										    'originalContentUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/' . $day . '_original.jpg',
+										    'previewImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/' . $day . '_240.jpg'
+										];	
+									}
 									break;		
 								default:
 									//--------------------------------------------------------
