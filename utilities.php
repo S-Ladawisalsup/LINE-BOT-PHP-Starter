@@ -851,11 +851,10 @@ function AnswerWhoQA($userId) {
 function InsertDataToDB() {
 	$db = pg_connect($GLOBALS['pgsql_conn']);		
 
-	//now tbhlinebotwmode id 37-39 is empty
+	//now tbhlinebotwmode id 38-39 is empty
 	// $t = 'text';
-	$result = pg_query($db, "INSERT INTO tbhlinebotlocname (loc_callname, loc_id) VALUES 
-						('ห้องserver', '2'),
-						('ห้องprogrammer', '1')						
+	$result = pg_query($db, "INSERT INTO tbhlinebotwmode (id, questiontext, questiontype) VALUES 
+						('37', 'เป็นไง', '5')
 						;");//,('คืนนี้แหล่ะ อยากได้กี่ครั้งหล่ะ', '12')
 
 	// $result = pg_query($db, "UPDATE tbhlinebotmodchng
