@@ -46,7 +46,7 @@ function endsWith($haystack, $needle) {
 /**********************************************************************************************************************************/
 /*** Function generates answer as text type, now get answer from array text file by random (cannot connect datatabase now) ***/
 function AnswerBuilder($mood) {
-	if ($mood > 12) {
+	if ($mood > 13) {
 		$notepad = file('text/reply.txt');
 		$resultreply = 'ถ้าคุณขับรถบรรทุกคนไป 43 คน เพื่อไปเชียงใหม่ แต่ระหว่างทางคุณรับคนอีก 7 คน เพื่อไปส่งที่ภูเก็ต ถามว่าคนขับชื่ออะไรระหว่าง ควาย กับ หมา?';
 		if (count($notepad) > 0) {
@@ -827,7 +827,7 @@ function BotPushAllowAccess($memberId, $allow) {
 	echo $result . "\r\n";
 }
 /**********************************************************************************************************************************/
-function AnswerWhoQA($userId) {
+function IdentifyUser($userId) {
 	$db = new PDO($GLOBALS['dsn']);
 
 	$query = "SELECT name FROM tbhlinebotmem WHERE user_id = '$userId'"; 
@@ -837,13 +837,13 @@ function AnswerWhoQA($userId) {
 	    $name_req = htmlspecialchars($row["name"]);
 	}
 	$result->closeCursor();
-	if (!isset($name_req)) {
-		return "ไม่รู้ว่าตัวเองเป็นใครเนี่ย ไปพบแพทย์หน่อยไหม";
-	}
-	else {
+	if (isset($name_req)) {
 		$prefix = array('0' => 'ไอ้', '1' => 'คุณ', '2' => 'พี่');
 		$rand = rand(0, 2);
-		return "แหม" . $prefix[$rand] . $name_req . " อย่าล้อผมเล่นสิครับ";
+		return $prefix[$rand] . $name_req;
+	}
+	else {
+		return "";
 	}
 }
 /**********************************************************************************************************************************/
@@ -852,9 +852,17 @@ function InsertDataToDB() {
 	$db = pg_connect($GLOBALS['pgsql_conn']);		
 
 	//now tbhlinebotwmode id 38-39 is empty
-	// $t = 'text';
-	$result = pg_query($db, "INSERT INTO tbhlinebotwmode (id, questiontext, questiontype) VALUES 
-						('37', 'เป็นไง', '5')
+	$t = 'text';
+	$result = pg_query($db, "INSERT INTO tbhlinebotans ($t, type) VALUES 
+						('ตอนเช้าเป็นยังไงบ้างครับ', '13'),
+						('อย่าลืมทานข้าวเช้านะครับ', '13'),
+						('สู้ๆนะครับวันนี้', '13'),
+						('ตั้งใจทำงานเข้านะครับ', '13'),
+						('เป็นยังไงบ้างครับที่นั่นอากาศดีมั้ย', '13'),
+						('สบายดีนะครับ', '13'),
+						('มื้อเช้าอร่อยมั้ยครับ', '13'),
+						('ขอให้โชคดีทั้งวันเลยนะครับวันนี้', '13'),
+						('อย่าเครียดมากนะครับ เดี๋ยวหน้าเหี่ยวเอานะ', '13')
 						;");//,('คืนนี้แหล่ะ อยากได้กี่ครั้งหล่ะ', '12')
 
 	// $result = pg_query($db, "UPDATE tbhlinebotmodchng

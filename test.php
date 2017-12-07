@@ -26,16 +26,16 @@ function QuestionWordFromDBTB() {
 
 	$t = 'text';
 
-	$query = "SELECT questiontext, questiontype FROM tbhlinebotwmode";// WHERE questiontype = '5'";
-	//$query = "SELECT $t, type FROM tbhlinebotans WHERE type = '10'";
+	//$query = "SELECT questiontext, questiontype FROM tbhlinebotwmode";// WHERE questiontype = '5'";
+	$query = "SELECT $t, type FROM tbhlinebotans";// WHERE type = '10'";
 	$result = $db->query($query);
 
 	$words = array();
 	$index = 0;
 	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 	    $words[$index] = array();
-		$words[$index]['text'] = htmlspecialchars($row["questiontext"]);//
-		$words[$index]['type'] = htmlspecialchars($row["questiontype"]);//
+		$words[$index]['text'] = htmlspecialchars($row["text"]);//question
+		$words[$index]['type'] = htmlspecialchars($row["type"]);//question
 		$index = $index + 1;
 	}
 	$result->closeCursor();
@@ -48,6 +48,5 @@ function have to add and test to line chat bot
 4. Defind server ip in database in UI Line Chat Bot. (optional)
 5. Start Greeting in group in everyday. (Maybe complete later)
 6. Start HBD on user that have date of birth in that day.
-7. Identify user in group. 
 8. Start random push message to random user(s).
 */

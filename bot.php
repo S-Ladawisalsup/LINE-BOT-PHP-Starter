@@ -64,14 +64,14 @@ if (!is_null($events['events'])) {
 									# code... Yes/No Question => Yes/No Answer
 									$messages = [						
 										'type' => 'text',
-										'text' => AnswerBuilder(10)
+										'text' => AnswerBuilder(10) . IdentifyUser($event['source']['userId']) 
 									];							
 									break;	
 								case '2':
 									# code... When Question => Timer Answer
 									$messages = [						
 										'type' => 'text',
-										'text' => AnswerBuilder(12)
+										'text' => AnswerBuilder(12) . "ครัย " . IdentifyUser($event['source']['userId'])  
 									];
 									break;
 								case '3':
@@ -89,7 +89,7 @@ if (!is_null($events['events'])) {
 									else {
 										$messages = [						
 											'type' => 'text',
-											'text' => AnswerBuilder(10)
+											'text' => AnswerBuilder(10) . IdentifyUser($event['source']['userId'])
 										];
 									}
 									break;
@@ -104,14 +104,14 @@ if (!is_null($events['events'])) {
 									# code... What/How Question => Reason Answer
 									$messages = [						
 										'type' => 'text',
-										'text' => AnswerBuilder(10)
+										'text' => AnswerBuilder(10) . IdentifyUser($event['source']['userId'])
 									];							
 									break;
 								case '6':
 									# code... Which Question => Object Answer
 									$messages = [						
 										'type' => 'text',
-										'text' => AnswerBuilder(10)
+										'text' => AnswerBuilder(10) . IdentifyUser($event['source']['userId'])
 									];
 									break;
 								case '7':
@@ -125,7 +125,7 @@ if (!is_null($events['events'])) {
 									else {
 										$messages = [						
 											'type' => 'text',
-											'text' => AnswerBuilder(10)
+											'text' => AnswerBuilder(10) . IdentifyUser($event['source']['userId'])
 										];							
 									}
 									break;	
@@ -135,7 +135,7 @@ if (!is_null($events['events'])) {
 									if ($protocal['IsChecked']) {
 										$messages = [						
 											'type' => 'text',
-											'text' => GetPingAnswer($protocal['ip_addr'])
+											'text' => GetPingAnswer($protocal['ip_addr']) . "ครับ " . IdentifyUser($event['source']['userId'])
 										];	
 									}
 									else {
@@ -147,35 +147,37 @@ if (!is_null($events['events'])) {
 									break;		
 								case '9':
 									# greeting mode
-									$day = strtolower(date("D"));
-									$messages = [
-										'type' => 'image',
-									    'originalContentUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/' . $day . '_original.jpg',
-									    'previewImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/' . $day . '_240.jpg'
+									$sayhi = 'สวัสดีครับ';
+									if (rand(0, 10000) % 2 == 0) {
+										$sayhi = substr($sayhi, 12);
+									}
+									$messages = [						
+										'type' => 'text',
+										'text' => $sayhi . IdentifyUser($event['source']['userId']) . " " . AnswerBuilder(13)
 									];
 									break;		
 								default:
 									//--------------------------------------------------------
 									// Test case to insert data to postgresql database.
-									if (strpos($text, 'Who am I?') !== false && isset($event['source']['userId'])) {
-										//InsertDataToDB();
+									if (strpos($text, 'testmsgbyball') !== false) {
+										InsertDataToDB();
 										$messages = [						
 											'type' => 'text',
-											'text' => AnswerWhoQA($event['source']['userId'])
+											'text' => 'Completed'
 										];
 									}
 									//--------------------------------------------------------
 									else if ((strpos($text, 'เปิดโหมดลงทะเบียนเข้าใช้งาน') !== false)) {
 										$messages = [						
 											'type' => 'text',
-											'text' => "คุณสามารถใช้งาน Line Chat Bot ได้อย่างเต็มรูปแบบแล้วจ้า"
+											'text' => IdentifyUser($event['source']['userId']) . "สามารถใช้งาน Line Chat Bot ได้อย่างเต็มรูปแบบแล้วจ้า"
 										]; 
 									}
 									else {
 										// Build message to reply back
 										$messages = [						
 											'type' => 'text',
-											'text' => AnswerBuilder(13)
+											'text' => AnswerBuilder(14)
 										];	
 									}  
 									break;
@@ -300,7 +302,7 @@ if (!is_null($events['events'])) {
 								else {
 									$messages = [						
 										'type' => 'text',
-										'text' => AnswerBuilder(13)
+										'text' => AnswerBuilder(14)
 									];	 	
 								}
 							}			
