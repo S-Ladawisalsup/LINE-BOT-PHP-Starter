@@ -111,12 +111,12 @@ function GetSticker() {
 /**********************************************************************************************************************************/
 function findQuestionType ($text) {
 	//Trim all space ' '
-	$text = str_replace(' ', '', $text);
+	$temp = str_replace(' ', '', $text);
 
 	$QAArray = QuestionWordFromDB();
 	foreach ($QAArray as $keyitems) {
 		if ($keyitems['type'] == 4) {
-			if (startsWith($text, $keyitems['text']) || endsWith($text, $keyitems['text'])) {
+			if (startsWith($temp, $keyitems['text']) || endsWith($temp, $keyitems['text'])) {
 				return $keyitems['type'];
 			}
 		}
@@ -124,7 +124,7 @@ function findQuestionType ($text) {
 			if (strpos($text, 'สถานะ') !== false || strpos($text, 'สเตตัส') !== false || strpos($text, 'status') !== false) {
 				return 8;
 			}
-			else if (startsWith($text, $keyitems['text']) || endsWith($text, $keyitems['text'])) {
+			else if (startsWith($temp, $keyitems['text']) || endsWith($temp, $keyitems['text'])) {
 				return $keyitems['type'];
 			} 
 		}  
@@ -136,7 +136,7 @@ function findQuestionType ($text) {
 				return $keyitems['type'];
 			}
 		}
-		else if (endsWith($text, $keyitems['text'])) {
+		else if (endsWith($temp, $keyitems['text'])) {
 			if (($keyitems['type'] == 1 && (strpos($text, 'ล่ม') !== false || strpos($text, 'เจ๊ง') !== false || strpos($text, 'เดี้ยง') !== false ||
 										    strpos($text, 'พัง') !== false || strpos($text, 'ดับ') !== false || strpos($text, 'ปกติ') !== false))) {
 				return 8;
