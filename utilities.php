@@ -834,7 +834,7 @@ function AnswerWhoQA($userId) {
 	$result = $db->query($query);
 
 	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-	    $name_req = htmlspecialchars($row["user_id"]);
+	    $name_req = htmlspecialchars($row["name"]);
 	}
 	$result->closeCursor();
 	if (!isset($name_req)) {
@@ -843,8 +843,7 @@ function AnswerWhoQA($userId) {
 	else {
 		$prefix = array('0' => 'ไอ้', '1' => 'คุณ', '2' => 'พี่');
 		$rand = rand(0, 2);
-		//return "แหม" . $prefix[$rand] . $name_req . " อย่าล้อผมเล่นสิครับ";
-		return "uid : " . $userId;
+		return "แหม" . $prefix[$rand] . $name_req . " อย่าล้อผมเล่นสิครับ";
 	}
 }
 /**********************************************************************************************************************************/
