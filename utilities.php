@@ -132,7 +132,7 @@ function findQuestionType ($text) {
 			if ($keyitems['type'] == 8 && strpos($text, 'อุณหภูมิ') !== false) {	
 				return 7;
 			}
-			else if (strpos($text, $keyitems['text']) !== false) {
+			else if (strpos($text, utf8_encode($keyitems['text'])) !== false) {
 				return $keyitems['type'];
 			}
 		}
