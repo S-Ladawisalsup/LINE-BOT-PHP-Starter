@@ -158,7 +158,7 @@ if (!is_null($events['events'])) {
 									//--------------------------------------------------------
 									// Test case to insert data to postgresql database.
 									//if (strpos($text, 'Who am I?') !== false && isset($event['source']['userId'])) {
-									if (strpos($text, 'Who am I?')) {
+									if (strpos($text, 'Who am I?') !== false) {
 										InsertDataToDB();
 										$messages = [						
 											'type' => 'text',
