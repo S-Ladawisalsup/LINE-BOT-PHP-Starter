@@ -715,7 +715,7 @@ function ListWaitRegister() { //<-- current bugged this function.
 	$result->closeCursor();
 
 	if (empty($regis)) {
-		return "ไม่มีรายชื่อขอเข้าใช้งานเต็มรูปแบบตกค้าง";
+		return "ไม่มีรายชื่อขอเข้าใช้งานเต็มรูปแบบตกค้าง"; // noone
 	}
 
 	$query2 = "SELECT name, linename FROM tbhlinebotmem WHERE ";
@@ -735,7 +735,7 @@ function ListWaitRegister() { //<-- current bugged this function.
 	}
 	$result2->closeCursor();
 
-	$ret = "ไม่มีรายชื่อขอเข้าใช้งานเต็มรูปแบบตกค้าง";
+	$ret = "ไม่มีรายชื่อขอเข้าใช้งานเต็มรูปแบบตกค้าง";	// noone
 	if (!empty($sum)) {
 		$ret = "เหลือผู้ที่รออนุมัติการใช้งานแชทบอทเต็มรูปแบบดังต่อไปนี้\n";
 		foreach ($sum as $key) {
@@ -825,6 +825,27 @@ function BotPushAllowAccess($memberId, $allow) {
 	curl_close($ch);
 
 	echo $result . "\r\n";
+}
+/**********************************************************************************************************************************/
+function AnswerWhoQA($userId) {
+	$db = new PDO($GLOBALS['dsn']);
+
+	$query = "SELECT name FROM tbhlinebotmem WHERE user_id = '$userId'"; 
+	$result = $db->query($query);
+
+	$name_req = '';
+	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+	    $name_req = htmlspecialchars($row["user_id"]);
+	}
+	$result->closeCursor();
+	if (is_null($name_req)) {
+		return "ไม่รู้ว่าตัวเองเป็นใครเนี่ย ไปพบแพทย์หน่อยไหม";
+	}
+	else {
+		$prefix = array('0' => 'ไอ้', '1' => 'คุณ', '2' => 'พี่');
+		$rand = rand(0, 2);
+		return "แหม" . $prefix[$rand] . $name_req . " อย่าล้อผมเล่นสิครับ";
+	}
 }
 /**********************************************************************************************************************************/
 //Function to insert data to postgresql database to easier than insert data to database by terminal

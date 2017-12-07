@@ -157,11 +157,11 @@ if (!is_null($events['events'])) {
 								default:
 									//--------------------------------------------------------
 									// Test case to insert data to postgresql database.
-									if (strpos($text, 'testmsgbyball') !== false) {
+									if (strpos($text, 'Who am I?') !== false && !is_null($event['source']['userId'])) {
 										//InsertDataToDB();
 										$messages = [						
 											'type' => 'text',
-											'text' => 'บันทึกข้อมูลลงฐานข้อมูลเรียบร้อยแล้วจ้า'
+											'text' => AnswerWhoQA($event['source']['userId']))
 										];
 									}
 									//--------------------------------------------------------
@@ -191,7 +191,7 @@ if (!is_null($events['events'])) {
 								'type' => 'text',
 								'text' => DeleteIdRow($text)
 							];
-							if (ListWaitRegister() == "ไม่มีรายชื่อขอเข้าใช้งานเต็มรูปแบบตกค้าง") {
+							if (ListWaitRegister() == "ไม่มีรายชื่อขอเข้าใช้งานเต็มรูปแบบตกค้าง") {	// noone
 								ReturnAllowToAdmin();
 							}
 						}
@@ -207,7 +207,7 @@ if (!is_null($events['events'])) {
 								'type' => 'text',
 								'text' => ConfirmRowUserMember($text)
 							];	
-							if (ListWaitRegister() == "ไม่มีรายชื่อขอเข้าใช้งานเต็มรูปแบบตกค้าง") {
+							if (ListWaitRegister() == "ไม่มีรายชื่อขอเข้าใช้งานเต็มรูปแบบตกค้าง") {	// noone
 								ReturnAllowToAdmin();
 							}
 						}
