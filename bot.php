@@ -205,7 +205,7 @@ if (!is_null($events['events'])) {
 									}
 									else if ((strpos($text, 'ขอบคุณ') !== false) || (strpos($text, 'ขอบใจ') !== false) || 
 											 (strpos(strtolower($text), 'thank') !== false) || (strpos(strtolower($text), 'thx') !== false) || 
-											 (strpos(strtolower($text), 'bye') !== false) || (strpos($text, 'ลาก่อน') !== false)) {
+											 (strpos(strtolower($text), 'bye') !== false) || (strpos($text, 'ไปแล้วนะ') !== false)) {
 										$sticker = GetSticker();
 										$messages = [
 											'type' => 'sticker',
@@ -344,7 +344,7 @@ if (!is_null($events['events'])) {
 								}
 								else if ((strpos($text, 'ขอบคุณ') !== false) || (strpos($text, 'ขอบใจ') !== false) || 
 										 (strpos(strtolower($text), 'thank') !== false) || (strpos(strtolower($text), 'thx') !== false) || 
-										 (strpos(strtolower($text), 'bye') !== false) || (strpos($text, 'ลาก่อน') !== false)) {
+										 (strpos(strtolower($text), 'bye') !== false) || (strpos($text, 'ไปแล้วนะ') !== false)) {
 									$sticker = GetSticker();
 									$messages = [
 										'type' => 'sticker',
