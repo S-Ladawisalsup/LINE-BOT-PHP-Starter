@@ -113,6 +113,9 @@ function findQuestionType ($text) {
 	//Trim all space ' '
 	//<--- Debug text encode with word 'หวัดดี' or 'สวัสดี'
 	$temp = str_replace(' ', '', $text);
+	if (strpos($text, 'สวัสดี') !== false || strpos($text, 'หวัดดี') !== false) {
+		return 9;
+	}
 
 	$QAArray = QuestionWordFromDB();
 	foreach ($QAArray as $keyitems) {
@@ -136,9 +139,6 @@ function findQuestionType ($text) {
 			else if (strpos($text, $keyitems['text']) !== false) {
 				return $keyitems['type'];
 			}
-		}
-		else if (strpos($text, 'สวัสดี') !== false || strpos($text, 'หวัดดี') !== false) {
-			return 9;
 		}
 		else if (endsWith($temp, $keyitems['text'])) {
 			if (($keyitems['type'] == 1 && (strpos($text, 'ล่ม') !== false || strpos($text, 'เจ๊ง') !== false || strpos($text, 'เดี้ยง') !== false ||
