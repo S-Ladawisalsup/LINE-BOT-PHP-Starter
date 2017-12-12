@@ -920,45 +920,43 @@ function IdentifyUser($userId) {
 }
 /**********************************************************************************************************************************/
 function AlertOthersAdmin($adminId, $IsConfirm, $arrayText) {
-	// $db = new PDO($GLOBALS['dsn']);
+	$db = new PDO($GLOBALS['dsn']);
 
-	// $query = "SELECT user_id FROM tbhlinebotmem WHERE position = '$admin' and user_id != '$adminId'"; 
-	// $result = $db->query($query);
+	$query = "SELECT user_id FROM tbhlinebotmem WHERE position = '$admin' or user_id != '$adminId'"; 
+	$result = $db->query($query);
 
-	// $admins = array();
-	// $seq = 0;
-	// while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-	// 	$admins = array();
-	//     $admins[$seq] = htmlspecialchars($row["user_id"]);
-	//     $seq = $seq + 1;
-	// }
-	// $result->closeCursor();
+	$admins = array();
+	$seq = 0;
+	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+		$admins = array();
+	    $admins[$seq] = htmlspecialchars($row["user_id"]);
+	    $seq = $seq + 1;
+	}
+	$result->closeCursor();
 
-	// $query2 = "SELECT name FROM tbhlinebotmem WHERE user_id != '$adminId'"; 
-	// $result2 = $db->query($query2);
+	$query2 = "SELECT name FROM tbhlinebotmem WHERE user_id == '$adminId'"; 
+	$result2 = $db->query($query2);
 
-	// while ($row = $result2->fetch(PDO::FETCH_ASSOC)) {
-	//     $adm_name = htmlspecialchars($row["name"]);
-	// }
-	// $result2->closeCursor();
+	while ($row = $result2->fetch(PDO::FETCH_ASSOC)) {
+	    $adm_name = htmlspecialchars($row["name"]);
+	}
+	$result2->closeCursor();
 	
-	// $tx = 'มีผู้';
-	// if (isset($adm_name)) {
-	// 	$tx = 'คุณ' . $adm_name;
-	// }
-	// if ($IsConfirm) {
-	// 	$tx .= 'อนุมัติการใช้งานของ ';
-	// }
-	// else {
-	// 	$tx .= 'ปฏิเสธการใช้งานของ ';
-	// }
-	// $tx .= $arrayText['name'] . ' ' . $arrayText['linename'] . ' เรียบร้อยแล้ว';
+	$tx = 'มีผู้';
+	if (isset($adm_name)) {
+		$tx = 'คุณ' . $adm_name;
+	}
+	if ($IsConfirm) {
+		$tx .= 'อนุมัติการใช้งานของ ';
+	}
+	else {
+		$tx .= 'ปฏิเสธการใช้งานของ ';
+	}
+	$tx .= $arrayText['name'] . ' ' . $arrayText['linename'] . ' เรียบร้อยแล้ว';
 
-	// foreach ($admins as $adm) {
-	// 	StandardBotPush($adm, $tx);
-	// }
-
-	StandardBotPush('Ua492767fd96449cd8a857b101dbdbcce', 'ทดสอบฟังก์ชั่นจ้าาาา');
+	foreach ($admins as $adm) {
+		StandardBotPush($adm, $tx);
+	}
 }
 /**********************************************************************************************************************************/
 function StandardBotPush($userId, $text) {
