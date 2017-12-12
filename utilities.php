@@ -352,7 +352,7 @@ function GetLocation() {
 	}
 	$result->closeCursor();
 
-	$randnum = rand(0, $index-1);
+	$randnum = rand(0, $index-2); //rand(0, $index-1);
 	$location = array('title'     => $locations[$randnum]['title'],
 					  'address'   => $locations[$randnum]['address'],
 					  'latitude'  => $locations[$randnum]['latitude'],

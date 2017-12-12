@@ -49,4 +49,9 @@ function have to add and test to line chat bot
 8. Start random push message to random user(s).
 8.1 add another toggle on 9am, 1pm, 3pm, 10pm to bot start push message first with random user(s). 
 8.1.1 change bot_mode in tbhlinebotmodchng to relation here.
+-------------------------------------------------------------------------------------------------------------
+1. Edit location answer. (Completed)
+2. Edit prefix.
+3. Edit suffix.
+4. Fixed bug on alert everyday.
 */
