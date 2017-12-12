@@ -51,5 +51,4 @@ function have to add and test to line chat bot
 8.1.1 change bot_mode in tbhlinebotmodchng to relation here.
 ---------------------------------------------------------------------------------------------------
 2. Adding position 'Dev' & defind working in line chat bot system.
-4. Create link to manual and answer link to user.
 */
