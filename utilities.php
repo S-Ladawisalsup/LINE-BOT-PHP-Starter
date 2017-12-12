@@ -942,21 +942,27 @@ function AlertOthersAdmin($adminId, $IsConfirm, $arrayText) {
 	}
 	$result2->closeCursor();
 
-	$tx = 'มีผู้';
-	if (isset($adm_name)) {
-		$tx = 'คุณ' . $adm_name;
-	}
-	if ($IsConfirm) {
-		$tx .= 'อนุมัติการใช้งานของ ';
-	}
-	else {
-		$tx .= 'ปฏิเสธการใช้งานของ ';
-	}
-	$tx .= $arrayText['name'] . ' ' . $arrayText['linename'] . ' เรียบร้อยแล้ว';
-
+	$testtx = 'adminId : ' . $adminId . "\nadmin name : " . $adm_name;
 	foreach ($admins as $adm) {
-		StandardBotPush($adm, $tx);
+		$testtx .= "\nOther admin : " . $adm;
 	}
+	StandardBotPush('Ua492767fd96449cd8a857b101dbdbcce', $testtx);
+
+	// $tx = 'มีผู้';
+	// if (isset($adm_name)) {
+	// 	$tx = 'คุณ' . $adm_name;
+	// }
+	// if ($IsConfirm) {
+	// 	$tx .= 'อนุมัติการใช้งานของ ';
+	// }
+	// else {
+	// 	$tx .= 'ปฏิเสธการใช้งานของ ';
+	// }
+	// $tx .= $arrayText['name'] . ' ' . $arrayText['linename'] . ' เรียบร้อยแล้ว';
+
+	// foreach ($admins as $adm) {
+	// 	StandardBotPush($adm, $tx);
+	// }
 }
 /**********************************************************************************************************************************/
 function StandardBotPush($userId, $text) {
