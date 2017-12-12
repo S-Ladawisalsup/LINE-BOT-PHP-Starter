@@ -231,7 +231,7 @@ if (!is_null($events['events'])) {
 							 (strpos($text, 'ปฏิเสธ') !== false) || (strpos(strtolower($text), 'refuse') !== false))) {
 							$messages = [						
 								'type' => 'text',
-								'text' => DeleteIdRow($text)
+								'text' => DeleteIdRow($text, $event['source']['userId'])
 							];
 							if (ListWaitRegister($event['source']['userId'])) {	// noone
 								ReturnAllowToAdmin();
@@ -247,7 +247,7 @@ if (!is_null($events['events'])) {
 							 	 (strpos($text, 'โอเค') !== false) || (strpos(strtolower($text), 'ok') !== false)) {
 							$messages = [						
 								'type' => 'text',
-								'text' => ConfirmRowUserMember($text)
+								'text' => ConfirmRowUserMember($text, $event['source']['userId'])
 							];	
 							if (ListWaitRegister($event['source']['userId'])) {	// noone
 								ReturnAllowToAdmin();

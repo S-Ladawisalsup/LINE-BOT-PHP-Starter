@@ -668,7 +668,7 @@ function ReturnAllowToAdmin() {
 	$result2 = pg_query($db2, $awaitadmin);
 }
 /**********************************************************************************************************************************/
-function DeleteIdRow($text) {
+function DeleteIdRow($text, $adminId) {
 	$db = new PDO($GLOBALS['dsn']);
 	$query = "SELECT user_id, name, linename FROM tbhlinebotmem WHERE status = 'trial'"; 
 	$result = $db->query($query);
@@ -691,6 +691,7 @@ function DeleteIdRow($text) {
 			$result2 = pg_query($db2, "DELETE FROM tbhlinebotmem WHERE user_id = '$rm';");
 			$result_again = pg_query($db2, "UPDATE tbhlinebotmodchng SET bot_mode = 'trial', seq = '0' WHERE user_id = '$rm';");
 			BotPushAllowAccess($rm, false);
+			AlertOthersAdmin($adminId, false, $del);
 			return "ระบบดำเนินการตามคำอนุมัติเรียบร้อย";
 		}
 	}
@@ -789,7 +790,7 @@ function SetRegisterSeq($userId) {
 	$result = pg_query($db, "UPDATE tbhlinebotmodchng SET bot_mode = 'regis', seq = '1' WHERE user_id = '$userId';");
 }
 /**********************************************************************************************************************************/
-function ConfirmRowUserMember($text) {
+function ConfirmRowUserMember($text, $adminId) {
 	$db = new PDO($GLOBALS['dsn']);
 
 	$query = "SELECT user_id, name, linename FROM tbhlinebotmem ORDER BY id ASC"; 
@@ -811,6 +812,7 @@ function ConfirmRowUserMember($text) {
 			$result2 = pg_query($db2, "UPDATE tbhlinebotmodchng SET bot_mode = 'allow', seq = '0' WHERE user_id = '$usrid';");
 			$result3 = pg_query($db2, "UPDATE tbhlinebotmem SET status = 'allow' WHERE user_id = '$usrid';");
 			BotPushAllowAccess($usrid, true);
+			AlertOthersAdmin($adminId, true, $awaitusr);
 			return "ระบบดำเนินการตามคำอนุมัติเรียบร้อย";
 		}
 	}
@@ -915,6 +917,74 @@ function IdentifyUser($userId) {
 	else {
 		return "";
 	}
+}
+/**********************************************************************************************************************************/
+function AlertOthersAdmin($adminId, $IsConfirm, $arrayText) {
+	$db = new PDO($GLOBALS['dsn']);
+
+	$query = "SELECT user_id FROM tbhlinebotmem WHERE position = '$admin' and user_id != '$adminId'"; 
+	$result = $db->query($query);
+
+	$admins = array();
+	$seq = 0;
+	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+		$admins = array();
+	    $admins[$seq] = htmlspecialchars($row["user_id"]);
+	    $seq = $seq + 1;
+	}
+	$result->closeCursor();
+
+	$query2 = "SELECT name FROM tbhlinebotmem WHERE user_id != '$adminId'"; 
+	$result2 = $db->query($query2);
+
+	while ($row = $result2->fetch(PDO::FETCH_ASSOC)) {
+	    $adm_name = htmlspecialchars($row["name"]);
+	}
+	$result2->closeCursor();
+	
+	$t_name = 'มีผู้';
+	if (isset($adm_name)) {
+		$t_name = 'คุณ' . $adm_name;
+	}
+	$tx = $t_name;
+	if ($IsConfirm) {
+		$tx .= 'อนุมัติการใช้งานของ ';
+	}
+	else {
+		$tx .= 'ปฏิเสธการใช้งานของ ';
+	}
+	$tx .= $arrayText['name'] . ' ' . $arrayText['linename'] . " เรียบร้อยแล้ว";
+
+	foreach ($admins as $adm) {
+		StandardBotPush($adm, $tx);
+	}
+}
+/**********************************************************************************************************************************/
+function StandardBotPush($userId, $text) {
+	$messages = [						
+		'type' => 'text',
+		'text' => $text
+	];
+
+	// Make a POST Request to Messaging API to push to sender
+	$url = 'https://api.line.me/v2/bot/message/push';
+	$data = [
+		'to' => $userId,
+		'messages' => [$messages],
+	];
+	$post = json_encode($data);
+	$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $GLOBALS['access_token']);
+
+	$ch = curl_init($url);
+	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+	$result = curl_exec($ch);
+	curl_close($ch);
+
+	echo $result . "\r\n";
 }
 /**********************************************************************************************************************************/
 //Function to insert data to postgresql database to easier than insert data to database by terminal
