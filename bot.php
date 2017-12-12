@@ -226,6 +226,7 @@ if (!is_null($events['events'])) {
 						break;
 					case 'await':
 						$text = $event['message']['text'];
+						$text = SubEndText($text);
 						if (((strpos($text, 'ไม่') !== false) || (strpos(strtolower($text), 'no') !== false) || 
 							 (strpos($text, 'ยกเลิก') !== false) || (strpos(strtolower($text), 'cancel') !== false) || 
 							 (strpos($text, 'ปฏิเสธ') !== false) || (strpos(strtolower($text), 'refuse') !== false))) {

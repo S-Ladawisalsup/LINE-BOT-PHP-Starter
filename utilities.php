@@ -922,7 +922,7 @@ function IdentifyUser($userId) {
 function AlertOthersAdmin($adminId, $IsConfirm, $arrayText) {
 	$db = new PDO($GLOBALS['dsn']);
 
-	$query = "SELECT user_id FROM tbhlinebotmem WHERE position = '$admin' or user_id != '$adminId'"; 
+	$query = "SELECT user_id FROM tbhlinebotmem WHERE position = 'admin' or user_id != '$adminId'"; 
 	$result = $db->query($query);
 
 	$admins = array();
@@ -941,7 +941,7 @@ function AlertOthersAdmin($adminId, $IsConfirm, $arrayText) {
 	    $adm_name = htmlspecialchars($row["name"]);
 	}
 	$result2->closeCursor();
-	
+
 	$tx = 'มีผู้';
 	if (isset($adm_name)) {
 		$tx = 'คุณ' . $adm_name;
