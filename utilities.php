@@ -748,7 +748,7 @@ function ListWaitRegister($userId) {
 	if (!empty($sum)) {
 		BotPushAListWaitingUser($userId, 'เหลือผู้ที่รออนุมัติการใช้งานแชทบอทเต็มรูปแบบดังต่อไปนี้');
 		foreach ($sum as $key) {
-			$ret .= $key['linename'] . " " . $key['name'];
+			$ret = $key['linename'] . " " . $key['name'];
 			BotPushAListWaitingUser($userId, $ret);
 		}
 		return false;
