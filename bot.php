@@ -42,6 +42,7 @@ if (!is_null($events['events'])) {
 								//RegisterMode($text, $event['source'][$event['source']['type'] . 'Id'], $event['source']['type'])
 							];
 						}
+						$text = $event['message']['text'];
 						$messages = [						
 							'type' => 'text',
 							'text' => $text . "\n" . $event['source'][$event['source']['type'] . 'Id'] . "\n" . $event['source']['type']
