@@ -943,9 +943,9 @@ function AlertOthersAdmin($adminId, $IsConfirm, $arrayText) {
 	$result2->closeCursor();
 
 	$testtx = 'adminId : ' . $adminId . "\nadmin name : " . $adm_name;
-	foreach ($admins as $adm) {
-		$testtx .= "\nOther admin : " . $adm;
-	}
+	// foreach ($admins as $adm) {
+	// 	$testtx .= "\nOther admin : " . $adm;
+	// }
 	StandardBotPush('Ua492767fd96449cd8a857b101dbdbcce', $testtx);
 
 	// $tx = 'มีผู้';
