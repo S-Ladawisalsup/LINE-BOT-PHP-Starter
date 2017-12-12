@@ -15,7 +15,7 @@ if (!is_null($_POST['val']) || !is_null($events)) {
 		. 'password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa';
 
 	$db = new PDO($dsn);
-	$query = "SELECT user_id FROM tbhlinebotmem WHERE position != 'user'";
+	$query = "SELECT user_id FROM tbhlinebotmem WHERE id_type != 'user'";
 	$result = $db->query($query);
 
 	$groups = array();
