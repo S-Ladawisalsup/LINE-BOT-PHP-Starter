@@ -28,6 +28,7 @@ if (!is_null($events['events'])) {
 				$bot_mod = IsAvailable($event['source'][$event['source']['type'] . 'Id']);
 				switch ($bot_mod) {
 					case 'regis':
+						$haystack = strtolower($event['message']['text']);
 						if (startsWith($haystack, $bot_name) || $event['source']['type'] == 'user') {
 							if ($event['source']['type'] != 'user') {
 								$text = substr($event['message']['text'], strlen($bot_name));
@@ -38,16 +39,9 @@ if (!is_null($events['events'])) {
 							}
 							$messages = [						
 								'type' => 'text',
-								'text' => $text . "\n" . $event['source'][$event['source']['type'] . 'Id'] . "\n" . $event['source']['type']
-								//RegisterMode($text, $event['source'][$event['source']['type'] . 'Id'], $event['source']['type'])
+								'text' => RegisterMode($text, $event['source'][$event['source']['type'] . 'Id'], $event['source']['type'])
 							];
 						}
-						$text = $event['message']['text'];
-						$messages = [						
-							'type' => 'text',
-							'text' => $text . "\n" . $event['source'][$event['source']['type'] . 'Id'] . "\n" . $event['source']['type']
-							//RegisterMode($text, $event['source'][$event['source']['type'] . 'Id'], $event['source']['type'])
-						];
 						break;
 					case 'allow':
 						// Compare message calling bot's name
