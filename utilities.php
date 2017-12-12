@@ -614,7 +614,7 @@ function MemberConfirmation($arrayData, $admin) {
 	$confirm = "มีผู้ต้องการใช้งาน Line Chat Bot อย่างเต็มระบบ\nชื่อ : " . $arrayData['name']; 
 	$confirm .= "\nชื่อไลน์ : " . $arrayData['linename'];
 	if (!empty($arrayData['gender']) && !empty($arrayData['bd'])) {
-		$confirm .= "\nเพศ : " . $arrayData['gender'] . "\nวันเกิด : " . $arrayData['bd'];
+		$confirm .= "\nเพศ : " . $arrayData['gender'] . "\nวันเกิด : " . substr($arrayData['bd'], 0, 10);
 	}
 	$confirm .= "\nประเภท : " . $arrayData['type'] . "\nต้องการให้บุคคลนี้สามารถใช้งานได้เต็มรูปแบบหรือไม่?";
 
@@ -874,7 +874,7 @@ function ListWaitingUsers($text) {
 		if ((strpos($text, $awaitusr['linename']) !== false) || (strpos($text, $awaitusr['name']) !== false)) {
 			$confirm = "ชื่อ : " . $awaitusr['name'] . "\nชื่อไลน์ : " . $awaitusr['linename']; 
 			if (!empty($awaitusr['gender']) && !empty($awaitusr['bd'])) {
-				$confirm .= "\nเพศ : " . $awaitusr['gender'] . "\nวันเกิด : " . $awaitusr['bd'];
+				$confirm .= "\nเพศ : " . $awaitusr['gender'] . "\nวันเกิด : " . substr($awaitusr['bd'], 0, 10);
 			}
 			$confirm .= "\nประเภท : " . $awaitusr['type'];
 		}
@@ -944,8 +944,8 @@ function IdentifyUser($userId) {
 			}
 		}
 		//return $prefix[rand(0, 6)] . $name_req['name'] . $suffix[$randend];
-		$temp_prefix = array('0' => '', '1' => 'คุณ');
-		return $temp_prefix[rand(0, 10000) % 2] . $name_req['name'];
+		$temp_prefix = array('0' => '', '1' => 'คุณ', '2' => 'พี่');
+		return $temp_prefix[rand(0, 30000) % 3] . $name_req['name'];
 	}
 	else {
 		return "";
