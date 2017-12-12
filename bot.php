@@ -181,24 +181,6 @@ if (!is_null($events['events'])) {
 									// Test case to insert data to postgresql database.
 									if (strpos($text, 'testmsgbyball') !== false) {
 										//InsertDataToDB();
-										// $messages = [
-										// 	'type'     => 'template',
-										// 	'altText'  => 'this is a button template',
-										// 	'template' => [
-										// 					'type' 				   => 'buttons', 
-										// 					'thumbnailImageUrl'    => 'https://cryptic-harbor-32168.herokuapp.com/images/tbh_icon.png',
-										// 					//'imageAspectRatio' 	   => 'rectangle', 
-										// 					//'imageSize' 		   => 'cover',
-										// 					//'imageBackgroundColor' => '#FFFFFF',
-										// 					'title' 			   => 'Menu',
-										// 					'text' 				   => 'Please Select',
-										// 					'actions' 			   => [
-										// 												'type'  => 'uri',
-										// 												'label' => 'Go to manual',
-										// 												'uri'   => 'https://cryptic-harbor-32168.herokuapp.com/manual.html'
-										// 					]
-										// 	]
-										// ];
 										$messages = [						
 											'type' => 'text',
 											'text' => "ที่นี้จ้า\nhttps://cryptic-harbor-32168.herokuapp.com/manual.html"
@@ -229,6 +211,12 @@ if (!is_null($events['events'])) {
 											'packageId' => $sticker['packageId'],
 						    				'stickerId' => $sticker['stickerId']
 										]; 
+									}
+									else if (strpos($text, 'คู่มือ') !== false) {
+										$messages = [						
+											'type' => 'text',
+											'text' => "ที่นี้เลยจ้า\nhttps://cryptic-harbor-32168.herokuapp.com/manual.html"
+										];
 									}
 									else {
 										// Build message to reply back
@@ -370,6 +358,12 @@ if (!is_null($events['events'])) {
 					    				'stickerId' => $sticker['stickerId']
 									]; 
 								}
+								else if (strpos($text, 'คู่มือ') !== false) {
+										$messages = [						
+											'type' => 'text',
+											'text' => "ที่นี้เลยจ้า\nhttps://cryptic-harbor-32168.herokuapp.com/manual.html"
+										];
+									}
 								else {
 									$messages = [						
 										'type' => 'text',
