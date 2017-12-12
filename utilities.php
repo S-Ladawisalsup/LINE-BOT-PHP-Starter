@@ -616,7 +616,7 @@ function MemberConfirmation($arrayData, $admin) {
 	if (!empty($arrayData['gender']) && !empty($arrayData['bd'])) {
 		$confirm .= "\nเพศ : " . $arrayData['gender'] . "\nวันเกิด : " . $arrayData['bd'];
 	}
-	$confirm .= "\nประเภท : " . $arrayData['type'] . "\nต้องการให้คนนี้สามารถใช้งานได้เต็มรูปแบบหรือไม่?";
+	$confirm .= "\nประเภท : " . $arrayData['type'] . "\nต้องการให้บุคคลนี้สามารถใช้งานได้เต็มรูปแบบหรือไม่?";
 
 	$messages = [						
 		'type' => 'text',
@@ -712,7 +712,6 @@ function ListWaitRegister($userId) {
 	$result->closeCursor();
 
 	if (empty($regis)) {
-		//return "ไม่มีรายชื่อขอเข้าใช้งานเต็มรูปแบบตกค้าง"; // noone
 		return true;
 	}
 
@@ -732,19 +731,7 @@ function ListWaitRegister($userId) {
 	    $seq = $seq + 1;
 	}
 	$result2->closeCursor();
-	//----------------------------------------------------------------------------------------------------------
-	// Old Version
-	// $ret = "ไม่มีรายชื่อขอเข้าใช้งานเต็มรูปแบบตกค้าง";	// noone
-	// if (!empty($sum)) {
-	// 	$ret = "เหลือผู้ที่รออนุมัติการใช้งานแชทบอทเต็มรูปแบบดังต่อไปนี้\n";
-	// 	foreach ($sum as $key) {
-	// 		$ret .= $key['linename'] . " " . $key['name'] . "\n";
-	// 	}
-	// 	$ret = substr($ret, 0, -1);
-	// }
-	// return $ret;
-	//----------------------------------------------------------------------------------------------------------
-	// New Version
+
 	if (!empty($sum)) {
 		BotPushAListWaitingUser($userId, 'เหลือผู้ที่รออนุมัติการใช้งานแชทบอทเต็มรูปแบบดังต่อไปนี้');
 		foreach ($sum as $key) {
@@ -754,7 +741,6 @@ function ListWaitRegister($userId) {
 		return false;
 	}
 	return true;
-	//----------------------------------------------------------------------------------------------------------
 }
 /**********************************************************************************************************************************/
 function BotPushAListWaitingUser($adminId, $users) {
@@ -829,6 +815,36 @@ function ConfirmRowUserMember($text) {
 		}
 	}
 	return "ไม่สามารถจัดการข้อมูลได้ กรุณาตรวจสอบ หรือ จัดการกับฐานข้อมูลโดยตรง";
+}
+/**********************************************************************************************************************************/
+function ListWaitingUsers($text) {
+	$db = new PDO($GLOBALS['dsn']);
+
+	$query = "SELECT name, linename, gender, date_of_birth, id_type FROM tbhlinebotmem WHERE status = 'trial'"; 
+	$result = $db->query($query);
+
+	$awaitmem = array();
+	$order = 0;
+	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+	    $awaitmem[$order]["linename"] = htmlspecialchars($row["linename"]);
+	    $awaitmem[$order]["name"] = htmlspecialchars($row["name"]);
+	    $awaitmem[$order]["gender"] = htmlspecialchars($row["gender"]);
+	    $awaitmem[$order]["bd"] = htmlspecialchars($row["date_of_birth"]);
+	    $awaitmem[$order]["type"] = htmlspecialchars($row["id_type"]);
+	    $order = $order + 1;
+	}
+	$result->closeCursor();
+	$confirm = "ไม่พบ้อมูลของบุคคลท่านนี้ อาจเกิดข้อผิดพลาด กรุณาตรวจสอบที่ฐานข้อมูล";
+	foreach ($awaitmem as $awaitusr) {
+		if ((strpos($text, $awaitusr['linename']) !== false) || (strpos($text, $awaitusr['name']) !== false)) {
+			$confirm = "ชื่อ : " . $awaitusr['name'] . "\nชื่อไลน์ : " . $awaitusr['linename']; 
+			if (!empty($awaitusr['gender']) && !empty($awaitusr['bd'])) {
+				$confirm .= "\nเพศ : " . $awaitusr['gender'] . "\nวันเกิด : " . $awaitusr['bd'];
+			}
+			$confirm .= "\nประเภท : " . $awaitusr['type'];
+		}
+	}
+	return $confirm;
 }
 /**********************************************************************************************************************************/
 function BotPushAllowAccess($memberId, $allow) {

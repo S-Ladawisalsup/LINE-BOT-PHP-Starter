@@ -27,7 +27,7 @@ function QuestionWordFromDBTB() {
 	$t = 'text';
 
 	//$query = "SELECT questiontext, questiontype FROM tbhlinebotwmode WHERE questiontype = '9'";
-	$query = "SELECT $t, type FROM tbhlinebotans WHERE type = '12'";
+	$query = "SELECT $t, type FROM tbhlinebotans";// WHERE type = '12'";
 	$result = $db->query($query);
 
 	$words = array();
@@ -50,9 +50,7 @@ function have to add and test to line chat bot
 8.1 add another toggle on 9am, 1pm, 3pm, 10pm to bot start push message first with random user(s). 
 8.1.1 change bot_mode in tbhlinebotmodchng to relation here.
 ---------------------------------------------------------------------------------------------------
-1. Fixed list on waiting register to 1 line per person.
 2. Adding position 'Dev' & defind working in line chat bot system.
-3. Make details on each list user who waiting in register mode.
 4. Create link to manual and answer link to user.
 5. Alert to admin when registered waiting's user is confirmed or refused by who.
 */

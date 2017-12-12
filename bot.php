@@ -254,11 +254,13 @@ if (!is_null($events['events'])) {
 							}
 						}
 						else if (findQuestionType($text) == 4 && (strpos($text, 'เหลือ') !== false || strpos($text, 'รอ') !== false)) {
-							// $messages = [						
-							// 	'type' => 'text',
-							// 	'text' => ListWaitRegister($event['source']['userId'])
-							// ];	
 							ListWaitRegister($event['source']['userId']);
+						}
+						else if (strpos($text, 'ดูข้อมูล') !== false) {
+							$messages = [						
+								'type' => 'text',
+								'text' => ListWaitingUsers($text)
+							];	
 						}
 						else {
 							$messages = [						
