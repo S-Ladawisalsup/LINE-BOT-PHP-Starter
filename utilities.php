@@ -684,18 +684,30 @@ function DeleteIdRow($text, $adminId) {
 	}
 	$result->closeCursor();
 
-	foreach ($del_user as $del) {
-		if ((strpos($text, $del['linename']) !== false) && (strpos($text, $del['name']) !== false)) {
-			$rm = $del['id'];
-			$db2 = pg_connect($GLOBALS['pgsql_conn']);
-			$result2 = pg_query($db2, "DELETE FROM tbhlinebotmem WHERE user_id = '$rm';");
-			$result_again = pg_query($db2, "UPDATE tbhlinebotmodchng SET bot_mode = 'trial', seq = '0' WHERE user_id = '$rm';");
-			BotPushAllowAccess($rm, false);
-			AlertOthersAdmin($adminId, false, $del);
-			return "ระบบดำเนินการตามคำอนุมัติเรียบร้อย";
+	if (strpos($text, 'รายชื่อผู้ขอใช้งานทั้งหมด') !== false) {
+		foreach ($del_user as $del) {
+			BotPushAllowAccess($del['id'], false);
+		}
+		$db2 = pg_connect($GLOBALS['pgsql_conn']);
+		$result2 = pg_query($db2, "DELETE FROM tbhlinebotmem WHERE status = 'trial';");
+		$result_again = pg_query($db2, "UPDATE tbhlinebotmodchng SET bot_mode = 'trial', seq = '0' WHERE bot_mode = 'regis';");
+		AlertOthersAdmin($adminId, false);	
+		return "ระบบดำเนินการตามคำอนุมัติเรียบร้อย";
+	}
+	else {
+		foreach ($del_user as $del) {
+			if ((strpos($text, $del['linename']) !== false) && (strpos($text, $del['name']) !== false)) {
+				$rm = $del['id'];
+				$db2 = pg_connect($GLOBALS['pgsql_conn']);
+				$result2 = pg_query($db2, "DELETE FROM tbhlinebotmem WHERE user_id = '$rm';");
+				$result_again = pg_query($db2, "UPDATE tbhlinebotmodchng SET bot_mode = 'trial', seq = '0' WHERE user_id = '$rm';");
+				BotPushAllowAccess($rm, false);
+				AlertOthersAdmin($adminId, false, $del);
+				return "ระบบดำเนินการตามคำอนุมัติเรียบร้อย";
+			}
 		}
 	}
-	return "ไม่สามารถจัดการข้อมูลได้ อาจจะไม่มีรายชื่อนี้ หรืออาจจะไม่สามารถยกเลิกผู้ใช้รายนี้ได้ กรุณาตรวจสอบ หรือ จัดการกับฐานข้อมูลโดยตรง";
+	return "กรุณาระบุคำอนุมัติในรูปแบบดังต่อไปนี้\n[คำอนุมัติ] [ชื่อไลน์ผู้ขอใช้งาน] [ชื่อผู้ขอใช้งาน]";
 }
 /**********************************************************************************************************************************/
 function ListWaitRegister($userId) {
@@ -805,18 +817,30 @@ function ConfirmRowUserMember($text, $adminId) {
 	    $order = $order + 1;
 	}
 	$result->closeCursor();
-	foreach ($awaitmem as $awaitusr) {
-		if ((strpos($text, $awaitusr['linename']) !== false) || (strpos($text, $awaitusr['name']) !== false)) {
-			$usrid = $awaitusr["id"];
-			$db2 = pg_connect($GLOBALS['pgsql_conn']);
-			$result2 = pg_query($db2, "UPDATE tbhlinebotmodchng SET bot_mode = 'allow', seq = '0' WHERE user_id = '$usrid';");
-			$result3 = pg_query($db2, "UPDATE tbhlinebotmem SET status = 'allow' WHERE user_id = '$usrid';");
-			BotPushAllowAccess($usrid, true);
-			AlertOthersAdmin($adminId, true, $awaitusr);
-			return "ระบบดำเนินการตามคำอนุมัติเรียบร้อย";
+	if (strpos($text, 'รายชื่อผู้ขอใช้งานทั้งหมด') !== false) {
+		foreach ($awaitmem as $awaitusr) {
+			BotPushAllowAccess($awaitusr['id'], true);
+		}
+		$db2 = pg_connect($GLOBALS['pgsql_conn']);
+		$result2 = pg_query($db2, "UPDATE tbhlinebotmem SET status = 'allow' WHERE status = 'trial';");
+		$result_again = pg_query($db2, "UPDATE tbhlinebotmodchng SET bot_mode = 'allow', seq = '0' WHERE bot_mode = 'regis';");
+		AlertOthersAdmin($adminId, true);	
+		return "ระบบดำเนินการตามคำอนุมัติเรียบร้อย";
+	}
+	else {
+		foreach ($awaitmem as $awaitusr) {
+			if ((strpos($text, $awaitusr['linename']) !== false) || (strpos($text, $awaitusr['name']) !== false)) {
+				$usrid = $awaitusr["id"];
+				$db2 = pg_connect($GLOBALS['pgsql_conn']);
+				$result2 = pg_query($db2, "UPDATE tbhlinebotmodchng SET bot_mode = 'allow', seq = '0' WHERE user_id = '$usrid';");
+				$result3 = pg_query($db2, "UPDATE tbhlinebotmem SET status = 'allow' WHERE user_id = '$usrid';");
+				BotPushAllowAccess($usrid, true);
+				AlertOthersAdmin($adminId, true, $awaitusr);
+				return "ระบบดำเนินการตามคำอนุมัติเรียบร้อย";
+			}
 		}
 	}
-	return "ไม่สามารถจัดการข้อมูลได้ กรุณาตรวจสอบ หรือ จัดการกับฐานข้อมูลโดยตรง";
+	return "กรุณาระบุคำอนุมัติในรูปแบบดังต่อไปนี้\n[คำอนุมัติ] [ชื่อไลน์ผู้ขอใช้งาน] [ชื่อผู้ขอใช้งาน]";
 }
 /**********************************************************************************************************************************/
 function ListWaitingUsers($text) {
@@ -947,13 +971,18 @@ function AlertOthersAdmin($adminId, $IsConfirm, $arrayText) {
 		$tx = 'คุณ' . $adm_name;
 	}
 	if ($IsConfirm) {
-		$tx .= 'อนุมัติการใช้งานของ ';
+		$tx .= 'อนุมัติ';
 	}
 	else {
-		$tx .= 'ปฏิเสธการใช้งานของ ';
+		$tx .= 'ปฏิเสธ';
 	}
-	$tx .= $arrayText['name'] . ' ' . $arrayText['linename'] . ' เรียบร้อยแล้ว';
-
+	$tx .= 'คำขอการใช้งาน';
+	if (empty($arrayText)) {
+		$tx .= 'ทั้งหมดเรียบร้อยแล้ว';
+	}
+	else {
+		$tx .= 'ของ ' . $arrayText['name'] . ' ' . $arrayText['linename'] . ' เรียบร้อยแล้ว';
+	}
 	foreach ($admins as $adm) {
 		StandardBotPush($adm, $tx);
 	}
