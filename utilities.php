@@ -425,13 +425,12 @@ function RegisterMode($text, $userId, $userType) {
 				$query2 = "SELECT id FROM tbhlinebotmem WHERE id = '$countable'"; 
 				$result2 = $db->query($query2);
 
-				$curr_val = 0;
 				while ($row = $result2->fetch(PDO::FETCH_ASSOC)) {
 				    $curr_val = htmlspecialchars($row["id"]);
 				}
 				$result2->closeCursor();
 
-				if ($curr_val == 0 || empty($curr_val)) {
+				if (!isset($curr_val)) {
 					break;
 				}
 				$countable = $countable + 1;
