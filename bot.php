@@ -79,7 +79,7 @@ if (!is_null($events['events'])) {
 									# code... When Question => Timer Answer
 									$messages = [						
 										'type' => 'text',
-										'text' => AnswerBuilder(12) . "ครัย " . IdentifyUser($event['source']['userId'])  
+										'text' => AnswerBuilder(12) . "จ้า " . IdentifyUser($event['source']['userId'])  
 									];
 									break;
 								case '3':
@@ -159,22 +159,12 @@ if (!is_null($events['events'])) {
 									if (rand(0, 10000) % 2 == 0) {
 										$sayhi = substr($sayhi, 12);
 									}
-									if (isset($event['source']['userId'])) {
-										$person = IdentifyUser($event['source']['userId']);	
-										if (!empty($person)) {
-											$messages = [						
-												'type' => 'text',
-												'text' => $sayhi . IdentifyUser($event['source']['userId']) . " " . AnswerBuilder(13)
-											];
-										}
-										else {
-											$day = strtolower(date("D"));
-											$messages = [
-												'type' => 'image',
-											    'originalContentUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/' . $day . '_original.jpg',
-											    'previewImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/' . $day . '_240.jpg'
-											];	
-										}
+									$person = IdentifyUser($event['source']['userId']);	
+									if (!empty($person)) {
+										$messages = [						
+											'type' => 'text',
+											'text' => $sayhi . IdentifyUser($event['source']['userId']) . " " . AnswerBuilder(13)
+										];
 									}
 									else {
 										$day = strtolower(date("D"));
@@ -197,11 +187,19 @@ if (!is_null($events['events'])) {
 										];
 									}
 									//--------------------------------------------------------
-									else if ((strpos($text, 'เปิดโหมดลงทะเบียนเข้าใช้งาน') !== false)) {
-										$messages = [						
-											'type' => 'text',
-											'text' => IdentifyUser($event['source']['userId']) . "สามารถใช้งาน Line Chat Bot ได้อย่างเต็มรูปแบบแล้วจ้า"
-										]; 
+									else if (strpos($text, 'เปิดโหมดลงทะเบียนเข้าใช้งาน') !== false) {
+										if ($event['source']['type'] == 'user') {
+											$messages = [						
+												'type' => 'text',
+												'text' => IdentifyUser($event['source']['userId']) . "สามารถใช้งาน Line Chat Bot ได้อย่างเต็มรูปแบบแล้วจ้า"
+											]; 
+										}
+										else {
+											$messages = [						
+												'type' => 'text',
+												'text' => "ท่านสามารถใช้งาน Line Chat Bot ได้อย่างเต็มรูปแบบแล้วจ้า"
+											]; 
+										}
 									}
 									else if ((strpos($text, 'ขอบคุณ') !== false) || (strpos($text, 'ขอบใจ') !== false) || 
 											 (strpos(strtolower($text), 'thank') !== false) || (strpos(strtolower($text), 'thx') !== false) || 
@@ -254,7 +252,7 @@ if (!is_null($events['events'])) {
 								ReturnAllowToAdmin();
 							}
 						}
-						else if (findQuestionType($text) == 4 && strpos($text, 'เหลือ') !== false) {
+						else if (findQuestionType($text) == 4 && (strpos($text, 'เหลือ') !== false || strpos($text, 'รอ') !== false)) {
 							$messages = [						
 								'type' => 'text',
 								'text' => ListWaitRegister()
@@ -267,9 +265,6 @@ if (!is_null($events['events'])) {
 							];	
 						}
 						break;		
-					case 'relation':
-						# code... <-------------------------------------------------------------------------------------- To Be Continue
-						break;
 					default:
 						# Check event user request is text
 						if ($event['message']['type'] == 'text') {

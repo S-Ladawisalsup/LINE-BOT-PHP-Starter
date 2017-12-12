@@ -51,6 +51,5 @@ function have to add and test to line chat bot
 8.1.1 change bot_mode in tbhlinebotmodchng to relation here.
 -------------------------------------------------------------------------------------------------------------
 1. Fixed list on waiting register to 1 line per person.
-2. Edit prefix.
-3. Edit suffix.
+2. Adding position 'Admin' & defind working in line chat bot system.
 */
