@@ -420,22 +420,22 @@ function RegisterMode($text, $userId, $userType) {
 		case '1':
 			# user tell name
 			# for infinite loop find empty id to insert in table tbhlinebotmem
-			// $countable = 1;
-			// while(true) {
-			// 	$query2 = "SELECT id FROM tbhlinebotmem WHERE id = '$countable'"; 
-			// 	$result2 = $db->query($query2);
+			$countable = 1;
+			while(true) {
+				$query2 = "SELECT id FROM tbhlinebotmem WHERE id = '$countable'"; 
+				$result2 = $db->query($query2);
 
-			// 	$curr_val = array();
-			// 	while ($row = $result2->fetch(PDO::FETCH_ASSOC)) {
-			// 	    $curr_val = htmlspecialchars($row["id"]);
-			// 	}
-			// 	$result2->closeCursor();
+				$curr_val = array();
+				while ($row = $result2->fetch(PDO::FETCH_ASSOC)) {
+				    $curr_val = htmlspecialchars($row["id"]);
+				}
+				$result2->closeCursor();
 
-			// 	if (empty($curr_val)) {
-			// 		break;
-			// 	}
-			// 	$countable = $countable + 1;
-			// }
+				if (empty($curr_val)) {
+					break;
+				}
+				$countable = $countable + 1;
+			}
 			$text = str_replace("ชื่อ", "", $text);
 			$text = str_replace("ไอ้", "", $text);
 			$text = str_replace("ท่าน", "", $text);
@@ -449,10 +449,8 @@ function RegisterMode($text, $userId, $userType) {
 			}
 			//$text = str_replace("นามสกุล", "", $text);
 			$roomgroup = "@" . $text;
-			//$results = pg_query($db2, "INSERT INTO tbhlinebotmem (id, user_id, name, linename, position, id_type) 
-			//						   VALUES ('$countable', '$userId', '$text', '$roomgroup', 'member', '$userType');");
-			$results = pg_query($db2, "INSERT INTO tbhlinebotmem (user_id, name, linename, position, id_type) 
-									   VALUES ('$userId', '$text', '$roomgroup', 'member', '$userType');");
+			$results = pg_query($db2, "INSERT INTO tbhlinebotmem (id, user_id, name, linename, position, id_type) 
+									   VALUES ('$countable', '$userId', '$text', '$roomgroup', 'member', '$userType');");
 			if ($userType == 'user') {
 				$toggle = 2;
 				$str = "คุณ$text กรุณาระบุชื่อไลน์ของคุณด้วยด้วยจ้า (เช่นของผมคือ @kiki อย่าลืมใส่เครื่องหมาย @ นะ)";

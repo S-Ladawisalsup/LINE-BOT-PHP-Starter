@@ -38,7 +38,8 @@ if (!is_null($events['events'])) {
 							}
 							$messages = [						
 								'type' => 'text',
-								'text' => RegisterMode($text, $event['source'][$event['source']['type'] . 'Id'], $event['source']['type'])
+								'text' => $text . "\n" . $event['source'][$event['source']['type'] . 'Id'] . "\n" . $event['source']['type']
+								//RegisterMode($text, $event['source'][$event['source']['type'] . 'Id'], $event['source']['type'])
 							];
 						}
 						break;
