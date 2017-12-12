@@ -68,7 +68,7 @@ function BotPush($room, $msg) {
 }
 /**********************************************************************************************************************************/
 function CheckBirthDay($db) {
-	$query = "SELECT user_id, date_of_birth FROM tbhlinebotmem WHERE position = 'user'";
+	$query = "SELECT user_id, date_of_birth FROM tbhlinebotmem WHERE id_type = 'user'";
 	$result = $db->query($query);
 
 	$bd = array();

@@ -232,7 +232,7 @@ if (!is_null($events['events'])) {
 								'type' => 'text',
 								'text' => DeleteIdRow($text)
 							];
-							if (ListWaitRegister() == "ไม่มีรายชื่อขอเข้าใช้งานเต็มรูปแบบตกค้าง") {	// noone
+							if (ListWaitRegister($event['source']['userId'])) {	// noone
 								ReturnAllowToAdmin();
 							}
 						}
@@ -248,15 +248,16 @@ if (!is_null($events['events'])) {
 								'type' => 'text',
 								'text' => ConfirmRowUserMember($text)
 							];	
-							if (ListWaitRegister() == "ไม่มีรายชื่อขอเข้าใช้งานเต็มรูปแบบตกค้าง") {	// noone
+							if (ListWaitRegister($event['source']['userId'])) {	// noone
 								ReturnAllowToAdmin();
 							}
 						}
 						else if (findQuestionType($text) == 4 && (strpos($text, 'เหลือ') !== false || strpos($text, 'รอ') !== false)) {
-							$messages = [						
-								'type' => 'text',
-								'text' => ListWaitRegister()
-							];	
+							// $messages = [						
+							// 	'type' => 'text',
+							// 	'text' => ListWaitRegister($event['source']['userId'])
+							// ];	
+							ListWaitRegister($event['source']['userId']);
 						}
 						else {
 							$messages = [						

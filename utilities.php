@@ -34,6 +34,8 @@ $pgsql_conn = "host=ec2-54-243-187-133.compute-1.amazonaws.com
 					user=mmbbbssobrmqjs 
 					password=fc2027eb6a706cd190646863367705a7969cbd85c0a86eed7a67d0dc6976bffa";
 
+$access_token = 'CFecc4UnPdpCUxVk2VuTlf7ANCYHbCpaxYltjR/z15zMJ/KzsPIVrp4tCql4xmQYr8qgJSZ6oitEZ0/PKH+FpdneucSfPgjTP03mQ5KRSKqYT93fEEvGDqOUxJ/SBoS3oTXcJaRSxlPVBWxH+8PWxAdB04t89/1O/w1cDnyilFU=';
+
 /**********************************************************************************************************************************/
 /*** Function for check word(s) contain(s) start or end at string. ***/
 function startsWith($haystack, $needle) {
@@ -609,8 +611,6 @@ function IsAcceptingMember($userId) {
 }
 /**********************************************************************************************************************************/
 function MemberConfirmation($arrayData, $admin) {
-	$access_token = 'CFecc4UnPdpCUxVk2VuTlf7ANCYHbCpaxYltjR/z15zMJ/KzsPIVrp4tCql4xmQYr8qgJSZ6oitEZ0/PKH+FpdneucSfPgjTP03mQ5KRSKqYT93fEEvGDqOUxJ/SBoS3oTXcJaRSxlPVBWxH+8PWxAdB04t89/1O/w1cDnyilFU=';
-
 	$confirm = "มีผู้ต้องการใช้งาน Line Chat Bot อย่างเต็มระบบ\nชื่อ : " . $arrayData['name']; 
 	$confirm .= "\nชื่อไลน์ : " . $arrayData['linename'];
 	if (!empty($arrayData['gender']) && !empty($arrayData['bd'])) {
@@ -630,7 +630,7 @@ function MemberConfirmation($arrayData, $admin) {
 		'messages' => [$messages],
 	];
 	$post = json_encode($data);
-	$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+	$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $GLOBALS['access_token']);
 
 	$ch = curl_init($url);
 	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
@@ -697,7 +697,7 @@ function DeleteIdRow($text) {
 	return "ไม่สามารถจัดการข้อมูลได้ อาจจะไม่มีรายชื่อนี้ หรืออาจจะไม่สามารถยกเลิกผู้ใช้รายนี้ได้ กรุณาตรวจสอบ หรือ จัดการกับฐานข้อมูลโดยตรง";
 }
 /**********************************************************************************************************************************/
-function ListWaitRegister() { //<-- current bugged this function.
+function ListWaitRegister($userId) {
 	$db = new PDO($GLOBALS['dsn']);
 
 	$query = "SELECT user_id FROM tbhlinebotmodchng WHERE bot_mode = 'regis'"; 
@@ -712,7 +712,8 @@ function ListWaitRegister() { //<-- current bugged this function.
 	$result->closeCursor();
 
 	if (empty($regis)) {
-		return "ไม่มีรายชื่อขอเข้าใช้งานเต็มรูปแบบตกค้าง"; // noone
+		//return "ไม่มีรายชื่อขอเข้าใช้งานเต็มรูปแบบตกค้าง"; // noone
+		return true;
 	}
 
 	$query2 = "SELECT name, linename FROM tbhlinebotmem WHERE ";
@@ -731,16 +732,56 @@ function ListWaitRegister() { //<-- current bugged this function.
 	    $seq = $seq + 1;
 	}
 	$result2->closeCursor();
-
-	$ret = "ไม่มีรายชื่อขอเข้าใช้งานเต็มรูปแบบตกค้าง";	// noone
+	//----------------------------------------------------------------------------------------------------------
+	// Old Version
+	// $ret = "ไม่มีรายชื่อขอเข้าใช้งานเต็มรูปแบบตกค้าง";	// noone
+	// if (!empty($sum)) {
+	// 	$ret = "เหลือผู้ที่รออนุมัติการใช้งานแชทบอทเต็มรูปแบบดังต่อไปนี้\n";
+	// 	foreach ($sum as $key) {
+	// 		$ret .= $key['linename'] . " " . $key['name'] . "\n";
+	// 	}
+	// 	$ret = substr($ret, 0, -1);
+	// }
+	// return $ret;
+	//----------------------------------------------------------------------------------------------------------
+	// New Version
 	if (!empty($sum)) {
-		$ret = "เหลือผู้ที่รออนุมัติการใช้งานแชทบอทเต็มรูปแบบดังต่อไปนี้\n";
+		BotPushAListWaitingUser($userId, 'เหลือผู้ที่รออนุมัติการใช้งานแชทบอทเต็มรูปแบบดังต่อไปนี้');
 		foreach ($sum as $key) {
-			$ret .= $key['linename'] . " " . $key['name'] . "\n";
+			$ret .= $key['linename'] . " " . $key['name'];
+			BotPushAListWaitingUser($userId, $ret);
 		}
-		$ret = substr($ret, 0, -1);
+		return false;
 	}
-	return $ret;
+	return true;
+	//----------------------------------------------------------------------------------------------------------
+}
+/**********************************************************************************************************************************/
+function BotPushAListWaitingUser($adminId, $users) {
+	$messages = [						
+		'type' => 'text',
+		'text' => $users
+	];
+
+	// Make a POST Request to Messaging API to push to sender
+	$url = 'https://api.line.me/v2/bot/message/push';
+	$data = [
+		'to' => $adminId,
+		'messages' => [$messages],
+	];
+	$post = json_encode($data);
+	$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $GLOBALS['access_token']);
+
+	$ch = curl_init($url);
+	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+	$result = curl_exec($ch);
+	curl_close($ch);
+
+	echo $result . "\r\n";
 }
 /**********************************************************************************************************************************/
 function CheckRegis($userId) {
@@ -791,8 +832,6 @@ function ConfirmRowUserMember($text) {
 }
 /**********************************************************************************************************************************/
 function BotPushAllowAccess($memberId, $allow) {
-	$access_token = 'CFecc4UnPdpCUxVk2VuTlf7ANCYHbCpaxYltjR/z15zMJ/KzsPIVrp4tCql4xmQYr8qgJSZ6oitEZ0/PKH+FpdneucSfPgjTP03mQ5KRSKqYT93fEEvGDqOUxJ/SBoS3oTXcJaRSxlPVBWxH+8PWxAdB04t89/1O/w1cDnyilFU=';
-
 	if ($allow) {
 		$tx = "คำขอใช้งาน Line Chat Bot ของคุณได้รับการอนุญาตแล้ว ยินดีต้อนรับสู่การใช้งาน Line Chat Bot อย่างเต็มรูปแบบนะคร้าบบบบบ";
 	}
@@ -812,7 +851,7 @@ function BotPushAllowAccess($memberId, $allow) {
 		'messages' => [$messages],
 	];
 	$post = json_encode($data);
-	$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+	$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $GLOBALS['access_token']);
 
 	$ch = curl_init($url);
 	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
