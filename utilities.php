@@ -920,29 +920,29 @@ function IdentifyUser($userId) {
 }
 /**********************************************************************************************************************************/
 function AlertOthersAdmin($adminId, $IsConfirm, $arrayText) {
-	$db = new PDO($GLOBALS['dsn']);
+	// $db = new PDO($GLOBALS['dsn']);
 
-	$query = "SELECT user_id FROM tbhlinebotmem WHERE position = 'admin' or user_id != '$adminId'"; 
-	$result = $db->query($query);
+	// $query = "SELECT user_id FROM tbhlinebotmem WHERE position = 'admin' and user_id != '$adminId'"; 
+	// $result = $db->query($query);
 
-	$admins = array();
-	$seq = 0;
-	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-		$admins = array();
-	    $admins[$seq] = htmlspecialchars($row["user_id"]);
-	    $seq = $seq + 1;
-	}
-	$result->closeCursor();
+	// $admins = array();
+	// $seq = 0;
+	// while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+	// 	$admins = array();
+	//     $admins[$seq] = htmlspecialchars($row["user_id"]);
+	//     $seq = $seq + 1;
+	// }
+	// $result->closeCursor();
 
-	$query2 = "SELECT name FROM tbhlinebotmem WHERE user_id == '$adminId'"; 
-	$result2 = $db->query($query2);
+	// $query2 = "SELECT name FROM tbhlinebotmem WHERE user_id == '$adminId'"; 
+	// $result2 = $db->query($query2);
 
-	while ($row = $result2->fetch(PDO::FETCH_ASSOC)) {
-	    $adm_name = htmlspecialchars($row["name"]);
-	}
-	$result2->closeCursor();
+	// while ($row = $result2->fetch(PDO::FETCH_ASSOC)) {
+	//     $adm_name = htmlspecialchars($row["name"]);
+	// }
+	// $result2->closeCursor();
 
-	$testtx = 'adminId : ' . $adminId . "\nadmin name : " . $adm_name;
+	$testtx = 'adminId : ' . $adminId . "\nIsConfirm? : " . $IsConfirm . "\nname : " . $arrayText['name'] . "\nlinename : " . $arrayText['linename'];
 	// foreach ($admins as $adm) {
 	// 	$testtx .= "\nOther admin : " . $adm;
 	// }
