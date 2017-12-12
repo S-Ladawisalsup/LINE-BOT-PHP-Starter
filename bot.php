@@ -233,7 +233,7 @@ if (!is_null($events['events'])) {
 								'type' => 'text',
 								'text' => DeleteIdRow($text, $event['source']['userId'])
 							];
-							if (ListWaitRegister($event['source']['userId'])) {	// noone
+							if (ListWaitRegister($event['source']['userId'])) {
 								ReturnAllowToAdmin();
 							}
 						}
@@ -249,7 +249,7 @@ if (!is_null($events['events'])) {
 								'type' => 'text',
 								'text' => ConfirmRowUserMember($text, $event['source']['userId'])
 							];	
-							if (ListWaitRegister($event['source']['userId'])) {	// noone
+							if (ListWaitRegister($event['source']['userId'])) {
 								ReturnAllowToAdmin();
 							}
 						}

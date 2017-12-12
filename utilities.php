@@ -942,18 +942,17 @@ function AlertOthersAdmin($adminId, $IsConfirm, $arrayText) {
 	}
 	$result2->closeCursor();
 	
-	$t_name = 'มีผู้';
+	$tx = 'มีผู้';
 	if (isset($adm_name)) {
-		$t_name = 'คุณ' . $adm_name;
+		$tx = 'คุณ' . $adm_name;
 	}
-	$tx = $t_name;
 	if ($IsConfirm) {
 		$tx .= 'อนุมัติการใช้งานของ ';
 	}
 	else {
 		$tx .= 'ปฏิเสธการใช้งานของ ';
 	}
-	$tx .= $arrayText['name'] . ' ' . $arrayText['linename'] . " เรียบร้อยแล้ว";
+	$tx .= $arrayText['name'] . ' ' . $arrayText['linename'] . ' เรียบร้อยแล้ว';
 
 	foreach ($admins as $adm) {
 		StandardBotPush($adm, $tx);
