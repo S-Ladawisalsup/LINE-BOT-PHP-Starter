@@ -854,7 +854,9 @@ function IdentifyUser($userId) {
 				$suffix[$randend] = '';
 			}
 		}
-		return $prefix[rand(0, 6)] . $name_req['name'] . $suffix[$randend];
+		//return $prefix[rand(0, 6)] . $name_req['name'] . $suffix[$randend];
+		$temp_prefix = array('0' => '', '1' => 'คุณ');
+		return $temp_prefix[rand(0, 10000) % 2] . $name_req['name'];
 	}
 	else {
 		return "";

@@ -27,7 +27,7 @@ function QuestionWordFromDBTB() {
 	$t = 'text';
 
 	//$query = "SELECT questiontext, questiontype FROM tbhlinebotwmode WHERE questiontype = '9'";
-	$query = "SELECT $t, type FROM tbhlinebotans";// WHERE type = '14'";
+	$query = "SELECT $t, type FROM tbhlinebotans WHERE type = '12'";
 	$result = $db->query($query);
 
 	$words = array();
@@ -50,8 +50,7 @@ function have to add and test to line chat bot
 8.1 add another toggle on 9am, 1pm, 3pm, 10pm to bot start push message first with random user(s). 
 8.1.1 change bot_mode in tbhlinebotmodchng to relation here.
 -------------------------------------------------------------------------------------------------------------
-1. Edit location answer. (Completed)
+1. Fixed list on waiting register to 1 line per person.
 2. Edit prefix.
 3. Edit suffix.
-4. Fixed bug on alert everyday.
 */
