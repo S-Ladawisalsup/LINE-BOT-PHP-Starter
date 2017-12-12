@@ -819,7 +819,7 @@ function ConfirmRowUserMember($text, $adminId) {
 	$result->closeCursor();
 	if (strpos($text, 'รายชื่อผู้ขอใช้งานทั้งหมด') !== false) {
 		$query2 = "SELECT user_id FROM tbhlinebotmem WHERE status = 'trial'";
-		$result4 = $db->query($query);
+		$result4 = $db->query($query2);
 		$alltrial = array();
 		$seq = 0;
 		while ($row = $result4->fetch(PDO::FETCH_ASSOC)) {
