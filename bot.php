@@ -187,9 +187,9 @@ if (!is_null($events['events'])) {
 											'template' => [
 															'type' 				   => 'buttons', 
 															'thumbnailImageUrl'    => 'https://cryptic-harbor-32168.herokuapp.com/images/tbh_icon.png',
-															'imageAspectRatio' 	   => 'rectangle', 
-															'imageSize' 		   => 'cover',
-															'imageBackgroundColor' => '#FFFFFF',
+															//'imageAspectRatio' 	   => 'rectangle', 
+															//'imageSize' 		   => 'cover',
+															//'imageBackgroundColor' => '#FFFFFF',
 															'title' 			   => 'Menu',
 															'text' 				   => 'Please Select',
 															'actions' 			   => [
