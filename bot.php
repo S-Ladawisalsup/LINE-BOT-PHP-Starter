@@ -182,18 +182,22 @@ if (!is_null($events['events'])) {
 									if (strpos($text, 'testmsgbyball') !== false) {
 										//InsertDataToDB();
 										$messages = [
-											'type' => 'template',
-											'altText' => 'this is a button template',
-											'template' => array('type' => 'buttons', 
-															    'thumbnailImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/tbh_icon.png',
-															    'imageAspectRatio' => 'rectangle', 
-															    'imageSize' => 'cover',
-															    'imageBackgroundColor' => '#FFFFFF',
-															    'title' => 'Menu',
-															    'text' => 'Please Select',
-															    'actions' => array('type' => 'uri',
-															    				   'label' => 'Go to manual',
-															    				   'uri' => 'https://cryptic-harbor-32168.herokuapp.com/manual.html'))
+											'type'     => 'template',
+											'altText'  => 'this is a button template',
+											'template' => [
+															'type' 				   => 'buttons', 
+															'thumbnailImageUrl'    => 'https://cryptic-harbor-32168.herokuapp.com/images/tbh_icon.png',
+															'imageAspectRatio' 	   => 'rectangle', 
+															'imageSize' 		   => 'cover',
+															'imageBackgroundColor' => '#FFFFFF',
+															'title' 			   => 'Menu',
+															'text' 				   => 'Please Select',
+															'actions' 			   => [
+																						'type'  => 'uri',
+																						'label' => 'Go to manual',
+																						'uri'   => 'https://cryptic-harbor-32168.herokuapp.com/manual.html'
+															]
+											]
 										];
 									}
 									//--------------------------------------------------------
