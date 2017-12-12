@@ -818,8 +818,17 @@ function ConfirmRowUserMember($text, $adminId) {
 	}
 	$result->closeCursor();
 	if (strpos($text, 'รายชื่อผู้ขอใช้งานทั้งหมด') !== false) {
-		foreach ($awaitmem as $awaitusr) {
-			BotPushAllowAccess($awaitusr['id'], true);
+		$query2 = "SELECT user_id FROM tbhlinebotmem WHERE status = 'trial'";
+		$result4 = $db->query($query);
+		$alltrial = array();
+		$seq = 0;
+		while ($row = $result4->fetch(PDO::FETCH_ASSOC)) {
+		    $alltrial[$seq] = htmlspecialchars($row["user_id"]);
+		    $seq = $seq + 1;
+		}
+		$result4->closeCursor();
+		foreach ($alltrial as $trial) {
+			BotPushAllowAccess($trial, true);
 		}
 		$db2 = pg_connect($GLOBALS['pgsql_conn']);
 		$result2 = pg_query($db2, "UPDATE tbhlinebotmem SET status = 'allow' WHERE status = 'trial';");
