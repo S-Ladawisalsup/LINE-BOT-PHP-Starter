@@ -54,5 +54,4 @@ function have to add and test to line chat bot
 2. Adding position 'Dev' & defind working in line chat bot system.
 ---------------------------------------------------------------------------------------------------
 3. Add more response word.
-4. Write policy while register.
 */
