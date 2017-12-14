@@ -182,7 +182,7 @@ if (!is_null($events['events'])) {
 									//--------------------------------------------------------
 									// Test case to insert data to postgresql database.
 									if (strpos($text, 'testmsgbyball') !== false) {
-										InsertDataToDB();
+										//InsertDataToDB();
 										$policies = file('text/policy.txt');
 										$tx = '';
 										foreach ($policies as $policy) {
