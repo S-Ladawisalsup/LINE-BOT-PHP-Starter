@@ -86,7 +86,7 @@ if (!is_null($events['events'])) {
 								case '3':
 									# code... Where Question => Location Answer
 									$locate = GetLocation();
-									if ($locate != null) {
+									if (($locate != null) && (rand(0, 10000) % 2 == 0)) {
 										$messages = [						
 											'type' => 'location',
 											'title' => $locate['title'],
@@ -96,9 +96,11 @@ if (!is_null($events['events'])) {
 										];
 									}
 									else {
+										$people = IdentifyUser($event['source']['userId']);
+										$people = empty($people)? 'เธอ' : $people;
 										$messages = [						
 											'type' => 'text',
-											'text' => AnswerBuilder(10) . IdentifyUser($event['source']['userId'])
+											'text' => 'ก็อยูในใจของ' . $people . 'ไงละจ้า'
 										];
 									}
 									break;
@@ -180,11 +182,16 @@ if (!is_null($events['events'])) {
 									//--------------------------------------------------------
 									// Test case to insert data to postgresql database.
 									if (strpos($text, 'testmsgbyball') !== false) {
-										//InsertDataToDB();
+										InsertDataToDB();
+										$policies = file('text/policy.txt');
+										$tx = '';
+										foreach ($policies as $policy) {
+											$tx .= $policy;
+										}
 										$messages = [						
 											'type' => 'text',
-											'text' => "ที่นี้จ้า\nhttps://cryptic-harbor-32168.herokuapp.com/manual.html"
-										];
+											'text' => $tx
+										]; 
 									}
 									//--------------------------------------------------------
 									else if (strpos($text, 'เปิดโหมดลงทะเบียนเข้าใช้งาน') !== false) {
@@ -330,18 +337,10 @@ if (!is_null($events['events'])) {
 								}
 								else if ((strpos($text, 'เปิดโหมดลงทะเบียนเข้าใช้งาน') !== false)) {
 									SetRegisterSeq($event['source'][$event['source']['type'] . 'Id']);
-									if ($event['source']['type'] == 'user') {
-										$tx = "กรุณาระบุชื่อที่ให้ใช้เรียก (ชื่อเล่นก็ได้นะ)";
-									}
-									else if ($event['source']['type'] == 'group') {
-										$tx = "กรุณาระบุชื่อกลุ่ม";
-									}
-									else if ($event['source']['type'] == 'room') {
-										$tx = "กรุณาระบุชื่อห้อง";
-									}
-									else {
-										$tx = "ขออภัยขณะนี้ระบบลงทะเบียนมีปัญหา ไว้มาลงทะเบียนใหม่ทีหลังน๊ะจ๊ะคนดีดนเก่งของพี่จุ๊บๆ 
-											   หรือลองไปติดต่อ ITSD ดูน๊ะจ๊ะ";
+									$policies = file('text/policy.txt');
+									$tx = '';
+									foreach ($policies as $policy) {
+										$tx .= $policy;
 									}
 									$messages = [						
 										'type' => 'text',

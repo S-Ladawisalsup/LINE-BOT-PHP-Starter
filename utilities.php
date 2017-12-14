@@ -418,6 +418,35 @@ function RegisterMode($text, $userId, $userType) {
 	$error = false;
 	switch ($stage) {
 		case '1':
+			# accept policy
+			if (strpos($text, 'ไม่') !== false) {
+				$error = true;
+				$str = "ว่างหรอ?";
+			}
+			else if ((strpos($text, 'ใช่') !== false) || (strpos(strtolower($text), 'yes') !== false) || 
+					 (strpos(strtolower($text), 'yeah') !== false) || (strpos(strtolower($text), 'sure') !== false) || 
+					 (strpos($text, 'ตกลง') !== false) || (strpos($text, 'ยืนยัน') !== false)) {
+				IsAcceptingMember($userId);
+				$toggle = 2;
+				if ($userType == 'user') {
+					$str = "กรุณาระบุชื่อที่ให้ใช้เรียก (ชื่อเล่นก็ได้นะ)";
+				} 
+				else if ($userType == 'group') {
+					$str = "กรุณาระบุชื่อกลุ่ม";
+				}
+				else if ($userType == 'room') {
+					$str = "กรุณาระบุชื่อห้อง";
+				}
+				else {
+					$str = "ขออภัยขณะนี้ระบบลงทะเบียนมีปัญหา ไว้มาลงทะเบียนใหม่ทีหลังน๊ะจ๊ะคนดีดนเก่งของพี่จุ๊บๆ";
+				}
+			}
+			else {
+				$error = true;
+				$str = "ว่างหรอ?";
+			}
+			break;
+		case '2':
 			# user tell name
 			# for infinite loop find empty id to insert in table tbhlinebotmem
 			$countable = 1;
@@ -452,15 +481,15 @@ function RegisterMode($text, $userId, $userType) {
 			$results = pg_query($db2, "INSERT INTO tbhlinebotmem (id, user_id, name, linename, position, id_type) 
 									   VALUES ('$countable', '$userId', '$text', '$roomgroup', 'member', '$userType');");
 			if ($userType == 'user') {
-				$toggle = 2;
+				$toggle = 3;
 				$str = "คุณ$text กรุณาระบุชื่อไลน์ของคุณด้วยด้วยจ้า (เช่นของผมคือ @kiki อย่าลืมใส่เครื่องหมาย @ นะ)";
 			}
 			else if ($userType == 'group') {
-				$toggle = 5;
+				$toggle = 6;
 				$str = "ชื่อกลุ่มของคุณคือ $text\nยืนยันการลงทะเบียนใช้งาน Line Chat Bot เต็มรูปแบบใช่หรือไม่";
 			}
 			else if ($userType == 'room') {
-				$toggle = 5;
+				$toggle = 6;
 				$str = "ชื่อห้องของคุณคือ $text\nยืนยันการลงทะเบียนใช้งาน Line Chat Bot เต็มรูปแบบใช่หรือไม่";
 			}
 			else {
@@ -468,7 +497,7 @@ function RegisterMode($text, $userId, $userType) {
 				$str = "ขออภัยขณะนี้ระบบลงทะเบียนมีปัญหา ไว้มาลงทะเบียนใหม่ทีหลังน๊ะจ๊ะคนดีดนเก่งของพี่จุ๊บๆ";
 			}
 			break;
-		case '2':
+		case '3':
 			# user tell line name
 			if (startsWith($text, '@')) {
 				$query3 = "SELECT name FROM tbhlinebotmem WHERE user_id = '$userId'"; 
@@ -481,7 +510,7 @@ function RegisterMode($text, $userId, $userType) {
 				$result3->closeCursor();
 
 				$results = pg_query($db2, "UPDATE tbhlinebotmem SET linename = '$text' WHERE user_id = '$userId';");
-				$toggle = 3;
+				$toggle = 4;
 				$str = "ชื่อไลน์ของคุณ" . $name . "คือ $text\nกรุณาระบุเพศด้วยจ้า (ชาย / หญิง)";
 			}
 			else {
@@ -489,16 +518,16 @@ function RegisterMode($text, $userId, $userType) {
 				$str = "ก็บอกให้ใส่เครื่องหมาย @ ด้วยไง ปัดโธ่ ไปเริ่มกรอกใหม่ตั้งแต่ต้นเลยไป๊!";
 			}
 			break;		
-		case '3':
+		case '4':
 			# user tell gender
 			if ((strpos($text, 'หญิง') !== false) || (strpos(strtolower($text), 'female') !== false)) {
 				$results = pg_query($db2, "UPDATE tbhlinebotmem SET gender = 'F' WHERE user_id = '$userId';");
-				$toggle = 4;
+				$toggle = 5;
 				$str = "คุณผู้หญิง กรุณาระบุวันเดือนปีเกิด (ในรูปแบบ dd/mm/yyyy เช่น 01/01/1900) ด้วยจ้า";
 			}
 			else if ((strpos($text, 'ชาย') !== false) || (strpos(strtolower($text), 'male') !== false)) {
 				$results = pg_query($db2, "UPDATE tbhlinebotmem SET gender = 'M' WHERE user_id = '$userId';");
-				$toggle = 4;
+				$toggle = 5;
 				$str = "คุณผู้ชาย กรุณาระบุวันเดือนปีเกิด (ในรูปแบบ(ค.ศ.) dd/mm/yyyy เช่น 01/01/1900) ด้วยจ้า";
 			} 
 			else {
@@ -506,7 +535,7 @@ function RegisterMode($text, $userId, $userType) {
 				$str = "ก็ให้ใส่แค่ ชาย หรือ หญิง ไง แล้วนี่กรอกอะไรมา ไปเริ่มกรอกใหม่เลยละกัน!";
 			}
 			break;
-		case '4':
+		case '5':
 			# user tell date of birth
 			preg_match_all("!\d+!", $text, $matches);
 			if (count($matches[0]) == 3) {
@@ -516,7 +545,7 @@ function RegisterMode($text, $userId, $userType) {
 					$results = pg_query($db2, "UPDATE tbhlinebotmem SET date_of_birth = '$bd' WHERE user_id = '$userId';");
 
 					if (checkdate($matches[0][1], $matches[0][0], $matches[0][2])) {
-						$toggle = 5;
+						$toggle = 6;
 						$str = "คุณเกิดวันที่ $bd2\nยืนยันการลงทะเบียนใช้งาน Line Chat Bot เต็มรูปแบบใช่หรือไม่";
 					}
 					else {
@@ -535,18 +564,17 @@ function RegisterMode($text, $userId, $userType) {
 				$str = "ก็บอกให้กรอกวันที่ในรูปแบบ(ค.ศ.) dd/mm/yyyy เช่น 01/01/1900 ไง ไปเริ่มกรอกใหม่ตั้งแต่ต้นเลยไป๊!";
 			}
 			break;
-		case '5':
+		case '6':
 			# acception by user
 			if (strpos($text, 'ไม่') !== false) {
 				$error = true;
 				$str = "ว่างหรอ?";
 			}
 			else if ((strpos($text, 'ใช่') !== false) || (strpos(strtolower($text), 'yes') !== false) || 
-					 (strpos(strtolower($text), 'yeah') !== false) || (strpos(strtolower($text), 'y') !== false) || 
-					 (strpos(strtolower($text), 'absolute') !== false) || (strpos(strtolower($text), 'whynot') !== false) || 
-					 (strpos(strtolower($text), 'sure') !== false)) {
+					 (strpos(strtolower($text), 'yeah') !== false) || (strpos(strtolower($text), 'sure') !== false) || 
+					 (strpos($text, 'ตกลง') !== false) || (strpos($text, 'ยืนยัน') !== false)) {
 				IsAcceptingMember($userId);
-				$toggle = 6;
+				$toggle = 7;
 				$str = "ขอคิดดูก่อนนะว่าจะรับดีมั้ยน้า แล้วเดี๋ยวจะมาบอกทีหลังนะ";
 			}
 			else {
@@ -554,8 +582,8 @@ function RegisterMode($text, $userId, $userType) {
 				$str = "ว่างหรอ?";
 			}
 			break;
-		case '6':
-			$toggle = 6;
+		case '7':
+			$toggle = 7;
 			$str = "คำขอใช้งานแชทบอทของคุณกำลังรออนุมัติ กรุณารอสักครู่น๊ะจ๊ะ";
 			break;
 		default:
@@ -599,49 +627,22 @@ function IsAcceptingMember($userId) {
 	}
 	$result2->closeCursor();
 
+	$confirm = "มีผู้ต้องการใช้งาน Line Chat Bot อย่างเต็มระบบ\nชื่อ : " . $new_member['name']; 
+	$confirm .= "\nชื่อไลน์ : " . $new_member['linename'];
+	if (!empty($new_member['gender']) && !empty($new_member['bd'])) {
+		$confirm .= "\nเพศ : " . $new_member['gender'] . "\nวันเกิด : " . substr($new_member['bd'], 0, 10);
+	}
+	$confirm .= "\nประเภท : " . $new_member['type'] . "\nต้องการให้บุคคลนี้สามารถใช้งานได้เต็มรูปแบบหรือไม่?";
+
 	$db2 = pg_connect($GLOBALS['pgsql_conn']);
 	$awaitadmin = "UPDATE tbhlinebotmodchng SET bot_mode = 'await' WHERE ";
 	foreach ($admin as $adm) {
 		$awaitadmin .= "user_id = '$adm' or ";
-		MemberConfirmation($new_member, $adm);
+		StandardBotPush($adm, $confirm);
 	}
 	$awaitadmin = substr($awaitadmin, 0, -3);
 	$awaitadmin .= ";";
 	$result3 = pg_query($db2, $awaitadmin);
-}
-/**********************************************************************************************************************************/
-function MemberConfirmation($arrayData, $admin) {
-	$confirm = "มีผู้ต้องการใช้งาน Line Chat Bot อย่างเต็มระบบ\nชื่อ : " . $arrayData['name']; 
-	$confirm .= "\nชื่อไลน์ : " . $arrayData['linename'];
-	if (!empty($arrayData['gender']) && !empty($arrayData['bd'])) {
-		$confirm .= "\nเพศ : " . $arrayData['gender'] . "\nวันเกิด : " . substr($arrayData['bd'], 0, 10);
-	}
-	$confirm .= "\nประเภท : " . $arrayData['type'] . "\nต้องการให้บุคคลนี้สามารถใช้งานได้เต็มรูปแบบหรือไม่?";
-
-	$messages = [						
-		'type' => 'text',
-		'text' => $confirm
-	];
-
-	// Make a POST Request to Messaging API to push to sender
-	$url = 'https://api.line.me/v2/bot/message/push';
-	$data = [
-		'to' => $admin,
-		'messages' => [$messages],
-	];
-	$post = json_encode($data);
-	$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $GLOBALS['access_token']);
-
-	$ch = curl_init($url);
-	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
-	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-	$result = curl_exec($ch);
-	curl_close($ch);
-
-	echo $result . "\r\n";
 }
 /**********************************************************************************************************************************/
 function ReturnAllowToAdmin() {
@@ -683,10 +684,10 @@ function DeleteIdRow($text, $adminId) {
 	    $index = $index + 1;
 	}
 	$result->closeCursor();
-
+	$waitres = "คำขอใช้งาน Line Chat Bot ของคุณถูกปฏิเสธ ไม่ต้องเศร้าไปนะ อย่าไปแอบร้องไห้ในห้องน้ำ อย่าสิ้นคิดไปติดยา อย่าทำร้ายตัวเอง ไว้ลองใหม่คราวหน้าละกันเนาะ";
 	if (strpos($text, 'รายชื่อผู้ขอใช้งานทั้งหมด') !== false) {
 		foreach ($del_user as $del) {
-			BotPushAllowAccess($del['id'], false);
+			StandardBotPush($del['id'], $waitres);
 		}
 		$db2 = pg_connect($GLOBALS['pgsql_conn']);
 		$result2 = pg_query($db2, "DELETE FROM tbhlinebotmem WHERE status = 'trial';");
@@ -701,7 +702,7 @@ function DeleteIdRow($text, $adminId) {
 				$db2 = pg_connect($GLOBALS['pgsql_conn']);
 				$result2 = pg_query($db2, "DELETE FROM tbhlinebotmem WHERE user_id = '$rm';");
 				$result_again = pg_query($db2, "UPDATE tbhlinebotmodchng SET bot_mode = 'trial', seq = '0' WHERE user_id = '$rm';");
-				BotPushAllowAccess($rm, false);
+				StandardBotPush($rm, $waitres);
 				AlertOthersAdmin($adminId, false, $del);
 				return "ระบบดำเนินการตามคำอนุมัติเรียบร้อย";
 			}
@@ -817,6 +818,7 @@ function ConfirmRowUserMember($text, $adminId) {
 	    $order = $order + 1;
 	}
 	$result->closeCursor();
+	$waitres = "คำขอใช้งาน Line Chat Bot ของคุณได้รับการอนุญาตแล้ว ยินดีต้อนรับสู่การใช้งาน Line Chat Bot อย่างเต็มรูปแบบนะคร้าบบบบบ";
 	if (strpos($text, 'รายชื่อผู้ขอใช้งานทั้งหมด') !== false) {
 		$query2 = "SELECT user_id FROM tbhlinebotmem WHERE status = 'trial'";
 		$result4 = $db->query($query2);
@@ -828,7 +830,7 @@ function ConfirmRowUserMember($text, $adminId) {
 		}
 		$result4->closeCursor();
 		foreach ($alltrial as $trial) {
-			BotPushAllowAccess($trial, true);
+			StandardBotPush($trial, $waitres);
 		}
 		$db2 = pg_connect($GLOBALS['pgsql_conn']);
 		$result2 = pg_query($db2, "UPDATE tbhlinebotmem SET status = 'allow' WHERE status = 'trial';");
@@ -843,7 +845,7 @@ function ConfirmRowUserMember($text, $adminId) {
 				$db2 = pg_connect($GLOBALS['pgsql_conn']);
 				$result2 = pg_query($db2, "UPDATE tbhlinebotmodchng SET bot_mode = 'allow', seq = '0' WHERE user_id = '$usrid';");
 				$result3 = pg_query($db2, "UPDATE tbhlinebotmem SET status = 'allow' WHERE user_id = '$usrid';");
-				BotPushAllowAccess($usrid, true);
+				StandardBotPush($usrid, $waitres);
 				AlertOthersAdmin($adminId, true, $awaitusr);
 				return "ระบบดำเนินการตามคำอนุมัติเรียบร้อย";
 			}
@@ -882,40 +884,6 @@ function ListWaitingUsers($text) {
 	return $confirm;
 }
 /**********************************************************************************************************************************/
-function BotPushAllowAccess($memberId, $allow) {
-	if ($allow) {
-		$tx = "คำขอใช้งาน Line Chat Bot ของคุณได้รับการอนุญาตแล้ว ยินดีต้อนรับสู่การใช้งาน Line Chat Bot อย่างเต็มรูปแบบนะคร้าบบบบบ";
-	}
-	else {
-		$tx = "คำขอใช้งาน Line Chat Bot ของคุณถูกปฏิเสธ ไม่ต้องเศร้าไปนะ อย่าไปแอบร้องไห้ในห้องน้ำ อย่าสิ้นคิดไปติดยา อย่าทำร้ายตัวเอง ไว้ลองใหม่คราวหน้าละกันเนาะ";
-	}
-
-	$messages = [						
-		'type' => 'text',
-		'text' => $tx
-	];
-
-	// Make a POST Request to Messaging API to push to sender
-	$url = 'https://api.line.me/v2/bot/message/push';
-	$data = [
-		'to' => $memberId,
-		'messages' => [$messages],
-	];
-	$post = json_encode($data);
-	$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $GLOBALS['access_token']);
-
-	$ch = curl_init($url);
-	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
-	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-	$result = curl_exec($ch);
-	curl_close($ch);
-
-	echo $result . "\r\n";
-}
-/**********************************************************************************************************************************/
 function IdentifyUser($userId) {
 	$db = new PDO($GLOBALS['dsn']);
 
@@ -944,8 +912,7 @@ function IdentifyUser($userId) {
 			}
 		}
 		//return $prefix[rand(0, 6)] . $name_req['name'] . $suffix[$randend];
-		$temp_prefix = array('0' => '', '1' => 'คุณ', '2' => 'พี่');
-		return $temp_prefix[rand(0, 30000) % 3] . $name_req['name'];
+		return 'พี่' . $name_req['name'];
 	}
 	else {
 		return "";
@@ -1028,17 +995,9 @@ function StandardBotPush($userId, $text) {
 function InsertDataToDB() {
 	$db = pg_connect($GLOBALS['pgsql_conn']);		
 
-	//now tbhlinebotwmode id 46 is empty
 	$t = 'text';
-	$result = pg_query($db, "INSERT INTO tbhlinebotans ($t, type) VALUES 
-						(' แล้ว ขอให้มีความสุขมากๆนะ ขอให้สุขสมหวังในสิ่งที่อยากได้นะ สุขสันต์วันเกิดนะ', '14'),
-						(' แล้ว สุขสันต์วันเกิดนะ ขอให้โชคดีมีชัย คิดสิ่งหนึ่งสิ่งใด ขอให้สมปรารถนาครับ', '14'),
-						(' แล้ว ขอให้มีความสุขมากๆ สุขสันต์วันเกิดนะ ปะ!! วันนี้ฉลองไหนดี', '14'),
-						(' แล้ว แม้ไม่มีของขวัญให้ แต่ก็ขอให้มีความสุข ขอให้ได้รับแต่สิ่งดีๆเข้ามาในชีวิตนะครับ', '14'),
-						(' ปีแล้ว ขอให้มีสุขภาพแข็งแรงเสมอ มีความสุขในชีวิตนะครับ', '14'),
-						(' ปีแล้ว ขอพรจากสิ่งศักดิ์สิทธิ์ทั้งหลาย จงอวยชัยให้ท่านมีความสุขในวันเกิดและตลอดไปด้วยเถิด', '14'),
-						(' ปี ครบรอบวันสุดมงคลอีกแล้ว กับวันดีวันนี้ สุขสันต์วันเกิดครับท่าน', '14'),
-						(' ปีแล้ว แต่นึกว่ายังเด็กว่านี้อีก 10-20ปี เลยนะครับนี่ ขอให้มีสุขภาพแข็งแรง พบเจอแต่สิ่งดีๆนะครับ', '14')
+	$result = pg_query($db, "INSERT INTO tbhlinebotwmode (id, questiontext, questiontype) VALUES 
+						('46', 'ป่ะ', '1')
 						;");//,('คืนนี้แหล่ะ อยากได้กี่ครั้งหล่ะ', '12')
 
 	// $result = pg_query($db, "UPDATE tbhlinebotwmode

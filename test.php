@@ -26,16 +26,16 @@ function QuestionWordFromDBTB() {
 
 	$t = 'text';
 
-	//$query = "SELECT questiontext, questiontype FROM tbhlinebotwmode WHERE questiontype = '9'";
-	$query = "SELECT $t, type FROM tbhlinebotans";// WHERE type = '14'";
+	$query = "SELECT questiontext, questiontype FROM tbhlinebotwmode WHERE questiontype = '1'";
+	//$query = "SELECT $t, type FROM tbhlinebotans";// WHERE type = '14'";
 	$result = $db->query($query);
 
 	$words = array();
 	$index = 0;
 	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 	    $words[$index] = array();
-		$words[$index]['text'] = htmlspecialchars($row["text"]);//question
-		$words[$index]['type'] = htmlspecialchars($row["type"]);
+		$words[$index]['text'] = htmlspecialchars($row["questiontext"]);//
+		$words[$index]['type'] = htmlspecialchars($row["questiontype"]);
 		$index = $index + 1;
 	}
 	$result->closeCursor();
@@ -52,4 +52,7 @@ function have to add and test to line chat bot
 ---------------------------------------------------------------------------------------------------
 1. Write about notification before user register.
 2. Adding position 'Dev' & defind working in line chat bot system.
+---------------------------------------------------------------------------------------------------
+3. Add more response word.
+4. Write policy while register.
 */
