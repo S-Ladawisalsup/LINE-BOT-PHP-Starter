@@ -1083,7 +1083,7 @@ function ConfirmationsMsg($stack, $userId) {
 				// 'min' => date("Y-m-d", strtotime("-150 Years"))
 			];
 			$actions_t = [
-				'type' => 'datetimepicker',
+				'type' => 'postback',
 				'label' => 'no',//'ยกเลิกการสมัคร',
 				'data' => 'datetimepicker=no'
 			];
