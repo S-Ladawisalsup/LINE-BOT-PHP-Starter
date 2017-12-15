@@ -44,7 +44,6 @@ if (!is_null($events['events'])) {
 							else {
 								$messages = BotReplyText($tx);
 							}
-							
 						}
 						break;
 					case 'allow':
@@ -304,6 +303,10 @@ if (!is_null($events['events'])) {
 	    				'stickerId' => $sticker['stickerId']
 					];
 				}
+			}
+
+			else if ($event['message']['type'] == 'postback') {
+				$messages = BotReplyText($event['message']['postback']['data']);
 			}
 
 			// Get replyToken
