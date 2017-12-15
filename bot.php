@@ -305,7 +305,7 @@ if (!is_null($events['events'])) {
 				}
 			}
 
-			else if ($event['message']['type'] == 'postback') {
+			else {
 				$messages = BotReplyText('1234567890');
 			}
 
