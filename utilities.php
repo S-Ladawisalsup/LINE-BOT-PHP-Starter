@@ -1083,7 +1083,7 @@ function ConfirmationsMsg($stack, $userId) {
 			$actions_t = [
 				'type' => 'postback',
 				'label' => 'ยกเลิกการสมัคร',
-				'data' => 'datetimepicker=no'
+				'data' => 'ยกเลิก'
 			];
 			$actions = array($actions_d, $actions_t);
 			$template = [
