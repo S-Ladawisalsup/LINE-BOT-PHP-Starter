@@ -1074,15 +1074,15 @@ function ConfirmationsMsg($stack, $userId) {
 			];
 			break;
 		case '4':
-			$maxdate = date('Y-m-d');
+			$maxdate = date("Y-m-d");
 			$mindate = date("Y-m-d", strtotime("-150 Years"));
 			$actions_d = [
 				'type' => 'datetimepicker',
 				'label' => 'เลือกวันที่',
 				'data' => 'datetimepicker=ok',
-				'mode' => 'date',
-				'max' => $maxdate,
-				'min' => $mindate
+				'mode' => 'date'//,
+				// 'max' => $maxdate,
+				// 'min' => $mindate
 			];
 			$actions_t = [
 				'type' => 'postback',
@@ -1096,8 +1096,8 @@ function ConfirmationsMsg($stack, $userId) {
 				'imageAspectRatio' => 'rectangle',
 				'imageSize' => 'cover',
 				'imageBackgroundColor' => '#FFFFFF',
-				'title' => 'กรุณาระบุวันเกิด',
-				'text' => 'พี่สุดน่ารักเกิดวันที่?',
+				'title' => $maxdate,//'กรุณาระบุวันเกิด',
+				'text' => $mindate,//'พี่สุดน่ารักเกิดวันที่?',
 				'actions' => $actions
 			];
 			$messages = [						
