@@ -1013,19 +1013,6 @@ function ConfirmationsMsg($stack, $userId) {
 		'label' => 'ยกเลิก',
 		'text' => 'ยกเลิก'
 	];
-
-	$actions_m = [
-		'type' => 'message',
-		'label' => 'ชาย',
-		'text' => 'ชาย'
-	];
-
-	$actions_f = [
-		'type' => 'message',
-		'label' => 'หญิง',
-		'text' => 'หญิง'
-	];
-
 	
 	$msg = '';
 	switch ($stack) {
@@ -1050,6 +1037,16 @@ function ConfirmationsMsg($stack, $userId) {
 			];
 			break;
 		case '2':
+			$actions_m = [
+				'type' => 'message',
+				'label' => 'ชาย',
+				'text' => 'ชาย'
+			];
+			$actions_f = [
+				'type' => 'message',
+				'label' => 'หญิง',
+				'text' => 'หญิง'
+			];
 			$actions = array($actions_m, $actions_f);
 			$msg = "ชื่อไลน์ของพี่" . $userId['name'] . 'คือ' .  $userId['linename'] . "\nกรุณาระบุเพศด้วยจ้า";
 			$template = [
@@ -1069,6 +1066,31 @@ function ConfirmationsMsg($stack, $userId) {
 			$template = [
 				'type' => 'confirm',
 				'text' => $msg,
+				'actions' => $actions
+			];
+			$messages = [						
+				'type' => 'template',
+				'altText' => 'this is an template message',
+				'template' => $template
+			];
+			break;
+		case '4':
+			$actions_d = [
+				'type' => 'datetimepicker',
+				'label' => 'ok',
+				'data' => 'datetimepicker=ok',
+				'mode' => 'date'
+			];
+			$actions_t = [
+				'type' => 'postback',
+				'label' => 'no',
+				'text' => 'datetimepicker=no'
+			];
+			$actions = array($actions_d, $actions_t);
+			$template = [
+				'type' => 'buttons',
+				'title' => 'event scedule',
+				'text' => 'select date',
 				'actions' => $actions
 			];
 			$messages = [						

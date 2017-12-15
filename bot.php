@@ -154,7 +154,7 @@ if (!is_null($events['events'])) {
 									// Test case to insert data to postgresql database.
 									if (strpos($text, 'testmsgbyball') !== false) {
 										//InsertDataToDB();
-										$messages = ConfirmationsMsg(1, $event['source'][$event['source']['type'] . 'Id']);
+										$messages = ConfirmationsMsg(4, $event['source'][$event['source']['type'] . 'Id']);
 									}
 									//--------------------------------------------------------
 									else if (strpos($text, 'เปิดโหมดลงทะเบียนเข้าใช้งาน') !== false) {
