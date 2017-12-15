@@ -306,7 +306,15 @@ if (!is_null($events['events'])) {
 			}
 		}
 		else if ($event['type'] == 'postback') {
-			$messages = BotReplyText($event['postback']['data'] . "\n" . $event['postback']['params']['date']);
+			if ($event['postback']['data'] == 'datetimepicker=ok') {
+				$messages = RegisterMode($event['postback']['params']['date'], $event['source']['userId'], $event['source']['type']);
+			}
+			else if ($event['postback']['data'] == 'ยกเลิก') {
+				$messages = BotReplyText('เสียใจจัง แต่ไม่เป็นไร ไว้มาสมัครใหม่ทีหลังก็ได้นะ');
+			}
+			else {
+				$messages = BotReplyText('ว่างหรอ');
+			}
 		}
 
 		if (isset($messages)) {
