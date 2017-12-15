@@ -1036,18 +1036,13 @@ function ConfirmationsMsg($stack) {
 		case '2':
 			$message_3 = [						
 				'type' => 'text',
-				'text' => 'ข้อความที่ 1'
+				'text' => 'this is message 1'
 			];
 			$message_4 = [						
 				'type' => 'text',
-				'text' => 'ข้อความที่ 2'
+				'text' => 'this is message 2'
 			];
-			$message = array($message_3, $message_4);
-			$post = json_encode($message);
-			$messages = [						
-				'type' => 'text',
-				'text' => $post
-			];
+			$messages = array($message_3, $message_4);
 			break;
 		default:
 			$messages = [						
