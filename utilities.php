@@ -1074,11 +1074,13 @@ function ConfirmationsMsg($stack, $userId) {
 			];
 			break;
 		case '4':
+			//$maxdate = date('Y-m-d');
+			//$mindate = date("Y-m-d", strtotime("-150 Years"));
 			$actions_d = [
 				'type' => 'datetimepicker',
 				'label' => 'เลือกวันที่',
 				'data' => 'datetimepicker=ok',
-				'mode' => 'date',
+				'mode' => 'date'//,
 				// 'max' => date('Y-m-d'),
 				// 'min' => date("Y-m-d", strtotime("-150 Years"))
 			];
