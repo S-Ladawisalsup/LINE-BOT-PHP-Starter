@@ -1074,21 +1074,16 @@ function ConfirmationsMsg($stack, $userId) {
 			];
 			break;
 		case '4':
-			$maxdate = date("Y-m-d");
-			$mindate = date("Y-m-d", strtotime("-150 Years"));
 			$actions_d = [
 				'type' => 'datetimepicker',
 				'label' => 'เลือกวันที่',
-				'data' => 'datestring',//'datetimepicker=ok',
-				'mode' => 'date'//,
-				// 'initial' => $maxdate,
-				// 'max' => $maxdate,
-				// 'min' => $mindate
+				'data' => 'datetimepicker=ok',
+				'mode' => 'date'
 			];
 			$actions_t = [
-				'type' => 'message',//'postback',
+				'type' => 'postback',
 				'label' => 'ยกเลิกการสมัคร',
-				'data' => 'no'//'datetimepicker=no'
+				'data' => 'datetimepicker=no'
 			];
 			$actions = array($actions_d, $actions_t);
 			$template = [
