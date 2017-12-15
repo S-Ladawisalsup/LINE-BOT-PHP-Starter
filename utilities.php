@@ -1004,10 +1004,12 @@ function PostbackDate($replyToken) {
 		'text' => 'no'
 	];
 
+	$actions = array($actions_y, $actions_n);
+
 	$template = [
 		'type' => 'confirm',
 		'text' => 'test',
-		'actions' => $actions_y . $actions_n
+		'actions' => $actions
 	];
 
 	$messages = [						

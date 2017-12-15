@@ -12,7 +12,8 @@ foreach ($ggezwp as $key) {
 	echo '<td style="border: 1px solid black; border-collapse: collapse;">' . $key['type'] . '</td></tr>';
 }		
 echo '</tbody></table><br />';
-
+/**********************************************************************************************************************************/
+/**********************************************************************************************************************************/
 function QuestionWordFromDBTB() {
 	$dsn = 'pgsql:'
 		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
@@ -26,7 +27,7 @@ function QuestionWordFromDBTB() {
 
 	$t = 'text';
 
-	$query = "SELECT questiontext, questiontype FROM tbhlinebotwmode WHERE questiontype = '2'";
+	$query = "SELECT questiontext, questiontype FROM tbhlinebotwmode WHERE questiontype = '3'";
 	//$query = "SELECT $t, type FROM tbhlinebotans";// WHERE type = '14'";
 	$result = $db->query($query);
 
