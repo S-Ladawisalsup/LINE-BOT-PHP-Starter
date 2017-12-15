@@ -1092,7 +1092,7 @@ function ConfirmationsMsg($stack, $userId) {
 			$actions = array($actions_d, $actions_t);
 			$template = [
 				'type' => 'buttons',
-				'thumbnailImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/tenor.gif',//'https://cryptic-harbor-32168.herokuapp.com/images/bdckiki.jpg',
+				'thumbnailImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/bdckiki.jpg',
 				'imageAspectRatio' => 'rectangle',
 				'imageSize' => 'cover',
 				'imageBackgroundColor' => '#FFFFFF',
