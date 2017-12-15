@@ -1013,6 +1013,7 @@ function ConfirmationsMsg($stack) {
 			foreach ($policies as $policy) {
 				$msg .= $policy;
 			}
+			$msg = 'เทสจ้า';
 			break;
 		default:
 			$error = true;
