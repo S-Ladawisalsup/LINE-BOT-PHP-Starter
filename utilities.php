@@ -1078,9 +1078,9 @@ function ConfirmationsMsg($stack, $userId) {
 				'type' => 'datetimepicker',
 				'label' => 'เลือกวันที่',
 				'data' => 'datetimepicker=ok',
-				'mode' => 'date'//,
-				// 'max' => date('Y-m-d'),
-				// 'min' => date("Y-m-d", strtotime("-150 Years"))
+				'mode' => 'date',
+				'max' => date('Y-m-d'),
+				'min' => date("Y-m-d", strtotime("-150 Years"))
 			];
 			$actions_t = [
 				'type' => 'postback',
