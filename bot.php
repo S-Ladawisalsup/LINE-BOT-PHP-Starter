@@ -306,7 +306,7 @@ if (!is_null($events['events'])) {
 			}
 
 			else if ($event['message']['type'] == 'postback') {
-				$messages = BotReplyText($event['message']['postback']['data']);
+				$messages = BotReplyText('1234567890');
 			}
 
 			// Get replyToken
