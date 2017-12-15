@@ -1021,7 +1021,7 @@ function ConfirmationsMsg($stack) {
 				'actions' => $actions
 			];
 
-			$messages = [						
+			$message_1 = [						
 				'type' => 'text',
 				'text' => $tx
 			];
@@ -1031,6 +1031,18 @@ function ConfirmationsMsg($stack) {
 				'altText' => 'this is an template message',
 				'template' => $template
 			];
+			$messages = array($message_1, $message_2);
+			break;
+		case '2':
+			$message_3 = [						
+				'type' => 'text',
+				'text' => 'ข้อความที่ 1'
+			];
+			$message_4 = [						
+				'type' => 'text',
+				'text' => 'ข้อความที่ 2'
+			];
+			$messages = array($message_3, $message_4);
 			break;
 		default:
 			$messages = [						
