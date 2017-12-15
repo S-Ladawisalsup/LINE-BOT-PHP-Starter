@@ -991,52 +991,55 @@ function StandardBotPush($userId, $text) {
 	echo $result . "\r\n";
 }
 /**********************************************************************************************************************************/
-function PostbackDate($replyToken) {
+function ConfirmationsMsg($stack) {
 	$actions_y = [
 		'type' => 'message',
-		'label' => 'yes',
-		'text' => 'yes'
+		'label' => 'ยืนยัน',
+		'text' => 'ยืนยัน'
 	];
 
 	$actions_n = [
 		'type' => 'message',
-		'label' => 'no',
-		'text' => 'no'
+		'label' => 'ยกเลิก',
+		'text' => 'ยกเลิก'
 	];
 
 	$actions = array($actions_y, $actions_n);
+	$msg = '';
+	$error = false;
+	switch ($stack) {
+		case '1':
+			$policies = file('text/policy.txt');
+			foreach ($policies as $policy) {
+				$msg .= $policy;
+			}
+			break;
+		default:
+			$error = true;
+			break;
+	}
 
-	$template = [
-		'type' => 'confirm',
-		'text' => 'test',
-		'actions' => $actions
-	];
+	if ($error) {
+		$messages = [						
+			'type' => 'text',
+			'text' => 'เกิดข้อผิดพลาด กรุณาลองใหม่ภายหลังหรือแจ้งผู้จัดทำไลน์แชทบอทด้วยจ้า'
+		];
+	}
+	else {
+		$template = [
+			'type' => 'confirm',
+			'text' => $msg,
+			'actions' => $actions
+		];
 
-	$messages = [						
-		'type' => 'template',
-		'altText' => 'this is an template message',
-		'template' => $template
-	]; 
-
-	// Make a POST Request to Messaging API to reply to sender
-	$url = 'https://api.line.me/v2/bot/message/reply';
-	$data = [
-		'replyToken' => $replyToken,
-		'messages' => [$messages],
-	];
-	$post = json_encode($data);
-	$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $GLOBALS['access_token']);
-
-	$ch = curl_init($url);
-	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
-	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-	$result = curl_exec($ch);
-	curl_close($ch);
-
-	echo $result . "\r\n";
+		$messages = [						
+			'type' => 'template',
+			'altText' => 'this is an template message',
+			'template' => $template
+		];
+	}
+	 
+	return $messages;
 }
 /**********************************************************************************************************************************/
 //Function to insert data to postgresql database to easier than insert data to database by terminal

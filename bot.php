@@ -183,7 +183,7 @@ if (!is_null($events['events'])) {
 									// Test case to insert data to postgresql database.
 									if (strpos($text, 'testmsgbyball') !== false) {
 										//InsertDataToDB();
-										PostbackDate($event['replyToken']);
+										$messages = ConfirmationsMsg(1);
 									}
 									//--------------------------------------------------------
 									else if (strpos($text, 'เปิดโหมดลงทะเบียนเข้าใช้งาน') !== false) {
@@ -329,15 +329,7 @@ if (!is_null($events['events'])) {
 								}
 								else if ((strpos($text, 'เปิดโหมดลงทะเบียนเข้าใช้งาน') !== false)) {
 									SetRegisterSeq($event['source'][$event['source']['type'] . 'Id']);
-									$policies = file('text/policy.txt');
-									$tx = '';
-									foreach ($policies as $policy) {
-										$tx .= $policy;
-									}
-									$messages = [						
-										'type' => 'text',
-										'text' => $tx
-									]; 
+									$messages = ConfirmationsMsg(1);
 								}
 								else if ((strpos($text, 'ขอบคุณ') !== false) || (strpos($text, 'ขอบใจ') !== false) || 
 										 (strpos(strtolower($text), 'thank') !== false) || (strpos(strtolower($text), 'thx') !== false) || 
