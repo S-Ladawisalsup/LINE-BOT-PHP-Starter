@@ -1014,7 +1014,6 @@ function ConfirmationsMsg($stack, $userId) {
 		'text' => 'ยกเลิก'
 	];
 	
-	$msg = '';
 	switch ($stack) {
 		case '1':
 			$tx = '';
@@ -1084,7 +1083,7 @@ function ConfirmationsMsg($stack, $userId) {
 			$actions_t = [
 				'type' => 'postback',
 				'label' => 'no',
-				'text' => 'datetimepicker=no'
+				'data' => 'datetimepicker=no'
 			];
 			$actions = array($actions_d, $actions_t);
 			$template = [
