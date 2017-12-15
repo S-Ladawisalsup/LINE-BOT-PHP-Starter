@@ -992,16 +992,22 @@ function StandardBotPush($userId, $text) {
 }
 /**********************************************************************************************************************************/
 function PostbackDate($replyToken) {
-	$actions = [
+	$actions_y = [
 		'type' => 'message',
 		'label' => 'yes',
 		'text' => 'yes'
 	];
 
+	$actions_n = [
+		'type' => 'message',
+		'label' => 'no',
+		'text' => 'no'
+	];
+
 	$template = [
 		'type' => 'confirm',
 		'text' => 'test',
-		'actions' => $actions
+		'actions' => $actions_y . $actions_n
 	];
 
 	$messages = [						
