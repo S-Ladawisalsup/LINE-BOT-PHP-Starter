@@ -1022,6 +1022,11 @@ function ConfirmationsMsg($stack) {
 			];
 
 			$messages = [						
+				'type' => 'text',
+				'text' => $tx
+			];
+
+			$message_2 = [						
 				'type' => 'template',
 				'altText' => 'this is an template message',
 				'template' => $template
