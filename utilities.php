@@ -1021,23 +1021,20 @@ function ConfirmationsMsg($stack) {
 				'actions' => $actions
 			];
 
-			$message_1 = [						
-				'type' => 'text',
-				'text' => $tx
-			];
-
-			$message_2 = [						
+			$messages = [						
 				'type' => 'template',
 				'altText' => 'this is an template message',
 				'template' => $template
 			];
-			return array($message_1, $message_2);
+			break;
 		default:
 			$messages = [						
 				'type' => 'text',
 				'text' => 'เกิดข้อผิดพลาด กรุณาลองใหม่ภายหลังหรือแจ้งผู้จัดทำไลน์แชทบอทด้วยจ้า'
 			];
-			return $messages;
+			break;
+
+		return $messages;
 	}
 }
 /**********************************************************************************************************************************/
