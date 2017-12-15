@@ -1078,16 +1078,16 @@ function ConfirmationsMsg($stack, $userId) {
 				'type' => 'datetimepicker',
 				'label' => 'เลือกวันที่',
 				'data' => 'datetimepicker=ok',
-				'mode' => 'date',
-				'max' => date('Y-m-d'),
-				'min' => date("Y-m-d", strtotime("-150 Years"))
+				'mode' => 'date'//,
+				// 'max' => date('Y-m-d'),
+				// 'min' => date("Y-m-d", strtotime("-150 Years"))
 			];
 			$template = [
 				'type' => 'buttons',
-				'thumbnailImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/bdckiki.jpg',
-				'imageAspectRatio' => 'rectangle',
-				'imageSize' => 'cover',
-				'imageBackgroundColor' => '#FFFFFF',
+				//'thumbnailImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/bdckiki.jpg',
+				//'imageAspectRatio' => 'rectangle',
+				//'imageSize' => 'cover',
+				//'imageBackgroundColor' => '#FFFFFF',
 				'title' => 'กรุณาระบุวันเกิด',
 				'text' => 'พี่สุดน่ารักเกิดวันที่?',
 				'actions' => $actions
