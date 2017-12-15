@@ -1014,7 +1014,6 @@ function ConfirmationsMsg($stack) {
 				$tx .= $policy;
 			}
 			$msg = 'ท่านได้รับทราบข้อตกลงและยืนยันที่จะขอเข้าใช้งานไลน์แชทบอทอย่างเต็มรูปแบบแล้วใช่หรือไม่?';
-			$msg = 'เทสอีกสักครั้ง';
 
 			$template = [
 				'type' => 'confirm',
@@ -1034,9 +1033,8 @@ function ConfirmationsMsg($stack) {
 				'text' => 'เกิดข้อผิดพลาด กรุณาลองใหม่ภายหลังหรือแจ้งผู้จัดทำไลน์แชทบอทด้วยจ้า'
 			];
 			break;
-
-		return $messages;
 	}
+	return $messages;
 }
 /**********************************************************************************************************************************/
 //Function to insert data to postgresql database to easier than insert data to database by terminal
