@@ -1085,7 +1085,7 @@ function ConfirmationsMsg($stack, $userId) {
 			$actions_t = [
 				'type' => 'datetimepicker',
 				'label' => 'no',//'ยกเลิกการสมัคร',
-				'data' => 'datetimepicker=no',
+				'data' => 'datetimepicker=no'
 			];
 			$actions = array($actions_d, $actions_t);
 			$template = [
