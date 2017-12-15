@@ -1079,16 +1079,16 @@ function ConfirmationsMsg($stack, $userId) {
 			$actions_d = [
 				'type' => 'datetimepicker',
 				'label' => 'เลือกวันที่',
-				'data' => 'datetimepicker=ok',
-				'mode' => 'date',
-				'initial' => $maxdate,
-				'max' => $maxdate,
-				'min' => $mindate
+				'data' => 'datestring',//'datetimepicker=ok',
+				'mode' => 'date'//,
+				// 'initial' => $maxdate,
+				// 'max' => $maxdate,
+				// 'min' => $mindate
 			];
 			$actions_t = [
-				'type' => 'postback',
+				'type' => 'message',//'postback',
 				'label' => 'ยกเลิกการสมัคร',
-				'data' => 'datetimepicker=no'
+				'data' => 'no'//'datetimepicker=no'
 			];
 			$actions = array($actions_d, $actions_t);
 			$template = [
