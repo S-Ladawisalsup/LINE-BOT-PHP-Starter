@@ -1006,41 +1006,39 @@ function ConfirmationsMsg($stack) {
 
 	$actions = array($actions_y, $actions_n);
 	$msg = '';
-	$error = false;
 	switch ($stack) {
 		case '1':
+			$tx = '';
 			$policies = file('text/policy.txt');
 			foreach ($policies as $policy) {
-				$msg .= $policy;
+				$tx .= $policy;
 			}
-			$msg = 'เทสจ้า';
-			break;
+			$msg = 'ท่านได้รับทราบข้อตกลงและยืนยันที่จะขอเข้าใช้งานไลน์แชทบอทอย่างเต็มรูปแบบแล้วใช่หรือไม่?';
+
+			$template = [
+				'type' => 'confirm',
+				'text' => $msg,
+				'actions' => $actions
+			];
+
+			$message_1 = [						
+				'type' => 'text',
+				'text' => $tx
+			];
+
+			$message_2 = [						
+				'type' => 'template',
+				'altText' => 'this is an template message',
+				'template' => $template
+			];
+			return array($message_1, $message_2);
 		default:
-			$error = true;
-			break;
+			$messages = [						
+				'type' => 'text',
+				'text' => 'เกิดข้อผิดพลาด กรุณาลองใหม่ภายหลังหรือแจ้งผู้จัดทำไลน์แชทบอทด้วยจ้า'
+			];
+			return $messages;
 	}
-
-	if ($error) {
-		$messages = [						
-			'type' => 'text',
-			'text' => 'เกิดข้อผิดพลาด กรุณาลองใหม่ภายหลังหรือแจ้งผู้จัดทำไลน์แชทบอทด้วยจ้า'
-		];
-	}
-	else {
-		$template = [
-			'type' => 'confirm',
-			'text' => $msg,
-			'actions' => $actions
-		];
-
-		$messages = [						
-			'type' => 'template',
-			'altText' => 'this is an template message',
-			'template' => $template
-		];
-	}
-	 
-	return $messages;
 }
 /**********************************************************************************************************************************/
 //Function to insert data to postgresql database to easier than insert data to database by terminal
