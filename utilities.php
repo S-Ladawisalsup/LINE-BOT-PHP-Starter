@@ -1043,7 +1043,7 @@ function ConfirmationsMsg($stack) {
 				'text' => 'ข้อความที่ 2'
 			];
 			$message = array($message_3, $message_4);
-			$post = json_encode($$message);
+			$post = json_encode($message);
 			$messages = [						
 				'type' => 'text',
 				'text' => $post
