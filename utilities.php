@@ -1077,7 +1077,7 @@ function ConfirmationsMsg($stack, $userId) {
 			$actions_d = [
 				'type' => 'datetimepicker',
 				'label' => 'เลือกวันที่',
-				'data' => 'datetimepicker=ok',
+				'data' => 'datetimepicker=เลือกวันที่',
 				'mode' => 'date'//,
 				// 'max' => date('Y-m-d'),
 				// 'min' => date("Y-m-d", strtotime("-150 Years"))
@@ -1085,7 +1085,7 @@ function ConfirmationsMsg($stack, $userId) {
 			$actions_t = [
 				'type' => 'datetimepicker',
 				'label' => 'ยกเลิกการสมัคร',
-				'data' => 'datetimepicker=no',
+				'data' => 'datetimepicker=ยกเลิกการสมัคร',
 			];
 			$actions = array($actions_d, $actions_t);
 			$template = [
