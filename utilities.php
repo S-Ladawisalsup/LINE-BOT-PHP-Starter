@@ -1076,7 +1076,7 @@ function ConfirmationsMsg($stack, $userId) {
 		case '4':
 			$actions_d = [
 				'type' => 'datetimepicker',
-				'label' => 'ok',//'เลือกวันที่',
+				'label' => 'เลือกวันที่',
 				'data' => 'datetimepicker=ok',
 				'mode' => 'date'//,
 				// 'max' => date('Y-m-d'),
@@ -1084,7 +1084,7 @@ function ConfirmationsMsg($stack, $userId) {
 			];
 			$actions_t = [
 				'type' => 'postback',
-				'label' => 'no',//'ยกเลิกการสมัคร',
+				'label' => 'ยกเลิกการสมัคร',
 				'data' => 'datetimepicker=no'
 			];
 			$actions = array($actions_d, $actions_t);
