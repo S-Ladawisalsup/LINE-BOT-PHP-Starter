@@ -1074,7 +1074,7 @@ function ConfirmationsMsg($stack, $userId) {
 			];
 			break;
 		case '4':
-			$actions = [
+			$actions_d = [
 				'type' => 'datetimepicker',
 				'label' => 'เลือกวันที่',
 				'data' => 'datetimepicker=ok',
@@ -1082,6 +1082,12 @@ function ConfirmationsMsg($stack, $userId) {
 				// 'max' => date('Y-m-d'),
 				// 'min' => date("Y-m-d", strtotime("-150 Years"))
 			];
+			$actions_t = [
+				'type' => 'datetimepicker',
+				'label' => 'ยกเลิกการสมัคร',
+				'data' => 'datetimepicker=no',
+			];
+			$actions = array($actions_d, $actions_t);
 			$template = [
 				'type' => 'buttons',
 				//'thumbnailImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/bdckiki.jpg',
