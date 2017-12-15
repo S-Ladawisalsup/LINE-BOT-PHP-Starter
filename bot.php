@@ -306,7 +306,7 @@ if (!is_null($events['events'])) {
 			}
 		}
 		else if ($event['type'] == 'postback') {
-			$messages = BotReplyText($event['postback']['data'] . "\n" . $event['postback']['param']);
+			$messages = BotReplyText($event['postback']['data'] . "\n" . $event['postback']['params']['date']);
 		}
 
 		if (isset($messages)) {
