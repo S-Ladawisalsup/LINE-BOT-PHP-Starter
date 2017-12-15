@@ -1074,22 +1074,22 @@ function ConfirmationsMsg($stack, $userId) {
 			];
 			break;
 		case '4':
-			$actions_d = [
+			$actions = [
 				'type' => 'datetimepicker',
-				'label' => 'ok',
+				'label' => 'เลือกวันที่',
 				'data' => 'datetimepicker=ok',
-				'mode' => 'date'
+				'mode' => 'date',
+				'max' => date('Y-m-d'),
+				'min' => date("Y-m-d", strtotime("-150 Years"))
 			];
-			$actions_t = [
-				'type' => 'postback',
-				'label' => 'no',
-				'data' => 'datetimepicker=no'
-			];
-			$actions = array($actions_d, $actions_t);
 			$template = [
 				'type' => 'buttons',
-				'title' => 'event scedule',
-				'text' => 'select date',
+				'thumbnailImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/bdckiki.jpg',
+				'imageAspectRatio' => 'rectangle',
+				'imageSize' => 'cover',
+				'imageBackgroundColor' => '#FFFFFF',
+				'title' => 'กรุณาระบุวันเกิด',
+				'text' => 'พี่สุดน่ารักเกิดวันที่?',
 				'actions' => $actions
 			];
 			$messages = [						
