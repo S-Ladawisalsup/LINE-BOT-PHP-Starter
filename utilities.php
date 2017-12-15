@@ -991,7 +991,7 @@ function StandardBotPush($userId, $text) {
 	echo $result . "\r\n";
 }
 /**********************************************************************************************************************************/
-function ConfirmationsMsg($stack) {
+function ConfirmationsMsg($stack, $userId) {
 	$actions_y = [
 		'type' => 'message',
 		'label' => 'ยืนยัน',
@@ -1013,6 +1013,8 @@ function ConfirmationsMsg($stack) {
 			foreach ($policies as $policy) {
 				$tx .= $policy;
 			}
+			StandardBotPush($userId, $tx);
+
 			$msg = 'ท่านได้รับทราบข้อตกลงและยืนยันที่จะขอเข้าใช้งานไลน์แชทบอทอย่างเต็มรูปแบบแล้วใช่หรือไม่?';
 
 			$template = [
@@ -1021,28 +1023,11 @@ function ConfirmationsMsg($stack) {
 				'actions' => $actions
 			];
 
-			$message_1 = [						
-				'type' => 'text',
-				'text' => $tx
-			];
-
-			$message_2 = [						
+			$messages = [						
 				'type' => 'template',
 				'altText' => 'this is an template message',
 				'template' => $template
 			];
-			$messages = array($message_1, $message_2);
-			break;
-		case '2':
-			$message_3 = [						
-				'type' => 'text',
-				'text' => 'this is message 1'
-			];
-			$message_4 = [						
-				'type' => 'text',
-				'text' => 'this is message 2'
-			];
-			$messages = array($message_3, $message_4);
 			break;
 		default:
 			$messages = [						
