@@ -37,7 +37,14 @@ if (!is_null($events['events'])) {
 							else {
 								$text = $event['message']['text'];
 							}
-							$messages = BotReplyText(RegisterMode($text, $event['source'][$event['source']['type'] . 'Id'], $event['source']['type']));
+							$tx = RegisterMode($text, $event['source'][$event['source']['type'] . 'Id'], $event['source']['type']);
+							if (is_array($tx)) {
+								$messages = $tx;
+							}
+							else {
+								$messages = BotReplyText($tx);
+							}
+							
 						}
 						break;
 					case 'allow':

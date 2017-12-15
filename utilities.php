@@ -423,9 +423,7 @@ function RegisterMode($text, $userId, $userType) {
 				$error = true;
 				$str = "ว่างหรอ?";
 			}
-			else if ((strpos($text, 'ใช่') !== false) || (strpos(strtolower($text), 'yes') !== false) || 
-					 (strpos(strtolower($text), 'yeah') !== false) || (strpos(strtolower($text), 'sure') !== false) || 
-					 (strpos($text, 'ตกลง') !== false) || (strpos($text, 'ยืนยัน') !== false)) {
+			else if (strpos($text, 'ยืนยัน') !== false) {
 				IsAcceptingMember($userId);
 				$toggle = 2;
 				if ($userType == 'user') {
@@ -441,6 +439,10 @@ function RegisterMode($text, $userId, $userType) {
 					$str = "ขออภัยขณะนี้ระบบลงทะเบียนมีปัญหา ไว้มาลงทะเบียนใหม่ทีหลังน๊ะจ๊ะคนดีดนเก่งของพี่จุ๊บๆ";
 				}
 			}
+			else if (strpos($text, 'ยกเลิก') !== false) { 
+				$error = true;
+				$str = "เสียใจจัง แต่ไม่เป็นไร ไว้มาสมัครใหม่ทีหลังก็ได้นะ";
+			}	
 			else {
 				$error = true;
 				$str = "ว่างหรอ?";
@@ -482,7 +484,7 @@ function RegisterMode($text, $userId, $userType) {
 									   VALUES ('$countable', '$userId', '$text', '$roomgroup', 'member', '$userType');");
 			if ($userType == 'user') {
 				$toggle = 3;
-				$str = "คุณ$text กรุณาระบุชื่อไลน์ของคุณด้วยด้วยจ้า (เช่นของผมคือ @kiki อย่าลืมใส่เครื่องหมาย @ นะ)";
+				$str = "พี่$text กรุณาระบุชื่อไลน์ของคุณด้วยด้วยจ้า (เช่นของผมคือ @kiki อย่าลืมใส่เครื่องหมาย @ นะ)";
 			}
 			else if ($userType == 'group') {
 				$toggle = 6;
@@ -510,8 +512,9 @@ function RegisterMode($text, $userId, $userType) {
 				$result3->closeCursor();
 
 				$results = pg_query($db2, "UPDATE tbhlinebotmem SET linename = '$text' WHERE user_id = '$userId';");
-				$toggle = 4;
-				$str = "ชื่อไลน์ของคุณ" . $name . "คือ $text\nกรุณาระบุเพศด้วยจ้า (ชาย / หญิง)";
+				$result_again = pg_query($db2, "UPDATE tbhlinebotmodchng SET seq = '4' WHERE user_id = '$userId';");
+				$lname = array('linename' => $text, 'name' => $name);
+				return ConfirmationsMsg(2, $lname);
 			}
 			else {
 				$error = true;
@@ -520,15 +523,26 @@ function RegisterMode($text, $userId, $userType) {
 			break;		
 		case '4':
 			# user tell gender
-			if ((strpos($text, 'หญิง') !== false) || (strpos(strtolower($text), 'female') !== false)) {
+			$query4 = "SELECT name FROM tbhlinebotmem WHERE user_id = '$userId'"; 
+			$result4 = $db->query($query4);
+
+			$name = "";
+			while ($row = $result4->fetch(PDO::FETCH_ASSOC)) {
+			    $name = htmlspecialchars($row["name"]);
+			}
+			$result4->closeCursor();
+
+			if (strpos($text, 'หญิง') !== false) {
 				$results = pg_query($db2, "UPDATE tbhlinebotmem SET gender = 'F' WHERE user_id = '$userId';");
 				$toggle = 5;
-				$str = "คุณผู้หญิง กรุณาระบุวันเดือนปีเกิด (ในรูปแบบ dd/mm/yyyy เช่น 01/01/1900) ด้วยจ้า";
+				$name = is_null($name) ? 'สาว' : $name;
+				$str = 'พี่' . $name . "สุดสวย กรุณาระบุวันเดือนปีเกิด (ในรูปแบบ dd/mm/yyyy เช่น 01/01/1900) ด้วยจ้า";
 			}
-			else if ((strpos($text, 'ชาย') !== false) || (strpos(strtolower($text), 'male') !== false)) {
+			else if (strpos($text, 'ชาย') !== false) {
 				$results = pg_query($db2, "UPDATE tbhlinebotmem SET gender = 'M' WHERE user_id = '$userId';");
 				$toggle = 5;
-				$str = "คุณผู้ชาย กรุณาระบุวันเดือนปีเกิด (ในรูปแบบ(ค.ศ.) dd/mm/yyyy เช่น 01/01/1900) ด้วยจ้า";
+				$name = is_null($name) ? 'ชาย' : $name;
+				$str = 'พี่' . $name . "สุดหล่อ กรุณาระบุวันเดือนปีเกิด (ในรูปแบบ(ค.ศ.) dd/mm/yyyy เช่น 01/01/1900) ด้วยจ้า";
 			} 
 			else {
 				$error = true;
@@ -545,8 +559,8 @@ function RegisterMode($text, $userId, $userType) {
 					$results = pg_query($db2, "UPDATE tbhlinebotmem SET date_of_birth = '$bd' WHERE user_id = '$userId';");
 
 					if (checkdate($matches[0][1], $matches[0][0], $matches[0][2])) {
-						$toggle = 6;
-						$str = "คุณเกิดวันที่ $bd2\nยืนยันการลงทะเบียนใช้งาน Line Chat Bot เต็มรูปแบบใช่หรือไม่";
+						$result_again = pg_query($db2, "UPDATE tbhlinebotmodchng SET seq = '6' WHERE user_id = '$userId';");
+						return ConfirmationsMsg(3, $bd2);
 					}
 					else {
 						$error = true;
@@ -570,12 +584,14 @@ function RegisterMode($text, $userId, $userType) {
 				$error = true;
 				$str = "ว่างหรอ?";
 			}
-			else if ((strpos($text, 'ใช่') !== false) || (strpos(strtolower($text), 'yes') !== false) || 
-					 (strpos(strtolower($text), 'yeah') !== false) || (strpos(strtolower($text), 'sure') !== false) || 
-					 (strpos($text, 'ตกลง') !== false) || (strpos($text, 'ยืนยัน') !== false)) {
+			else if (strpos($text, 'ยืนยัน') !== false) {
 				IsAcceptingMember($userId);
 				$toggle = 7;
 				$str = "ขอคิดดูก่อนนะว่าจะรับดีมั้ยน้า แล้วเดี๋ยวจะมาบอกทีหลังนะ";
+			}
+			else if (strpos($text, 'ยกเลิก') !== false) { 
+				$error = true;
+				$str = "เสียใจจัง แต่ไม่เป็นไร ไว้มาสมัครใหม่ทีหลังก็ได้นะ";
 			}
 			else {
 				$error = true;
@@ -998,7 +1014,19 @@ function ConfirmationsMsg($stack, $userId) {
 		'text' => 'ยกเลิก'
 	];
 
-	$actions = array($actions_y, $actions_n);
+	$actions_m = [
+		'type' => 'message',
+		'label' => 'ชาย',
+		'text' => 'ชาย'
+	];
+
+	$actions_f = [
+		'type' => 'message',
+		'label' => 'หญิง',
+		'text' => 'หญิง'
+	];
+
+	
 	$msg = '';
 	switch ($stack) {
 		case '1':
@@ -1008,15 +1036,41 @@ function ConfirmationsMsg($stack, $userId) {
 				$tx .= $policy;
 			}
 			StandardBotPush($userId, $tx);
-
-			$msg = 'ท่านได้รับทราบข้อตกลงและยืนยันที่จะขอเข้าใช้งานไลน์แชทบอทอย่างเต็มรูปแบบแล้วใช่หรือไม่?';
-
+			$actions = array($actions_y, $actions_n);
+			$msg = 'คุณได้รับทราบข้อตกลงและยืนยันที่จะขอเข้าใช้งานไลน์แชทบอทอย่างเต็มรูปแบบแล้วใช่หรือไม่?';
 			$template = [
 				'type' => 'confirm',
 				'text' => $msg,
 				'actions' => $actions
 			];
-
+			$messages = [						
+				'type' => 'template',
+				'altText' => 'this is an template message',
+				'template' => $template
+			];
+			break;
+		case '2':
+			$actions = array($actions_m, $actions_f);
+			$msg = "ชื่อไลน์ของพี่" . $userId['name'] . 'คือ' .  $userId['linename'] . "\nกรุณาระบุเพศด้วยจ้า";
+			$template = [
+				'type' => 'confirm',
+				'text' => $msg,
+				'actions' => $actions
+			];
+			$messages = [						
+				'type' => 'template',
+				'altText' => 'this is an template message',
+				'template' => $template
+			];
+			break;
+		case '3':
+			$actions = array($actions_y, $actions_n);
+			$msg = 'คุณเกิดวันที่' . $userId . "\nยืนยันการลงทะเบียนใช้งาน Line Chat Bot เต็มรูปแบบใช่หรือไม่";
+			$template = [
+				'type' => 'confirm',
+				'text' => $msg,
+				'actions' => $actions
+			];
 			$messages = [						
 				'type' => 'template',
 				'altText' => 'this is an template message',
