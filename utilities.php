@@ -1074,15 +1074,15 @@ function ConfirmationsMsg($stack, $userId) {
 			];
 			break;
 		case '4':
-			//$maxdate = date('Y-m-d');
-			//$mindate = date("Y-m-d", strtotime("-150 Years"));
+			$maxdate = date('Y-m-d');
+			$mindate = date("Y-m-d", strtotime("-150 Years"));
 			$actions_d = [
 				'type' => 'datetimepicker',
 				'label' => 'เลือกวันที่',
 				'data' => 'datetimepicker=ok',
-				'mode' => 'date'//,
-				// 'max' => date('Y-m-d'),
-				// 'min' => date("Y-m-d", strtotime("-150 Years"))
+				'mode' => 'date',
+				'max' => $maxdate,
+				'min' => $mindate
 			];
 			$actions_t = [
 				'type' => 'postback',
@@ -1092,13 +1092,13 @@ function ConfirmationsMsg($stack, $userId) {
 			$actions = array($actions_d, $actions_t);
 			$template = [
 				'type' => 'buttons',
-				'thumbnailImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/bdckiki.jpg',
+				'thumbnailImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/tenor.gif',//'https://cryptic-harbor-32168.herokuapp.com/images/bdckiki.jpg',
 				'imageAspectRatio' => 'rectangle',
 				'imageSize' => 'cover',
 				'imageBackgroundColor' => '#FFFFFF',
 				'title' => 'กรุณาระบุวันเกิด',
 				'text' => 'พี่สุดน่ารักเกิดวันที่?',
-				'actions' => $actions_d
+				'actions' => $actions
 			];
 			$messages = [						
 				'type' => 'template',
