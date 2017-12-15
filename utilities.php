@@ -1080,9 +1080,10 @@ function ConfirmationsMsg($stack, $userId) {
 				'type' => 'datetimepicker',
 				'label' => 'เลือกวันที่',
 				'data' => 'datetimepicker=ok',
-				'mode' => 'date'//,
-				// 'max' => $maxdate,
-				// 'min' => $mindate
+				'mode' => 'date',
+				'initial' => $maxdate,
+				'max' => $maxdate,
+				'min' => $mindate
 			];
 			$actions_t = [
 				'type' => 'postback',
@@ -1096,8 +1097,8 @@ function ConfirmationsMsg($stack, $userId) {
 				'imageAspectRatio' => 'rectangle',
 				'imageSize' => 'cover',
 				'imageBackgroundColor' => '#FFFFFF',
-				'title' => $maxdate,//'กรุณาระบุวันเกิด',
-				'text' => $mindate,//'พี่สุดน่ารักเกิดวันที่?',
+				'title' => 'กรุณาระบุวันเกิด',
+				'text' => 'พี่สุดน่ารักเกิดวันที่?',
 				'actions' => $actions
 			];
 			$messages = [						
