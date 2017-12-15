@@ -1076,16 +1076,16 @@ function ConfirmationsMsg($stack, $userId) {
 		case '4':
 			$actions_d = [
 				'type' => 'datetimepicker',
-				'label' => 'เลือกวันที่',
-				'data' => 'datetimepicker=เลือกวันที่',
+				'label' => 'ok',//'เลือกวันที่',
+				'data' => 'datetimepicker=ok',
 				'mode' => 'date'//,
 				// 'max' => date('Y-m-d'),
 				// 'min' => date("Y-m-d", strtotime("-150 Years"))
 			];
 			$actions_t = [
 				'type' => 'datetimepicker',
-				'label' => 'ยกเลิกการสมัคร',
-				'data' => 'datetimepicker=ยกเลิกการสมัคร',
+				'label' => 'no',//'ยกเลิกการสมัคร',
+				'data' => 'datetimepicker=no',
 			];
 			$actions = array($actions_d, $actions_t);
 			$template = [
