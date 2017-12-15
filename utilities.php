@@ -1090,10 +1090,10 @@ function ConfirmationsMsg($stack, $userId) {
 			$actions = array($actions_d, $actions_t);
 			$template = [
 				'type' => 'buttons',
-				//'thumbnailImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/bdckiki.jpg',
-				//'imageAspectRatio' => 'rectangle',
-				//'imageSize' => 'cover',
-				//'imageBackgroundColor' => '#FFFFFF',
+				'thumbnailImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/bdckiki.jpg',
+				'imageAspectRatio' => 'rectangle',
+				'imageSize' => 'cover',
+				'imageBackgroundColor' => '#FFFFFF',
 				'title' => 'กรุณาระบุวันเกิด',
 				'text' => 'พี่สุดน่ารักเกิดวันที่?',
 				'actions' => $actions
