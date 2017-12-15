@@ -1079,8 +1079,8 @@ function ConfirmationsMsg($stack, $userId) {
 				'label' => 'เลือกวันที่',
 				'data' => 'datetimepicker=ok',
 				'mode' => 'date',
-				'max' => date('Y-m-d'),
-				'min' => date("Y-m-d", strtotime("-150 Years"))
+				// 'max' => date('Y-m-d'),
+				// 'min' => date("Y-m-d", strtotime("-150 Years"))
 			];
 			$actions_t = [
 				'type' => 'postback',
@@ -1096,7 +1096,7 @@ function ConfirmationsMsg($stack, $userId) {
 				'imageBackgroundColor' => '#FFFFFF',
 				'title' => 'กรุณาระบุวันเกิด',
 				'text' => 'พี่สุดน่ารักเกิดวันที่?',
-				'actions' => $actions
+				'actions' => $actions_d
 			];
 			$messages = [						
 				'type' => 'template',
