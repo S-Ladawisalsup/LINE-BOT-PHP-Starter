@@ -183,15 +183,7 @@ if (!is_null($events['events'])) {
 									// Test case to insert data to postgresql database.
 									if (strpos($text, 'testmsgbyball') !== false) {
 										//InsertDataToDB();
-										$policies = file('text/policy.txt');
-										$tx = '';
-										foreach ($policies as $policy) {
-											$tx .= $policy;
-										}
-										$messages = [						
-											'type' => 'text',
-											'text' => $tx
-										]; 
+										PostbackDate($event['replyToken']);
 									}
 									//--------------------------------------------------------
 									else if (strpos($text, 'เปิดโหมดลงทะเบียนเข้าใช้งาน') !== false) {
