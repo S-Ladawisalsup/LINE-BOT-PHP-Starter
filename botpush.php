@@ -1,4 +1,5 @@
 <?php
+include 'utilities.php';
 date_default_timezone_set("Asia/Bangkok");
 // Get POST body content
 $content = file_get_contents('php://input');
@@ -41,10 +42,7 @@ if (!is_null($_POST['val']) || !is_null($events)) {
 function BotPush($room, $msg) {
 	$access_token = 'CFecc4UnPdpCUxVk2VuTlf7ANCYHbCpaxYltjR/z15zMJ/KzsPIVrp4tCql4xmQYr8qgJSZ6oitEZ0/PKH+FpdneucSfPgjTP03mQ5KRSKqYT93fEEvGDqOUxJ/SBoS3oTXcJaRSxlPVBWxH+8PWxAdB04t89/1O/w1cDnyilFU=';
 
-	$messages = [						
-		'type' => 'text',
-		'text' => $msg
-	];
+	$messages = BotReplyText($msg);
 	
 	// Make a POST Request to Messaging API to push to sender
 	$url = 'https://api.line.me/v2/bot/message/push';

@@ -758,10 +758,7 @@ function ListWaitRegister($userId) {
 }
 /**********************************************************************************************************************************/
 function BotPushAListWaitingUser($adminId, $users) {
-	$messages = [						
-		'type' => 'text',
-		'text' => $users
-	];
+	$messages = BotReplyText($users);
 
 	// Make a POST Request to Messaging API to push to sender
 	$url = 'https://api.line.me/v2/bot/message/push';
@@ -965,10 +962,7 @@ function AlertOthersAdmin($adminId, $IsConfirm, $arrayText) {
 }
 /**********************************************************************************************************************************/
 function StandardBotPush($userId, $text) {
-	$messages = [						
-		'type' => 'text',
-		'text' => $text
-	];
+	$messages = BotReplyText($text);
 
 	// Make a POST Request to Messaging API to push to sender
 	$url = 'https://api.line.me/v2/bot/message/push';
@@ -1030,12 +1024,17 @@ function ConfirmationsMsg($stack, $userId) {
 			];
 			break;
 		default:
-			$messages = [						
-				'type' => 'text',
-				'text' => 'เกิดข้อผิดพลาด กรุณาลองใหม่ภายหลังหรือแจ้งผู้จัดทำไลน์แชทบอทด้วยจ้า'
-			];
+			$messages = BotReplyText('เกิดข้อผิดพลาด กรุณาลองใหม่ภายหลังหรือแจ้งผู้จัดทำไลน์แชทบอทด้วยจ้า');
 			break;
 	}
+	return $messages;
+}
+/**********************************************************************************************************************************/
+function BotReplyText($message) {
+	$messages = [						
+		'type' => 'text',
+		'text' => $message
+	];
 	return $messages;
 }
 /**********************************************************************************************************************************/

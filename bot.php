@@ -37,10 +37,7 @@ if (!is_null($events['events'])) {
 							else {
 								$text = $event['message']['text'];
 							}
-							$messages = [						
-								'type' => 'text',
-								'text' => RegisterMode($text, $event['source'][$event['source']['type'] . 'Id'], $event['source']['type'])
-							];
+							$messages = BotReplyText(RegisterMode($text, $event['source'][$event['source']['type'] . 'Id'], $event['source']['type']));
 						}
 						break;
 					case 'allow':
@@ -70,18 +67,12 @@ if (!is_null($events['events'])) {
 										];
 									}
 									else {
-										$messages = [						
-											'type' => 'text',
-											'text' => AnswerBuilder(10) . IdentifyUser($event['source']['userId']) 
-										];	
+										$messages = BotReplyText(AnswerBuilder(10) . IdentifyUser($event['source']['userId']));
 									}						
 									break;	
 								case '2':
 									# code... When Question => Timer Answer
-									$messages = [						
-										'type' => 'text',
-										'text' => AnswerBuilder(12) . "จ้า " . IdentifyUser($event['source']['userId'])  
-									];
+									$messages = BotReplyText(AnswerBuilder(12) . "จ้า " . IdentifyUser($event['source']['userId']));
 									break;
 								case '3':
 									# code... Where Question => Location Answer
@@ -98,62 +89,38 @@ if (!is_null($events['events'])) {
 									else {
 										$people = IdentifyUser($event['source']['userId']);
 										$people = empty($people)? 'เธอ' : $people;
-										$messages = [						
-											'type' => 'text',
-											'text' => 'ก็อยูในใจของ' . $people . 'ไงละจ้า'
-										];
+										$messages = BotReplyText('ก็อยูในใจของ' . $people . 'ไงละจ้า');
 									}
 									break;
 								case '4':
 									# code... Who Question => Personal Answer
-									$messages = [						
-										'type' => 'text',
-										'text' => AnswerBuilder(11)
-									];
+									$messages = BotReplyText(AnswerBuilder(11));
 									break;
 								case '5':
 									# code... What/How Question => Reason Answer
-									$messages = [						
-										'type' => 'text',
-										'text' => AnswerBuilder(10) . IdentifyUser($event['source']['userId'])
-									];							
+									$messages = BotReplyText(AnswerBuilder(10) . IdentifyUser($event['source']['userId']));							
 									break;
 								case '6':
 									# code... Which Question => Object Answer
-									$messages = [						
-										'type' => 'text',
-										'text' => AnswerBuilder(10) . IdentifyUser($event['source']['userId'])
-									];
+									$messages = BotReplyText(AnswerBuilder(10) . IdentifyUser($event['source']['userId']));	
 									break;
 								case '7':
 									# Number Question (How + ...) => Number Answer
 									if (strpos($text, 'อุณหภูมิ') !== false) {							
-										$messages = [						
-											'type' => 'text',
-											'text' => GetTemperature($text) . IdentifyUser($event['source']['userId'])
-										];	
+										$messages = BotReplyText(GetTemperature($text) . IdentifyUser($event['source']['userId']));	
 									}
-									else {
-										$messages = [						
-											'type' => 'text',
-											'text' => AnswerBuilder(10) . IdentifyUser($event['source']['userId'])
-										];							
+									else {		
+										$messages = BotReplyText(AnswerBuilder(10) . IdentifyUser($event['source']['userId']));					
 									}
 									break;	
 								case '8':
 									# ping mode
 									$protocal = IsAskedServer($text);
 									if ($protocal['IsChecked']) {
-										$messages = [						
-											'type' => 'text',
-											'text' => GetPingAnswer($protocal['ip_addr']) . IdentifyUser($event['source']['userId'])
-										];	
+										$messages = BotReplyText(GetPingAnswer($protocal['ip_addr']) . IdentifyUser($event['source']['userId']));	
 									}
 									else {
-										$messages = [						
-											'type' => 'text',
-											'text' => 'ไม่มีข้อมูลในระบบจ้า อยากรู้ก็ไป ping เองสิจ๊ะ'
-										];	
+										$messages = BotReplyText('ไม่มีข้อมูลในระบบจ้า อยากรู้ก็ไป ping เองสิจ๊ะ');
 									}
 									break;		
 								case '9':
@@ -164,10 +131,7 @@ if (!is_null($events['events'])) {
 									}
 									$person = IdentifyUser($event['source']['userId']);	
 									if (!empty($person)) {
-										$messages = [						
-											'type' => 'text',
-											'text' => $sayhi . IdentifyUser($event['source']['userId']) . " " . AnswerBuilder(13)
-										];
+										$messages = BotReplyText($sayhi . IdentifyUser($event['source']['userId']) . " " . AnswerBuilder(13));
 									}
 									else {
 										$day = strtolower(date("D"));
@@ -188,16 +152,10 @@ if (!is_null($events['events'])) {
 									//--------------------------------------------------------
 									else if (strpos($text, 'เปิดโหมดลงทะเบียนเข้าใช้งาน') !== false) {
 										if ($event['source']['type'] == 'user') {
-											$messages = [						
-												'type' => 'text',
-												'text' => IdentifyUser($event['source']['userId']) . "สามารถใช้งาน Line Chat Bot ได้อย่างเต็มรูปแบบแล้วจ้า"
-											]; 
+											$messages = BotReplyText(IdentifyUser($event['source']['userId']) . "สามารถใช้งาน Line Chat Bot ได้อย่างเต็มรูปแบบแล้วจ้า");
 										}
 										else {
-											$messages = [						
-												'type' => 'text',
-												'text' => "ท่านสามารถใช้งาน Line Chat Bot ได้อย่างเต็มรูปแบบแล้วจ้า"
-											]; 
+											$messages = BotReplyText('ท่านสามารถใช้งาน Line Chat Bot ได้อย่างเต็มรูปแบบแล้วจ้า');
 										}
 									}
 									else if ((strpos($text, 'ขอบคุณ') !== false) || (strpos($text, 'ขอบใจ') !== false) || 
@@ -212,17 +170,11 @@ if (!is_null($events['events'])) {
 										]; 
 									}
 									else if (strpos($text, 'คู่มือ') !== false) {
-										$messages = [						
-											'type' => 'text',
-											'text' => "ที่นี้เลยจ้า\nhttps://cryptic-harbor-32168.herokuapp.com/manual.html"
-										];
+										$messages = BotReplyText("ที่นี้เลยจ้า\nhttps://cryptic-harbor-32168.herokuapp.com/manual.html");
 									}
 									else {
 										// Build message to reply back
-										$messages = [						
-											'type' => 'text',
-											'text' => AnswerBuilder(15)
-										];	
+										$messages = BotReplyText(AnswerBuilder(15));
 									}  
 									break;
 							}
@@ -234,10 +186,7 @@ if (!is_null($events['events'])) {
 						if (((strpos($text, 'ไม่') !== false) || (strpos(strtolower($text), 'no') !== false) || 
 							 (strpos($text, 'ยกเลิก') !== false) || (strpos(strtolower($text), 'cancel') !== false) || 
 							 (strpos($text, 'ปฏิเสธ') !== false) || (strpos(strtolower($text), 'refuse') !== false))) {
-							$messages = [						
-								'type' => 'text',
-								'text' => DeleteIdRow($text, $event['source']['userId'])
-							];
+							$messages = BotReplyText(DeleteIdRow($text, $event['source']['userId']));
 							if (ListWaitRegister($event['source']['userId'])) {
 								ReturnAllowToAdmin();
 							}
@@ -250,10 +199,7 @@ if (!is_null($events['events'])) {
 							 	 (strpos($text, 'แน่นอน') !== false) || (strpos(strtolower($text), 'absolute') !== false) || 
 							 	 (strpos($text, 'คอนเฟิร์ม') !== false) || (strpos($text, 'อนุมัติ') !== false) || 
 							 	 (strpos($text, 'โอเค') !== false) || (strpos(strtolower($text), 'ok') !== false)) {
-							$messages = [						
-								'type' => 'text',
-								'text' => ConfirmRowUserMember($text, $event['source']['userId'])
-							];	
+							$messages = BotReplyText(ConfirmRowUserMember($text, $event['source']['userId']));
 							if (ListWaitRegister($event['source']['userId'])) {
 								ReturnAllowToAdmin();
 							}
@@ -262,16 +208,10 @@ if (!is_null($events['events'])) {
 							ListWaitRegister($event['source']['userId']);
 						}
 						else if (strpos($text, 'ดูข้อมูล') !== false) {
-							$messages = [						
-								'type' => 'text',
-								'text' => ListWaitingUsers($text)
-							];	
+							$messages = BotReplyText(ListWaitingUsers($text));
 						}
 						else {
-							$messages = [						
-								'type' => 'text',
-								'text' => 'ทำเป็นเล่นอยู่นั่น ตอบมาอนุมัติมั้ย'
-							];	
+							$messages = BotReplyText('ทำเป็นเล่นอยู่นั่น ตอบมาอนุมัติมั้ย');
 						}
 						break;		
 					default:
@@ -294,30 +234,18 @@ if (!is_null($events['events'])) {
 								// Check text is question
 								$typing = findQuestionType($text);
 								if ($typing > 0 && $typing < 7) {
-									$messages = [						
-										'type' => 'text',
-										'text' => AnswerBuilder(10)
-									];		
+									$messages = BotReplyText(AnswerBuilder(10));
 								}
 								else if ($typing == 7) {
 									if (strpos($text, 'อุณหภูมิ') !== false) {							
-										$messages = [						
-											'type' => 'text',
-											'text' => 'อยากรู้ก็เดินไปวัดเองสิจ๊ะ'
-										];	
+										$messages = BotReplyText('อยากรู้ก็เดินไปวัดเองสิจ๊ะ');
 									}
 									else {
-										$messages = [						
-											'type' => 'text',
-											'text' => AnswerBuilder(10)
-										];							
+										$messages = BotReplyText(AnswerBuilder(10));						
 									}		
 								}
 								else if ($typing == 8) {
-									$messages = [						
-										'type' => 'text',
-										'text' => 'อยากรู้ก็ไป ping เองสิจ๊ะ'
-									];		
+									$messages = BotReplyText('อยากรู้ก็ไป ping เองสิจ๊ะ');	
 								}
 								else if ($typing == 9) {
 									$day = strtolower(date("D"));
@@ -329,7 +257,7 @@ if (!is_null($events['events'])) {
 								}
 								else if ((strpos($text, 'เปิดโหมดลงทะเบียนเข้าใช้งาน') !== false)) {
 									SetRegisterSeq($event['source'][$event['source']['type'] . 'Id']);
-									$messages = ConfirmationsMsg(1);
+									$messages = ConfirmationsMsg(1, $event['source'][$event['source']['type'] . 'Id']);
 								}
 								else if ((strpos($text, 'ขอบคุณ') !== false) || (strpos($text, 'ขอบใจ') !== false) || 
 										 (strpos(strtolower($text), 'thank') !== false) || (strpos(strtolower($text), 'thx') !== false) || 
@@ -342,16 +270,10 @@ if (!is_null($events['events'])) {
 									]; 
 								}
 								else if (strpos($text, 'คู่มือ') !== false) {
-										$messages = [						
-											'type' => 'text',
-											'text' => "ที่นี้เลยจ้า\nhttps://cryptic-harbor-32168.herokuapp.com/manual.html"
-										];
+										$messages = BotReplyText("ที่นี้เลยจ้า\nhttps://cryptic-harbor-32168.herokuapp.com/manual.html");	
 									}
-								else {
-									$messages = [						
-										'type' => 'text',
-										'text' => AnswerBuilder(15)
-									];	 	
+								else {	 	
+									$messages = BotReplyText(AnswerBuilder(15));	
 								}
 							}			
 						}
