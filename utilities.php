@@ -536,14 +536,14 @@ function RegisterMode($text, $userId, $userType) {
 				$results = pg_query($db2, "UPDATE tbhlinebotmem SET gender = 'F' WHERE user_id = '$userId';");
 				$result_again = pg_query($db2, "UPDATE tbhlinebotmodchng SET seq = '5' WHERE user_id = '$userId';");
 				$name = is_null($name) ? 'สาว' : $name;
-				$name .= 'พี่' . $name . 'สุดสวย';
+				$name = 'พี่' . $name . 'สุดสวย';
 				return ConfirmationsMsg(4, $name);
 			}
 			else if (strpos($text, 'ชาย') !== false) {
 				$results = pg_query($db2, "UPDATE tbhlinebotmem SET gender = 'M' WHERE user_id = '$userId';");
 				$result_again = pg_query($db2, "UPDATE tbhlinebotmodchng SET seq = '5' WHERE user_id = '$userId';");
 				$name = is_null($name) ? 'ชาย' : $name;
-				$name .= 'พี่' . $name . 'สุดหล่อ';
+				$name = 'พี่' . $name . 'สุดหล่อ';
 				return ConfirmationsMsg(4, $name);
 			} 
 			else {
