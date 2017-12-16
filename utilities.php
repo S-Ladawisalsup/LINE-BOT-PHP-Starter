@@ -425,7 +425,6 @@ function RegisterMode($text, $userId, $userType) {
 				$str = "ว่างหรอ?";
 			}
 			else if (strpos($text, 'ยืนยัน') !== false) {
-				IsAcceptingMember($userId);
 				$toggle = 2;
 				if ($userType == 'user') {
 					$str = "กรุณาระบุชื่อที่ให้ใช้เรียก (ชื่อเล่นก็ได้นะ)";
@@ -1002,6 +1001,7 @@ function ConfirmationsMsg($stack, $userId) {
 	];
 	
 	switch ($stack) {
+		//case 1 to 3 is confirmation template
 		case '1':
 			$tx = '';
 			$policies = file('text/policy.txt');
@@ -1061,6 +1061,7 @@ function ConfirmationsMsg($stack, $userId) {
 			];
 			break;
 		case '4':
+			//datetime picker template
 			$actions_d = [
 				'type' => 'datetimepicker',
 				'label' => 'เลือกวันที่',
@@ -1089,6 +1090,35 @@ function ConfirmationsMsg($stack, $userId) {
 				'template' => $template
 			];
 			break;
+		case '5':
+			//multi buttons menu template
+			$actions_m1 = [
+				'type' => 'postback',
+				'label' => 'สมัครเข้าใช้งานเต็มรูปแบบ',
+				'data' => 'เปิดโหมดลงทะเบียนเข้าใช้งาน'
+			];
+			$actions_m2 = [
+				'type' => 'uri',
+				'label' => 'คู่มือการใช้งาน',
+				'uri' => 'https://cryptic-harbor-32168.herokuapp.com/manual.html'
+			];
+			$actions = array($actions_m1, $actions_m2);
+			$template = [
+				'type' => 'buttons',
+				'thumbnailImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/readingmenu.png',
+				'imageAspectRatio' => 'rectangle',
+				'imageSize' => 'cover',
+				'imageBackgroundColor' => '#FFFFFF',
+				'title' => 'เมนูการใช้งาน',
+				'text' => 'กรุณาเลือกเมนูการใช้งาน',
+				'actions' => $actions
+			];
+			$messages = [						
+				'type' => 'template',
+				'altText' => 'this is a buttons message',
+				'template' => $template
+			];
+		break;
 		default:
 			$messages = BotReplyText('เกิดข้อผิดพลาด กรุณาลองใหม่ภายหลังหรือแจ้งผู้จัดทำไลน์แชทบอทด้วยจ้า');
 			break;
