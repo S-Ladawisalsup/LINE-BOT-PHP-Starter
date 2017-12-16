@@ -1111,7 +1111,7 @@ function ConfirmationsMsg($stack, $userId) {
 				'imageBackgroundColor' => '#FFFFFF',
 				'title' => 'เมนูการใช้งาน',
 				'text' => 'กรุณาเลือกเมนูการใช้งาน',
-				'actions' => $actions_m2
+				'actions' => $actions
 			];
 			$messages = [						
 				'type' => 'template',
