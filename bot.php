@@ -181,22 +181,13 @@ if (!is_null($events['events'])) {
 					case 'await':
 						$text = $event['message']['text'];
 						$text = SubEndText($text);
-						if (((strpos($text, 'ไม่') !== false) || (strpos(strtolower($text), 'no') !== false) || 
-							 (strpos($text, 'ยกเลิก') !== false) || (strpos(strtolower($text), 'cancel') !== false) || 
-							 (strpos($text, 'ปฏิเสธ') !== false) || (strpos(strtolower($text), 'refuse') !== false))) {
+						if ((strpos($text, 'ไม่') !== false) || (strpos($text, 'ยกเลิก') !== false)) {
 							$messages = BotReplyText(DeleteIdRow($text, $event['source']['userId']));
 							if (ListWaitRegister($event['source']['userId'])) {
 								ReturnAllowToAdmin();
 							}
 						}
-						else if ((strpos($text, 'ใช่') !== false) || (strpos(strtolower($text), 'yes') !== false) || 
-							 	 (strpos($text, 'ตกลง') !== false) || (strpos(strtolower($text), 'accept') !== false) || 
-							 	 (strpos($text, 'ยอมรับ') !== false) || (strpos(strtolower($text), 'confirm') !== false) || 
-							 	 (strpos($text, 'ยืนยัน') !== false) || (strpos(strtolower($text), 'yeah') !== false) || 
-							 	 (strpos($text, 'ชัวร์') !== false) || (strpos(strtolower($text), 'sure') !== false) || 
-							 	 (strpos($text, 'แน่นอน') !== false) || (strpos(strtolower($text), 'absolute') !== false) || 
-							 	 (strpos($text, 'คอนเฟิร์ม') !== false) || (strpos($text, 'อนุมัติ') !== false) || 
-							 	 (strpos($text, 'โอเค') !== false) || (strpos(strtolower($text), 'ok') !== false)) {
+						else if (strpos($text, 'อนุมัติ') !== false) {
 							$messages = BotReplyText(ConfirmRowUserMember($text, $event['source']['userId']));
 							if (ListWaitRegister($event['source']['userId'])) {
 								ReturnAllowToAdmin();

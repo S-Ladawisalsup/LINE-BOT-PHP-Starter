@@ -1132,12 +1132,12 @@ function ConfirmationsMsg($stack, $userId) {
 			$actions_1 = [
 				'type' => 'message',
 				'label' => 'อนุมัติ',
-				'text' => 'อนุมัติ' . $new_member['name'] . ' ' . $new_member['linename']
+				'text' => 'อนุมัติ ' . $new_member['name'] . ' ' . $new_member['linename']
 			];
 			$actions_2 = [
 				'type' => 'message',
 				'label' => 'ยกเลิก',
-				'text' => 'ยกเลิก' . $new_member['name'] . ' ' . $new_member['linename']
+				'text' => 'ยกเลิก ' . $new_member['name'] . ' ' . $new_member['linename']
 			];
 			$actions_3 = [
 				'type' => 'postback',
