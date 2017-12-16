@@ -605,18 +605,6 @@ function RegisterMode($text, $userId, $userType) {
 /**********************************************************************************************************************************/
 function IsAcceptingMember($userId) {
 	$db = new PDO($GLOBALS['dsn']);
-	// $query = "SELECT name, linename, gender, date_of_birth, id_type FROM tbhlinebotmem WHERE user_id = '$userId'"; 
-	// $result = $db->query($query);
-
-	// $new_member = array();
-	// while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-	//     $new_member['name'] = htmlspecialchars($row["name"]);
-	//     $new_member['linename'] = htmlspecialchars($row["linename"]);
-	//     $new_member['gender'] = htmlspecialchars($row["gender"]);
-	//     $new_member['bd'] = htmlspecialchars($row["date_of_birth"]);
-	//     $new_member['type'] = htmlspecialchars($row["id_type"]);
-	// }
-	// $result->closeCursor();
 
 	$query2 = "SELECT user_id FROM tbhlinebotmem WHERE position = 'admin'"; 
 	$result2 = $db->query($query2);
@@ -628,12 +616,6 @@ function IsAcceptingMember($userId) {
 	    $index = $index + 1;
 	}
 	$result2->closeCursor();
-
-	// $confirm = "มีผู้ต้องการใช้งาน Line Chat Bot อย่างเต็มระบบ\nชื่อ : " . $new_member['name'] . "\nชื่อไลน์ : " . $new_member['linename'];
-	// if (!empty($new_member['gender']) && !empty($new_member['bd'])) {
-	// 	$confirm .= "\nเพศ : " . $new_member['gender'] . "\nวันเกิด : " . substr($new_member['bd'], 0, 10);
-	// }
-	// $confirm .= "\nประเภท : " . $new_member['type'] . "\nต้องการให้บุคคลนี้สามารถใช้งานได้เต็มรูปแบบหรือไม่?";
 
 	$db2 = pg_connect($GLOBALS['pgsql_conn']);
 	$awaitadmin = "UPDATE tbhlinebotmodchng SET bot_mode = 'await' WHERE ";
