@@ -153,11 +153,11 @@ if (!is_null($events['events'])) {
 									// Test case to insert data to postgresql database.
 									if (strpos($text, 'testmsgbyball') !== false) {
 										//InsertDataToDB();
-										$messages = ConfirmationsMsg(6, $event['source'][$event['source']['type'] . 'Id']);
+										$messages = ConfirmationsMsg(6, $event['source'][$event['source']['type'] . 'Id'], $event['source']['type']);
 									}
 									//--------------------------------------------------------
 									else if ((strpos($text, 'ขอเมนู') !== false) || (strpos($text, 'ขอคู่มือ') !== false)) {
-										$messages = ConfirmationsMsg(5, $event['source'][$event['source']['type'] . 'Id']);
+										$messages = ConfirmationsMsg(5, $event['source'][$event['source']['type'] . 'Id'], $event['source']['type']);
 									}
 									else if ((strpos($text, 'ขอบคุณ') !== false) || (strpos($text, 'ขอบใจ') !== false) || 
 											 (strpos(strtolower($text), 'thank') !== false) || (strpos(strtolower($text), 'thx') !== false) || 
@@ -245,7 +245,7 @@ if (!is_null($events['events'])) {
 									];
 								}
 								else if ((strpos($text, 'ขอเมนู') !== false) || (strpos($text, 'ขอคู่มือ') !== false)) {
-									$messages = ConfirmationsMsg(5, $event['source'][$event['source']['type'] . 'Id']);
+									$messages = ConfirmationsMsg(5, $event['source'][$event['source']['type'] . 'Id'], $event['source']['type']);
 								}
 								else if ((strpos($text, 'ขอบคุณ') !== false) || (strpos($text, 'ขอบใจ') !== false) || 
 										 (strpos(strtolower($text), 'thank') !== false) || (strpos(strtolower($text), 'thx') !== false) || 
@@ -307,7 +307,7 @@ if (!is_null($events['events'])) {
 			else if ($event['postback']['data'] == 'เปิดโหมดลงทะเบียนเข้าใช้งาน') {
 				if ($bot_mod['mode'] == 'trial') {
 					SetRegisterSeq($event['source'][$event['source']['type'] . 'Id']);
-					$messages = ConfirmationsMsg(1, $event['source'][$event['source']['type'] . 'Id']);
+					$messages = ConfirmationsMsg(1, $event['source'][$event['source']['type'] . 'Id'], $event['source']['type']);
 				}
 				else if ($bot_mod['mode'] == 'allow') {
 					if ($event['source']['type'] == 'user') {

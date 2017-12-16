@@ -514,7 +514,7 @@ function RegisterMode($text, $userId, $userType) {
 				$results = pg_query($db2, "UPDATE tbhlinebotmem SET linename = '$text' WHERE user_id = '$userId';");
 				$result_again = pg_query($db2, "UPDATE tbhlinebotmodchng SET seq = '4' WHERE user_id = '$userId';");
 				$lname = array('linename' => $text, 'name' => $name);
-				return ConfirmationsMsg(2, $lname);
+				return ConfirmationsMsg(2, $lname, $userType);
 			}
 			else {
 				$error = true;
@@ -537,14 +537,14 @@ function RegisterMode($text, $userId, $userType) {
 				$result_again = pg_query($db2, "UPDATE tbhlinebotmodchng SET seq = '5' WHERE user_id = '$userId';");
 				$name = is_null($name) ? 'สาว' : $name;
 				$name = 'พี่' . $name . 'สุดสวย';
-				return ConfirmationsMsg(4, $name);
+				return ConfirmationsMsg(4, $name, $userType);
 			}
 			else if (strpos($text, 'ชาย') !== false) {
 				$results = pg_query($db2, "UPDATE tbhlinebotmem SET gender = 'M' WHERE user_id = '$userId';");
 				$result_again = pg_query($db2, "UPDATE tbhlinebotmodchng SET seq = '5' WHERE user_id = '$userId';");
 				$name = is_null($name) ? 'ชาย' : $name;
 				$name = 'พี่' . $name . 'สุดหล่อ';
-				return ConfirmationsMsg(4, $name);
+				return ConfirmationsMsg(4, $name, $userType);
 			} 
 			else {
 				$error = true;
@@ -557,7 +557,7 @@ function RegisterMode($text, $userId, $userType) {
 				$results = pg_query($db2, "UPDATE tbhlinebotmem SET date_of_birth = '$bd' WHERE user_id = '$userId';");
 				$result_again = pg_query($db2, "UPDATE tbhlinebotmodchng SET seq = '6' WHERE user_id = '$userId';");
 				$bd2 = date("d/m/Y", strtotime($text));
-				return ConfirmationsMsg(3, $bd2);
+				return ConfirmationsMsg(3, $bd2, $userType);
 			}
 			else {
 				$error = true;
@@ -571,7 +571,7 @@ function RegisterMode($text, $userId, $userType) {
 				$str = "ว่างหรอ?";
 			}
 			else if (strpos($text, 'ยืนยัน') !== false) {
-				IsAcceptingMember($userId);
+				IsAcceptingMember($userId, $userType);
 				$toggle = 7;
 				$str = "ขอคิดดูก่อนนะว่าจะรับดีมั้ยน้า แล้วเดี๋ยวจะมาบอกทีหลังนะ";
 			}
@@ -603,10 +603,10 @@ function RegisterMode($text, $userId, $userType) {
 	return $str;
 }
 /**********************************************************************************************************************************/
-function IsAcceptingMember($userId) {
+function IsAcceptingMember($userId, $userType) {
 	$db = new PDO($GLOBALS['dsn']);
 
-	$query2 = "SELECT user_id FROM tbhlinebotmem WHERE position = 'admin'"; 
+	$query2 = "SELECT user_idFROM tbhlinebotmem WHERE position = 'admin'"; 
 	$result2 = $db->query($query2);
 
 	$admin = array();
@@ -621,8 +621,7 @@ function IsAcceptingMember($userId) {
 	$awaitadmin = "UPDATE tbhlinebotmodchng SET bot_mode = 'await' WHERE ";
 	foreach ($admin as $adm) {
 		$awaitadmin .= "user_id = '$adm' or ";
-		//StandardBotPush($adm, BotReplyText($confirm));
-		StandardBotPush($adm, ConfirmationsMsg(6, $userId));
+		StandardBotPush($adm, ConfirmationsMsg(6, $userId, $userType));
 	}
 	$awaitadmin = substr($awaitadmin, 0, -4);
 	$awaitadmin .= ";";
@@ -968,17 +967,18 @@ function StandardBotPush($userId, $messages) {
 	echo $result . "\r\n";
 }
 /**********************************************************************************************************************************/
-function ConfirmationsMsg($stack, $userId) {
+function ConfirmationsMsg($stack, $userId, $userType) {
+	$botname = '@kiki';
 	$actions_y = [
 		'type' => 'message',
 		'label' => 'ยืนยัน',
-		'text' => 'ยืนยัน'
+		'text' => $userType == 'user' ? 'ยืนยัน' : $botname . 'ยืนยัน' 
 	];
 
 	$actions_n = [
 		'type' => 'message',
 		'label' => 'ยกเลิก',
-		'text' => 'ยกเลิก'
+		'text' => $userType == 'user' ? 'ยกเลิก' : $botname . 'ยกเลิก'
 	];
 	
 	switch ($stack) {
