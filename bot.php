@@ -156,14 +156,9 @@ if (!is_null($events['events'])) {
 										$messages = ConfirmationsMsg(5, $event['source'][$event['source']['type'] . 'Id']);
 									}
 									//--------------------------------------------------------
-									// else if (strpos($text, 'เปิดโหมดลงทะเบียนเข้าใช้งาน') !== false) {
-									// 	if ($event['source']['type'] == 'user') {
-									// 		$messages = BotReplyText(IdentifyUser($event['source']['userId']) . "สามารถใช้งาน Line Chat Bot ได้อย่างเต็มรูปแบบแล้วจ้า");
-									// 	}
-									// 	else {
-									// 		$messages = BotReplyText('ท่านสามารถใช้งาน Line Chat Bot ได้อย่างเต็มรูปแบบแล้วจ้า');
-									// 	}
-									// }
+									else if ((strpos($text, 'ขอเมนู') !== false) || (strpos($text, 'ขอคู่มือ') !== false)) {
+										$messages = ConfirmationsMsg(5, $event['source'][$event['source']['type'] . 'Id']);
+									}
 									else if ((strpos($text, 'ขอบคุณ') !== false) || (strpos($text, 'ขอบใจ') !== false) || 
 											 (strpos(strtolower($text), 'thank') !== false) || (strpos(strtolower($text), 'thx') !== false) || 
 											 (strpos(strtolower($text), 'bye') !== false) || (strpos($text, 'ไปแล้วนะ') !== false) || 
@@ -258,10 +253,9 @@ if (!is_null($events['events'])) {
 									    'previewImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/' . $day . '_240.jpg'
 									];
 								}
-								// else if ((strpos($text, 'เปิดโหมดลงทะเบียนเข้าใช้งาน') !== false)) {
-								// 	SetRegisterSeq($event['source'][$event['source']['type'] . 'Id']);
-								// 	$messages = ConfirmationsMsg(1, $event['source'][$event['source']['type'] . 'Id']);
-								// }
+								else if ((strpos($text, 'ขอเมนู') !== false) || (strpos($text, 'ขอคู่มือ') !== false)) {
+									$messages = ConfirmationsMsg(5, $event['source'][$event['source']['type'] . 'Id']);
+								}
 								else if ((strpos($text, 'ขอบคุณ') !== false) || (strpos($text, 'ขอบใจ') !== false) || 
 										 (strpos(strtolower($text), 'thank') !== false) || (strpos(strtolower($text), 'thx') !== false) || 
 										 (strpos(strtolower($text), 'bye') !== false) || (strpos($text, 'ไปแล้วนะ') !== false)) {
