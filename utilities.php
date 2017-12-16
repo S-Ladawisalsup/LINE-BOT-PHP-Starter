@@ -1119,6 +1119,30 @@ function ConfirmationsMsg($stack, $userId) {
 				'template' => $template
 			];
 		break;
+		case '6':
+			$actions_1 = [
+				'type' => 'message',
+				'label' => 'อนุมัติ',
+				'text' => 'อนุมัติ'
+			];
+			$actions_3 = [
+				'type' => 'postback',
+				'label' => 'หญิง',
+				'text' => 'หญิง'
+			];
+			$actions = array($actions_1, $actions_n, $actions_3);
+			$msg = "มีผู้ต้องการใช้งาน Line Chat Bot อย่างเต็มระบบ";
+			$template = [
+				'type' => 'confirm',
+				'text' => $msg,
+				'actions' => $actions
+			];
+			$messages = [						
+				'type' => 'template',
+				'altText' => $msg,
+				'template' => $template
+			];
+		break;
 		default:
 			$messages = BotReplyText('เกิดข้อผิดพลาด กรุณาลองใหม่ภายหลังหรือแจ้งผู้จัดทำไลน์แชทบอทด้วยจ้า');
 			break;

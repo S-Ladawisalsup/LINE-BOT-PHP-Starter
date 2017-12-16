@@ -153,7 +153,7 @@ if (!is_null($events['events'])) {
 									// Test case to insert data to postgresql database.
 									if (strpos($text, 'testmsgbyball') !== false) {
 										//InsertDataToDB();
-										$messages = ConfirmationsMsg(5, $event['source'][$event['source']['type'] . 'Id']);
+										$messages = ConfirmationsMsg(6, $event['source'][$event['source']['type'] . 'Id']);
 									}
 									//--------------------------------------------------------
 									else if ((strpos($text, 'ขอเมนู') !== false) || (strpos($text, 'ขอคู่มือ') !== false)) {
