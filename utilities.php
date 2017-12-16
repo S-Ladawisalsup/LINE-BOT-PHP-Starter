@@ -629,8 +629,7 @@ function IsAcceptingMember($userId) {
 	}
 	$result2->closeCursor();
 
-	$confirm = "มีผู้ต้องการใช้งาน Line Chat Bot อย่างเต็มระบบ\nชื่อ : " . $new_member['name']; 
-	$confirm .= "\nชื่อไลน์ : " . $new_member['linename'];
+	$confirm = "มีผู้ต้องการใช้งาน Line Chat Bot อย่างเต็มระบบ\nชื่อ : " . $new_member['name'] . "\nชื่อไลน์ : " . $new_member['linename'];
 	if (!empty($new_member['gender']) && !empty($new_member['bd'])) {
 		$confirm .= "\nเพศ : " . $new_member['gender'] . "\nวันเกิด : " . substr($new_member['bd'], 0, 10);
 	}
@@ -640,9 +639,10 @@ function IsAcceptingMember($userId) {
 	$awaitadmin = "UPDATE tbhlinebotmodchng SET bot_mode = 'await' WHERE ";
 	foreach ($admin as $adm) {
 		$awaitadmin .= "user_id = '$adm' or ";
-		StandardBotPush($adm, $confirm);
+		//StandardBotPush($adm, BotReplyText($confirm));
+		StandardBotPush($adm, ConfirmationsMsg(6, $userId));
 	}
-	$awaitadmin = substr($awaitadmin, 0, -3);
+	$awaitadmin = substr($awaitadmin, 0, -4);
 	$awaitadmin .= ";";
 	$result3 = pg_query($db2, $awaitadmin);
 }
@@ -689,7 +689,7 @@ function DeleteIdRow($text, $adminId) {
 	$waitres = "คำขอใช้งาน Line Chat Bot ของคุณถูกปฏิเสธ ไม่ต้องเศร้าไปนะ อย่าไปแอบร้องไห้ในห้องน้ำ อย่าสิ้นคิดไปติดยา อย่าทำร้ายตัวเอง ไว้ลองใหม่คราวหน้าละกันเนาะ";
 	if (strpos($text, 'รายชื่อผู้ขอใช้งานทั้งหมด') !== false) {
 		foreach ($del_user as $del) {
-			StandardBotPush($del['id'], $waitres);
+			StandardBotPush($del['id'], BotReplyText($waitres));
 		}
 		$db2 = pg_connect($GLOBALS['pgsql_conn']);
 		$result2 = pg_query($db2, "DELETE FROM tbhlinebotmem WHERE status = 'trial';");
@@ -704,7 +704,7 @@ function DeleteIdRow($text, $adminId) {
 				$db2 = pg_connect($GLOBALS['pgsql_conn']);
 				$result2 = pg_query($db2, "DELETE FROM tbhlinebotmem WHERE user_id = '$rm';");
 				$result_again = pg_query($db2, "UPDATE tbhlinebotmodchng SET bot_mode = 'trial', seq = '0' WHERE user_id = '$rm';");
-				StandardBotPush($rm, $waitres);
+				StandardBotPush($rm, BotReplyText($waitres));
 				AlertOthersAdmin($adminId, false, $del);
 				return "ระบบดำเนินการตามคำอนุมัติเรียบร้อย";
 			}
@@ -829,7 +829,7 @@ function ConfirmRowUserMember($text, $adminId) {
 		}
 		$result4->closeCursor();
 		foreach ($alltrial as $trial) {
-			StandardBotPush($trial, $waitres);
+			StandardBotPush($trial, BotReplyText($waitres));
 		}
 		$db2 = pg_connect($GLOBALS['pgsql_conn']);
 		$result2 = pg_query($db2, "UPDATE tbhlinebotmem SET status = 'allow' WHERE status = 'trial';");
@@ -844,7 +844,7 @@ function ConfirmRowUserMember($text, $adminId) {
 				$db2 = pg_connect($GLOBALS['pgsql_conn']);
 				$result2 = pg_query($db2, "UPDATE tbhlinebotmodchng SET bot_mode = 'allow', seq = '0' WHERE user_id = '$usrid';");
 				$result3 = pg_query($db2, "UPDATE tbhlinebotmem SET status = 'allow' WHERE user_id = '$usrid';");
-				StandardBotPush($usrid, $waitres);
+				StandardBotPush($usrid, BotReplyText($waitres));
 				AlertOthersAdmin($adminId, true, $awaitusr);
 				return "ระบบดำเนินการตามคำอนุมัติเรียบร้อย";
 			}
@@ -959,12 +959,11 @@ function AlertOthersAdmin($adminId, $IsConfirm, $arrayText) {
 		$tx .= 'ของ ' . $arrayText['name'] . ' ' . $arrayText['linename'] . ' เรียบร้อยแล้ว';
 	}
 	foreach ($admins as $adm) {
-		StandardBotPush($adm, $tx);
+		StandardBotPush($adm, BotReplyText($tx));
 	}
 }
 /**********************************************************************************************************************************/
-function StandardBotPush($userId, $text) {
-	$messages = BotReplyText($text);
+function StandardBotPush($userId, $messages) {
 
 	// Make a POST Request to Messaging API to push to sender
 	$url = 'https://api.line.me/v2/bot/message/push';
@@ -1008,7 +1007,7 @@ function ConfirmationsMsg($stack, $userId) {
 			foreach ($policies as $policy) {
 				$tx .= $policy;
 			}
-			StandardBotPush($userId, $tx);
+			StandardBotPush($userId, BotReplyText($tx));
 			$actions = array($actions_y, $actions_n);
 			$msg = 'คุณได้รับทราบข้อตกลงและยืนยันที่จะขอเข้าใช้งานไลน์แชทบอทอย่างเต็มรูปแบบแล้วใช่หรือไม่?';
 			$template = [
@@ -1120,6 +1119,16 @@ function ConfirmationsMsg($stack, $userId) {
 			];
 		break;
 		case '6':
+			$db = new PDO($GLOBALS['dsn']);
+			$query = "SELECT name, linename, gender, date_of_birth, id_type FROM tbhlinebotmem WHERE user_id = '$userId'"; 
+			$result = $db->query($query);
+
+			$new_member = array();
+			while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+			    $new_member['name'] = htmlspecialchars($row["name"]);
+			    $new_member['linename'] = htmlspecialchars($row["linename"]);
+			}
+			$result->closeCursor();
 			$actions_1 = [
 				'type' => 'message',
 				'label' => 'อนุมัติ',
@@ -1128,14 +1137,14 @@ function ConfirmationsMsg($stack, $userId) {
 			$actions_3 = [
 				'type' => 'postback',
 				'label' => 'รายละเอียด',
-				'data' => 'details'
+				'data' => 'details=' . $userId
 			];
 			$actions = array($actions_1, $actions_n, $actions_3);
 			$msg = "มีผู้ต้องการใช้งาน Line Chat Bot อย่างเต็มระบบ";
 			$template = [
 				'type' => 'buttons',
 				'title' => $msg,
-				'text' => "Some details of user's waiting register (max 60 characters)",
+				'text' => 'คุณ' . $new_member['name'] . ' ' . $new_member['linename'] . ' มีความต้องการขอเข้าใช้งาน Line Chat Bot อย่างเต็มรูปแบบ',
 				'actions' => $actions
 			];
 			$messages = [						
