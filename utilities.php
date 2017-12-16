@@ -1134,7 +1134,7 @@ function ConfirmationsMsg($stack, $userId) {
 				'label' => 'อนุมัติ',
 				'text' => 'อนุมัติ' . $new_member['name'] . ' ' . $new_member['linename']
 			];
-			$actions_n = [
+			$actions_2 = [
 				'type' => 'message',
 				'label' => 'ยกเลิก',
 				'text' => 'ยกเลิก' . $new_member['name'] . ' ' . $new_member['linename']
@@ -1144,7 +1144,7 @@ function ConfirmationsMsg($stack, $userId) {
 				'label' => 'รายละเอียด',
 				'data' => 'details=' . $userId
 			];
-			$actions = array($actions_1, $actions_n, $actions_3);
+			$actions = array($actions_1, $actions_2, $actions_3);
 			$msg = "มีผู้ต้องการใช้งาน Line Chat Bot อย่างเต็มระบบ";
 			$template = [
 				'type' => 'buttons',
