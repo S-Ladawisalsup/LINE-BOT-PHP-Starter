@@ -175,9 +175,6 @@ if (!is_null($events['events'])) {
 						    				'stickerId' => $sticker['stickerId']
 										]; 
 									}
-									else if (strpos($text, 'คู่มือ') !== false) {
-										$messages = BotReplyText("ที่นี้เลยจ้า\nhttps://cryptic-harbor-32168.herokuapp.com/manual.html");
-									}
 									else {
 										// Build message to reply back
 										$messages = BotReplyText(AnswerBuilder(15));
@@ -275,9 +272,6 @@ if (!is_null($events['events'])) {
 					    				'stickerId' => $sticker['stickerId']
 									]; 
 								}
-								else if (strpos($text, 'คู่มือ') !== false) {
-										$messages = BotReplyText("ที่นี้เลยจ้า\nhttps://cryptic-harbor-32168.herokuapp.com/manual.html");	
-									}
 								else {	 	
 									$messages = BotReplyText(AnswerBuilder(15));	
 								}

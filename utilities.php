@@ -1018,7 +1018,7 @@ function ConfirmationsMsg($stack, $userId) {
 			];
 			$messages = [						
 				'type' => 'template',
-				'altText' => 'this is an template message',
+				'altText' => 'คุณได้รับทราบข้อตกลงและยืนยันที่จะขอเข้าใช้งานไลน์แชทบอทอย่างเต็มรูปแบบแล้วใช่หรือไม่?',
 				'template' => $template
 			];
 			break;
@@ -1042,7 +1042,7 @@ function ConfirmationsMsg($stack, $userId) {
 			];
 			$messages = [						
 				'type' => 'template',
-				'altText' => 'this is an template message',
+				'altText' => $msg,
 				'template' => $template
 			];
 			break;
@@ -1056,7 +1056,7 @@ function ConfirmationsMsg($stack, $userId) {
 			];
 			$messages = [						
 				'type' => 'template',
-				'altText' => 'this is an template message',
+				'altText' => $msg,
 				'template' => $template
 			];
 			break;
@@ -1086,7 +1086,7 @@ function ConfirmationsMsg($stack, $userId) {
 			];
 			$messages = [						
 				'type' => 'template',
-				'altText' => 'this is an template message',
+				'altText' => 'กรุณาระบุวันเกิด',
 				'template' => $template
 			];
 			break;
@@ -1111,11 +1111,11 @@ function ConfirmationsMsg($stack, $userId) {
 				'imageBackgroundColor' => '#FFFFFF',
 				'title' => 'เมนูการใช้งาน',
 				'text' => 'กรุณาเลือกเมนูการใช้งาน',
-				'actions' => $actions
+				'actions' => $actions_m2
 			];
 			$messages = [						
 				'type' => 'template',
-				'altText' => 'this is a buttons message',
+				'altText' => 'กรุณาเลือกเมนูการใช้งาน',
 				'template' => $template
 			];
 		break;
