@@ -1173,6 +1173,29 @@ function BotReplyText($message) {
 	return $messages;
 }
 /**********************************************************************************************************************************/
+function GetDetailsMember($userId) {
+	$db = new PDO($GLOBALS['dsn']);
+	$query = "SELECT name, linename, gender, date_of_birth, id_type FROM tbhlinebotmem WHERE user_id = '$userId'"; 
+	$result = $db->query($query);
+
+	$new_member = array();
+	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+	    $new_member['name'] = htmlspecialchars($row["name"]);
+	    $new_member['linename'] = htmlspecialchars($row["linename"]);
+	    $new_member['gender'] = htmlspecialchars($row["gender"]);
+	    $new_member['bd'] = htmlspecialchars($row["date_of_birth"]);
+	    $new_member['type'] = htmlspecialchars($row["id_type"]);
+	}
+	$result->closeCursor();
+
+	$confirm = "ชื่อ : " . $new_member['name'] . "\nชื่อไลน์ : " . $new_member['linename'];
+	if (!empty($new_member['gender']) && !empty($new_member['bd'])) {
+		$confirm .= "\nเพศ : " . $new_member['gender'] . "\nวันเกิด : " . substr($new_member['bd'], 0, 10);
+	}
+	$confirm .= "\nประเภท : " . $new_member['type'];
+	return $confirm;
+}
+/**********************************************************************************************************************************/
 //Function to insert data to postgresql database to easier than insert data to database by terminal
 function InsertDataToDB() {
 	$db = pg_connect($GLOBALS['pgsql_conn']);		

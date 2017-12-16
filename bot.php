@@ -298,6 +298,12 @@ if (!is_null($events['events'])) {
 					$messages = BotReplyText('ว่างหรอ');
 				}
 			}
+			else if ($bot_mod['mode'] == 'await') {
+				if (strpos($event['postback']['data'], 'details=') !== false) {
+					$userId = substr($event['postback']['data'], 8);
+					$messages = BotReplyText(GetDetailsMember($userId));
+				}
+			}
 			else if ($event['postback']['data'] == 'เปิดโหมดลงทะเบียนเข้าใช้งาน') {
 				if ($bot_mod['mode'] == 'trial') {
 					SetRegisterSeq($event['source'][$event['source']['type'] . 'Id']);
