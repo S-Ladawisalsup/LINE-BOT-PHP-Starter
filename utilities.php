@@ -1038,7 +1038,7 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 			else {
 				return BotReplyText('เกิดข้อผิดพลาด กรุณาลองใหม่ภายหลังหรือแจ้งผู้จัดทำไลน์แชทบอทด้วยจ้า');
 			}
-			$msg .= $userType . "\nยืนยันการลงทะเบียนใช้งาน Line Chat Bot เต็มรูปแบบใช่หรือไม่";
+			$msg .= $userId . "\nยืนยันการลงทะเบียนใช้งาน Line Chat Bot เต็มรูปแบบใช่หรือไม่";
 			$template = [
 				'type' => 'confirm',
 				'text' => $msg,
