@@ -1133,8 +1133,9 @@ function ConfirmationsMsg($stack, $userId) {
 			$actions = array($actions_1, $actions_n, $actions_3);
 			$msg = "มีผู้ต้องการใช้งาน Line Chat Bot อย่างเต็มระบบ";
 			$template = [
-				'type' => 'confirm',
-				'text' => $msg,
+				'type' => 'buttons',
+				'title' => $msg,
+				'text' => "Some details of user's waiting register (max 60 characters)",
 				'actions' => $actions
 			];
 			$messages = [						
