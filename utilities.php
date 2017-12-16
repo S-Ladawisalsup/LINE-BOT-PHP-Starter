@@ -374,12 +374,13 @@ function SubEndText($text) {
 /**********************************************************************************************************************************/
 function IsAvailable($userId) {
 	$db = new PDO($GLOBALS['dsn']);
-	$query = "SELECT bot_mode FROM tbhlinebotmodchng WHERE user_id = '$userId'"; 
+	$query = "SELECT bot_mode, seq FROM tbhlinebotmodchng WHERE user_id = '$userId'"; 
 	$result = $db->query($query);
 
-	$botmod = 'trial';
+	$botmod = array();
 	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-	    $botmod = htmlspecialchars($row["bot_mode"]);
+	    $botmod['mode'] = htmlspecialchars($row["bot_mode"]);
+	    $botmod['seq'] = htmlspecialchars($row["seq"]);
 	}
 	$result->closeCursor();
 
@@ -534,15 +535,17 @@ function RegisterMode($text, $userId, $userType) {
 
 			if (strpos($text, 'หญิง') !== false) {
 				$results = pg_query($db2, "UPDATE tbhlinebotmem SET gender = 'F' WHERE user_id = '$userId';");
-				$toggle = 5;
+				$result_again = pg_query($db2, "UPDATE tbhlinebotmodchng SET seq = '5' WHERE user_id = '$userId';");
 				$name = is_null($name) ? 'สาว' : $name;
-				$str = 'พี่' . $name . "สุดสวย กรุณาระบุวันเดือนปีเกิด (ในรูปแบบ dd/mm/yyyy เช่น 01/01/1900) ด้วยจ้า";
+				$name .= 'พี่' . $name . 'สุดสวย';
+				return ConfirmationsMsg(4, $name);
 			}
 			else if (strpos($text, 'ชาย') !== false) {
 				$results = pg_query($db2, "UPDATE tbhlinebotmem SET gender = 'M' WHERE user_id = '$userId';");
-				$toggle = 5;
+				$result_again = pg_query($db2, "UPDATE tbhlinebotmodchng SET seq = '5' WHERE user_id = '$userId';");
 				$name = is_null($name) ? 'ชาย' : $name;
-				$str = 'พี่' . $name . "สุดหล่อ กรุณาระบุวันเดือนปีเกิด (ในรูปแบบ(ค.ศ.) dd/mm/yyyy เช่น 01/01/1900) ด้วยจ้า";
+				$name .= 'พี่' . $name . 'สุดหล่อ';
+				return ConfirmationsMsg(4, $name);
 			} 
 			else {
 				$error = true;
@@ -550,32 +553,16 @@ function RegisterMode($text, $userId, $userType) {
 			}
 			break;
 		case '5':
-			# user tell date of birth
-			preg_match_all("!\d+!", $text, $matches);
-			if (count($matches[0]) == 3) {
-				$bd = $matches[0][2] . '-' . $matches[0][1] . '-' . $matches[0][0] . ' 00:00:00';
-				$bd2 = $matches[0][0] . '/' . $matches[0][1] . '/' . $matches[0][2];
-				if (($bd < date("Y-m-d H:i:s")) && ($bd > date("Y-m-d H:i:s", strtotime("-150 Years")))) {
-					$results = pg_query($db2, "UPDATE tbhlinebotmem SET date_of_birth = '$bd' WHERE user_id = '$userId';");
-
-					if (checkdate($matches[0][1], $matches[0][0], $matches[0][2])) {
-						$result_again = pg_query($db2, "UPDATE tbhlinebotmodchng SET seq = '6' WHERE user_id = '$userId';");
-						return ConfirmationsMsg(3, $bd2);
-					}
-					else {
-						$error = true;
-						$str = "ฮั่นแน่! กรอกวันที่มั่วๆมาหน่ะสิคิดว่า...ไม่รู้หรอ ไปกรอกเริ่มใหม่ตั้งแต่ต้นน๊ะจ๊ะ";
-					}
-
-				}
-				else {
-					$error = true;
-					$str = "อายุคูณไม่ได้อยู่ในช่วง 150 ปีที่ผ่านมา คุณเป็นใครกันแน่เนี่ยยยย!";	
-				}
+			$bd = $text . ' 00:00:00';
+			if (($bd < date("Y-m-d H:i:s")) && ($bd > date("Y-m-d H:i:s", strtotime("-150 Years")))) {
+				$results = pg_query($db2, "UPDATE tbhlinebotmem SET date_of_birth = '$bd' WHERE user_id = '$userId';");
+				$result_again = pg_query($db2, "UPDATE tbhlinebotmodchng SET seq = '6' WHERE user_id = '$userId';");
+				$bd2 = date("d/m/Y", strtotime($text));
+				return ConfirmationsMsg(3, $bd2);
 			}
 			else {
 				$error = true;
-				$str = "ก็บอกให้กรอกวันที่ในรูปแบบ(ค.ศ.) dd/mm/yyyy เช่น 01/01/1900 ไง ไปเริ่มกรอกใหม่ตั้งแต่ต้นเลยไป๊!";
+				$str = "อายุคูณไม่ได้อยู่ในช่วง 150 ปีที่ผ่านมา คุณเป็นใครกันแน่เนี่ยยยย!";	
 			}
 			break;
 		case '6':
@@ -1093,7 +1080,7 @@ function ConfirmationsMsg($stack, $userId) {
 				'imageSize' => 'cover',
 				'imageBackgroundColor' => '#FFFFFF',
 				'title' => 'กรุณาระบุวันเกิด',
-				'text' => 'พี่สุดน่ารักเกิดวันที่?',
+				'text' => $userId . 'เกิดวันที่?',
 				'actions' => $actions
 			];
 			$messages = [						

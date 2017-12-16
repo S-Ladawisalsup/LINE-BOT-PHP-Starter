@@ -26,7 +26,7 @@ if (!is_null($events['events'])) {
 			# Check event user request is text
 			if ($event['message']['type'] == 'text') {
 				$bot_mod = IsAvailable($event['source'][$event['source']['type'] . 'Id']);
-				switch ($bot_mod) {
+				switch ($bot_mod['mode']) {
 					case 'regis':
 						$haystack = strtolower($event['message']['text']);
 						if (startsWith($haystack, $bot_name) || $event['source']['type'] == 'user') {
@@ -305,15 +305,19 @@ if (!is_null($events['events'])) {
 				}
 			}
 		}
+
 		else if ($event['type'] == 'postback') {
-			if ($event['postback']['data'] == 'datetimepicker=ok') {
-				$messages = RegisterMode($event['postback']['params']['date'], $event['source']['userId'], $event['source']['type']);
-			}
-			else if ($event['postback']['data'] == 'ยกเลิก') {
-				$messages = BotReplyText('เสียใจจัง แต่ไม่เป็นไร ไว้มาสมัครใหม่ทีหลังก็ได้นะ');
-			}
-			else {
-				$messages = BotReplyText('ว่างหรอ');
+			$bot_mod = IsAvailable($event['source'][$event['source']['type'] . 'Id']);
+			if ($bot_mod['mode'] == 'regis' && $bot_mod['seq'] == 5) {
+				if ($event['postback']['data'] == 'datetimepicker=ok') {
+					$messages = RegisterMode($event['postback']['params']['date'], $event['source']['userId'], $event['source']['type']);
+				}
+				else if ($event['postback']['data'] == 'ยกเลิก') {
+					$messages = BotReplyText('เสียใจจัง แต่ไม่เป็นไร ไว้มาสมัครใหม่ทีหลังก็ได้นะ');
+				}
+				else {
+					$messages = BotReplyText('ว่างหรอ');
+				}
 			}
 		}
 
