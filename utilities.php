@@ -1126,15 +1126,15 @@ function ConfirmationsMsg($stack, $userId) {
 				'text' => 'อนุมัติ'
 			];
 			$actions_3 = [
-				'type' => 'message',//'postback',
+				'type' => 'postback',
 				'label' => 'รายละเอียด',
-				'text' => 'รายละเอียด'//'data' => 'details'
+				'data' => 'details'
 			];
 			$actions = array($actions_1, $actions_n, $actions_3);
 			$msg = "มีผู้ต้องการใช้งาน Line Chat Bot อย่างเต็มระบบ";
 			$template = [
-				'type' => 'confirm',
-				//'title' => $msg,
+				'type' => 'buttons',
+				'title' => $msg,
 				'text' => "Some details of user's waiting register (max 60 characters)",
 				'actions' => $actions
 			];
