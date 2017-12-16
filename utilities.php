@@ -486,13 +486,10 @@ function RegisterMode($text, $userId, $userType) {
 				$toggle = 3;
 				$str = "พี่$text กรุณาระบุชื่อไลน์ของคุณด้วยด้วยจ้า (เช่นของผมคือ @kiki อย่าลืมใส่เครื่องหมาย @ นะ)";
 			}
-			else if ($userType == 'group') {
-				$toggle = 6;
-				$str = "ชื่อกลุ่มของคุณคือ $text\nยืนยันการลงทะเบียนใช้งาน Line Chat Bot เต็มรูปแบบใช่หรือไม่";
-			}
-			else if ($userType == 'room') {
-				$toggle = 6;
-				$str = "ชื่อห้องของคุณคือ $text\nยืนยันการลงทะเบียนใช้งาน Line Chat Bot เต็มรูปแบบใช่หรือไม่";
+			//Edit to confirmation in accepting register room or group
+			else if ($userType == 'group' || $userType == 'room') {
+				$result_again = pg_query($db2, "UPDATE tbhlinebotmodchng SET seq = '6' WHERE user_id = '$userId';");
+				return ConfirmationsMsg(3, $text, $userType);
 			}
 			else {
 				$error = true;
@@ -972,13 +969,13 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 	$actions_y = [
 		'type' => 'message',
 		'label' => 'ยืนยัน',
-		'text' => $userType == 'user' ? 'ยืนยัน' : $botname . 'ยืนยัน' 
+		'text' => $userType == 'user' ? 'ยืนยัน' : $botname . ' ยืนยัน' 
 	];
 
 	$actions_n = [
 		'type' => 'message',
 		'label' => 'ยกเลิก',
-		'text' => $userType == 'user' ? 'ยกเลิก' : $botname . 'ยกเลิก'
+		'text' => $userType == 'user' ? 'ยกเลิก' : $botname . ' ยกเลิก'
 	];
 	
 	switch ($stack) {
@@ -1029,7 +1026,19 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 			break;
 		case '3':
 			$actions = array($actions_y, $actions_n);
-			$msg = 'คุณเกิดวันที่' . $userId . "\nยืนยันการลงทะเบียนใช้งาน Line Chat Bot เต็มรูปแบบใช่หรือไม่";
+			if ($userType == 'user') {
+				$msg = 'คุณเกิดวันที่';
+			}
+			else if ($userType == 'group') {
+				$msg = 'ชื่อกลุ่มของคุณคือ ';
+			}
+			else if ($userType = 'room') {
+				$msg = 'ชื่อห้องของคุณคือ ';
+			}
+			else {
+				return BotReplyText('เกิดข้อผิดพลาด กรุณาลองใหม่ภายหลังหรือแจ้งผู้จัดทำไลน์แชทบอทด้วยจ้า');
+			}
+			$msg .= $userType . "\nยืนยันการลงทะเบียนใช้งาน Line Chat Bot เต็มรูปแบบใช่หรือไม่";
 			$template = [
 				'type' => 'confirm',
 				'text' => $msg,
