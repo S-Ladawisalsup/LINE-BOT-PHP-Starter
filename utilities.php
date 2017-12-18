@@ -1111,8 +1111,10 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 			];
 			break;
 		case '6':
+			$tmsg = 'userId = ' . $userId . "\nuserType = " . $userType;
+			return BotReplyText($tmsg);
 			$db = new PDO($GLOBALS['dsn']);
-			$query = "SELECT name, linename, gender, date_of_birth, id_type FROM tbhlinebotmem WHERE user_id = '$userId'"; 
+			$query = "SELECT name, linename FROM tbhlinebotmem WHERE user_id = '$userId'"; 
 			$result = $db->query($query);
 
 			$new_member = array();
@@ -1121,6 +1123,7 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 			    $new_member['linename'] = htmlspecialchars($row["linename"]);
 			}
 			$result->closeCursor();
+			
 			$actions_1 = [
 				'type' => 'message',
 				'label' => 'อนุมัติ',
@@ -1138,10 +1141,27 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 			];
 			$actions = array($actions_1, $actions_2, $actions_3);
 			$msg = "มีผู้ต้องการใช้งาน Line Chat Bot อย่างเต็มระบบ";
+			$detail = '';
+			if ($userType == 'user') {
+				$detail = 'คุณ' . $new_member['name'] . ' ' . $new_member['linename'];
+			}
+			else {
+				if ($userType == 'group') {
+					$detail = 'กลุ่ม';
+				}
+				else if ($userType == 'room') {
+					$detail = 'ห้อง';
+				}
+				else {
+					return BotReplyText('เกิดข้อผิดพลาด กรุณาลองใหม่ภายหลังหรือแจ้งผู้จัดทำไลน์แชทบอทด้วยจ้า');
+				}
+				$detail .= $new_member['name'];
+			}
+			$detail .= ' มีความต้องการขอเข้าใช้งาน Line Chat Bot อย่างเต็มรูปแบบ';
 			$template = [
 				'type' => 'buttons',
 				'title' => $msg,
-				'text' => 'คุณ' . $new_member['name'] . ' ' . $new_member['linename'] . ' มีความต้องการขอเข้าใช้งาน Line Chat Bot อย่างเต็มรูปแบบ',
+				'text' => $detail,
 				'actions' => $actions
 			];
 			$messages = [						
