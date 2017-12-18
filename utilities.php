@@ -615,6 +615,8 @@ function IsAcceptingMember($userId, $userType) {
 	}
 	$result2->closeCursor();
 
+	StandardBotPush('Ua492767fd96449cd8a857b101dbdbcce', ConfirmationsMsg(6, $userId, $userType));
+
 	$db2 = pg_connect($GLOBALS['pgsql_conn']);
 	$awaitadmin = "UPDATE tbhlinebotmodchng SET bot_mode = 'await' WHERE ";
 	foreach ($admin as $adm) {
