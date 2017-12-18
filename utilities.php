@@ -1078,7 +1078,7 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 				'uri' => 'https://cryptic-harbor-32168.herokuapp.com/manual.html'
 			];
 			if ($pos == 'await') {
-				$actions = array($actions_m1, $actions_m2, $actions_m3);
+				$actions = array($actions_m2, $actions_m3);
 			}	
 			else if ($pos == 'allow') {
 				$actions = $actions_m3;
