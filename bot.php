@@ -115,6 +115,9 @@ if (!is_null($events['events'])) {
 									if (strpos($text, 'อุณหภูมิ') !== false) {							
 										$messages = BotReplyText(GetTemperature($text) . IdentifyUser($event['source']['userId']));	
 									}
+									else if (strpos($text, 'ความชื้น') !== false) {
+										$messages = BotReplyText(GetTemperature($text) . IdentifyUser($event['source']['userId']));
+									}
 									else {		
 										$messages = BotReplyText(AnswerBuilder(10) . IdentifyUser($event['source']['userId']));					
 									}
@@ -223,7 +226,7 @@ if (!is_null($events['events'])) {
 									$messages = BotReplyText(AnswerBuilder(10));
 								}
 								else if ($typing == 7) {
-									if (strpos($text, 'อุณหภูมิ') !== false) {							
+									if ((strpos($text, 'อุณหภูมิ') !== false) || (strpos($text, 'ความชื้น') !== false)) {							
 										$messages = BotReplyText('อยากรู้ก็เดินไปวัดเองสิจ๊ะ');
 									}
 									else {

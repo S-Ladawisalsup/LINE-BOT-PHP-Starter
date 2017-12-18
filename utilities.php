@@ -133,7 +133,7 @@ function findQuestionType ($text) {
 			} 
 		}  
 		else if ($keyitems['type'] == 8 || $keyitems['type'] == 9) {
-			if ($keyitems['type'] == 8 && strpos($text, 'อุณหภูมิ') !== false) {	
+			if ($keyitems['type'] == 8 && ((strpos($text, 'อุณหภูมิ') !== false) || (strpos($text, 'ความชื้น') !== false))) {	
 				return 7;
 			}
 			else if (strpos($text, $keyitems['text']) !== false) {
@@ -197,28 +197,49 @@ function GetTemperature($text) {
 
 	$tempresult = 'ไม่มีที่ ' . $curr_locname . ' น๊ะจ๊ะ อยากรู้เดินไปดูเองเลยจ้า';
 	if ($curr_place != 0) {
-		$query_locnametemp = "SELECT temperature, lastchangedatetime AT TI"
+		$query_locnametemp = "SELECT temperature, humidity, lastchangedatetime AT TI"
 							."ME ZONE 'UTC+7' as lastchangedatetime FROM tbhlinebottemploc WHERE id = $curr_place";
 		$results = $db->query($query_locnametemp);
 		$last_temp = array();
 		while ($row = $results->fetch(PDO::FETCH_ASSOC)) {  
 			$last_temp['temp'] = htmlspecialchars($row["temperature"]);
+			$last_temp['humid'] = htmlspecialchars($row["humidity"]);
 			$last_temp['datetime'] = substr(htmlspecialchars($row["lastchangedatetime"]), 0, 16);
 		}
 		$results->closeCursor();
+
+		if (strpos($text, 'อุณหภูมิ') !== false) {
+			if (!empty($last_temp['temp'])) {
+				$cur_result = $last_temp['temp'] . ' องศาเซลเซียส จ้า';
+			}
+			else {
+				return 'ขณะนี้ยังไม่ได้ติดตั้งระบบวัดอุณหภูมิที่' . $curr_locname . 'เลยจ้า ไว้มาตรวจสอบใหม่ทีหลังนะ';
+			}
+		}
+		else if (strpos($text, 'ความชื้น') !== false) {
+			if (!empty($last_temp['humid'])) {
+				$cur_result = $last_temp['humidity'] . '% จ้า';
+			}
+			else {
+				return 'ขณะนี้ยังไม่ได้ติดตั้งระบบวัดความชื้นที่' . $curr_locname . 'เลยจ้า ไว้มาตรวจสอบใหม่ทีหลังนะ';
+			}
+		}
+		else {
+			return 'อยากรู้อะไรก็เดินไดูเองเลยสิจ๊ะ';
+		}
 
 		if (substr($last_temp['datetime'], 0, 10) == date("Y-m-d")) {
 			//lastchangedatetime == datenow, tell only time
 			$previous_time = substr($last_temp['datetime'], 11);
 			$previous_time = str_replace(':', '.', $previous_time);
-			$tempresult = 'ล่าสุดเมื่อเวลา ' . $previous_time . 'น. อุณหภูมิที่' . $curr_locname . 'เท่ากับ ' . $last_temp['temp'] . ' องศาเซลเซียส จ้า';
+			$tempresult = 'ล่าสุดเมื่อเวลา ' . $previous_time . 'น. อุณหภูมิที่' . $curr_locname . 'เท่ากับ ' . $cur_result;
 		}
 		else {
 			//lastchangedatetime != datenow, tell date and time
 			$previous_date = date("d/m/Y", strtotime(substr($last_temp['datetime'], 0, 10)));
 			$previous_time = substr($last_temp['datetime'], 11);
 			$previous_time = str_replace(':', '.', $previous_time);
-			$tempresult = 'ล่าสุดเมื่อวันที่ ' . $previous_date . ' เวลา ' . $previous_time . 'น. อุณหภูมิที่' . $curr_locname . 'เท่ากับ ' . $last_temp['temp'] . ' องศาเซลเซียส จ้า';
+			$tempresult = 'ล่าสุดเมื่อวันที่ ' . $previous_date . ' เวลา ' . $previous_time . 'น. อุณหภูมิที่' . $curr_locname . 'เท่ากับ ' . $cur_result;
 		}
 	}
 	return $tempresult;
@@ -1293,7 +1314,7 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 					$botname = '';
 				}
 				else {
-					$botname .= ' ';
+					$botname = $botname . ' ';
 				}
 				$actions_temp[$counter] = [
 					'type' => 'message',
