@@ -1080,9 +1080,9 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 			if ($pos == 'await') {
 				$actions = array($actions_m2, $actions_m3);
 			}	
-			else if ($pos == 'allow') {
-				$actions = $actions_m3;
-			}
+			// else if ($pos == 'allow') {
+			// 	$actions = $actions_m3;
+			// }
 			else {
 				$actions = array($actions_m1, $actions_m3);
 			}
