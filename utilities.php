@@ -1225,10 +1225,10 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 					if ($temp_mem['type'] == 'user') {
 						$kind = $temp_mem[$name] . ' ' . $temp_mem['line'];
 					}
-					else if ($temp_mem == 'group') {
+					else if ($temp_mem['type'] == 'group') {
 						$kind = 'กลุ่ม' . $temp_mem['name'];
 					}
-					else if ($temp_mem == 'room') {
+					else if ($temp_mem['type'] == 'room') {
 						$kind = 'ห้อง' . $temp_mem['name'];
 					}
 					else {
