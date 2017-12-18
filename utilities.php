@@ -1156,8 +1156,8 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 				}
 				$detail .= $new_member['name'];
 			}
-			$detail .= ' ต้องการเข้าใช้งาน Line Chat Bot เต็มรูปแบบ?';
-			$dt = 'มีผู้ต้องการเข้าใช้งาน Line Chat Bot เต็มรูปแบบ โปรดดูที่รายละเอียด';
+			$detail .= ' ต้องการใช้งาน Line Chat Bot เต็มรูปแบบ?';
+			$dt = 'มีผู้ต้องการใช้งาน Line Chat Bot เต็มรูปแบบ โปรดดูที่รายละเอียด';
 			$msg = strlen($dt);
 			// if (strlen($detail) > 160) {
 			// 	$detail = 'มีผู้ต้องการเข้าใช้งาน Line Chat Bot เต็มรูปแบบ โปรดกดดูที่รายละเอียด';
