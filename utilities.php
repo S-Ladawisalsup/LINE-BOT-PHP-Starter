@@ -604,7 +604,7 @@ function RegisterMode($text, $userId, $userType) {
 function IsAcceptingMember($userId, $userType) {
 	$db = new PDO($GLOBALS['dsn']);
 
-	$query2 = "SELECT user_idFROM tbhlinebotmem WHERE position = 'admin'"; 
+	$query2 = "SELECT user_id FROM tbhlinebotmem WHERE position = 'admin'"; 
 	$result2 = $db->query($query2);
 
 	$admin = array();
@@ -614,9 +614,6 @@ function IsAcceptingMember($userId, $userType) {
 	    $index = $index + 1;
 	}
 	$result2->closeCursor();
-
-	$mes = 'user id is ' . $userId . "\nuser type is " . $userType;
-	StandardBotPush('Ua492767fd96449cd8a857b101dbdbcce', $mes);
 
 	$db2 = pg_connect($GLOBALS['pgsql_conn']);
 	$awaitadmin = "UPDATE tbhlinebotmodchng SET bot_mode = 'await' WHERE ";
