@@ -1054,7 +1054,7 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 		case '5':
 			//multi buttons menu template
 			$db = new PDO($GLOBALS['dsn']);
-			$query = "SELECT bot_mode FROM tbhlinebotmem WHERE user_id = '$userId'"; 
+			$query = "SELECT bot_mode FROM tbhlinebotmodchng WHERE user_id = '$userId'"; 
 			$result = $db->query($query);
 
 			while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
