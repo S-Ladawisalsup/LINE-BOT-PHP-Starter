@@ -153,7 +153,7 @@ if (!is_null($events['events'])) {
 									// Test case to insert data to postgresql database.
 									if (strpos($text, 'testmsgbyball') !== false) {
 										//InsertDataToDB();
-										$messages = ConfirmationsMsg(6, 'Ca35db1d5c584c6467d717df89a0302ec', 'group');
+										$messages = ConfirmationsMsg(6, 'Ua492767fd96449cd8a857b101dbdbcce', 'user');
 									}
 									//--------------------------------------------------------
 									else if ((strpos($text, 'ขอเมนู') !== false) || (strpos($text, 'ขอคู่มือ') !== false)) {
