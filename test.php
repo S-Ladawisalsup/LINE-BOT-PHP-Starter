@@ -27,7 +27,7 @@ function QuestionWordFromDBTB() {
 
 	$t = 'text';
 
-	$query = "SELECT questiontext, questiontype FROM tbhlinebotwmode WHERE questiontype = '7'";
+	$query = "SELECT questiontext, questiontype FROM tbhlinebotwmode WHERE questiontype = '9'";
 	//$query = "SELECT $t, type FROM tbhlinebotans";// WHERE type = '14'";
 	$result = $db->query($query);
 
@@ -37,7 +37,7 @@ function QuestionWordFromDBTB() {
 	    $words[$index] = array();
 		$words[$index]['text'] = htmlspecialchars($row["questiontext"]);//
 		$words[$index]['type'] = htmlspecialchars($row["questiontype"]);
-		$index = $index + 1;
+		$index += 1;
 	}
 	$result->closeCursor();
 

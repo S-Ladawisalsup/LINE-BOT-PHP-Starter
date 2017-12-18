@@ -69,7 +69,7 @@ function AnswerBuilder($mood) {
 	$index = 0;
 	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 	    $reply[$index] = htmlspecialchars($row["text"]);
-	    $index = $index + 1;
+	    $index += 1;
 	}
 	$result->closeCursor();
 	//$reply = array_filter($reply);
@@ -164,7 +164,7 @@ function QuestionWordFromDB() {
 	    $qwords[$index] = array();
 		$qwords[$index]['text'] = htmlspecialchars($row["questiontext"]);
 		$qwords[$index]['type'] = htmlspecialchars($row["questiontype"]);
-		$index = $index + 1;
+		$index += 1;
 	}
 	$result->closeCursor();
 
@@ -182,7 +182,7 @@ function GetTemperature($text) {
 	    $locations[$index] = array();
 		$locations[$index]['name'] = htmlspecialchars($row["loc_callname"]);
 		$locations[$index]['id'] = htmlspecialchars($row["loc_id"]);
-		$index = $index + 1;
+		$index += 1;
 	}
 	$result->closeCursor();
 
@@ -237,7 +237,7 @@ function IsAskedServer($text) {
 		$servers[$index]['ip'] = htmlspecialchars($row["ip_addr"]);
 		$servers[$index]['name'] = htmlspecialchars($row["serv_name"]);
 		$servers[$index]['lip'] = htmlspecialchars($row["last_ip"]);
-		$index = $index + 1;
+		$index += 1;
 	}
 	$result->closeCursor();
 
@@ -349,7 +349,7 @@ function GetLocation() {
 		$locations[$index]['address'] = htmlspecialchars($row["address"]);
 		$locations[$index]['latitude'] = htmlspecialchars($row["latitude"]);
 		$locations[$index]['longitude'] = htmlspecialchars($row["longitude"]);
-		$index = $index + 1;
+		$index += 1;
 	}
 	$result->closeCursor();
 
@@ -465,7 +465,7 @@ function RegisterMode($text, $userId, $userType) {
 				if (empty($curr_val)) {
 					break;
 				}
-				$countable = $countable + 1;
+				$countable += 1;
 			}
 			$text = str_replace("ชื่อ", "", $text);
 			$text = str_replace("ไอ้", "", $text);
@@ -611,7 +611,7 @@ function IsAcceptingMember($userId, $userType) {
 	$index = 0;
 	while ($row = $result2->fetch(PDO::FETCH_ASSOC)) {
 	    $admin[$index] = htmlspecialchars($row["user_id"]);
-	    $index = $index + 1;
+	    $index += 1;
 	}
 	$result2->closeCursor();
 
@@ -636,7 +636,7 @@ function ReturnAllowToAdmin() {
 	$index = 0;
 	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 	    $admin[$index] = htmlspecialchars($row["user_id"]);
-	    $index = $index + 1;
+	    $index += 1;
 	}
 	$result->closeCursor();
 
@@ -662,11 +662,11 @@ function DeleteIdRow($text, $adminId) {
 	    $del_user[$index]['id'] = htmlspecialchars($row["user_id"]);
 	    $del_user[$index]['name'] = htmlspecialchars($row["name"]);
 	    $del_user[$index]['linename'] = htmlspecialchars($row["linename"]);
-	    $index = $index + 1;
+	    $index += 1;
 	}
 	$result->closeCursor();
 	$waitres = "คำขอใช้งาน Line Chat Bot ของคุณถูกปฏิเสธ ไม่ต้องเศร้าไปนะ อย่าไปแอบร้องไห้ในห้องน้ำ อย่าสิ้นคิดไปติดยา อย่าทำร้ายตัวเอง ไว้ลองใหม่คราวหน้าละกันเนาะ";
-	if (strpos($text, 'รายชื่อผู้ขอใช้งานทั้งหมด') !== false) {
+	if (strpos($text, 'ผู้ขอใช้งานทั้งหมด') !== false) {
 		foreach ($del_user as $del) {
 			StandardBotPush($del['id'], BotReplyText($waitres));
 		}
@@ -702,7 +702,7 @@ function ListWaitRegister($userId) {
 	$index = 0;
 	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 	    $regis[$index] = htmlspecialchars($row["user_id"]);
-	    $index = $index + 1;
+	    $index += 1;
 	}
 	$result->closeCursor();
 
@@ -723,7 +723,7 @@ function ListWaitRegister($userId) {
 		$sum[$seq] = array();
 	    $sum[$seq]['linename'] = htmlspecialchars($row["linename"]);
 	    $sum[$seq]['name'] = htmlspecialchars($row["name"]);
-	    $seq = $seq + 1;
+	    $seq += 1;
 	}
 	$result2->closeCursor();
 
@@ -793,18 +793,18 @@ function ConfirmRowUserMember($text, $adminId) {
 	    $awaitmem[$order]["id"] = htmlspecialchars($row["user_id"]);
 	    $awaitmem[$order]["linename"] = htmlspecialchars($row["linename"]);
 	    $awaitmem[$order]["name"] = htmlspecialchars($row["name"]);
-	    $order = $order + 1;
+	    $order += 1;
 	}
 	$result->closeCursor();
 	$waitres = "คำขอใช้งาน Line Chat Bot ของคุณได้รับการอนุญาตแล้ว ยินดีต้อนรับสู่การใช้งาน Line Chat Bot อย่างเต็มรูปแบบนะคร้าบบบบบ";
-	if (strpos($text, 'รายชื่อผู้ขอใช้งานทั้งหมด') !== false) {
+	if (strpos($text, 'ผู้ขอใช้งานทั้งหมด') !== false) {
 		$query2 = "SELECT user_id FROM tbhlinebotmem WHERE status = 'trial'";
 		$result4 = $db->query($query2);
 		$alltrial = array();
 		$seq = 0;
 		while ($row = $result4->fetch(PDO::FETCH_ASSOC)) {
 		    $alltrial[$seq] = htmlspecialchars($row["user_id"]);
-		    $seq = $seq + 1;
+		    $seq += 1;
 		}
 		$result4->closeCursor();
 		foreach ($alltrial as $trial) {
@@ -878,7 +878,7 @@ function AlertOthersAdmin($adminId, $IsConfirm, $arrayText) {
 	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 		$admins = array();
 	    $admins[$seq] = htmlspecialchars($row["user_id"]);
-	    $seq = $seq + 1;
+	    $seq += 1;
 	}
 	$result->closeCursor();
 
@@ -1078,7 +1078,7 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 				'uri' => 'https://cryptic-harbor-32168.herokuapp.com/manual.html'
 			];
 			if ($pos == 'await') {
-				$actions = array($actions_m2, $actions_m3);
+				$actions = array($actions_m1, $actions_m2, $actions_m3);
 			}	
 			// else if ($pos == 'allow') {
 			// 	$actions = $actions_m3;
@@ -1152,6 +1152,64 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 			if (strlen($detail) > 160) {
 				$detail = 'มีผู้ต้องการใช้งาน Line Chat Bot เต็มรูปแบบ โปรดดูที่รายละเอียด';
 			}
+			$template = [
+				'type' => 'buttons',
+				'title' => $msg,
+				'text' => $detail,
+				'actions' => $actions
+			];
+			$messages = [						
+				'type' => 'template',
+				'altText' => $msg,
+				'template' => $template
+			];
+			break;
+		case '7':
+			$db = new PDO($GLOBALS['dsn']);
+			$query = "SELECT user_id FROM tbhlinebotmodchng WHERE seq = '7'"; 
+			$result = $db->query($query);
+
+			$temp_id = array();
+			$count = 0;
+			while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+			    $temp_id[$count] = htmlspecialchars($row["user_id"]);
+			    $count += 1;
+			}
+			$result->closeCursor();
+
+			$query2 = "SELECT name, linename, id_type WHERE ";
+			foreach ($temp_id as $tid) {
+				$query2 .= "user_id = '$tid' or ";
+			}
+			$query2 = substr($query2, 0, -4);
+			$query2 .= ';';
+			$result2 = $db->query($query2);
+
+			$temp_member = array();
+			$seq = 0;
+			while ($row = $result2->fetch(PDO::FETCH_ASSOC)) {
+				$temp_member[$seq] = array();
+				$temp_member[$seq]['name'] = htmlspecialchars($row["name"]);
+				$temp_member[$seq]['line'] = htmlspecialchars($row["linename"]);
+				$temp_member[$seq]['type'] = htmlspecialchars($row["id_type"]);
+				$seq += 1;
+			}
+			$result2->closeCursor();
+
+			$actions_ya = [
+				'type' => 'message',
+				'label' => 'อนุมัติผู้ขอใช้งานทั้งหมด',
+				'text' => 'อนุมัติผู้ขอใช้งานทั้งหมด'
+			];
+			$actions_na = [
+				'type' => 'message',
+				'label' => 'ยกเลิกผู้ขอใช้งานทั้งหมด',
+				'text' => 'ยกเลิกผู้ขอใช้งานทั้งหมด'
+			];
+			$actions = array($actions_ya, $actions_na);
+
+			$msg = "รายชื่อผู้ขอใช้งาน Line Chat Bot";
+			$detail = 'กดที่แต่ละชื่อเพื่อดูรายละเอียด';
 			$template = [
 				'type' => 'buttons',
 				'title' => $msg,

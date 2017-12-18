@@ -51,7 +51,7 @@ function UpdateTempToDB($curr_temperature, $location) {
 		$index = 0;
 		while ($row = $result2->fetch(PDO::FETCH_ASSOC)) {
 		    $admin[$index] = htmlspecialchars($row["user_id"]);
-		    $index = $index + 1;
+		    $index += 1;
 		}
 		$result2->closeCursor();
 		$message = "ขณะนี้ที่ " . $location . " อุณหภูมิเท่กับ " . $curr_temperature . " องศาเซลเซียส เพื่อความถูกต้องกรุณาตรวจสอบด้วยตัวของท่านเอง";
@@ -83,7 +83,7 @@ function UpdateServToDB($name, $status, $location) {
 		$previos_status[$count]['ip'] = htmlspecialchars($row["ip_addr"]);
 		$previos_status[$count]['stats'] = htmlspecialchars($row["status"]);
 		$previos_status[$count]['timer'] = htmlspecialchars($row["lastchangedatetime"]);
-		$count = $count + 1;
+		$count += 1;
 	}
 	$res->closeCursor();
 	$backup = false;
@@ -112,7 +112,7 @@ function UpdateServToDB($name, $status, $location) {
 			$index = 0;
 			while ($row = $result2->fetch(PDO::FETCH_ASSOC)) {
 			    $admin[$index] = htmlspecialchars($row["user_id"]);
-			    $index = $index + 1;
+			    $index += 1;
 			}
 			$result2->closeCursor();
 			$message = "ขณะนี้ server " . $name . " อาจจะไม่สามารถใช้งานได้ เพื่อความถูกต้องกรุณาตรวจสอบด้วยตัวของท่านเอง";
@@ -132,7 +132,7 @@ function UpdateServToDB($name, $status, $location) {
 		// 	$index = 0;
 		// 	while ($row = $result2->fetch(PDO::FETCH_ASSOC)) {
 		// 	    $admin[$index] = htmlspecialchars($row["user_id"]);
-		// 	    $index = $index + 1;
+		// 	    $index += 1;
 		// 	}
 		// 	$result2->closeCursor();
 		// 	$message = "ขณะนี้ server " . $name . " อาจจะไม่สามารถใช้งานได้ เพื่อความถูกต้องกรุณาตรวจสอบด้วยตัวของท่านเอง";
@@ -162,7 +162,7 @@ function findLocationID($loc_name) {
 	    $locs[$index] = array();
 		$locs[$index]['id'] = $row["id"];
 		$locs[$index]['loc'] = htmlspecialchars($row["location"]);
-		$index = $index + 1;
+		$index += 1;
 	}
 	$result->closeCursor();
 
@@ -184,7 +184,7 @@ function GetServerNameList() {
 	$list = 0;
 	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 	    $servers[$list] = htmlspecialchars($row["ip_addr"]);
-		$list = $list + 1;
+		$list += 1;
 	}
 	$result->closeCursor();
 

@@ -153,7 +153,7 @@ if (!is_null($events['events'])) {
 									// Test case to insert data to postgresql database.
 									if (strpos($text, 'testmsgbyball') !== false) {
 										//InsertDataToDB();
-										$messages = ConfirmationsMsg(6, 'Ua492767fd96449cd8a857b101dbdbcce', 'user');
+										$messages = ConfirmationsMsg(7, 'Ua492767fd96449cd8a857b101dbdbcce', 'user');
 									}
 									//--------------------------------------------------------
 									else if ((strpos($text, 'ขอเมนู') !== false) || (strpos($text, 'ขอคู่มือ') !== false)) {
@@ -192,9 +192,6 @@ if (!is_null($events['events'])) {
 							if (ListWaitRegister($event['source']['userId'])) {
 								ReturnAllowToAdmin();
 							}
-						}
-						else if (findQuestionType($text) == 4 && (strpos($text, 'เหลือ') !== false || strpos($text, 'รอ') !== false)) {
-							ListWaitRegister($event['source']['userId']);
 						}
 						else if ((strpos($text, 'ขอเมนู') !== false) || (strpos($text, 'ขอคู่มือ') !== false)) {
 							$messages = ConfirmationsMsg(5, $event['source'][$event['source']['type'] . 'Id'], $event['source']['type']);
@@ -315,6 +312,7 @@ if (!is_null($events['events'])) {
 			else if ($event['postback']['data'] == 'waitlist') { 
 				if ($bot_mod['mode'] == 'await') {
 					//Show a list here
+					$messages = ConfirmationsMsg(7, $event['source'][$event['source']['type'] . 'Id'], $event['source']['type']);
 					$messages = BotReplyText('เดี๋ยวไว้จะทำลิสต์แสดงรายชื่อน๊ะจ๊ะ');
 				}
 				else if ($bot_mod['mode'] == 'allow') {

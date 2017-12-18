@@ -23,7 +23,7 @@ if (!is_null($_POST['val']) || !is_null($events)) {
 	$index = 0;
 	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 	    $groups[$index] = htmlspecialchars($row["user_id"]);
-		$index = $index + 1;
+		$index += 1;
 	}
 	$result->closeCursor();
 
@@ -75,7 +75,7 @@ function CheckBirthDay($db) {
 		$bd = array();
 	    $bd[$index]['uid'] = htmlspecialchars($row["user_id"]);
 	    $bd[$index]['bd'] = htmlspecialchars($row["date_of_birth"]);
-		$index = $index + 1;
+		$index += 1;
 	}
 	$result->closeCursor();
 
@@ -87,7 +87,7 @@ function CheckBirthDay($db) {
   			$born[$user] = array();
   			$born[$user]['uid'] = $hbd['uid'];
   			$born[$user]['age'] = date("Y") - substr($hbd['bd'], 0, 4);
-  			$user = $user + 1;
+  			$user += 1;
 		}
 	}
 
@@ -110,7 +110,7 @@ function CreateMsg($age, $db) {
 	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 		$wishes = array();
 	    $wishes[$index] = htmlspecialchars($row["text"]);
-		$index = $index + 1;
+		$index += 1;
 	}
 	$result->closeCursor();
 
