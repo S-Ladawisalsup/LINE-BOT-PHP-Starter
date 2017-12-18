@@ -1121,6 +1121,9 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 			    $new_member['linename'] = htmlspecialchars($row["linename"]);
 			}
 			$result->closeCursor();
+			
+			$tmsg = 'name = ' . $new_member['name'] . "\nlinename = " . $new_member['linename'];
+			return BotReplyText($tmsg);
 
 			$actions_1 = [
 				'type' => 'message',
