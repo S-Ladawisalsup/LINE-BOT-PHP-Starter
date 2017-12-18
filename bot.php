@@ -196,8 +196,8 @@ if (!is_null($events['events'])) {
 						else if (findQuestionType($text) == 4 && (strpos($text, 'เหลือ') !== false || strpos($text, 'รอ') !== false)) {
 							ListWaitRegister($event['source']['userId']);
 						}
-						else if (strpos($text, 'ดูข้อมูล') !== false) {
-							$messages = BotReplyText(ListWaitingUsers($text));
+						else if ((strpos($text, 'ขอเมนู') !== false) || (strpos($text, 'ขอคู่มือ') !== false)) {
+							$messages = ConfirmationsMsg(5, $event['source'][$event['source']['type'] . 'Id'], $event['source']['type']);
 						}
 						else {
 							$messages = BotReplyText('คุณต้องอนุมัติหรือยกเลิกคำขอใช้งาน Line Chat Bot อย่างเต็มรูปแบบทั้งหมดก่อน');

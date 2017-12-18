@@ -832,36 +832,6 @@ function ConfirmRowUserMember($text, $adminId) {
 	return "กรุณาระบุคำอนุมัติในรูปแบบดังต่อไปนี้\n[คำอนุมัติ] [ชื่อไลน์ผู้ขอใช้งาน] [ชื่อผู้ขอใช้งาน]";
 }
 /**********************************************************************************************************************************/
-function ListWaitingUsers($text) {
-	$db = new PDO($GLOBALS['dsn']);
-
-	$query = "SELECT name, linename, gender, date_of_birth, id_type FROM tbhlinebotmem WHERE status = 'trial'"; 
-	$result = $db->query($query);
-
-	$awaitmem = array();
-	$order = 0;
-	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-	    $awaitmem[$order]["linename"] = htmlspecialchars($row["linename"]);
-	    $awaitmem[$order]["name"] = htmlspecialchars($row["name"]);
-	    $awaitmem[$order]["gender"] = htmlspecialchars($row["gender"]);
-	    $awaitmem[$order]["bd"] = htmlspecialchars($row["date_of_birth"]);
-	    $awaitmem[$order]["type"] = htmlspecialchars($row["id_type"]);
-	    $order = $order + 1;
-	}
-	$result->closeCursor();
-	$confirm = "ไม่พบ้อมูลของบุคคลท่านนี้ อาจเกิดข้อผิดพลาด กรุณาตรวจสอบที่ฐานข้อมูล";
-	foreach ($awaitmem as $awaitusr) {
-		if ((strpos($text, $awaitusr['linename']) !== false) || (strpos($text, $awaitusr['name']) !== false)) {
-			$confirm = "ชื่อ : " . $awaitusr['name'] . "\nชื่อไลน์ : " . $awaitusr['linename']; 
-			if (!empty($awaitusr['gender']) && !empty($awaitusr['bd'])) {
-				$confirm .= "\nเพศ : " . $awaitusr['gender'] . "\nวันเกิด : " . substr($awaitusr['bd'], 0, 10);
-			}
-			$confirm .= "\nประเภท : " . $awaitusr['type'];
-		}
-	}
-	return $confirm;
-}
-/**********************************************************************************************************************************/
 function IdentifyUser($userId) {
 	$db = new PDO($GLOBALS['dsn']);
 
