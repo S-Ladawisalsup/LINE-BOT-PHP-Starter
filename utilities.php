@@ -1285,6 +1285,47 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 				'template' => $template
 			];
 			break;
+		case '8':
+			$places = array('0' => 'ห้องโปรแกรมเมอร์', '1' => 'ห้องเซิฟเวอร์');
+			$counter = 0;
+			foreach ($places as $place) {
+				$actions_temp[$counter] = [
+					'type' => 'message',
+					'label' => 'อุณหภูมิ',
+					'text' => 'อุณหภูมิที่' . $place . 'เท่ากับเท่าไร'
+				];
+				$actions_humid[$counter] = [
+					'type' => 'message',
+					'label' => 'ความชื้น',
+					'text' => 'ความชื้นที่' . $place . 'เท่ากับเท่าไร'
+				];
+				$actions[$counter] = array($actions_temp[$counter], $actions_humid[$counter]);
+				$counter += 1;
+			}
+
+			$sequence = 0;
+			foreach ($places as $place) { 
+				$pic_link = "https://cryptic-harbor-32168.herokuapp.com/images/location-" . ($sequence + 1) . ".jpg";
+				$columns[$sequence] = [
+					'thumbnailImageUrl' => $pic_link,
+					'imageBackgroundColor' => "#FFFFFF",
+					'title' => $place,
+					'text' => 'อาคาร 4 ชั้น 3',
+					'actions' => $actions[$sequence]
+				];
+				$sequence += 1;
+			}
+
+			$template = [
+				'type' => 'carousel',
+				'columns' => $columns
+			];
+			$messages = [						
+				'type' => 'template',
+				'altText' => 'นี่คือสถานที่ต่าง ๆ ในฐานข้อมูลจ้า',
+				'template' => $template
+			];
+			break;
 		default:
 			$messages = BotReplyText('เกิดข้อผิดพลาด กรุณาลองใหม่ภายหลังหรือแจ้งผู้จัดทำไลน์แชทบอทด้วยจ้า');
 			break;

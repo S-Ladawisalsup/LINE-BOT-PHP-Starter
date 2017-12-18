@@ -329,7 +329,8 @@ if (!is_null($events['events'])) {
 			}
 			else if ($bot_mod['mode'] == 'allow') {
 				if ($event['postback']['data'] == 'locationsplaces') {
-					$messages = BotReplyText('เดี๋ยวจะแสดงลิสต์รายชื่อสถานที่ตรงนี้น๊ะจ๊ะ');
+					$messages = ConfirmationsMsg(8, $event['source'][$event['source']['type'] . 'Id'], $event['source']['type']);
+					//$messages = BotReplyText('เดี๋ยวจะแสดงลิสต์รายชื่อสถานที่ตรงนี้น๊ะจ๊ะ');
 				}
 			}
 		}
