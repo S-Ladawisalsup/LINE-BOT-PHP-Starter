@@ -621,8 +621,13 @@ function IsAcceptingMember($userId, $userType) {
 		$awaitadmin .= "user_id = '$adm' or ";
 		StandardBotPush($adm, ConfirmationsMsg(6, $userId, $userType));
 	}
-	$awaitadmin = substr($awaitadmin, 0, -4);
-	$awaitadmin .= ";";
+	if (!empty($admin)) {
+		$awaitadmin = substr($awaitadmin, 0, -4);
+		$awaitadmin .= ";";
+	}
+	else {
+		$awaitadmin .= "id = '0';";
+	}
 	$result3 = pg_query($db2, $awaitadmin);
 }
 /**********************************************************************************************************************************/
@@ -645,8 +650,13 @@ function ReturnAllowToAdmin() {
 	foreach ($admin as $adm) {
 		$awaitadmin .= "user_id = '$adm' or ";
 	}
-	$awaitadmin = substr($awaitadmin, 0, -4);
-	$awaitadmin .= ";";
+	if (!empty($admin)) {
+		$awaitadmin = substr($awaitadmin, 0, -4);
+		$awaitadmin .= ";";
+	}
+	else {
+		$awaitadmin .= "id = '0';";
+	}
 	$result2 = pg_query($db2, $awaitadmin);
 }
 /**********************************************************************************************************************************/
@@ -712,9 +722,15 @@ function ListWaitRegister($userId) {
 
 	$query2 = "SELECT name, linename FROM tbhlinebotmem WHERE ";
 	foreach ($regis as $item) {
-		$query2 .= "user_id = '$item' OR ";
+		$query2 .= "user_id = '$item' or ";
 	}
-	$query2 = substr($query2, 0, -4);
+	if (!empty($regis)) {
+		$query2 = substr($query2, 0, -4);
+		$query2 .= ";";
+	}
+	else {
+		$query2 .= "id = '0';";
+	}
 	$result2 = $db->query($query2);
 
 	$sum = array();
@@ -1177,12 +1193,17 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 			}
 			$result->closeCursor();
 
-			$query2 = "SELECT name, linename, id_type WHERE ";
+			$query2 = "SELECT name, linename, id_type FROM tbhlinebotmem WHERE ";
 			foreach ($temp_id as $tid) {
 				$query2 .= "user_id = '$tid' or ";
 			}
-			$query2 = substr($query2, 0, -4);
-			$query2 .= ';';
+			if (!empty($temp_id)) {
+				$query2 = substr($query2, 0, -4);
+				$query2 .= ';';
+			}
+			else {
+				$query2 .= "id = '0';";
+			}
 			$result2 = $db->query($query2);
 
 			$temp_member = array();
