@@ -1111,8 +1111,6 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 			];
 			break;
 		case '6':
-			$tmsg = 'userId = ' . $userId . "\nuserType = " . $userType;
-			return BotReplyText($tmsg);
 			$db = new PDO($GLOBALS['dsn']);
 			$query = "SELECT name, linename FROM tbhlinebotmem WHERE user_id = '$userId'"; 
 			$result = $db->query($query);
@@ -1124,6 +1122,9 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 			}
 			$result->closeCursor();
 			
+			$tmsg = 'name = ' . $new_member['name'] . "\nlinename = " . $new_member['linename'];
+			return BotReplyText($tmsg);
+
 			$actions_1 = [
 				'type' => 'message',
 				'label' => 'อนุมัติ',
@@ -1140,6 +1141,7 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 				'data' => 'details=' . $userId
 			];
 			$actions = array($actions_1, $actions_2, $actions_3);
+
 			$msg = "มีผู้ต้องการใช้งาน Line Chat Bot อย่างเต็มระบบ";
 			$detail = '';
 			if ($userType == 'user') {
@@ -1158,6 +1160,7 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 				$detail .= $new_member['name'];
 			}
 			$detail .= ' มีความต้องการขอเข้าใช้งาน Line Chat Bot อย่างเต็มรูปแบบ';
+
 			$template = [
 				'type' => 'buttons',
 				'title' => $msg,
