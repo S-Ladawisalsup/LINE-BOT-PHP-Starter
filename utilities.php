@@ -1122,9 +1122,6 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 			}
 			$result->closeCursor();
 			
-			// $tmsg = 'name = ' . $new_member['name'] . "\nlinename = " . $new_member['linename'];
-			// return BotReplyText($tmsg);
-
 			$actions_1 = [
 				'type' => 'message',
 				'label' => 'อนุมัติ',
@@ -1160,7 +1157,6 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 				$detail .= $new_member['name'];
 			}
 			$detail .= ' มีความต้องการขอเข้าใช้งาน Line Chat Bot อย่างเต็มรูปแบบ';
-			$detail = 'dt';
 			$template = [
 				'type' => 'buttons',
 				'title' => $msg,
