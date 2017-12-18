@@ -27,7 +27,7 @@ function QuestionWordFromDBTB() {
 
 	$t = 'text';
 
-	$query = "SELECT questiontext, questiontype FROM tbhlinebotwmode WHERE questiontype = '6'";
+	$query = "SELECT questiontext, questiontype FROM tbhlinebotwmode WHERE questiontype = '7'";
 	//$query = "SELECT $t, type FROM tbhlinebotans";// WHERE type = '14'";
 	$result = $db->query($query);
 
