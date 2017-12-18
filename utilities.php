@@ -1193,7 +1193,7 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 			}
 			$result->closeCursor();
 
-			$query2 = "SELECT name, linename, id_type FROM tbhlinebotmem WHERE ";
+			$query2 = "SELECT user_id, name, linename, id_type FROM tbhlinebotmem WHERE ";
 			foreach ($temp_id as $tid) {
 				$query2 .= "user_id = '$tid' or ";
 			}
@@ -1210,12 +1210,38 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 			$seq = 0;
 			while ($row = $result2->fetch(PDO::FETCH_ASSOC)) {
 				$temp_member[$seq] = array();
+				$temp_member[$seq]['id'] = htmlspecialchars($row["user_id"]);
 				$temp_member[$seq]['name'] = htmlspecialchars($row["name"]);
 				$temp_member[$seq]['line'] = htmlspecialchars($row["linename"]);
 				$temp_member[$seq]['type'] = htmlspecialchars($row["id_type"]);
 				$seq += 1;
 			}
 			$result2->closeCursor();
+
+			$actions_array = array();
+			$order = 0;
+			if (!empty($temp_member)) {
+				foreach ($temp_member as $temp_mem) {
+					if ($temp_mem['type'] == 'user') {
+						$kind = $temp_mem[$name] . ' ' . $temp_mem['line'];
+					}
+					else if ($temp_mem == 'group') {
+						$kind = 'กลุ่ม' . $temp_mem['name'];
+					}
+					else if ($temp_mem == 'room') {
+						$kind = 'ห้อง' . $temp_mem['name'];
+					}
+					else {
+						$kind = '';
+					}
+					$actions_array[$order] = [
+						'type'=> 'postback',
+						'label' => $kind,
+						'data' => 'identify=' . $temp_mem['id']
+					];
+					$order += 1;
+				}
+			}
 
 			$actions_ya = [
 				'type' => 'message',
@@ -1227,10 +1253,20 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 				'label' => 'ยกเลิกผู้ขอใช้งานทั้งหมด',
 				'text' => 'ยกเลิกผู้ขอใช้งานทั้งหมด'
 			];
-			$actions = array($actions_ya, $actions_na);
+
+			if ($order == 0) {
+				$actions = array($actions_ya, $actions_na);
+			}
+			else {
+				$actions = array($actions_ya);
+				foreach ($actions_array as $act_a) {
+					array_push($actions, $act_a);
+				}
+				array_push($actions, $actions_na);
+			}
 
 			$msg = "รายชื่อผู้ขอใช้งาน Line Chat Bot";
-			$detail = 'กดที่แต่ละชื่อเพื่อดูรายละเอียด';
+			$detail = "กดเพื่อดูรายละเอียด ($order รายชื่อ)";
 			$template = [
 				'type' => 'buttons',
 				'title' => $msg,

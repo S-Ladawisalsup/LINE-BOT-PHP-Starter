@@ -313,7 +313,7 @@ if (!is_null($events['events'])) {
 				if ($bot_mod['mode'] == 'await') {
 					//Show a list here
 					$messages = ConfirmationsMsg(7, $event['source'][$event['source']['type'] . 'Id'], $event['source']['type']);
-					$messages = BotReplyText('เดี๋ยวไว้จะทำลิสต์แสดงรายชื่อน๊ะจ๊ะ');
+					//$messages = BotReplyText('เดี๋ยวไว้จะทำลิสต์แสดงรายชื่อน๊ะจ๊ะ');
 				}
 				else if ($bot_mod['mode'] == 'allow') {
 					$messages = BotReplyText('ไม่มีรายชื่อรออนุมัติขอเข้าใช้งาน Line Chat Bot ในขณะนี้');
@@ -323,6 +323,11 @@ if (!is_null($events['events'])) {
 				if (strpos($event['postback']['data'], 'details=') !== false) {
 					$userId = substr($event['postback']['data'], 8);
 					$messages = BotReplyText(GetDetailsMember($userId));
+				}
+				else if (strpos($event['postback']['data'], 'identify=') !== false) {
+					$userId = substr($event['postback']['data'], 9);
+					//$messages = BotReplyText();//return confrimation template for each user
+					$messages = BotReplyText('userId = ' . $userId);
 				}
 			}
 		}
