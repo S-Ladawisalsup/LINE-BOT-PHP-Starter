@@ -1289,15 +1289,21 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 			$places = array('0' => 'ห้องโปรแกรมเมอร์', '1' => 'ห้องเซิฟเวอร์');
 			$counter = 0;
 			foreach ($places as $place) {
+				if ($userType == 'user') {
+					$botname = '';
+				}
+				else {
+					$botname .= ' ';
+				}
 				$actions_temp[$counter] = [
 					'type' => 'message',
 					'label' => 'อุณหภูมิ',
-					'text' => 'อุณหภูมิที่' . $place . 'เท่ากับเท่าไร'
+					'text' => $botname . 'อุณหภูมิที่' . $place . 'เท่ากับเท่าไร'
 				];
 				$actions_humid[$counter] = [
 					'type' => 'message',
 					'label' => 'ความชื้น',
-					'text' => 'ความชื้นที่' . $place . 'เท่ากับเท่าไร'
+					'text' => $botname . 'ความชื้นที่' . $place . 'เท่ากับเท่าไร'
 				];
 				$actions[$counter] = array($actions_temp[$counter], $actions_humid[$counter]);
 				$counter += 1;
