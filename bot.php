@@ -298,33 +298,33 @@ if (!is_null($events['events'])) {
 					$messages = BotReplyText('ว่างหรอ');
 				}
 			}
-			else if ($bot_mod['mode'] == 'await') {
-				if (strpos($event['postback']['data'], 'details=') !== false) {
-					$userId = substr($event['postback']['data'], 8);
-					$messages = BotReplyText(GetDetailsMember($userId));
-				}
-				else if (strpos($event['postback']['data'], 'waitlist') !== false) {
-					//Show a list here
-					BotReplyText('เดี๋ยวไว้จะทำลิสต์แสดงรายชื่อน๊ะจ๊ะ');
-				}
-			}
-			else if ($bot_mod['mode'] == 'allow') {
-				if (strpos($event['postback']['data'], 'waitlist') !== false) {
-					BotReplyText('ไม่มีรายชื่อรออนุมัติขอเข้าใช้งาน Line Chat Bot ในขณะนี้');
-				}
-			}
 			else if ($event['postback']['data'] == 'เปิดโหมดลงทะเบียนเข้าใช้งาน') {
 				if ($bot_mod['mode'] == 'trial') {
 					SetRegisterSeq($event['source'][$event['source']['type'] . 'Id']);
 					$messages = ConfirmationsMsg(1, $event['source'][$event['source']['type'] . 'Id'], $event['source']['type']);
 				}
-				else if ($bot_mod['mode'] == 'allow') {
+				else if ($bot_mod['mode'] == 'allow' || $bot_mod['mode'] == 'await') {
 					if ($event['source']['type'] == 'user') {
 						$messages = BotReplyText(IdentifyUser($event['source']['userId']) . "สามารถใช้งาน Line Chat Bot ได้อย่างเต็มรูปแบบแล้วจ้า");
 					}
 					else {
 						$messages = BotReplyText('ท่านสามารถใช้งาน Line Chat Bot ได้อย่างเต็มรูปแบบแล้วจ้า');
 					}
+				}
+			}
+			else if ($bot_mod['mode'] == 'await') {
+				if (strpos($event['postback']['data'], 'details=') !== false) {
+					$userId = substr($event['postback']['data'], 8);
+					$messages = BotReplyText(GetDetailsMember($userId));
+				}
+				else if ($event['postback']['data'] == 'waitlist') {
+					//Show a list here
+					BotReplyText('เดี๋ยวไว้จะทำลิสต์แสดงรายชื่อน๊ะจ๊ะ');
+				}
+			}
+			else if ($bot_mod['mode'] == 'allow') {
+				if ($event['postback']['data'] == 'waitlist') {
+					BotReplyText('ไม่มีรายชื่อรออนุมัติขอเข้าใช้งาน Line Chat Bot ในขณะนี้');
 				}
 			}
 		}
