@@ -568,7 +568,8 @@ function RegisterMode($text, $userId, $userType) {
 				$str = "ว่างหรอ?";
 			}
 			else if (strpos($text, 'ยืนยัน') !== false) {
-				IsAcceptingMember($userId, $userType);
+				//now error cannot accept register request in group or room here <--------------------------------------------------
+				//IsAcceptingMember($userId, $userType);
 				$toggle = 7;
 				$str = "ขอคิดดูก่อนนะว่าจะรับดีมั้ยน้า แล้วเดี๋ยวจะมาบอกทีหลังนะ";
 			}

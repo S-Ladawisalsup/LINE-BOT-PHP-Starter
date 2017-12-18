@@ -287,12 +287,9 @@ if (!is_null($events['events'])) {
 
 		else if ($event['type'] == 'postback') {
 			$bot_mod = IsAvailable($event['source'][$event['source']['type'] . 'Id']);
-			if ($bot_mod['mode'] == 'regis') {
-				if (($event['postback']['data'] == 'datetimepicker=ok') && ($bot_mod['seq'] == 5)) {
+			if (($bot_mod['mode'] == 'regis') && ($bot_mod['seq'] == 5)) {
+				if ($event['postback']['data'] == 'datetimepicker=ok') {
 					$messages = RegisterMode($event['postback']['params']['date'], $event['source']['userId'], $event['source']['type']);
-				}
-				else if ((strpos($event['postback']['data'], 'ยืนยัน') !== false) && ($bot_mod['seq'] == 6)) {
-					$messages = RegisterMode($event['postback']['data'], $event['source']['userId'], $event['source']['type']);
 				}
 				else if ($event['postback']['data'] == 'ยกเลิก') {
 					$messages = BotReplyText('เสียใจจัง แต่ไม่เป็นไร ไว้มาสมัครใหม่ทีหลังก็ได้นะ');
