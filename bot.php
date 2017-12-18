@@ -200,7 +200,7 @@ if (!is_null($events['events'])) {
 							$messages = BotReplyText(ListWaitingUsers($text));
 						}
 						else {
-							$messages = BotReplyText('ทำเป็นเล่นอยู่นั่น ตอบมาอนุมัติมั้ย');
+							$messages = BotReplyText('คุณต้องอนุมัติหรือยกเลิกคำขอใช้งาน Line Chat Bot อย่างเต็มรูปแบบทั้งหมดก่อน');
 						}
 						break;		
 					default:
