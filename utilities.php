@@ -1139,7 +1139,7 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 			];
 			$actions = array($actions_1, $actions_2, $actions_3);
 
-			$msg = 'msg';//"มีผู้ต้องการใช้งาน Line Chat Bot อย่างเต็มระบบ";
+			$msg = "มีผู้ต้องการใช้งาน Line Chat Bot อย่างเต็มระบบ";
 			$detail = '';
 			if ($userType == 'user') {
 				$detail = 'คุณ' . $new_member['name'] . ' ' . $new_member['linename'];
@@ -1157,6 +1157,7 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 				$detail .= $new_member['name'];
 			}
 			$detail .= ' มีความต้องการขอเข้าใช้งาน Line Chat Bot อย่างเต็มรูปแบบ';
+			$detail = 'dt';
 			$template = [
 				'type' => 'buttons',
 				'title' => $msg,
