@@ -1083,17 +1083,36 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 			break;
 		case '5':
 			//multi buttons menu template
+			$db = new PDO($GLOBALS['dsn']);
+			$query = "SELECT bot_mode FROM tbhlinebotmem WHERE user_id = '$userId'"; 
+			$result = $db->query($query);
+
+			while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+			    $pos = htmlspecialchars($row["bot_mode"]);
+			}
+			$result->closeCursor();
+
 			$actions_m1 = [
 				'type' => 'postback',
-				'label' => 'สมัครเข้าใช้งานเต็มรูปแบบ',
+				'label' => 'สมัครใช้งานเต็มรูปแบบ',
 				'data' => 'เปิดโหมดลงทะเบียนเข้าใช้งาน'
 			];
 			$actions_m2 = [
+				'type' => 'postback',
+				'label' => 'รายชื่อรออนุมัติเข้าใช้งาน',
+				'data' => 'waitlist'
+			];
+			$actions_m3 = [
 				'type' => 'uri',
 				'label' => 'คู่มือการใช้งาน',
 				'uri' => 'https://cryptic-harbor-32168.herokuapp.com/manual.html'
 			];
-			$actions = array($actions_m1, $actions_m2);
+			if ($pos == 'await') {
+				$actions = array($actions_m1, $actions_m2, $actions_m3);
+			}	
+			else {
+				$actions = array($actions_m1, $actions_m3);
+			}
 			$template = [
 				'type' => 'buttons',
 				'thumbnailImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/readingmenu.png',

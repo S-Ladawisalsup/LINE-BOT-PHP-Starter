@@ -303,6 +303,15 @@ if (!is_null($events['events'])) {
 					$userId = substr($event['postback']['data'], 8);
 					$messages = BotReplyText(GetDetailsMember($userId));
 				}
+				else if (strpos($event['postback']['data'], 'waitlist') !== false) {
+					//Show a list here
+					BotReplyText('เดี๋ยวไว้จะทำลิสต์แสดงรายชื่อน๊ะจ๊ะ');
+				}
+			}
+			else if ($bot_mod['mode'] == 'allow') {
+				if (strpos($event['postback']['data'], 'waitlist') !== false) {
+					BotReplyText('ไม่มีรายชื่อรออนุมัติขอเข้าใช้งาน Line Chat Bot ในขณะนี้');
+				}
 			}
 			else if ($event['postback']['data'] == 'เปิดโหมดลงทะเบียนเข้าใช้งาน') {
 				if ($bot_mod['mode'] == 'trial') {
