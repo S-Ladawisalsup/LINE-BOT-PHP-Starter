@@ -1157,7 +1157,7 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 				$detail .= $new_member['name'];
 			}
 			$detail .= ' ต้องการเข้าใช้งาน Line Chat Bot เต็มรูปแบบ?';
-			$detail .= strlen($detail);
+			$msg = strlen($detail);
 			$template = [
 				'type' => 'buttons',
 				'title' => $msg,
