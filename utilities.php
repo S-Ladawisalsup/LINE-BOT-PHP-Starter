@@ -569,7 +569,7 @@ function RegisterMode($text, $userId, $userType) {
 			}
 			else if (strpos($text, 'ยืนยัน') !== false) {
 				//now error cannot accept register request in group or room here <--------------------------------------------------
-				//IsAcceptingMember($userId, $userType);
+				IsAcceptingMember($userId, $userType);
 				$toggle = 7;
 				$str = "ขอคิดดูก่อนนะว่าจะรับดีมั้ยน้า แล้วเดี๋ยวจะมาบอกทีหลังนะ";
 			}
@@ -643,7 +643,7 @@ function ReturnAllowToAdmin() {
 	$db2 = pg_connect($GLOBALS['pgsql_conn']);
 	$awaitadmin = "UPDATE tbhlinebotmodchng SET bot_mode = 'allow' WHERE ";
 	foreach ($admin as $adm) {
-		$awaitadmin .= "user_id = '$adm' OR ";
+		$awaitadmin .= "user_id = '$adm' or ";
 	}
 	$awaitadmin = substr($awaitadmin, 0, -4);
 	$awaitadmin .= ";";
@@ -1109,7 +1109,7 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 				'altText' => 'กรุณาเลือกเมนูการใช้งาน',
 				'template' => $template
 			];
-		break;
+			break;
 		case '6':
 			$db = new PDO($GLOBALS['dsn']);
 			$query = "SELECT name, linename, gender, date_of_birth, id_type FROM tbhlinebotmem WHERE user_id = '$userId'"; 
@@ -1149,7 +1149,7 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 				'altText' => $msg,
 				'template' => $template
 			];
-		break;
+			break;
 		default:
 			$messages = BotReplyText('เกิดข้อผิดพลาด กรุณาลองใหม่ภายหลังหรือแจ้งผู้จัดทำไลน์แชทบอทด้วยจ้า');
 			break;
