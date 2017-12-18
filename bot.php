@@ -324,7 +324,7 @@ if (!is_null($events['events'])) {
 				}
 				else if (strpos($event['postback']['data'], 'identify=') !== false) {
 					$userId = substr($event['postback']['data'], 9);
-					$messages = BotReplyText(ConfirmationsMsg(6, $userId, $event['source']['type']));
+					$messages = ConfirmationsMsg(6, $userId, $event['source']['type']);
 					//$messages = BotReplyText('userId = ' . $userId);
 				}
 			}
