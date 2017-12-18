@@ -315,10 +315,10 @@ if (!is_null($events['events'])) {
 			else if ($event['postback']['data'] == 'waitlist') { 
 				if ($bot_mod['mode'] == 'await') {
 					//Show a list here
-					BotReplyText('เดี๋ยวไว้จะทำลิสต์แสดงรายชื่อน๊ะจ๊ะ');
+					$messages = BotReplyText('เดี๋ยวไว้จะทำลิสต์แสดงรายชื่อน๊ะจ๊ะ');
 				}
 				else if ($bot_mod['mode'] == 'allow') {
-					BotReplyText('ไม่มีรายชื่อรออนุมัติขอเข้าใช้งาน Line Chat Bot ในขณะนี้');
+					$messages = BotReplyText('ไม่มีรายชื่อรออนุมัติขอเข้าใช้งาน Line Chat Bot ในขณะนี้');
 				}	
 			}
 			else if ($bot_mod['mode'] == 'await') {
