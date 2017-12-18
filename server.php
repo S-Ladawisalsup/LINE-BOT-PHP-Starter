@@ -29,6 +29,9 @@ if (!is_null($events)) {
 		if (!is_null($events['temperature'])) {
 			UpdateTempToDB($events['temperature'], $events['location']);
 		}
+		if (!is_null($events['humidity'])) {
+			UpdateHumidToDB($events['humidity'], $events['location']);
+		}
 		foreach ($events['server'] as $event) {
 			if (!is_null($event)) {
 				UpdateServToDB($event['name'], $event['status'], $events['location']);
@@ -55,6 +58,37 @@ function UpdateTempToDB($curr_temperature, $location) {
 		}
 		$result2->closeCursor();
 		$message = "ขณะนี้ที่ " . $location . " อุณหภูมิเท่กับ " . $curr_temperature . " องศาเซลเซียส เพื่อความถูกต้องกรุณาตรวจสอบด้วยตัวของท่านเอง";
+		foreach ($admin as $adm) {
+			BotPush($message, $adm);
+		}
+	}
+
+	// if (!$result) {
+	// 	echo "An error occurred.";
+	// }			
+	// else {
+	// 	echo "Updated database successful, please check on your database.";
+	// }
+}
+/**********************************************************************************************************************************/
+function UpdateHumidToDB($curr_humidity, $location) {
+	$db = pg_connect($GLOBALS['pgsql_conn']);
+
+	$result = pg_query($db, "UPDATE tbhlinebottemploc SET humidity = '$curr_humidity' WHERE location = '$location'");	
+
+	if ($curr_humidity > 50) {
+		$db_query = new PDO($GLOBALS['dsn']);
+		$query2 = "SELECT user_id FROM tbhlinebotmem WHERE position = 'admin'"; 
+		$result2 = $db_query->query($query2);
+
+		$admin = array();
+		$index = 0;
+		while ($row = $result2->fetch(PDO::FETCH_ASSOC)) {
+		    $admin[$index] = htmlspecialchars($row["user_id"]);
+		    $index += 1;
+		}
+		$result2->closeCursor();
+		$message = "ขณะนี้ที่ " . $location . " มีค่าความชื้นมากกว่า " . $curr_humidity . "% แล้ว เพื่อความถูกต้องกรุณาตรวจสอบด้วยตัวของท่านเอง";
 		foreach ($admin as $adm) {
 			BotPush($message, $adm);
 		}
