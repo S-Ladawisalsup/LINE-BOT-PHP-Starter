@@ -1093,12 +1093,17 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 				'label' => 'คู่มือการใช้งาน',
 				'uri' => 'https://cryptic-harbor-32168.herokuapp.com/manual.html'
 			];
+			$actions_m4 = [
+				'type' => 'postback',
+				'label' => 'หมวดสถานที่',
+				'data' => 'locationsplaces'
+			];
 			if ($pos == 'await') {
-				$actions = array($actions_m1, $actions_m2, $actions_m3);
+				$actions = array($actions_m2, $actions_m3);
 			}	
-			// else if ($pos == 'allow') {
-			// 	$actions = $actions_m3;
-			// }
+			else if ($pos == 'allow') {
+				$actions = array($actions_m4, $actions_m3);
+			}
 			else {
 				$actions = array($actions_m1, $actions_m3);
 			}
@@ -1224,7 +1229,7 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 			if (!empty($temp_member)) {
 				foreach ($temp_member as $temp_mem) {
 					if ($temp_mem['type'] == 'user') {
-						$kind = $temp_mem[$name] . ' ' . $temp_mem['line'];
+						$kind = $temp_mem['name'] . ' ' . $temp_mem['line'];
 					}
 					else if ($temp_mem['type'] == 'group') {
 						$kind = 'กลุ่ม' . $temp_mem['name'];
@@ -1312,7 +1317,7 @@ function GetDetailsMember($userId) {
 
 	$confirm = "ชื่อ : " . $new_member['name'] . "\nชื่อไลน์ : " . $new_member['linename'];
 	if (!empty($new_member['gender']) && !empty($new_member['bd'])) {
-		$confirm .= "\nเพศ : " . $new_member['gender'] . "\nวันเกิด : " . substr($new_member['bd'], 0, 10);
+		$confirm .= "\nเพศ : " . $new_member['gender'] == 'M' ? 'ชาย' : 'หญิง' . "\nวันเกิด : " . substr($new_member['bd'], 0, 10);
 	}
 	$confirm .= "\nประเภท : " . $new_member['type'];
 	return $confirm;

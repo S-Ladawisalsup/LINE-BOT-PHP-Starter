@@ -13,7 +13,6 @@ foreach ($ggezwp as $key) {
 }		
 echo '</tbody></table><br />';
 /**********************************************************************************************************************************/
-/**********************************************************************************************************************************/
 function QuestionWordFromDBTB() {
 	$dsn = 'pgsql:'
 		. 'host=ec2-54-243-187-133.compute-1.amazonaws.com;'
@@ -27,7 +26,7 @@ function QuestionWordFromDBTB() {
 
 	$t = 'text';
 
-	$query = "SELECT questiontext, questiontype FROM tbhlinebotwmode WHERE questiontype = '6'";
+	$query = "SELECT questiontext, questiontype FROM tbhlinebotwmode WHERE questiontype = '7'";
 	//$query = "SELECT $t, type FROM tbhlinebotans";// WHERE type = '14'";
 	$result = $db->query($query);
 
@@ -43,16 +42,3 @@ function QuestionWordFromDBTB() {
 
 	return $words;
 }
-
-/*
-function have to add and test to line chat bot
-4. Defind server ip in database in UI Line Chat Bot. (optional)
-8. Start random push message to random user(s).
-8.1 add another toggle on 9am, 1pm, 3pm, 10pm to bot start push message first with random user(s). 
-8.1.1 change bot_mode in tbhlinebotmodchng to relation here.
----------------------------------------------------------------------------------------------------
-1. Write about notification before user register.
-2. Adding position 'Dev' & defind working in line chat bot system.
----------------------------------------------------------------------------------------------------
-3. Add more response word.
-*/
