@@ -1085,7 +1085,7 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 			];
 			$actions_m2 = [
 				'type' => 'postback',
-				'label' => 'รายชื่อรออนุมัติเข้าใช้งาน',
+				'label' => 'รายชื่อผู้รออนุมัติเข้าใช้งาน',
 				'data' => 'waitlist'
 			];
 			$actions_m3 = [
@@ -1120,13 +1120,14 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 			break;
 		case '6':
 			$db = new PDO($GLOBALS['dsn']);
-			$query = "SELECT name, linename FROM tbhlinebotmem WHERE user_id = '$userId'"; 
+			$query = "SELECT name, linename, id_type FROM tbhlinebotmem WHERE user_id = '$userId'"; 
 			$result = $db->query($query);
 
 			$new_member = array();
 			while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 			    $new_member['name'] = htmlspecialchars($row["name"]);
 			    $new_member['linename'] = htmlspecialchars($row["linename"]);
+			    $new_member['type'] = htmlspecialchars($row["id_type"]);
 			}
 			$result->closeCursor();
 			
@@ -1149,14 +1150,14 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 
 			$msg = "มีผู้ต้องการใช้งาน Line Chat Bot อย่างเต็มระบบ";
 			$detail = '';
-			if ($userType == 'user') {
+			if ($new_member['type'] == 'user') {
 				$detail = 'คุณ' . $new_member['name'] . ' ' . $new_member['linename'];
 			}
 			else {
-				if ($userType == 'group') {
+				if ($new_member['type'] == 'group') {
 					$detail = 'กลุ่ม';
 				}
-				else if ($userType == 'room') {
+				else if ($new_member['type'] == 'room') {
 					$detail = 'ห้อง';
 				}
 				else {
@@ -1250,8 +1251,8 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 			];
 			$actions_na = [
 				'type' => 'message',
-				'label' => 'ยกเลิกผู้ขอใช้งานทั้งหมด',
-				'text' => 'ยกเลิกผู้ขอใช้งานทั้งหมด'
+				'label' => 'ปฏิเสธผู้ขอใช้งานทั้งหมด',
+				'text' => 'ปฏิเสธผู้ขอใช้งานทั้งหมด'
 			];
 
 			if ($order == 0) {

@@ -181,7 +181,7 @@ if (!is_null($events['events'])) {
 					case 'await':
 						$text = $event['message']['text'];
 						$text = SubEndText($text);
-						if ((strpos($text, 'ไม่') !== false) || (strpos($text, 'ยกเลิก') !== false)) {
+						if ((strpos($text, 'ไม่') !== false) || (strpos($text, 'ยกเลิก') !== false) || (strpos($text, 'ปฏิเสธ') !== false)) {
 							$messages = BotReplyText(DeleteIdRow($text, $event['source']['userId']));
 							if (ListWaitRegister($event['source']['userId'])) {
 								ReturnAllowToAdmin();
@@ -311,9 +311,7 @@ if (!is_null($events['events'])) {
 			}
 			else if ($event['postback']['data'] == 'waitlist') { 
 				if ($bot_mod['mode'] == 'await') {
-					//Show a list here
 					$messages = ConfirmationsMsg(7, $event['source'][$event['source']['type'] . 'Id'], $event['source']['type']);
-					//$messages = BotReplyText('เดี๋ยวไว้จะทำลิสต์แสดงรายชื่อน๊ะจ๊ะ');
 				}
 				else if ($bot_mod['mode'] == 'allow') {
 					$messages = BotReplyText('ไม่มีรายชื่อรออนุมัติขอเข้าใช้งาน Line Chat Bot ในขณะนี้');
@@ -326,8 +324,8 @@ if (!is_null($events['events'])) {
 				}
 				else if (strpos($event['postback']['data'], 'identify=') !== false) {
 					$userId = substr($event['postback']['data'], 9);
-					//$messages = BotReplyText();//return confrimation template for each user
-					$messages = BotReplyText('userId = ' . $userId);
+					$messages = BotReplyText(ConfirmationsMsg(6, $userId, $event['source']['type']));
+					//$messages = BotReplyText('userId = ' . $userId);
 				}
 			}
 		}
