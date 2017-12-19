@@ -168,7 +168,7 @@ if (!is_null($events['events'])) {
 									//--------------------------------------------------------
 									// Test case to insert data to postgresql database.
 									if (strpos($text, 'testmsgbyball') !== false) {
-										InsertDataToDB();
+										//InsertDataToDB();
 										$messages = BotReplyText('เพิ่มข้อมูลลงฐานข้อมูลเรียบร้อยแล้วจ้า ไปดูสิจ๊ะ');
 									}
 									//--------------------------------------------------------
