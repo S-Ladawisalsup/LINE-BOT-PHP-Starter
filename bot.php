@@ -116,7 +116,12 @@ if (!is_null($events['events'])) {
 										$messages = BotReplyText(GetTemperature($text) . IdentifyUser($event['source']['userId']));	
 									}
 									else if (strpos($text, 'ความชื้น') !== false) {
-										$messages = BotReplyText(GetTemperature($text) . IdentifyUser($event['source']['userId']));
+										if (rand(0, 99) == 1) {
+											$messages = BotReplyText('ไม่มีอ่ะความชื้น มีแต่ความรักแทนได้มั้ยจ๊ะ');
+										}
+										else {
+											$messages = BotReplyText(GetTemperature($text) . IdentifyUser($event['source']['userId']));
+										}
 									}
 									else {		
 										$messages = BotReplyText(AnswerBuilder(10) . IdentifyUser($event['source']['userId']));					
@@ -125,7 +130,10 @@ if (!is_null($events['events'])) {
 								case '8':
 									# ping mode
 									$protocal = IsAskedServer($text);
-									if ($protocal['IsChecked']) {
+									if ((strpos($text, 'เบอร์') !== false) && (rand(0, 99) == 1)) {
+										$messages = BotReplyText('ที่มันเบลอ เพราะว่าเธอไม่ชัดเจนหน่ะสิ');
+									}
+									else if ($protocal['IsChecked']) {
 										$messages = BotReplyText(GetPingAnswer($protocal['ip_addr']) . IdentifyUser($event['source']['userId']));	
 									}
 									else {

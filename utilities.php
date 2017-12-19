@@ -1318,7 +1318,7 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 			//     $index += 1;
 			// }
 			// $result->closeCursor();
-			
+
 			$places = array('0' => 'ห้องโปรแกรมเมอร์', '1' => 'ห้องเซิฟเวอร์');
 			$counter = 0;
 			foreach ($places as $place) {
