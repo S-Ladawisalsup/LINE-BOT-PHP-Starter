@@ -199,15 +199,11 @@ if (!is_null($events['events'])) {
 						$text = SubEndText($text);
 						if ((strpos($text, 'ไม่') !== false) || (strpos($text, 'ยกเลิก') !== false) || (strpos($text, 'ปฏิเสธ') !== false)) {
 							$messages = BotReplyText(DeleteIdRow($text, $event['source']['userId']));
-							if (ListWaitRegister($event['source']['userId'])) {
-								ReturnAllowToAdmin();
-							}
+							ListWaitRegister($event['source']['userId']);
 						}
 						else if (strpos($text, 'อนุมัติ') !== false) {
 							$messages = BotReplyText(ConfirmRowUserMember($text, $event['source']['userId']));
-							if (ListWaitRegister($event['source']['userId'])) {
-								ReturnAllowToAdmin();
-							}
+							ListWaitRegister($event['source']['userId']);
 						}
 						else if ((strpos($text, 'ขอเมนู') !== false) || (strpos($text, 'ขอคู่มือ') !== false)) {
 							$messages = ConfirmationsMsg(5, $event['source'][$event['source']['type'] . 'Id'], $event['source']['type']);

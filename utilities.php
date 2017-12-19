@@ -652,35 +652,6 @@ function IsAcceptingMember($userId, $userType) {
 	$result3 = pg_query($db2, $awaitadmin);
 }
 /**********************************************************************************************************************************/
-function ReturnAllowToAdmin() {
-	$db = new PDO($GLOBALS['dsn']);
-
-	$query = "SELECT user_id FROM tbhlinebotmem WHERE position = 'admin'"; 
-	$result = $db->query($query);
-
-	$admin = array();
-	$index = 0;
-	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-	    $admin[$index] = htmlspecialchars($row["user_id"]);
-	    $index += 1;
-	}
-	$result->closeCursor();
-
-	$db2 = pg_connect($GLOBALS['pgsql_conn']);
-	$awaitadmin = "UPDATE tbhlinebotmodchng SET bot_mode = 'allow' WHERE ";
-	foreach ($admin as $adm) {
-		$awaitadmin .= "user_id = '$adm' or ";
-	}
-	if (!empty($admin)) {
-		$awaitadmin = substr($awaitadmin, 0, -4);
-		$awaitadmin .= ";";
-	}
-	else {
-		$awaitadmin .= "id = '0';";
-	}
-	$result2 = pg_query($db2, $awaitadmin);
-}
-/**********************************************************************************************************************************/
 function DeleteIdRow($text, $adminId) {
 	$db = new PDO($GLOBALS['dsn']);
 	$query = "SELECT user_id, name, linename FROM tbhlinebotmem WHERE status = 'trial'"; 
@@ -738,9 +709,31 @@ function ListWaitRegister($userId) {
 	$result->closeCursor();
 
 	if (empty($regis)) {
-		return true;
+		$query2 = "SELECT user_id FROM tbhlinebotmem WHERE position = 'admin'"; 
+		$result2 = $db->query($query2);
+
+		$admin = array();
+		$cnt = 0;
+		while ($row = $result2->fetch(PDO::FETCH_ASSOC)) {
+		    $admin[$cnt] = htmlspecialchars($row["user_id"]);
+		    $cnt += 1;
+		}
+		$result2->closeCursor();
+
+		$db2 = pg_connect($GLOBALS['pgsql_conn']);
+		$awaitadmin = "UPDATE tbhlinebotmodchng SET bot_mode = 'allow' WHERE ";
+		foreach ($admin as $adm) {
+			$awaitadmin .= "user_id = '$adm' or ";
+		}
+		if (!empty($admin)) {
+			$awaitadmin = substr($awaitadmin, 0, -4);
+			$awaitadmin .= ";";
+		}
+		else {
+			$awaitadmin .= "id = '0';";
+		}
+		$result3 = pg_query($db2, $awaitadmin);
 	}
-	return false;
 }
 /**********************************************************************************************************************************/
 function CheckRegis($userId) {
