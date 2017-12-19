@@ -169,7 +169,11 @@ if (!is_null($events['events'])) {
 									// Test case to insert data to postgresql database.
 									if (strpos($text, 'testmsgbyball') !== false) {
 										//InsertDataToDB();
-										$messages = BotReplyText('เพิ่มข้อมูลลงฐานข้อมูลเรียบร้อยแล้วจ้า ไปดูสิจ๊ะ');
+										$messages = [
+											'type' => 'audio',
+											'originalContentUrl' => 'https://cryptic-harbor-32168.herokuapp.com/sounds/SE_Crow.m4a',
+						    				'stickerId' => '10000'
+										]; 
 									}
 									//--------------------------------------------------------
 									else if ((strpos($text, 'ขอเมนู') !== false) || (strpos($text, 'ขอคู่มือ') !== false)) {
