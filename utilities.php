@@ -1307,6 +1307,18 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 			];
 			break;
 		case '8':
+			// $db = new PDO($GLOBALS['dsn']);
+			// $query = "SELECT location FROM tbhlinebotmodchng ORDER BY id ASC"; 
+			// $result = $db->query($query);
+
+			// $locate = array();
+			// $index = 0;
+			// while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+			//     $locate[$index] = htmlspecialchars($row["location"]);
+			//     $index += 1;
+			// }
+			// $result->closeCursor();
+			
 			$places = array('0' => 'ห้องโปรแกรมเมอร์', '1' => 'ห้องเซิฟเวอร์');
 			$counter = 0;
 			foreach ($places as $place) {
