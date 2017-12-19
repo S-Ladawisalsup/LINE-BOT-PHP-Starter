@@ -132,7 +132,7 @@ if (!is_null($events['events'])) {
 									$protocal = IsAskedServer($text);
 									if ((strpos($text, 'เบอร์') !== false) && (rand(0, 19) == 1)) {
 										if (rand(0, 10000) % 2 == 0) {
-											$messages = BotReplyText('ที่มันเบลอ เพราะว่าเธอไม่ชัดเจนหน่ะสิ');
+											$messages = BotReplyText('ที่มันเบอร์ เพราะว่าเธอไม่ชัดเจนหน่ะสิ');
 										}
 										else {
 											$messages = BotReplyText('แหมพอดีมีแต่ เบอร์ว่ารักแถบ หน่ะสิจ๊ะ');
@@ -168,7 +168,7 @@ if (!is_null($events['events'])) {
 									//--------------------------------------------------------
 									// Test case to insert data to postgresql database.
 									if (strpos($text, 'testmsgbyball') !== false) {
-										//InsertDataToDB();
+										InsertDataToDB();
 										$messages = BotReplyText('เพิ่มข้อมูลลงฐานข้อมูลเรียบร้อยแล้วจ้า ไปดูสิจ๊ะ');
 									}
 									//--------------------------------------------------------
