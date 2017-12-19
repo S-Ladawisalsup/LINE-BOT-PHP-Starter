@@ -142,7 +142,7 @@ function findQuestionType ($text) {
 		}
 		else if (endsWith($temp, $keyitems['text'])) {
 			if (($keyitems['type'] == 1 && (strpos($text, 'ล่ม') !== false || strpos($text, 'เจ๊ง') !== false || strpos($text, 'เดี้ยง') !== false ||
-										    strpos($text, 'พัง') !== false || strpos($text, 'ดับ') !== false || strpos($text, 'ปกติ') !== false))) {
+										    strpos($text, 'พัง') !== false || strpos($text, 'ดับ') !== false))) {
 				return 8;
 			}
 			else {
