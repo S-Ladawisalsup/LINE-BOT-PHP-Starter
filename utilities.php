@@ -740,63 +740,7 @@ function ListWaitRegister($userId) {
 	if (empty($regis)) {
 		return true;
 	}
-
-	$query2 = "SELECT name, linename FROM tbhlinebotmem WHERE ";
-	foreach ($regis as $item) {
-		$query2 .= "user_id = '$item' or ";
-	}
-	if (!empty($regis)) {
-		$query2 = substr($query2, 0, -4);
-		$query2 .= ";";
-	}
-	else {
-		$query2 .= "id = '0';";
-	}
-	$result2 = $db->query($query2);
-
-	$sum = array();
-	$seq = 0;
-	while ($row = $result2->fetch(PDO::FETCH_ASSOC)) {
-		$sum[$seq] = array();
-	    $sum[$seq]['linename'] = htmlspecialchars($row["linename"]);
-	    $sum[$seq]['name'] = htmlspecialchars($row["name"]);
-	    $seq += 1;
-	}
-	$result2->closeCursor();
-
-	if (!empty($sum)) {
-		BotPushAListWaitingUser($userId, 'เหลือผู้ที่รออนุมัติการใช้งานแชทบอทเต็มรูปแบบดังต่อไปนี้');
-		foreach ($sum as $key) {
-			$ret = $key['linename'] . " " . $key['name'];
-			BotPushAListWaitingUser($userId, $ret);
-		}
-		return false;
-	}
-	return true;
-}
-/**********************************************************************************************************************************/
-function BotPushAListWaitingUser($adminId, $users) {
-	$messages = BotReplyText($users);
-
-	// Make a POST Request to Messaging API to push to sender
-	$url = 'https://api.line.me/v2/bot/message/push';
-	$data = [
-		'to' => $adminId,
-		'messages' => [$messages],
-	];
-	$post = json_encode($data);
-	$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $GLOBALS['access_token']);
-
-	$ch = curl_init($url);
-	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
-	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-	$result = curl_exec($ch);
-	curl_close($ch);
-
-	echo $result . "\r\n";
+	return false;
 }
 /**********************************************************************************************************************************/
 function CheckRegis($userId) {
