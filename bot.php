@@ -116,7 +116,7 @@ if (!is_null($events['events'])) {
 										$messages = BotReplyText(GetTemperature($text) . IdentifyUser($event['source']['userId']));	
 									}
 									else if (strpos($text, 'ความชื้น') !== false) {
-										if (rand(0, 99) == 1) {
+										if (rand(0, 9) == 1) {
 											$messages = BotReplyText('ไม่มีอ่ะความชื้น มีแต่ความรักแทนได้มั้ยจ๊ะ');
 										}
 										else {
@@ -130,8 +130,13 @@ if (!is_null($events['events'])) {
 								case '8':
 									# ping mode
 									$protocal = IsAskedServer($text);
-									if ((strpos($text, 'เบอร์') !== false) && (rand(0, 99) == 1)) {
-										$messages = BotReplyText('ที่มันเบลอ เพราะว่าเธอไม่ชัดเจนหน่ะสิ');
+									if ((strpos($text, 'เบอร์') !== false) && (rand(0, 19) == 1)) {
+										if (rand(0, 10000) % 2 == 0) {
+											$messages = BotReplyText('ที่มันเบลอ เพราะว่าเธอไม่ชัดเจนหน่ะสิ');
+										}
+										else {
+											$messages = BotReplyText('แหมพอดีมีแต่ เบอร์ว่ารักแถบ หน่ะสิจ๊ะ');
+										}
 									}
 									else if ($protocal['IsChecked']) {
 										$messages = BotReplyText(GetPingAnswer($protocal['ip_addr']) . IdentifyUser($event['source']['userId']));	
@@ -164,7 +169,7 @@ if (!is_null($events['events'])) {
 									// Test case to insert data to postgresql database.
 									if (strpos($text, 'testmsgbyball') !== false) {
 										//InsertDataToDB();
-										$messages = ConfirmationsMsg(7, 'Ua492767fd96449cd8a857b101dbdbcce', 'user');
+										$messages = BotReplyText('เพิ่มข้อมูลลงฐานข้อมูลเรียบร้อยแล้วจ้า ไปดูสิจ๊ะ');
 									}
 									//--------------------------------------------------------
 									else if ((strpos($text, 'ขอเมนู') !== false) || (strpos($text, 'ขอคู่มือ') !== false)) {

@@ -1408,8 +1408,8 @@ function InsertDataToDB() {
 	$db = pg_connect($GLOBALS['pgsql_conn']);		
 
 	$t = 'text';
-	$result = pg_query($db, "INSERT INTO tbhlinebotwmode (id, questiontext, questiontype) VALUES 
-						('46', 'ป่ะ', '1')
+	$result = pg_query($db, "INSERT INTO tbhlinebotans ($t, type) VALUES 
+						('คิดถึงเค้าป่ะตัวเอง', '13')
 						;");//,('คืนนี้แหล่ะ อยากได้กี่ครั้งหล่ะ', '12')
 
 	// $result = pg_query($db, "UPDATE tbhlinebotwmode
