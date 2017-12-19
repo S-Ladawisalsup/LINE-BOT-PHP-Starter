@@ -172,7 +172,7 @@ if (!is_null($events['events'])) {
 										$messages = [
 											'type' => 'audio',
 											'originalContentUrl' => 'https://cryptic-harbor-32168.herokuapp.com/sounds/SE_Crow.m4a',
-						    				'stickerId' => '10000'
+						    				'duration' => '10000'
 										]; 
 									}
 									//--------------------------------------------------------
