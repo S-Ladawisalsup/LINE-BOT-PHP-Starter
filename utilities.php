@@ -1368,7 +1368,7 @@ function StartJokeQuestion($userId) {
 	return BotReplyText($joke_q . '?');
 }
 /**********************************************************************************************************************************/
-function EndJokeQustion($text, $userId) {
+function EndJokeQuestion($text, $userId) {
 	$botname = 'Kiki';
 	$db = new PDO($GLOBALS['dsn']);
 	$query = "SELECT seq FROM tbhlinebotmodchng WHERE user_id = '$userId' AND bot_mode = 'joke'"; 
@@ -1378,7 +1378,7 @@ function EndJokeQustion($text, $userId) {
 	    $seq = htmlspecialchars($row["seq"]);
 	}
 	$result->closeCursor();
-	return BotReplyText('seq is ' . $seq);
+	
 	if (isset($seq)) {
 		$query2 = "SELECT answer FROM tbhlinebotjokeq WHERE id = '$seq'";
 		$result2 = $db->query($query2);
