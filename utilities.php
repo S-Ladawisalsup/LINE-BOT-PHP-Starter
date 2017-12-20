@@ -493,7 +493,6 @@ function RegisterMode($text, $userId, $userType) {
 				$countable += 1;
 			}
 			$text = str_replace("ชื่อ", "", $text);
-			$text = str_replace("ไอ้", "", $text);
 			$text = str_replace("ท่าน", "", $text);
 			$text = str_replace("พี่", "", $text);
 			$text = str_replace("น้อง", "", $text);
@@ -1349,8 +1348,9 @@ function InsertDataToDB() {
 	$db = pg_connect($GLOBALS['pgsql_conn']);		
 
 	$t = 'text';
-	$result = pg_query($db, "INSERT INTO tbhlinebotans ($t, type) VALUES 
-						('คิดถึงเค้าป่ะตัวเอง', '13')
+	$result = pg_query($db, "INSERT INTO tbhlinebotjokeq (question, answer) VALUES 
+						('หมูอะไร ไวกว่าหมูย่าง', 'หมูวิ่ง'),
+						('อะไรเอ่ย ใหญ่กว่ารถสิบล้อ', 'รถสิบล้อชุบแป้งทอด')
 						;");//,('คืนนี้แหล่ะ อยากได้กี่ครั้งหล่ะ', '12')
 
 	// $result = pg_query($db, "UPDATE tbhlinebotwmode
