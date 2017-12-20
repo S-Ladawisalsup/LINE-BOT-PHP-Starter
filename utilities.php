@@ -385,6 +385,9 @@ function GetLocation() {
 }
 /**********************************************************************************************************************************/
 function SubEndText($text) {
+	if (startsWith($text, 'มี')) {
+		$text = substr($text, 6);
+	}
 	if (endsWith($text, 'บ้าง') || endsWith($text, 'อยู่')) {
 		$text = substr($text, 0, -12);
 	}
