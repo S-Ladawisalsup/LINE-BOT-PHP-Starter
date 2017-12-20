@@ -120,7 +120,8 @@ function findQuestionType ($text) {
 	$QAArray = QuestionWordFromDB();
 	foreach ($QAArray as $keyitems) {
 		if ($keyitems['type'] == 4) {
-			if (startsWith($temp, $keyitems['text']) || endsWith($temp, $keyitems['text'])) {
+			//if (startsWith($temp, $keyitems['text']) || endsWith($temp, $keyitems['text'])) {
+			if (strpos($text, $keyitems['text']) !== false) {
 				return $keyitems['type'];
 			}
 		}
