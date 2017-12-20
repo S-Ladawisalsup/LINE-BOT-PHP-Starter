@@ -168,8 +168,8 @@ if (!is_null($events['events'])) {
 									//--------------------------------------------------------
 									// Test case to insert data to postgresql database.
 									if (strpos($text, 'testmsgbyball') !== false) {
-										InsertDataToDB();
-										$messages = BotReplyText('เพิ่มข้อมูลลงฐานข้อมูลเรียบร้อยแล้วจ้า ไปดูสิจ๊ะ');
+										//InsertDataToDB();
+										$messages = StartJokeQuestion($event['source'][$event['source']['type'] . 'Id']);
 									}
 									//--------------------------------------------------------
 									else if ((strpos($text, 'ขอเมนู') !== false) || (strpos($text, 'ขอคู่มือ') !== false)) {
@@ -192,6 +192,25 @@ if (!is_null($events['events'])) {
 									}  
 									break;
 							}
+						}
+						break;
+					case 'joke':
+						if ($event['message']['type'] == 'text') {
+
+							// Compare message calling bot's name
+							$haystack = strtolower($event['message']['text']);
+							if (startsWith($haystack, $bot_name) || $event['source']['type'] == 'user') {
+
+								// Get text echo without bot's name
+								if ($event['source']['type'] != 'user') {
+									$text = substr($event['message']['text'], strlen($bot_name));
+								}
+								else {
+									$text = $event['message']['text'];
+								}
+
+								$messages = EndJokeQuestion($text, $event['source'][$event['source']['type'] . 'Id']);
+							}			
 						}
 						break;
 					case 'await':

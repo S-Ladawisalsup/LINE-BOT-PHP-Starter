@@ -1343,6 +1343,90 @@ function GetDetailsMember($userId) {
 	return $confirm;
 }
 /**********************************************************************************************************************************/
+function StartJokeQuestion($userId) {
+	$db = new PDO($GLOBALS['dsn']);
+	$query = "SELECT id, question FROM tbhlinebotjokeq ORDER BY id ASC"; 
+	$result = $db->query($query);
+
+	$joker = array();
+	$seq = 0;
+	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+		$joker[$seq] = array();
+	    $joker[$seq]['id'] = htmlspecialchars($row["id"]);
+	    $joker[$seq]['question'] = htmlspecialchars($row["question"]);
+	    $seq += 1;
+	}
+	$result->closeCursor();
+	
+	$num = rand(0, $seq - 1);
+	$joke_id = $joker[$num]['id'];
+	$joke_q = $joker[$num]['question'];
+
+	$db2 = pg_connect($GLOBALS['pgsql_conn']);
+	$result2 = pg_query($db2, "UPDATE tbhlinebotmodchng SET bot_mode = 'joke', seq = '$joke_id' where user_id = '$userId'");
+
+	return BotReplyText($joke_q);
+}
+/**********************************************************************************************************************************/
+function EndJokeQustion($text, $userId) {
+	$botname = 'Kiki';
+	$db = new PDO($GLOBALS['dsn']);
+	$query = "SELECT seq FROM tbhlinebotmodchng WHERE user_id = '$userId' AND bot_mode = 'joke'"; 
+	$result = $db->query($query);
+
+	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+	    $seq = htmlspecialchars($row["seq"]);
+	}
+	$result->closeCursor();
+
+	if (isset($seq)) {
+		$query2 = "SELECT answer FROM tbhlinebotjokeq WHERE id = '$seq'";
+		$result2 = $db->query($query2);
+
+		while ($row = $result2->fetch(PDO::FETCH_ASSOC)) {
+			$joke_ans = htmlspecialchars($row['answer']);
+		}
+		$result2->closeCursor();
+
+		if (isset($joke_ans)) {
+			$soundeff = array('0' => 'ผ่ามๆๆๆพ๊ามมมมม!', '1' => 'เฉียบบบ!', '2' => '', 
+							  '3' => 'บู่ววววววว', '4' => 'ว๊ายยย',
+							  '5' => '5555555555555555', '6' => 'ถถถถถถถถถถถถถถถถถถถ', '7' => 'วั๊ยๆๆๆๆๆๆๆๆๆๆๆ');
+			if (strpos($text, $joke_ans) !== false) {
+				$tx = "ถูกต้องนะคร๊าบบบบบ\nเฉลย " . $joke_ans . $soundeff[rand(0, 2)];
+				$pass = true;
+			}
+			else if (strpos($text, 'ไม่') !== false) {
+				$tx = $soundeff[rand(5, 7)];
+			}
+			else if (strpos($text, 'ยอม') !== false) {
+				$tx = 'เฉลย ' . $joke_ans . $soundeff[rand(0, 2)];
+				$pass = true;
+			}
+			else if (strpos($text, 'เฉลย') !== false) {
+				$tx = 'ลองร้องขอว่า "คุณ' . $botname . '(ครับ/ค่ะ) (ผม/ฉัน)ขอยอมแพ้แล้ว(ครับ/ค่ะ) สติปัญญาของ(ผม/ฉัน)คงไม่อาจสามารถทัดเทียมคุณ' . $botname . 'ได้" ให้ดูหน่อยสิ';
+			}
+			else {
+				$sx = rand(0, 10000) % 2 == 0 ? 'จ๊ะ' : 'จ้า';
+				$tx = $soundeff[rand(2, 4)] . ' ผิดนะ' . $sx . ' ' . $soundeff[rand(5, 7)];
+			}
+
+			if (isset($pass) && $pass) {
+				$db2 = pg_connect($GLOBALS['pgsql_conn']);
+				$result3 = pg_query($db2, "UPDATE tbhlinebotmodchng SET bot_mode = 'allow', seq = '0' where user_id = '$userId'");
+			}
+
+			return BotReplyText($tx);
+		}
+		else {
+			return BotReplyText('เกิดข้อผิดพลาด กรุณาลองใหม่ภายหลังหรือแจ้งผู้จัดทำไลน์แชทบอทด้วยจ้า');
+		}
+	}
+	else {
+		return BotReplyText('เกิดข้อผิดพลาด กรุณาลองใหม่ภายหลังหรือแจ้งผู้จัดทำไลน์แชทบอทด้วยจ้า');
+	}
+}
+/**********************************************************************************************************************************/
 //Function to insert data to postgresql database to easier than insert data to database by terminal
 function InsertDataToDB() {
 	$db = pg_connect($GLOBALS['pgsql_conn']);		
