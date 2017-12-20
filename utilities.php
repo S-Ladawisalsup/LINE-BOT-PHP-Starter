@@ -1343,31 +1343,6 @@ function GetDetailsMember($userId) {
 	return $confirm;
 }
 /**********************************************************************************************************************************/
-function StartJokeQuestion($userId) {
-	$db = new PDO($GLOBALS['dsn']);
-	$query = "SELECT id, question FROM tbhlinebotjokeq ORDER BY id ASC"; 
-	$result = $db->query($query);
-
-	$joker = array();
-	$seq = 0;
-	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-		$joker[$seq] = array();
-	    $joker[$seq]['id'] = htmlspecialchars($row["id"]);
-	    $joker[$seq]['question'] = htmlspecialchars($row["question"]);
-	    $seq += 1;
-	}
-	$result->closeCursor();
-	
-	$num = rand(0, $seq - 1);
-	$joke_id = $joker[$num]['id'];
-	$joke_q = $joker[$num]['question'];
-
-	$db2 = pg_connect($GLOBALS['pgsql_conn']);
-	$result2 = pg_query($db2, "UPDATE tbhlinebotmodchng SET bot_mode = 'joke', seq = '$joke_id' where user_id = '$userId'");
-
-	return BotReplyText($joke_q . '?');
-}
-/**********************************************************************************************************************************/
 function EndJokeQuestion($text, $userId) {
 	$botname = 'Kiki';
 	$db = new PDO($GLOBALS['dsn']);

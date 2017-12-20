@@ -169,7 +169,7 @@ if (!is_null($events['events'])) {
 									// Test case to insert data to postgresql database.
 									if (strpos($text, 'testmsgbyball') !== false) {
 										//InsertDataToDB();
-										$messages = StartJokeQuestion($event['source'][$event['source']['type'] . 'Id']);
+										$messages = BotReplyText('555666');
 									}
 									//--------------------------------------------------------
 									else if ((strpos($text, 'ขอเมนู') !== false) || (strpos($text, 'ขอคู่มือ') !== false)) {

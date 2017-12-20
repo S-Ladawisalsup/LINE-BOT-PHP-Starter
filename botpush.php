@@ -26,13 +26,9 @@ if (!is_null($_POST['val']) || !is_null($events)) {
 		$index += 1;
 	}
 	$result->closeCursor();
-
-	$greeting = array('0' => 'สวัสดีตอนเช้าคับทุกคนนนนนน อากาศตอนเช้าสบายดีมั้ย ขอเสียงโหน่ยยยยยยย',
-					  '1' => 'เช้าแล้วน้าาา ทุกคนตอนนี้เป็นไงกันบ้าง ขอเสียงโหน่ยยยยยยย',
-					  '2' => 'ทำไมมันเงียบจังน้า ทำไมมันถึงเงียบกว่าชาวบ้านเค้า');
 	
 	foreach ($groups as $group) {
-		BotPush($group, $greeting[rand(0, 2)]);
+		BotPush($group, StartJokeQuestion($group));
 		//Maybe add random function if have to many groups registered. 
 	}
 
@@ -124,3 +120,44 @@ function CreateMsg($age, $db) {
 		return $prefix[3] . $age . $wishes[rand(4, 7)];				// rand(count($wishes) / 2, count($wishes) - 1)
 	}
 }
+/**********************************************************************************************************************************/
+function StartJokeQuestion($userId) {
+	$db = new PDO($GLOBALS['dsn']);
+
+	$first_query = "SELECT bot_mode FROM tbhlinebotmodchng WHERE user_id = '$userId'";
+	$first_result = $db->query($first_query);
+	while ($row = $first_result->fetch(PDO::FETCH_ASSOC)) {
+		$bot_mod = htmlspecialchars($row["bot_mode"]);
+	}
+	$first_result->closeCursor();
+
+	if (!isset($bot_mod) || $bot_mod != 'allow') {
+		$greeting = array('0' => 'สวัสดีตอนเช้าคับทุกคนนนนนน อากาศตอนเช้าสบายดีมั้ย ขอเสียงโหน่ยยยยยยย',
+					  	  '1' => 'เช้าแล้วน้าาา ทุกคนตอนนี้เป็นไงกันบ้าง ขอเสียงโหน่ยยยยยยย',
+					  	  '2' => 'ทำไมมันเงียบจังน้า ทำไมมันถึงเงียบกว่าชาวบ้านเค้า');
+		return BotReplyText($greeting[rand(0, 2)]);
+	}
+
+	$query = "SELECT id, question FROM tbhlinebotjokeq ORDER BY id ASC"; 
+	$result = $db->query($query);
+
+	$joker = array();
+	$seq = 0;
+	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+		$joker[$seq] = array();
+	    $joker[$seq]['id'] = htmlspecialchars($row["id"]);
+	    $joker[$seq]['question'] = htmlspecialchars($row["question"]);
+	    $seq += 1;
+	}
+	$result->closeCursor();
+	
+	$num = rand(0, $seq - 1);
+	$joke_id = $joker[$num]['id'];
+	$joke_q = $joker[$num]['question'];
+
+	$db2 = pg_connect($GLOBALS['pgsql_conn']);
+	$result2 = pg_query($db2, "UPDATE tbhlinebotmodchng SET bot_mode = 'joke', seq = '$joke_id' where user_id = '$userId'");
+
+	return BotReplyText($joke_q . '?');
+}
+/**********************************************************************************************************************************/
