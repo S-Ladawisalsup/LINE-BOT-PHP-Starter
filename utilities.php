@@ -1365,7 +1365,7 @@ function StartJokeQuestion($userId) {
 	$db2 = pg_connect($GLOBALS['pgsql_conn']);
 	$result2 = pg_query($db2, "UPDATE tbhlinebotmodchng SET bot_mode = 'joke', seq = '$joke_id' where user_id = '$userId'");
 
-	return BotReplyText($joke_q);
+	return BotReplyText($joke_q . '?');
 }
 /**********************************************************************************************************************************/
 function EndJokeQustion($text, $userId) {
@@ -1378,7 +1378,7 @@ function EndJokeQustion($text, $userId) {
 	    $seq = htmlspecialchars($row["seq"]);
 	}
 	$result->closeCursor();
-
+	return BotReplyText('seq is ' . $seq);
 	if (isset($seq)) {
 		$query2 = "SELECT answer FROM tbhlinebotjokeq WHERE id = '$seq'";
 		$result2 = $db->query($query2);
@@ -1433,8 +1433,8 @@ function InsertDataToDB() {
 
 	$t = 'text';
 	$result = pg_query($db, "INSERT INTO tbhlinebotjokeq (question, answer) VALUES 
-						('หมูอะไร ไวกว่าหมูย่าง', 'หมูวิ่ง'),
-						('อะไรเอ่ย ใหญ่กว่ารถสิบล้อ', 'รถสิบล้อชุบแป้งทอด')
+						('หมูอะไร ไวกว่าหมูย่าง?', 'หมูวิ่ง'),
+						('อะไรเอ่ย ใหญ่กว่ารถสิบล้อ?', 'รถสิบล้อชุบแป้งทอด')
 						;");//,('คืนนี้แหล่ะ อยากได้กี่ครั้งหล่ะ', '12')
 
 	// $result = pg_query($db, "UPDATE tbhlinebotwmode
