@@ -13,7 +13,7 @@
         #head-section {
             position:fixed; 
             width:98%;
-            height: 60px;
+            height: 100px;
             left:1%; 
             z-index:1; 
             background-color:#a9cce3;
@@ -23,7 +23,7 @@
             position: relative;
             width:98%;
             left:1%;
-            top: 60px; 
+            top: 100px; 
         }
 
         ul {
@@ -41,7 +41,7 @@
         #nav a {
             display: block;
             padding: 5px 0;
-            width: 4em;
+            width: 8em;
             text-align: center;
             -webkit-transition: .5s all ease-out;
             -moz-transition: .5s all ease-out;
@@ -66,17 +66,19 @@
     <div id="head-section">
         <table style="height:100%; width:100%;">
             <tr style="height:100%; width:100%;">
-                <td style="height:100%; vertical-align:middle;">
-                    &nbsp;&nbsp;<b>คู่มือการใช้งาน</b>
+                <td align="center" style="height:100%; vertical-align:middle;">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>คู่มือการใช้งาน</b>
                 </td>
-                <td valign="middle" align="right" style="">
+            </tr>
+            <tr style="height:100%; width:100%;">
+                <td align="center" style="height:100%; vertical-align:middle;">
                     <div style="display:inline-block;">
                         <ul id="nav">
-                            <li class="active"><a href="#menu_a">A</a></li>
-                            <li><a href="#menu_b">B</a></li>
-                            <li><a href="#menu_c">C</a></li>
+                            <li class="active"><a href="#menu_a">register</a></li>
+                            <li><a href="#menu_b">ใช้งานทั่วไป</a></li>
+                            <li><a href="#menu_c">admin</a></li>
                         </ul>
-                    </div>&nbsp;&nbsp;
+                    </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </td>
             </tr>
         </table>
@@ -105,7 +107,6 @@
         menuItems.click(function (e) {
             var href = $(this).attr("href"),
             offsetTop = href === "#" ? 0 : (($(href).offset().top - topMenuHeight) + 1);
-            console.log("offsetTop: " + offsetTop);
             $('html, body').stop().animate({
                 scrollTop: offsetTop
             }, 300);
