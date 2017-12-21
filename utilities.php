@@ -1408,12 +1408,12 @@ function InsertDataToDB() {
 	$db = pg_connect($GLOBALS['pgsql_conn']);		
 
 	$t = 'text';
-	$result = pg_query($db, "INSERT INTO tbhlinebotjokeq (question, answer) VALUES 
-						('หมูอะไร ไวกว่าหมูย่าง?', 'หมูวิ่ง'),
-						('อะไรเอ่ย ใหญ่กว่ารถสิบล้อ?', 'รถสิบล้อชุบแป้งทอด')
-						;");//,('คืนนี้แหล่ะ อยากได้กี่ครั้งหล่ะ', '12')
+	// $result = pg_query($db, "INSERT INTO tbhlinebotjokeq (question, answer) VALUES 
+	// 					('หมูอะไร ไวกว่าหมูย่าง?', 'หมูวิ่ง'),
+	// 					('อะไรเอ่ย ใหญ่กว่ารถสิบล้อ?', 'รถสิบล้อชุบแป้งทอด')
+	// 					;");//,('คืนนี้แหล่ะ อยากได้กี่ครั้งหล่ะ', '12')
 
-	// $result = pg_query($db, "UPDATE tbhlinebotwmode
-	// 						SET questiontext = 'หวัดดี'
-	// 						WHERE id = '46'");		
+	$result = pg_query($db, "UPDATE tbhlinebotjokeq
+							SET question = 'หมูอะไร ไวกว่าหมูย่าง'
+							WHERE id = '1'");		
 }
