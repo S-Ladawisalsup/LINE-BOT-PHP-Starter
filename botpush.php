@@ -135,7 +135,7 @@ function StartJokeQuestion($userId) {
 		$greeting = array('0' => 'สวัสดีตอนเช้าคับทุกคนนนนนน อากาศตอนเช้าสบายดีมั้ย ขอเสียงโหน่ยยยยยยย',
 					  	  '1' => 'เช้าแล้วน้าาา ทุกคนตอนนี้เป็นไงกันบ้าง ขอเสียงโหน่ยยยยยยย',
 					  	  '2' => 'ทำไมมันเงียบจังน้า ทำไมมันถึงเงียบกว่าชาวบ้านเค้า');
-		return BotReplyText($greeting[rand(0, 2)]);
+		return $greeting[rand(0, 2)];
 	}
 
 	$query = "SELECT id, question FROM tbhlinebotjokeq ORDER BY id ASC"; 
@@ -158,6 +158,6 @@ function StartJokeQuestion($userId) {
 	$db2 = pg_connect($GLOBALS['pgsql_conn']);
 	$result2 = pg_query($db2, "UPDATE tbhlinebotmodchng SET bot_mode = 'joke', seq = '$joke_id' where user_id = '$userId'");
 
-	return BotReplyText($joke_q . '?');
+	return $joke_q . '?';
 }
 /**********************************************************************************************************************************/
