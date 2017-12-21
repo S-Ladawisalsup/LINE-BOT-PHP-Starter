@@ -1414,6 +1414,6 @@ function InsertDataToDB() {
 	// 					;");//,('คืนนี้แหล่ะ อยากได้กี่ครั้งหล่ะ', '12')
 
 	$result = pg_query($db, "UPDATE tbhlinebotjokeq
-							SET question = 'หมูอะไร ไวกว่าหมูย่าง'
-							WHERE id = '1'");		
+							SET question = 'อะไรเอ่ย ใหญ่กว่ารถสิบล้อ'
+							WHERE id = '2'");		
 }
