@@ -327,6 +327,10 @@ if (!is_null($events['events'])) {
 					];
 				}
 			}
+
+			else if ($event['message']['type'] == 'image') {
+				$messages = BotReplyText('นี่คือรูปภาพน๊ะจ้า');
+			}
 		}
 
 		else if ($event['type'] == 'postback') {
