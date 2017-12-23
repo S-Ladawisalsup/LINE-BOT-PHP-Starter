@@ -44,7 +44,7 @@ function BotPush($room, $msg) {
 		$result = pg_query($db, "UPDATE tbhlinebotmodchng SET bot_mode = 'allow', seq = '0' where bot_mode = 'joke'");
 		$messages = [
 			'type' => 'image',
-		    'originalContentUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/meemoa_' . $day . '_original.jpg',
+		    'originalContentUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/meemoa_' . $day . '_orginal.jpg',
 		    'previewImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/meemoa_' . $day . '_240.jpg'
 		];
 	}

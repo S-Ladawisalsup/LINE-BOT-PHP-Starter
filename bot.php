@@ -172,14 +172,14 @@ if (!is_null($events['events'])) {
 										if (strpos($text, '1') !== false) {
 											$messages = [
 												'type' => 'image',
-											    'originalContentUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/meemoa_sun_original.jpg',
+											    'originalContentUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/meemoa_sun_orginal.jpg',
 											    'previewImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/meemoa_sun_240.jpg'
 											];
 										}
 										else if (strpos($text, '2') !== false) {
 											$messages = [
 												'type' => 'image',
-											    'originalContentUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/meemoa_mon_original.jpg',
+											    'originalContentUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/meemoa_mon_orginal.jpg',
 											    'previewImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/meemoa_mon_240.jpg'
 											];
 										}
