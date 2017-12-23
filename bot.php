@@ -183,7 +183,7 @@ if (!is_null($events['events'])) {
 											];
 										}
 										else {
-											InsertDataToDB();
+											//InsertDataToDB();
 											$messages = BotReplyText('จัดการข้อมูลในฐานข้อมูลเรียบร้อยแล้ว ลองเข้าไปดูเองน๊ะจ๊ะ');
 										}
 									}
