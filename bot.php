@@ -168,7 +168,6 @@ if (!is_null($events['events'])) {
 									//--------------------------------------------------------
 									// Test case to insert data to postgresql database.
 									if (strpos($text, 'testmsgbyball') !== false) {
-										//InsertDataToDB();
 										if (strpos($text, '1') !== false) {
 											$messages = [
 												'type' => 'image',
@@ -184,6 +183,7 @@ if (!is_null($events['events'])) {
 											];
 										}
 										else {
+											InsertDataToDB();
 											$messages = BotReplyText('จัดการข้อมูลในฐานข้อมูลเรียบร้อยแล้ว ลองเข้าไปดูเองน๊ะจ๊ะ');
 										}
 									}
@@ -329,7 +329,7 @@ if (!is_null($events['events'])) {
 			}
 
 			else if ($event['message']['type'] == 'image') {
-				$messages = BotReplyText('นี่คือรูปภาพน๊ะจ้า');
+				$messages = BotReplyText('นี่รูปตัวอะไรอ่ะ');
 			}
 		}
 

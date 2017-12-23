@@ -170,6 +170,6 @@ function StartJokeQuestion($userId) {
 	$db2 = pg_connect($GLOBALS['pgsql_conn']);
 	$result2 = pg_query($db2, "UPDATE tbhlinebotmodchng SET bot_mode = 'joke', seq = '$joke_id' where user_id = '$userId'");
 
-	return $joke_q . '?';
+	return $greeting[rand(0, 2)] . "\nมาทายปัญหากันดีกว่า\n" . $joke_q . '?';
 }
 /**********************************************************************************************************************************/

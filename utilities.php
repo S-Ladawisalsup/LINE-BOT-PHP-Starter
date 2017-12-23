@@ -1368,7 +1368,8 @@ function EndJokeQuestion($text, $userId) {
 							  '3' => 'บู่ววววววว', '4' => 'ว๊ายยย',
 							  '5' => '5555555555555555', '6' => 'ถถถถถถถถถถถถถถถถถถถ', '7' => 'วั๊ยๆๆๆๆๆๆๆๆๆๆๆ');
 			//$text = str_replace(' ', '', $text);
-			if (strpos($text, $joke_ans) !== false) {
+			$pizza = explode(" เพราะ", $joke_ans);
+			if (strpos($text, $pizza[0]) !== false) {
 				$tx = "ถูกต้องนะคร๊าบบบบบ\nเฉลย " . $joke_ans . $soundeff[rand(0, 2)];
 				$pass = true;
 			}
@@ -1409,7 +1410,10 @@ function InsertDataToDB() {
 
 	$t = 'text';
 	$result = pg_query($db, "INSERT INTO tbhlinebotjokeq (question, answer) VALUES 
-						('แม่อะไร น่าตกใจที่สุด', 'แม่เจ้าโว้ย')
+						('เพลงตอน แปดโมงเช้าวันอังคาร ร้องยังไง', 'ประเทศไทยรวมเลือดเนื้อชาติเชื้อไทย'),
+						('ขนมอะไร กินไม่ได้', 'ขนมเปียกปูน'),
+						('สัตว์อะไรตลกที่สุด', 'หอย เพราะมีมุก'),
+						('กาอะไร ช้าที่สุด', 'กาดึ๊บ')
 						;");//,('คืนนี้แหล่ะ อยากได้กี่ครั้งหล่ะ', '12')
 
 	// $result = pg_query($db, "UPDATE tbhlinebotjokeq
