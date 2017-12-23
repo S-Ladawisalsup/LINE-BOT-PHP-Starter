@@ -38,7 +38,19 @@ if (!is_null($_POST['val']) || !is_null($events)) {
 function BotPush($room, $msg) {
 	$access_token = 'CFecc4UnPdpCUxVk2VuTlf7ANCYHbCpaxYltjR/z15zMJ/KzsPIVrp4tCql4xmQYr8qgJSZ6oitEZ0/PKH+FpdneucSfPgjTP03mQ5KRSKqYT93fEEvGDqOUxJ/SBoS3oTXcJaRSxlPVBWxH+8PWxAdB04t89/1O/w1cDnyilFU=';
 
-	$messages = BotReplyText($msg);
+	$day = strtolower(date("D"));
+	if ($day == 'sun' || $day == 'mon') {
+		$db = pg_connect($GLOBALS['pgsql_conn']);
+		$result = pg_query($db, "UPDATE tbhlinebotmodchng SET bot_mode = 'allow', seq = '0' where bot_mode = 'joke'");
+		$messages = [
+			'type' => 'image',
+		    'originalContentUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/meemoa_' . $day . '_original.jpg',
+		    'previewImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/meemoa_' . $day . '_240.jpg'
+		];
+	}
+	else {
+		$messages = BotReplyText($msg);
+	}
 	
 	// Make a POST Request to Messaging API to push to sender
 	$url = 'https://api.line.me/v2/bot/message/push';

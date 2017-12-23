@@ -169,7 +169,23 @@ if (!is_null($events['events'])) {
 									// Test case to insert data to postgresql database.
 									if (strpos($text, 'testmsgbyball') !== false) {
 										//InsertDataToDB();
-										$messages = BotReplyText('จัดการข้อมูลในฐานข้อมูลเรียบร้อยแล้ว ลองเข้าไปดูเองน๊ะจ๊ะ');
+										if (strpos($text, '1') !== false) {
+											$messages = [
+												'type' => 'image',
+											    'originalContentUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/meemoa_sun_original.jpg',
+											    'previewImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/meemoa_sun_240.jpg'
+											];
+										}
+										else if (strpos($text, '2') !== false) {
+											$messages = [
+												'type' => 'image',
+											    'originalContentUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/meemoa_mon_original.jpg',
+											    'previewImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/meemoa_mon_240.jpg'
+											];
+										}
+										else {
+											$messages = BotReplyText('จัดการข้อมูลในฐานข้อมูลเรียบร้อยแล้ว ลองเข้าไปดูเองน๊ะจ๊ะ');
+										}
 									}
 									//--------------------------------------------------------
 									else if ((strpos($text, 'ขอเมนู') !== false) || (strpos($text, 'ขอคู่มือ') !== false)) {
