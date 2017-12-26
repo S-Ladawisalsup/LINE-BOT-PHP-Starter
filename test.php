@@ -26,17 +26,17 @@ function QuestionWordFromDBTB() {
 
 	$t = 'text';
 
-	//$query = "SELECT questiontext, questiontype FROM tbhlinebotwmode WHERE questiontype = '6'";
+	$query = "SELECT questiontext, questiontype FROM tbhlinebotwmode";// WHERE questiontype = '6'";
 	//$query = "SELECT $t, type FROM tbhlinebotans WHERE type = '13'";
-	$query = "SELECT question, answer FROM tbhlinebotjokeq ORDER BY id DESC";
+	//$query = "SELECT question, answer FROM tbhlinebotjokeq ORDER BY id DESC";
 	$result = $db->query($query);
 
 	$words = array();
 	$index = 0;
 	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 	    $words[$index] = array();
-		$words[$index]['text'] = htmlspecialchars($row["question"]);
-		$words[$index]['type'] = htmlspecialchars($row["answer"]);
+		$words[$index]['text'] = htmlspecialchars($row["questiontext"]);
+		$words[$index]['type'] = htmlspecialchars($row["questiontype"]);
 		$index += 1;
 	}
 	$result->closeCursor();

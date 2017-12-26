@@ -188,8 +188,10 @@ function GetTemperature($text) {
 	$result->closeCursor();
 
 	$curr_place = 0;
+	$test = str_replace(' ', '', $text);
+	$test = strtolower($test);
 	foreach ($locations as $locate) {
-		if (strpos($text, $locate['name']) !== false) {
+		if (strpos($test, $locate['name']) !== false) {
 			$curr_place = $locate['id'];
 			$curr_locname = $locate['name'];
 			break;
@@ -1408,12 +1410,18 @@ function EndJokeQuestion($text, $userId) {
 function InsertDataToDB() {
 	$db = pg_connect($GLOBALS['pgsql_conn']);		
 
-	$t = 'text';
-	$result = pg_query($db, "INSERT INTO tbhlinebottemploc (location) VALUES 
-						('managerroom')
-						;");//,('คืนนี้แหล่ะ อยากได้กี่ครั้งหล่ะ', '12')
+	$result = pg_query($db, "INSERT INTO tbhlinebotlocname (loc_callname, loc_id) VALUES 
+							('ห้องผู้จัดการไอที', '3'),
+							('ห้องผู้จัดการฝ่ายไอที', '3'),
+							('ห้องผู้จัดการit', '3'),
+							('ห้องผู้จัดการฝ่ายit', '3'),
+							('ห้องพี่ตั๋ง', '3'),
+							('ห้องคุณตั๋ง', '3'),
+							('ห้องพี่พฤกษ์', '3'),
+							('ห้องคุณพฤกษ์', '3')
+							;");
 
-	// $result = pg_query($db, "UPDATE tbhlinebotjokeq
-	// 						SET question = 'อะไรเอ่ย ใหญ่กว่ารถสิบล้อ'
-	// 						WHERE id = '2'");		
+	// $result = pg_query($db, "UPDATE tbhlinebottemploc
+	// 						SET location = 'Manager Room'
+	// 						WHERE location = 'managerroom'");		
 }
