@@ -1409,11 +1409,8 @@ function InsertDataToDB() {
 	$db = pg_connect($GLOBALS['pgsql_conn']);		
 
 	$t = 'text';
-	$result = pg_query($db, "INSERT INTO tbhlinebotjokeq (question, answer) VALUES 
-						('เพลงตอน แปดโมงเช้าวันอังคาร ร้องยังไง', 'ประเทศไทยรวมเลือดเนื้อชาติเชื้อไทย'),
-						('ขนมอะไร กินไม่ได้', 'ขนมเปียกปูน'),
-						('สัตว์อะไรตลกที่สุด', 'หอย เพราะมีมุก'),
-						('กาอะไร ช้าที่สุด', 'กาดึ๊บ')
+	$result = pg_query($db, "INSERT INTO tbhlinebottemploc (location) VALUES 
+						('managerroom')
 						;");//,('คืนนี้แหล่ะ อยากได้กี่ครั้งหล่ะ', '12')
 
 	// $result = pg_query($db, "UPDATE tbhlinebotjokeq
