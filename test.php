@@ -26,7 +26,7 @@ function QuestionWordFromDBTB() {
 
 	$t = 'text';
 
-	$query = "SELECT questiontext, questiontype FROM tbhlinebotwmode ORDER BY id ASC";// WHERE questiontype = '6'";
+	$query = "SELECT questiontext, questiontype FROM tbhlinebotwmode ORDER BY id DESC";// WHERE questiontype = '6'";
 	//$query = "SELECT $t, type FROM tbhlinebotans WHERE type = '13'";
 	//$query = "SELECT question, answer FROM tbhlinebotjokeq ORDER BY id DESC";
 	$result = $db->query($query);
@@ -43,3 +43,7 @@ function QuestionWordFromDBTB() {
 
 	return $words;
 }
+/**********************************************************************************************************************************
+1. Make a bot a little bit mad group or room user when have no response after bot greeting.
+2. Start talking random user(s).
+**********************************************************************************************************************************/

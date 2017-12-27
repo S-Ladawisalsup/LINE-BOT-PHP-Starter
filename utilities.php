@@ -74,7 +74,20 @@ function AnswerBuilder($mood) {
 	$result->closeCursor();
 	//$reply = array_filter($reply);
 
-	return $reply[rand(0, count($reply))];
+	$send_back = $reply[rand(0, count($reply) - 1)];
+	if ($mood == 13) {
+		if (date('H') > 19) {
+			$send_back = str_replace('เช้า', 'ค่ำ', $send_back);
+		}
+		else if (date('H') > 16) {
+			$send_back = str_replace('เช้า', 'เย็น', $send_back);
+		}
+		else if (date('H') > 11) {
+			$send_back = str_replace('เช้า', 'เที่ยง', $send_back);
+		}
+	}
+
+	return $send_back; //$reply[rand(0, count($reply) - 1)];
 }
 /**********************************************************************************************************************************/
 /*** Function generates answer as sticker type by random from default sticker(s) by LINE Corp. ***/
