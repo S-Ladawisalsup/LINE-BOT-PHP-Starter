@@ -167,9 +167,12 @@ if (!is_null($events['events'])) {
 								default:
 									//--------------------------------------------------------
 									// Test case to insert data to postgresql database.
-									if (strpos($text, 'testmsgbyball') !== false) {
+									if (strpos($text, 'testmsgbyballa') !== false) {
 										//InsertDataToDB();
-										$messages = BotReplyText('จัดการข้อมูลในฐานข้อมูลเรียบร้อยแล้ว ลองเข้าไปดูเองน๊ะจ๊ะ');
+										$messages = BotReplyText('ขณะนี้ที่ ห้องเซิฟเวอร์ อุณหภูมิเท่กับ 27.862 องศาเซลเซียส เพื่อความถูกต้องกรุณาตรวจสอบด้วยตัวของท่านเอง');
+									}
+									else if (strpos($text, 'testmsgbyballb') !== false) {
+										$messages = BotReplyText('ขณะนี้ที่ ห้องเซิฟเวอร์ มีค่าความชื้นมากกว่า 50% แล้ว เพื่อความถูกต้องกรุณาตรวจสอบด้วยตัวของท่านเอง');
 									}
 									//--------------------------------------------------------
 									else if ((strpos($text, 'ขอเมนู') !== false) || (strpos($text, 'ขอคู่มือ') !== false)) {
