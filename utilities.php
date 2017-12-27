@@ -1339,7 +1339,9 @@ function GetDetailsMember($userId) {
 
 	$confirm = "ชื่อ : " . $new_member['name'] . "\nชื่อไลน์ : " . $new_member['linename'];
 	if (!empty($new_member['gender']) && !empty($new_member['bd'])) {
-		$confirm .= "\nเพศ : " . $new_member['gender'] == 'M' ? 'ชาย' : 'หญิง' . "\nวันเกิด : " . substr($new_member['bd'], 0, 10);
+		$tz  = new DateTimeZone('Asia/Bangkok');
+		$age = DateTime::createFromFormat('Y-m-d', substr($new_member['bd'], 0, 10), $tz)->diff(new DateTime('now', $tz))->y;
+		$confirm .= "\nเพศ : " . $new_member['gender'] == 'M' ? 'ชาย' : 'หญิง' . "\nวันเกิด : " . substr($new_member['bd'], 0, 10) . "\nอายุ : " . $age . " ปี";
 	}
 	$confirm .= "\nประเภท : " . $new_member['type'];
 	return $confirm;
