@@ -26,17 +26,17 @@ function QuestionWordFromDBTB() {
 
 	$t = 'text';
 
-	$query = "SELECT questiontext, questiontype FROM tbhlinebotwmode ORDER BY id DESC";// WHERE questiontype = '6'";
+	//$query = "SELECT questiontext, questiontype FROM tbhlinebotwmode ORDER BY id DESC";// WHERE questiontype = '6'";
 	//$query = "SELECT $t, type FROM tbhlinebotans WHERE type = '13'";
-	//$query = "SELECT question, answer FROM tbhlinebotjokeq ORDER BY id DESC";
+	$query = "SELECT question, answer FROM tbhlinebotjokeq ORDER BY id ASC";
 	$result = $db->query($query);
 
 	$words = array();
 	$index = 0;
 	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 	    $words[$index] = array();
-		$words[$index]['text'] = htmlspecialchars($row["questiontext"]);
-		$words[$index]['type'] = htmlspecialchars($row["questiontype"]);
+		$words[$index]['text'] = htmlspecialchars($row["question"]);
+		$words[$index]['type'] = htmlspecialchars($row["answer"]);
 		$index += 1;
 	}
 	$result->closeCursor();
@@ -44,6 +44,7 @@ function QuestionWordFromDBTB() {
 	return $words;
 }
 /**********************************************************************************************************************************
-1. Make a bot a little bit mad group or room user when have no response after bot greeting.
-2. Start talking random user(s).
+1. Make a bot a little bit mad group or room user when have no response after bot greeting (maybe need to use new column for check user response).
+2. Get timestamp from client and update to database (need to create new column and new query string).
+3. Start talking random user(s) (optional).
 **********************************************************************************************************************************/
