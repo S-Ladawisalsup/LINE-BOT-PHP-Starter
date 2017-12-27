@@ -169,7 +169,11 @@ if (!is_null($events['events'])) {
 									// Test case to insert data to postgresql database.
 									if (strpos($text, 'testmsgbyball') !== false) {
 										//InsertDataToDB();
-										$messages = BotReplyText('ขณะนี้ที่ ห้องเซิฟเวอร์ อุณหภูมิเท่กับ 27.862 องศาเซลเซียส เพื่อความถูกต้องกรุณาตรวจสอบด้วยตัวของท่านเอง');
+										$messages = [
+											'type' => 'image',
+										    'originalContentUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/location-1.jpg',
+										    'previewImageUrl' => 'https://cryptic-harbor-32168.herokuapp.com/images/location-1.jpg'
+										];	
 									}
 									//--------------------------------------------------------
 									else if ((strpos($text, 'ขอเมนู') !== false) || (strpos($text, 'ขอคู่มือ') !== false)) {
