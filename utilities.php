@@ -1373,14 +1373,14 @@ function EndJokeQuestion($text, $userId) {
 			$pizza = explode(" เพราะ", $joke_ans);
 			if (strpos($text, $pizza[0]) !== false) {
 				$congratz = rand(0, 10000) % 2 == 0 ? 'จังเลย' : 'จุงเบย';
-				$tx = "ถูกต้องนะคร๊าบบบ เก่ง" . $congratz . "\nเฉลย " . $joke_ans . $soundeff[rand(0, 2)];
+				$tx = "ถูกต้องนะคร๊าบบบ เก่ง" . $congratz . "\nเฉลย " . $joke_ans . "\n" . $soundeff[rand(0, 2)];
 				$pass = true;
 			}
 			else if (strpos($text, 'ไม่') !== false) {
 				$tx = $soundeff[rand(5, 7)];
 			}
 			else if (strpos($text, 'ยอม') !== false) {
-				$tx = 'เฉลย ' . $joke_ans . $soundeff[rand(0, 2)];
+				$tx = 'เฉลย ' . $joke_ans . "\n" . $soundeff[rand(0, 2)];
 				$pass = true;
 			}
 			else if (strpos($text, 'เฉลย') !== false) {
