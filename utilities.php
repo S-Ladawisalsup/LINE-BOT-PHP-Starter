@@ -1372,7 +1372,8 @@ function EndJokeQuestion($text, $userId) {
 			//$text = str_replace(' ', '', $text);
 			$pizza = explode(" เพราะ", $joke_ans);
 			if (strpos($text, $pizza[0]) !== false) {
-				$tx = "ถูกต้องนะคร๊าบบบบบ\nเฉลย " . $joke_ans . $soundeff[rand(0, 2)];
+				$congratz = array('0' => 'จังเลย', '1' => 'จุงเบย');
+				$tx = "ถูกต้องนะคร๊าบบบ เก่ง" . $congratz[rand(0, 10000) % 2] . "\nเฉลย " . $joke_ans . $soundeff[rand(0, 2)];
 				$pass = true;
 			}
 			else if (strpos($text, 'ไม่') !== false) {
