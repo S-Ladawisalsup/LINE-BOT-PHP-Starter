@@ -1074,6 +1074,11 @@ function ConfirmationsMsg($stack, $userId, $userType) {
 				'label' => 'หมวดสถานที่',
 				'data' => 'locationsplaces'
 			];
+			$actions_m5 = [
+				'type' => 'postback',
+				'label' => 'เขียนอีเมล',
+				'data' => 'electronicsmail'
+			];
 			if ($pos == 'await') {
 				$actions = array($actions_m2, $actions_m3);
 			}	
